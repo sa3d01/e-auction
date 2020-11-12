@@ -17,12 +17,17 @@ class CreateSettingsTable extends Migration
             $table->id();
             $table->json('about')->nullable();
             $table->json('licence')->nullable();
-            $table->json('private')->nullable();
             $table->json('languages')->nullable();
             $table->json('socials')->nullable();
             $table->json('contacts')->nullable();
-            $table->json('app_links')->nullable();
-            //ratio,...
+            $table->json('purchasing_power_text')->nullable();
+            //in seconds
+            $table->integer('auction_period')->default(60);
+            $table->integer('auction_increasing_period')->default(60);
+            //علي الشاري
+            $table->integer('app_ratio')->default(60);
+            $table->integer('purchasing_power_ratio')->default(60);
+            $table->integer('tax_ratio')->default(60);
             $table->json('more_details')->nullable();
             $table->timestamps();
         });

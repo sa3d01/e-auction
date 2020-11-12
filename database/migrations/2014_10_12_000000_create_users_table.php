@@ -15,20 +15,23 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_type_id')->nullable();
+            $table->foreignId('user_type_id')->default(1);
             $table->char('name',50)->nullable();
             $table->json('phone_details')->nullable();
             $table->char('phone',15)->unique()->nullable();
             $table->timestamp('phone_verified_at')->nullable();
             $table->char('email',50)->unique()->nullable();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->foreignId('package_id')->nullable();
+            $table->timestamp('package_subscribed_at')->nullable();
+            $table->integer('purchasing_power')->nullable();
             //for id and type --fcm
             $table->json('device')->nullable();
             $table->char('activation_code',6)->nullable();
             $table->integer('status')->default(1);
-            $table->boolean('online')->default(1);
             $table->char('image',20)->nullable();
+            $table->char('licence_image',20)->nullable();
             $table->string('password')->nullable();
-            $table->json('location')->nullable();
             $table->json('more_details')->nullable();
             $table->softDeletes('deleted_at', 0);
             $table->rememberToken();

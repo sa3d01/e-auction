@@ -19,13 +19,13 @@ class UserResource extends JsonResource
         return [
             'id'=> (int) $this->id,
             'name'=> $this->name,
-            'phone_details'=> $this->phone_details ?? new Object_(),
             'phone'=> $this->phone,
             'email'=> $this->email,
             'image'=> $this->image ?? '',
+            'licence_image'=> $this->licence_image ?? '',
             'activation_code'=> $this->activation_code ? (int)$this->activation_code : '',
-            'location'=> $this->location ?? new Object_(),
-            'online'=> (int)$this->online,
+            'package'=> new PackageResource($this->package) ?? new Object_(),
+            'purchasing_power'=> (double)$this->purchasing_power ?? 0,
         ];
     }
 }

@@ -9,7 +9,5 @@ class UserObserver
 {
     public function deleting(User $user)
     {
-        $user->orders()->delete();
-        $user->chats()->delete();
     }
 }

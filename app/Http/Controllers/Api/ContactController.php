@@ -25,7 +25,7 @@ class ContactController extends MasterController
     public function validation_rules($method, $id = null)
     {
         return [
-            'type_id' => 'required',
+            'title' => 'required',
             'message' => 'required',
         ];
     }
@@ -34,16 +34,6 @@ class ContactController extends MasterController
         return array(
             'required' => ':attribute يجب ادخال الـ',
         );
-    }
-    public function types(){
-        $types=DropDown::whereClass('Contact')->get();
-        $data=[];
-        foreach ($types as $type){
-            $arr['id']=$type->id;
-            $arr['name']=$type->name['ar'];
-            $data[]=$arr;
-        }
-        return $this->sendResponse($data);
     }
     public function store(Request $request){
         $validator = Validator::make($request->all(),$this->validation_rules(1),$this->validation_messages());

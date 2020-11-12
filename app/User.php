@@ -5,6 +5,7 @@ namespace App;
 use App\Traits\ModelBaseFunctions;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Mockery\Exception;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
@@ -15,13 +16,12 @@ class User extends Authenticatable implements JWTSubject
     private $route='user';
     private $images_link='media/images/user/';
 
-    protected $fillable = ['user_type_id','name','phone_verified_at','phone','phone_details','email','password','device','activation_code','status','online','image','location','more_details'];
+    protected $fillable = ['user_type_id','name','package_id','purchasing_power','phone_verified_at','email_verified_at','phone','phone_details','email','password','device','activation_code','status','image','licence_image','more_details'];
     protected $hidden = ['password', 'remember_token'];
     protected $casts = [
         'phone_verified_at' => 'datetime',
         'phone_details' => 'json',
         'device' => 'json',
-        'location' => 'json',
         'more_details' => 'json',
     ];
     public function getJWTIdentifier()
@@ -41,11 +41,9 @@ class User extends Authenticatable implements JWTSubject
 
     //functions
 
-    protected function getPhoneAttribute()
-    {
-        return $this->phone_details['country_key'].$this->attributes['phone'];
+    public function package(){
+        return $this->belongsTo(Package::class);
     }
-
     public function nameForSelect(){
         return $this->name ;
     }

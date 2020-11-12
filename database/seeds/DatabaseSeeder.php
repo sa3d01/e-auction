@@ -11,33 +11,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        //users
          $this->call([
+             SettingSeeder::class,
              UserTypeSeeder::class,
-             UserSeeder::class,
              AdminSeeder::class,
+             PackageSeeder::class,
+             PartnerSeeder::class,
          ]);
-         //settings
-        \App\Setting::create([
-            'about->ar' => 'عن التطبيق',
-            'licence->ar' => 'الشروط والأحكام',
-            'private->ar' => 'الشروط والأحكام',
-            'socials->twitter'=>'https://',
-            'socials->snap'=>'https://',
-            'socials->instagram'=>'https://',
-        ]);
-        //contact types
-        \App\DropDown::create([
-            'class' => 'Contact',
-            'name->ar' => 'اقتراح'
-        ]);
-        \App\DropDown::create([
-            'class' => 'Contact',
-            'name->ar' => 'شكوى'
-        ]);
-        \App\DropDown::create([
-            'class' => 'Contact',
-            'name->ar' => 'غير ذلك'
-        ]);
+
+
     }
 }

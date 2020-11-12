@@ -42,6 +42,29 @@ trait ModelBaseFunctions
             return asset($dest) . '/default.jpeg';
         }
     }
+    protected function setLicenceImageAttribute()
+    {
+        $licence_image=request('licence_image');
+        $filename=null;
+        if (is_file($licence_image)) {
+            $filename = $this->upload_file($licence_image);
+        }elseif (filter_var($licence_image, FILTER_VALIDATE_URL) === True) {
+            $filename = $licence_image;
+        }
+        $this->attributes['licence_image'] = $filename;
+    }
+
+    protected function getLicenceImageAttribute()
+    {
+        $dest=$this->images_link;
+        try {
+            if ($this->attributes['licence_image'])
+                return asset($dest). '/' . $this->attributes['licence_image'];
+            return "";
+        }catch (\Exception $e){
+            return "";
+        }
+    }
 
     protected function setPasswordAttribute($password)
     {
