@@ -28,8 +28,7 @@ class CreateItemsTable extends Migration
             $table->foreignId('item_status_id')->nullable();
             $table->string('paper_image')->nullable();
             $table->foreignId('sale_type_id')->default(1);
-            $table->string('user_price')->nullable();
-            $table->string('admin_price')->nullable();
+            $table->string('price')->nullable();
             $table->foreignId('city_id')->nullable();
             $table->json('location')->nullable();
             $table->enum('shipping_by',['user','app'])->default('app');
