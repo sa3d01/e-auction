@@ -11,6 +11,11 @@ class CarSeeder extends Seeder
      */
     public function run()
     {
+        DropDown::create([
+            'name->ar'=>'مركبات',
+            'name->en'=>'Cars',
+            'class'=>'Category',
+        ]);
         //marks
         //id=2
         DropDown::create([
