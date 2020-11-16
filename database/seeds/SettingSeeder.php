@@ -19,11 +19,12 @@ class SettingSeeder extends Seeder
             'licence->en' => 'licence',
             'purchasing_power_text->ar' => 'القوة الشرائية',
             'purchasing_power_text->en' => 'purchasing power nfo',
-            'auction_period' => 90,
-            'auction_increasing_period' => 10,
-            'app_ratio' => 2,
-            'purchasing_power_ratio' => 10,
-            'tax_ratio' => 1,
+            'auction_period' => 90,//second
+            'auction_increasing_period' => 10,//second
+            'app_ratio' => 2,//percent
+            'purchasing_power_ratio' => 10,//percent
+            'tax_ratio' => 1,//percent
+            'add_item_tax' => 100,//fixed amount
             'socials->twitter'=>'https://',
             'socials->snap'=>'https://',
             'socials->instagram'=>'https://',
