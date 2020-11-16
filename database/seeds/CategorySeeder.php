@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
+use \App\DropDown;
 class CategorySeeder extends Seeder
 {
     /**
@@ -11,7 +11,7 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        \App\DropDown::create([
+        DropDown::create([
             'name->ar'=>'مركبات',
             'name->en'=>'Cars',
             'class'=>'Category',
