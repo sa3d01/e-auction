@@ -20,12 +20,34 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['prefix' => 'v1','namespace'=>'Api'], function () {
     Route::group(['prefix' => '/general'], function () {
         Route::get('/setting', 'SettingController@index');
-        Route::get('/partners', 'SettingController@partners');
+        Route::get('/asks', 'SettingController@asks');
+    });
+
+    Route::group(['prefix' => '/drop_down'], function () {
+        Route::get('/category', 'DropDownController@categories');
+        Route::get('/partners', 'DropDownController@partners');
+        Route::get('/mark', 'DropDownController@marks');
+        Route::get('/mark/{id}/model', 'DropDownController@models');
+        Route::get('/item_status_list', 'DropDownController@itemStatus');
+        Route::get('/city', 'DropDownController@cities');
+    });
+
+    Route::group(['prefix' => '/sale_types'], function () {
+        Route::get('/', 'SaleTypeController@saleTypes');
+    });
+
+    Route::group(['prefix' => '/feed_back'], function () {
+        Route::get('/', 'FeedBackController@index');
+        Route::post('/', 'FeedBackController@store')->middleware(CheckApiToken::class);
+    });
+    Route::group(['prefix' => '/contact'], function () {
+        Route::post('/', 'ContactController@store')->middleware(CheckApiToken::class);
     });
     Route::group(['prefix' => '/package'], function () {
         Route::get('/', 'PackageController@index');
         Route::get('/{package}', 'PackageController@show');
     });
+
     Route::group(['prefix' => '/transfer'], function () {
         Route::post('/', 'TransferController@transfer')->middleware(CheckApiToken::class);
     });
@@ -39,7 +61,11 @@ Route::group(['prefix' => 'v1','namespace'=>'Api'], function () {
         Route::get('/profile', 'UserController@profile')->middleware(CheckApiToken::class);
         Route::get('/{id}', 'UserController@show');
     });
-    Route::group(['prefix' => '/contact'], function () {
-        Route::post('/', 'ContactController@store')->middleware(CheckApiToken::class);
+
+
+    Route::group(['prefix' => '/item'], function () {
+        Route::post('/upload_images', 'ItemController@uploadImages')->middleware(CheckApiToken::class);
+        Route::post('/', 'ItemController@store')->middleware(CheckApiToken::class);
     });
+
 });

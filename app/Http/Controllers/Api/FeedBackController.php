@@ -6,6 +6,7 @@ use App\Contact;
 use App\DropDown;
 use App\FeedBack;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\FeedBackCollection;
 use App\Http\Resources\SmallUserResource;
 use App\Http\Resources\UserResource;
 use App\Setting;
@@ -15,21 +16,14 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Exceptions\UserNotDefinedException;
 
-class ContactController extends MasterController
+class FeedBackController extends MasterController
 {
     protected $model;
 
-    public function __construct(Contact $model)
+    public function __construct(FeedBack $model)
     {
         $this->model = $model;
         parent::__construct();
-    }
-    public function validation_rules($method, $id = null)
-    {
-        return [
-            'title' => 'required',
-            'message' => 'required',
-        ];
     }
     public function validation_messages()
     {
@@ -38,14 +32,17 @@ class ContactController extends MasterController
         );
     }
     public function store(Request $request){
-        $validator = Validator::make($request->all(),$this->validation_rules(1),$this->validation_messages());
+        $validator = Validator::make($request->all(),['feed_back' => 'required'],$this->validation_messages());
         if ($validator->fails()) {
             return $this->sendError($validator->errors()->first());
         }
         $data=$request->all();
         $data['user_id']=auth()->user()->id;
         $this->model->create($data);
-        return $this->sendResponse('تم الارسال بنجاح');
+        //todo only approved feeds
+        return $this->sendResponse(new FeedBackCollection($this->model->all()));
     }
-
+    public function index(){
+        return $this->sendResponse(new FeedBackCollection($this->model->all()));
+    }
 }

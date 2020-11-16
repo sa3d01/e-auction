@@ -66,6 +66,30 @@ trait ModelBaseFunctions
         }
     }
 
+    protected function setPaperImageAttribute()
+    {
+        $paper_image=request('paper_image');
+        $filename=null;
+        if (is_file($paper_image)) {
+            $filename = $this->upload_file($paper_image);
+        }elseif (filter_var($paper_image, FILTER_VALIDATE_URL) === True) {
+            $filename = $paper_image;
+        }
+        $this->attributes['paper_image'] = $filename;
+    }
+
+    protected function getPaperImageAttribute()
+    {
+        $dest=$this->images_link;
+        try {
+            if ($this->attributes['paper_image'])
+                return asset($dest). '/' . $this->attributes['paper_image'];
+            return "";
+        }catch (\Exception $e){
+            return "";
+        }
+    }
+
     protected function setPasswordAttribute($password)
     {
         if (isset($password)) {

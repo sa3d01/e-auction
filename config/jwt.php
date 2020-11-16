@@ -25,7 +25,7 @@ return [
     |
     */
 
-    'secret' => 'b5gkeAGca2WdCurmggpaZXbxjF60GoHzJGKfuyyoP9K5EPknixVj72aW86WGZtLM',
+    'secret' => 'jkeUqtBbACSZXZONKif1XqtXepzU0ECZ5BK3jjzHGubRD1kcwSktUb3stswqFzuD',
 
     /*
     |--------------------------------------------------------------------------
@@ -101,7 +101,7 @@ return [
     |
     */
 
-    'ttl' => env('JWT_TTL', 1440),
+    'ttl' => 259999,
 
     /*
     |--------------------------------------------------------------------------
@@ -120,7 +120,7 @@ return [
     |
     */
 
-    'refresh_ttl' => env('JWT_REFRESH_TTL', 20160),
+    'refresh_ttl' => 259999,
 
     /*
     |--------------------------------------------------------------------------

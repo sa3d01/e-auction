@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Ask;
 use App\DropDown;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\DropDownCollection;
 use App\Http\Resources\UserResource;
+use App\SaleType;
 use App\Setting;
 use App\User;
 use Illuminate\Http\Request;
@@ -32,22 +35,26 @@ class SettingController extends MasterController
             $data['about']=$setting->about['ar'];
             $data['licence']=$setting->licence['ar'];
         }
+        $data['add_item_tax']=$setting->add_item_tax;
         $data['socials']=$setting->socials;
         return $this->sendResponse($data);
     }
-    public function partners(){
-        $partners=DropDown::whereClass('Partner')->get();
+
+    public function asks(){
+        $asks=Ask::all();
         $data=[];
-        foreach ($partners as $partner){
+        foreach ($asks as $ask){
             if (\request()->header('lang')=='en'){
-                $arr['name']=$partner->name['en'];
+                $arr['ask']=$ask->ask['en'];
+                $arr['answer']=$ask->answer['en'];
             }else{
-                $arr['name']=$partner->name['ar'];
+                $arr['ask']=$ask->ask['ar'];
+                $arr['answer']=$ask->answer['ar'];
             }
-            $arr['image']=$partner->image;
             $data[]=$arr;
         }
         return $this->sendResponse($data);
     }
+
 
 }

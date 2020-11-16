@@ -14,7 +14,7 @@ class Item extends Model
     protected $fillable = [
         'user_id','category_id','mark_id','model_id','item_status_id','city_id','sale_type_id'
         ,'images','location'
-        ,'paper_image','price','shipping_by','status','image','name','model_class','factory','kms'
+        ,'paper_image','price','shipping_by','status','name','model_class','factory','kms'
     ];
     protected $casts = [
         'images' => 'array',

@@ -17,7 +17,6 @@ class CreateItemsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable();
             $table->string('name')->nullable();
-            $table->string('image')->nullable();
             $table->json('images')->nullable();
             $table->foreignId('category_id')->default(1);
             $table->foreignId('mark_id')->nullable();
