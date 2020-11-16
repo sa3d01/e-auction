@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
              UserTypeSeeder::class,
              AdminSeeder::class,
              PackageSeeder::class,
-//             CategorySeeder::class,
+             CategorySeeder::class,
              CarSeeder::class,
              PartnerSeeder::class,
              CitySeeder::class,
