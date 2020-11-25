@@ -6,10 +6,9 @@ use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Package;
 use App\User;
-use App\userType;
-use App\Wallet;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -25,13 +24,13 @@ class UserController extends MasterController
     public function validation_rules($method, $id = null)
     {
         if ($method == 2) {
-            $rules['phone'] = 'nullable|regex:/[0-9]{10}/|max:10|unique:users,phone,' . $id;
+            $rules['phone'] = 'nullable|regex:/(05)[0-9]{8}/|max:10|unique:users,phone,' . $id;
             $rules['email'] = 'nullable|email|max:50|unique:users,email,' . $id;
             $rules['name'] = 'nullable|max:30';
             $rules['device'] = 'required';
         } else {
             $rules = [
-                'phone' => 'required|unique:users|max:10|regex:/[0-9]{10}/',
+                'phone' => 'required|unique:users|max:10|regex:/(05)[0-9]{8}/',
                 'email' => 'required|unique:users|email|max:50',
                 'name' => 'required|max:30',
                 'password' => 'required|min:8',
@@ -48,22 +47,42 @@ class UserController extends MasterController
             'max' =>' يجب أﻻ تزيد قيمته عن :max عناصر :attribute',
             'min' =>' يجب أﻻ تقل قيمته عن :min عناصر :attribute',
             'email'=>'يرجى التأكد من صحة البريد الالكترونى',
-            'regex'=>'تأكد من أن رقم الجوال صحيح '
+            'regex'=>'تأكد من أن رقم الجوال صحيح ويبدا بـ 05 '
         );
     }
 
-    function send_code($mobile,$activation_code){
+    function sendToPhone($phone,$activation_code){
+        //todo remove 0 and add key country
         //Mail::to($email)->send(new ConfirmCode($activation_code));
     }
-    public function authMail(Request $request)
+    function sendToMail($email,$activation_code){
+//        Mail::to($email)->send(new ConfirmCode($activation_code));
+    }
+    function send_code($activation_code,$email=null,$phone=null){
+        if ($email){
+            $this->sendToMail($email,$activation_code);
+        }
+        if ($phone){
+            $this->sendToPhone($phone,$activation_code);
+        }
+    }
+    public function authPhoneAndMail(Request $request)
     {
-        $validator = Validator::make($request->only('email'),['email'=>'required|email|max:50'],$this->validation_messages());
+        $validator = Validator::make($request->only('email','phone'),
+            [
+                'email'=>'nullable|email|max:50',
+                'phone'=>'nullable|regex:/(05)[0-9]{8}/|max:10'
+            ]
+            ,$this->validation_messages());
         if ($validator->fails()) {
             return $this->sendError($validator->errors()->first());
         }
+        if (!$request->has('email') && !$request->has('phone')){
+            return $this->sendError('يجب ادخال وسيلة ارسال واحدة على الأقل');
+        }
         $activation_code =2021;// rand(1111, 9999);
-        $this->send_code($request['email'],$activation_code);
-        $user = User::where('email',$request['email'])->first();
+        $this->send_code($activation_code,$request['email'],$request['phone']);
+        $user = User::where('email',$request['email'])->orWhere('phone',$request['phone'])->first();
         $all = $request->all();
         $all['activation_code'] = $activation_code;
         if (!$user) {
@@ -75,17 +94,36 @@ class UserController extends MasterController
     }
     public function verifyUser(Request $request)
     {
-        $validator = Validator::make($request->only('email','activation_code'),['activation_code'=>'required','email' => 'required|email|max:50'],$this->validation_messages());
+        $validator = Validator::make($request->only('email','activation_code'),
+            [
+                'activation_code'=>'required',
+                'email'=>'nullable|email|max:50',
+                'phone'=>'nullable|regex:/(05)[0-9]{8}/|max:10'
+            ]
+            ,$this->validation_messages());
         if ($validator->fails()) {
             return $this->sendError($validator->errors()->first());
         }
-        $user = User::where('email',$request['email'])->first();
+        if (!$request->has('email') && !$request->has('phone')){
+            return $this->sendError('يجب ادخال وسيلة ارسال واحدة على الأقل');
+        }
+        $user = User::where('email',$request['email'])->orWhere('phone',$request['phone'])->first();
         if (!$user) {
             return $this->sendError('المستخدم غير مسجل');
         }
         if ($user->activation_code===$request['activation_code']){
             $data= new UserResource($user);
-            $user->update(['activation_code'=>null,'email_verified_at' => Carbon::now()]);
+            if ($request->has('email')){
+                $user->update([
+                    'activation_code'=>null,
+                    'email_verified_at' => Carbon::now()
+                ]);
+            }else{
+                $user->update([
+                    'activation_code'=>null,
+                    'phone_verified_at' => Carbon::now()
+                ]);
+            }
             $token = auth()->login($user);
             return $this->sendResponse($data)->withHeaders(['apiToken'=>$token,'tokenType'=>'bearer']);
         }else{
@@ -124,7 +162,7 @@ class UserController extends MasterController
             return $this->sendError($validator->errors()->first());
         }
         $activation_code = rand(1111, 9999);
-        $this->send_code($request['phone'],$activation_code);
+        $this->send_code($activation_code,$request['email'],$request['phone']);
         $all = $request->all();
         $all['activation_code'] = $activation_code;
         $user = User::create($all);

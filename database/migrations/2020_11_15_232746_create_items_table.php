@@ -21,16 +21,20 @@ class CreateItemsTable extends Migration
             $table->foreignId('category_id')->default(1);
             $table->foreignId('mark_id')->nullable();
             $table->foreignId('model_id')->nullable();
-            $table->string('model_class')->nullable();
-            $table->string('factory')->nullable();
-            $table->string('kms')->nullable();
             $table->foreignId('item_status_id')->nullable();
+            $table->integer('sunder_count')->nullable();
+            $table->foreignId('fetes_id')->nullable();
+            $table->foreignId('color_id')->nullable();
+            $table->integer('kms_count')->nullable();
+            $table->foreignId('scan_status_id')->nullable();
+            $table->foreignId('paper_status_id')->nullable();
             $table->string('paper_image')->nullable();
-            $table->foreignId('sale_type_id')->default(1);
+            $table->foreignId('auction_type_id')->default(1);
             $table->string('price')->nullable();
             $table->foreignId('city_id')->nullable();
             $table->json('location')->nullable();
             $table->enum('shipping_by',['user','app'])->default('app');
+            //pay throw wallet
             $table->enum('status',['pending','rejected','shown','sold'])->default('pending');
             $table->timestamps();
         });

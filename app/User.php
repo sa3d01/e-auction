@@ -16,7 +16,10 @@ class User extends Authenticatable implements JWTSubject
     private $route='user';
     private $images_link='media/images/user/';
 
-    protected $fillable = ['user_type_id','name','package_id','purchasing_power','phone_verified_at','email_verified_at','phone','phone_details','email','password','device','activation_code','status','image','licence_image','more_details'];
+    protected $fillable = [
+        'name','package_id','purchasing_power','phone','phone_details','email','licence_image','more_details'
+        ,'device','activation_code','status','image','phone_verified_at','email_verified_at','password'
+    ];
     protected $hidden = ['password', 'remember_token'];
     protected $casts = [
         'phone_verified_at' => 'datetime',
@@ -31,12 +34,6 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
-    }
-
-    //relations
-
-    public function User_type(){
-        return $this->belongsTo(userType::class);
     }
 
     //functions

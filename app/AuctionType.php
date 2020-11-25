@@ -5,7 +5,7 @@ namespace App;
 use App\Traits\ModelBaseFunctions;
 use Illuminate\Database\Eloquent\Model;
 
-class SaleType extends Model
+class AuctionType extends Model
 {
     use ModelBaseFunctions;
 

@@ -15,7 +15,6 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_type_id')->default(1);
             $table->char('name',50)->nullable();
             $table->json('phone_details')->nullable();
             $table->char('phone',15)->unique()->nullable();
@@ -23,7 +22,6 @@ class CreateUsersTable extends Migration
             $table->char('email',50)->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->foreignId('package_id')->nullable();
-            $table->timestamp('package_subscribed_at')->nullable();
             $table->integer('purchasing_power')->nullable();
             //for id and type --fcm
             $table->json('device')->nullable();

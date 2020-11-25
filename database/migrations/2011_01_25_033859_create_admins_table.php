@@ -21,7 +21,6 @@ class CreateAdminsTable extends Migration
             $table->char('image',20)->nullable();
             $table->string('password')->nullable();
             $table->boolean('status')->default(1);
-            $table->foreignId('user_type_id')->default(2)->constrained();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -38,4 +38,20 @@ class DropDownController extends MasterController
     public function cities(){
         return $this->sendResponse(new DropDownCollection($this->model->whereClass('City')->get()));
     }
+
+    public function fetes(){
+        return $this->sendResponse(new DropDownCollection($this->model->whereClass('Fetes')->get()));
+    }
+
+    public function colors(){
+        return $this->sendResponse(new DropDownCollection($this->model->whereClass('Color')->get()));
+    }
+
+    public function scanStatus(){
+        return $this->sendResponse(new DropDownCollection($this->model->whereClass('scanStatus')->get()));
+    }
+
+    public function paperStatus(){
+        return $this->sendResponse(new DropDownCollection($this->model->whereClass('paperStatus')->get()));
+    }
 }

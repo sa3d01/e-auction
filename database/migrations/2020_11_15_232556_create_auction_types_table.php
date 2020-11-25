@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSaleTypesTable extends Migration
+class CreateAuctionTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateSaleTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('sale_types', function (Blueprint $table) {
+        Schema::create('auction_types', function (Blueprint $table) {
             $table->id();
             $table->json('name')->nullable();
             $table->json('more_details')->nullable();
@@ -28,6 +28,6 @@ class CreateSaleTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sale_types');
+        Schema::dropIfExists('auction_types');
     }
 }

@@ -29,16 +29,16 @@ class ItemController extends MasterController
     {
         $validate = Validator::make($request->all(),
             [
-                'image' => 'required',
-                 'image.*' => 'image|mimes:jpeg,jpg,png,jpg,gif,svg|max:6048'
+                'images' => 'required',
+                 'images.*' => 'image|mimes:jpeg,jpg,png,jpg,gif,svg|max:6048'
             ]
         );
         if ($validate->fails()) {
             return $this->sendError('يوجد مشكلة بالصور المرفقة');
         }
         $data = [];
-        for ($i = 0; $i < count($request['image']); $i++) {
-            $file = $request['image'][$i];
+        for ($i = 0; $i < count($request['images']); $i++) {
+            $file = $request['images'][$i];
             $destinationPath = 'media/images/item/';
             $filename = Str::random(10) . '.' . $file->getClientOriginalExtension();
             $file->move($destinationPath, $filename);
@@ -51,7 +51,7 @@ class ItemController extends MasterController
         $data=$request->all();
         $data['user_id']=$user->id;
         $item=$this->model->create($data);
-        return $this->sendResponse('تم ارسال إضافة المنتج بنجاح');
+        return $this->sendResponse('تم ارسال طلب إضافة المنتج بنجاح');
     }
 
 }

@@ -16,7 +16,6 @@ class AdminSeeder extends Seeder
             'name' => 'SuperAdmin',
             'email' => 'admin@admin.com',
             'password' => 'secret',
-            'user_type_id' => 2,
         ]);
     }
 }

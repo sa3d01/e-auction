@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Resources\DropDownCollection;
 
-use App\SaleType;
+use App\AuctionType;
 
 class SaleTypeController extends MasterController
 {
     protected $model;
 
-    public function __construct(SaleType $model)
+    public function __construct(AuctionType $model)
     {
         $this->model = $model;
         parent::__construct();

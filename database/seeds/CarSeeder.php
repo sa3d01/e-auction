@@ -58,6 +58,59 @@ class CarSeeder extends Seeder
             'name->en'=>'almost new',
             'class'=>'ItemStatus',
         ]);
+        DropDown::create([
+            'name->ar'=>'يدوي',
+            'name->en'=>'manual',
+            'class'=>'Fetes',
+        ]);
+        DropDown::create([
+            'name->ar'=>'أوتوماتيك',
+            'name->en'=>'automatic',
+            'class'=>'Fetes',
+        ]);
+
+        DropDown::create([
+            'name->ar'=>'أسود',
+            'name->en'=>'black',
+            'class'=>'Color',
+        ]);
+        DropDown::create([
+            'name->ar'=>'أبيض',
+            'name->en'=>'white',
+            'class'=>'Color',
+        ]);
+        DropDown::create([
+            'name->ar'=>'أحمر',
+            'name->en'=>'red',
+            'class'=>'Color',
+        ]);
+        DropDown::create([
+            'name->ar'=>'رمادى',
+            'name->en'=>'gray',
+            'class'=>'Color',
+        ]);
+
+
+        DropDown::create([
+            'name->ar'=>'حديث',
+            'name->en'=>'new',
+            'class'=>'ScanStatus',
+        ]);
+        DropDown::create([
+            'name->ar'=>'قديم',
+            'name->en'=>'old',
+            'class'=>'ScanStatus',
+        ]);
+        DropDown::create([
+            'name->ar'=>'أكثر من 6 أشهر',
+            'name->en'=>'more than 6 months',
+            'class'=>'PaperStatus',
+        ]);
+        DropDown::create([
+            'name->ar'=>'أقل من 6 أشهر',
+            'name->en'=>'less than 6 months',
+            'class'=>'PaperStatus',
+        ]);
 
     }
 }

@@ -7,7 +7,7 @@ use App\DropDown;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\DropDownCollection;
 use App\Http\Resources\UserResource;
-use App\SaleType;
+use App\AuctionType;
 use App\Setting;
 use App\User;
 use Illuminate\Http\Request;

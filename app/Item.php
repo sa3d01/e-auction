@@ -12,9 +12,10 @@ class Item extends Model
     private $route='item';
     private $images_link='media/images/item/';
     protected $fillable = [
-        'user_id','category_id','mark_id','model_id','item_status_id','city_id','sale_type_id'
-        ,'images','location'
-        ,'paper_image','price','shipping_by','status','name','model_class','factory','kms'
+        'user_id','category_id','status'
+        ,'name','images','mark_id','model_id','item_status_id','sunder_count','fetes_id',
+        'color_id','kms_count','scan_status_id','paper_status_id','paper_image'
+        ,'auction_type_id','price','city_id','shipping_by','location'
     ];
     protected $casts = [
         'images' => 'array',
@@ -24,7 +25,7 @@ class Item extends Model
         return $this->belongsTo(User::class);
     }
     public function sale_type(){
-        return $this->belongsTo(SaleType::class);
+        return $this->belongsTo(AuctionType::class);
     }
     public function category(){
         return $this->belongsTo(DropDown::class,'category_id','id');

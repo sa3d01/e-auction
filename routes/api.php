@@ -30,9 +30,13 @@ Route::group(['prefix' => 'v1','namespace'=>'Api'], function () {
         Route::get('/mark/{id}/model', 'DropDownController@models');
         Route::get('/item_status_list', 'DropDownController@itemStatus');
         Route::get('/city', 'DropDownController@cities');
+        Route::get('/fetes', 'DropDownController@fetes');
+        Route::get('/color', 'DropDownController@colors');
+        Route::get('/scan_status', 'DropDownController@scanStatus');
+        Route::get('/paper_status', 'DropDownController@paperStatus');
     });
 
-    Route::group(['prefix' => '/sale_types'], function () {
+    Route::group(['prefix' => '/auction_types'], function () {
         Route::get('/', 'SaleTypeController@saleTypes');
     });
 
@@ -53,7 +57,7 @@ Route::group(['prefix' => 'v1','namespace'=>'Api'], function () {
     });
     Route::group(['prefix' => '/user'], function () {
         // Verification
-        Route::post('/validate-email', 'UserController@authMail');
+        Route::post('/validate-auth', 'UserController@authPhoneAndMail');
         Route::post('/verify', 'UserController@verifyUser');
         //register
         Route::post('/update', 'UserController@update')->middleware(CheckApiToken::class);
