@@ -37,12 +37,12 @@ class UserController extends MasterController
     }
     public function index()
     {
-        $rows = $this->model->where('user_type_id',1)->get();
+        $rows = $this->model->latest()->get();
         return View('dashboard.index.index', [
             'rows' => $rows,
             'type'=>'user',
             'title'=>'قائمة العملاء',
-            'index_fields'=>['الاسم' => 'name', 'البريد الإلكترونى' => 'email', ' الجوال' => 'mobile','تاريخ الانضمام'=>'created_at'],
+            'index_fields'=>['الاسم' => 'name', 'البريد الإلكترونى' => 'email', ' الجوال' => 'phone','تاريخ الانضمام'=>'created_at'],
             'status'=>true,
             'image'=>true,
         ]);
@@ -106,7 +106,7 @@ class UserController extends MasterController
         if ($user->wallet >= $wallet_decrement_value){
             $user->update(
                 [
-                    'wallet'=>$user->wallet-$wallet_decrement_value,
+                    'item'=>$user->wallet-$wallet_decrement_value,
                 ]
             );
             $user->device['type'] =='IOS'? $fcm_notification=array('title'=>'رسالة ادارية', 'sound' => 'default') : $fcm_notification=null;

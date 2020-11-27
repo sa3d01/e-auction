@@ -26,8 +26,8 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
 
     Route::get('/', 'HomeController@index')->name('home');
 
-    Route::get('/setting', 'HomeController@setting')->name('setting')->middleware('permission:edit-settings');
-    Route::post('/setting', 'HomeController@update_setting')->name('setting.update')->middleware('permission:edit-settings');
+    Route::get('/setting', 'HomeController@setting')->name('setting');
+    Route::post('/setting', 'HomeController@update_setting')->name('setting.update');
 
     Route::get('admin/profile', 'AdminController@profile')->name('profile');
     Route::post('admin/update_profile/{id}', 'AdminController@update_profile')->name('update_profile');
@@ -39,20 +39,15 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
     Route::post('/role/{id}', 'RoleController@update')->name('update');
 
     Route::post('user/{id}', 'UserController@update')->name('user.update');
-    Route::resource('user', 'UserController')->middleware('permission:view-users');
+    Route::resource('user', 'UserController');
     Route::get('user/activate/{id}', 'UserController@activate')->name('user.activate');
-    Route::get('user/wallet_decrement/{id}', 'UserController@wallet_decrement')->name('user.wallet_decrement')->middleware('permission:edit-wallets');
 
-    Route::post('provider/{id}', 'ProviderController@update')->name('provider.update')->middleware('permission:view-providers');
-    Route::resource('provider', 'ProviderController');
-    Route::get('provider/activate/{id}', 'ProviderController@activate')->name('provider.activate');
 
-    Route::get('order/status/{status}', 'OrderController@orders')->name('order.status');
-    Route::resource('order', 'OrderController');
+    Route::get('item/status/{status}', 'ItemController@items')->name('item.status');
+    Route::resource('item', 'ItemController');
 
     Route::get('notification/admin_notify_type/{admin_notify_type}', 'NotificationController@notifications')->name('notification.admin_notify_type');
     Route::resource('notification', 'NotificationController');
-
 
     Route::get('show_single_contact/{id}', 'ContactController@show_single_contact');
     Route::get('single_contact_form/{user_id}/{contact_id}', 'ContactController@single_contact_form')->name('contact.form');
@@ -60,7 +55,7 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
     Route::resource('contact', 'ContactController');
     Route::get('send_single_notify/{receiver_id}/{note}', 'ContactController@send_single_notify');
 
-    Route::resource('wallet', 'WalletController');
+    Route::resource('item', 'WalletController');
 });
 Auth::routes();
 Route::get('/', function (){

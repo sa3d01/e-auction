@@ -17,74 +17,67 @@
                     <h5 class="form-header">
                         {{$title}}
                     </h5>
-                    @if($type=='role'|| $type=='admin')
-{{--                        @can('add-'.$type.'s')--}}
-                        <div class="form-buttons-w">
-                            <a href="{{route('admin.'.$type.'.create')}}" class="btn btn-primary create-submit" ><label>+</label> إضافة</a>
-                        </div>
-{{--                        @endcan--}}
-                    @endif
                     <div  class="table-responsive">
                         <table id="datatable" width="100%" class="table table-striped table-lightfont">
                             <thead>
-                                <tr>
-                                    <th hidden></th>
-                                    @foreach($index_fields as $key=>$value)
-                                        <th>{{$key}}</th>
+                            <tr>
+                                <th hidden></th>
+                                @foreach($index_fields as $key=>$value)
+                                    <th>{{$key}}</th>
+                                @endforeach
+                                @if(isset($selects))
+                                    @foreach($selects as $select)
+                                        <th>{{$select['title']}}</th>
                                     @endforeach
-                                    @if(isset($selects))
-                                        @foreach($selects as $select)
-                                            <th>{{$select['title']}}</th>
-                                        @endforeach
-                                    @endif
-                                    @if(isset($status))
-                                        <th>الحالة</th>
-                                    @endif
-                                    @if(isset($image))
-                                        <th>الصورة</th>
-                                    @endif
-                                    <th>المزيد</th>
-                                </tr>
+                                @endif
+                                @if(isset($status))
+                                    <th>الحالة</th>
+                                @endif
+                                @if(isset($image))
+                                    <th>الصورة</th>
+                                @endif
+                                <th>المزيد</th>
+                            </tr>
                             </thead>
                             <tfoot>
-                                <tr>
-                                    <th hidden></th>
-                                    @foreach($index_fields as $key=>$value)
-                                        <th>{{$key}}</th>
+                            <tr>
+                                <th hidden></th>
+                                @foreach($index_fields as $key=>$value)
+                                    <th>{{$key}}</th>
+                                @endforeach
+                                @if(isset($selects))
+                                    @foreach($selects as $select)
+                                        <th>{{$select['title']}}</th>
                                     @endforeach
-                                    @if(isset($selects))
-                                        @foreach($selects as $select)
-                                            <th>{{$select['title']}}</th>
-                                        @endforeach
-                                    @endif
-                                    @if(isset($status))
-                                        <th>الحالة</th>
-                                    @endif
-                                    @if(isset($image))
-                                        <th>الصورة</th>
-                                    @endif
-                                        <th>المزيد</th>
-                                </tr>
+                                @endif
+                                @if(isset($status))
+                                    <th>الحالة</th>
+                                @endif
+                                @if(isset($image))
+                                    <th>الصورة</th>
+                                @endif
+                                <th>المزيد</th>
+                            </tr>
                             </tfoot>
                             <tbody>
                             @foreach($rows as $row)
                                 <tr>
                                     <td hidden>{{$row->id}}</td>
-                                @foreach($index_fields as $key=>$value)
-                                    @if($value=='created_at')
-                                        <td>{{$row->published_at()}}</td>
-                                    @elseif($value=='role')
-                                        @if($row->hasRole(\Spatie\Permission\Models\Role::all()))
-                                            <td>{{$row->getRoleArabicName()}}</td>
+                                    @foreach($index_fields as $key=>$value)
+                                        @if($value=='created_at')
+                                            <td>{{$row->published_at()}}</td>
+                                        @elseif($value=='role')
+                                            @if($row->hasRole(\Spatie\Permission\Models\Role::all()))
+                                                <td>{{$row->getRoleArabicName()}}</td>
+                                            @else
+                                                ﻻ يمتلك أي صﻻحيات حتى الآن
+                                            @endif
+                                        @elseif($type=='role' && $value=='users_count')
+                                            <td>{{$row->users()->count()}}</td>
                                         @else
-                                            ﻻ يمتلك أي صﻻحيات حتى الآن
+                                            <td>{{$row->$value}}</td>
                                         @endif
-                                    @elseif($type=='role' && $value=='users_count')
-                                        <td>{{$row->users()->count()}}</td>
-                                    @else
-                                        <td>{{$row->$value}}</td>
-                                    @endif
-                                @endforeach
+                                    @endforeach
                                     @if(isset($selects))
                                         @foreach($selects as $select)
                                             @php($related_model=$select['name'])
@@ -93,7 +86,7 @@
                                     @endif
                                     @if(isset($status))
                                         <td>
-                                        {!!$row->getStatusIcon()!!}
+                                            {!!$row->getStatusIcon()!!}
                                         </td>
                                     @endif
                                     @if(isset($image))

@@ -9,8 +9,6 @@ use App\Item;
 use App\Package;
 use App\Transfer;
 use App\User;
-use App\userType;
-use App\Wallet;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;

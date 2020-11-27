@@ -12,7 +12,7 @@ class Admin extends Authenticatable
     private $route='admin';
     private $images_link='media/images/user/';
     protected $guard = 'admin';
-    protected $fillable = ['name','email','mobile','image','password','activation_code','activation_status','status','user_type_id'];
+    protected $fillable = ['name','email','mobile','image','password','activation_code','activation_status','status'];
     protected $hidden = ['password', 'remember_token'];
 
     public function getAllPermissionsAttribute()
@@ -24,9 +24,7 @@ class Admin extends Authenticatable
         }
         return $res;
     }
-    public function User_type(){
-        return $this->belongsTo(userType::class);
-    }
+
     public function getRoleArabicName()
     {
         $role=$this->roles()->first();

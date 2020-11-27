@@ -2,48 +2,30 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Notification;
-use App\Order;
-use App\User;
-use App\UserSale;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use App\Sale;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
+use App\Item;
 
-class OrderController extends MasterController
+class ItemController extends MasterController
 {
-    public function __construct(Order $model)
+    public function __construct(Item $model)
     {
         $this->model = $model;
-        $this->route = 'order';
-
+        $this->route = 'item';
         parent::__construct();
     }
 
-    public function orders($status)
+    public function items($status)
     {
         $rows=$this->model->where('status',$status)->latest()->get();
         return View('dashboard.index.index', [
             'rows' => $rows,
-            'type'=>'order',
-            'title'=>'قائمة الطلبات',
+            'type'=>'item',
+            'title'=>'قائمة السلع',
             'index_fields'=>['الرقم التسلسلى' => 'id','تاريخ الطلب'=>'created_at'],
             'selects'=>[
                 [
                     'name'=>'user',
                     'title'=>'المستخدم'
-                ],
-                [
-                    'name'=>'provider',
-                    'title'=>'مقدم الخدمة'
-                ],
-                [
-                    'name'=>'type',
-                    'title'=>'نوع الخدمة'
-                ],
+                ]
             ],
             'only_show'=>true,
             'status'=>true,
@@ -69,8 +51,8 @@ class OrderController extends MasterController
         }
         return View('dashboard.show.show', [
             'row' => $row,
-            'type'=>'order',
-            'action'=>'admin.order.update',
+            'type'=>'item',
+            'action'=>'admin.item.update',
             'title'=>'بيانات الطلب',
             'edit_fields'=>$fields,
             'selects'=>[
