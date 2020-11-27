@@ -16,4 +16,7 @@ class AuctionType extends Model
         'name' => 'json',
         'more_details' => 'json',
     ];
+    public function nameForSelect(){
+        return $this->name['ar'] ;
+    }
 }

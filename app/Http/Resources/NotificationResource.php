@@ -14,13 +14,20 @@ class NotificationResource extends JsonResource
      */
     public function toArray($request)
     {
+        if (\request()->header('lang')=='en'){
+            $title=$this->title['en'];
+            $note=$this->note['en'];
+        }else{
+            $title=$this->title['ar'];
+            $note=$this->note['ar'];
+        }
         return [
             'id'=> (int)$this->id,
             'type'=> $this->type,
             'read'=> ($this->read == 'true') ? true : false,
-            'title'=> $this->title,
-            'note'=> $this->note,
-            'order_id'=>(int) $this->order_id,
+            'title'=> $title,
+            'note'=> $note,
+            'item_id'=>(int) $this->item_id,
             'published_from'=> $this->published_from()
         ];
     }

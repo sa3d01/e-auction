@@ -30,9 +30,6 @@
                                         <th>{{$select['title']}}</th>
                                     @endforeach
                                 @endif
-                                @if(isset($status))
-                                    <th>الحالة</th>
-                                @endif
                                 @if(isset($image))
                                     <th>الصورة</th>
                                 @endif
@@ -50,9 +47,6 @@
                                         <th>{{$select['title']}}</th>
                                     @endforeach
                                 @endif
-                                @if(isset($status))
-                                    <th>الحالة</th>
-                                @endif
                                 @if(isset($image))
                                     <th>الصورة</th>
                                 @endif
@@ -66,14 +60,6 @@
                                     @foreach($index_fields as $key=>$value)
                                         @if($value=='created_at')
                                             <td>{{$row->published_at()}}</td>
-                                        @elseif($value=='role')
-                                            @if($row->hasRole(\Spatie\Permission\Models\Role::all()))
-                                                <td>{{$row->getRoleArabicName()}}</td>
-                                            @else
-                                                ﻻ يمتلك أي صﻻحيات حتى الآن
-                                            @endif
-                                        @elseif($type=='role' && $value=='users_count')
-                                            <td>{{$row->users()->count()}}</td>
                                         @else
                                             <td>{{$row->$value}}</td>
                                         @endif
@@ -84,24 +70,33 @@
                                             <td>{{$row->$related_model->nameForSelect()}}</td>
                                         @endforeach
                                     @endif
-                                    @if(isset($status))
-                                        <td>
-                                            {!!$row->getStatusIcon()!!}
-                                        </td>
-                                    @endif
                                     @if(isset($image))
-                                        <td><img width="50px" height="50px" src="{{$row->image}}"></td>
+                                        <td data-toggle="modal" data-target="#imgModal{{$row->id}}">
+                                            <img width="50px" height="50px" class="img_preview" src="{{ $row->image}}">
+                                        </td>
+                                        <div id="imgModal{{$row->id}}" class="modal fade" role="img">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-body">
+                                                        <img data-toggle="modal" data-target="#imgModal{{$row->id}}" class="img-preview" src="{{ $row->image}}" style="max-height: 500px">
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">إغلاق</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     @endif
                                     <td>
-                                        <form class="delete" data-id="{{$row->id}}" method="POST" action="{{ route('admin.'.$type.'.destroy',[$row->id]) }}">
-                                            @csrf
-                                            {{ method_field('DELETE') }}
-                                            <input type="hidden" value="{{$row->id}}">
-                                            <button type="button " class="btn p-0 no-bg">
-                                                <i class="fa fa-trash text-danger"></i>
-                                            </button>
-                                        </form>
-                                        <a href="{{route('admin.'.$type.'.show',$row->id)}}"><i class="os-icon os-icon-grid-10"></i></a>
+{{--                                        <form class="delete" data-id="{{$row->id}}" method="POST" action="{{ route('admin.'.$type.'.destroy',[$row->id]) }}">--}}
+{{--                                            @csrf--}}
+{{--                                            {{ method_field('DELETE') }}--}}
+{{--                                            <input type="hidden" value="{{$row->id}}">--}}
+{{--                                            <button type="button " class="btn p-0 no-bg">--}}
+{{--                                                <i class="fa fa-trash text-danger"></i>--}}
+{{--                                            </button>--}}
+{{--                                        </form>--}}
+                                        <a href="{{route('admin.item.show',$row->id)}}"><i class="os-icon os-icon-eye"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

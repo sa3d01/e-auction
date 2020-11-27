@@ -33,9 +33,11 @@ class CreateItemsTable extends Migration
             $table->string('price')->nullable();
             $table->foreignId('city_id')->nullable();
             $table->json('location')->nullable();
+            $table->json('more_details')->nullable();
             $table->enum('shipping_by',['user','app'])->default('app');
             //pay throw item
-            $table->enum('status',['pending','rejected','shown','sold'])->default('pending');
+            $table->enum('status',['pending','accepted','rejected','shown','sold'])->default('pending');
+            $table->boolean('pay_status')->default(0);
             $table->timestamps();
         });
     }

@@ -19,9 +19,14 @@ class NotificationCollection extends ResourceCollection
             $arr['id']=(int)$obj->id;
             $arr['type']=$obj->type;
             $arr['read']=($obj->read == 'true') ? true : false;
-            $arr['title']=$obj->title;
-            $arr['note']=$obj->note;
-            $arr['order_id']=(int)$obj->order_id;
+            if (\request()->header('lang')=='en'){
+                $arr['title']=$obj->title['en'];
+                $arr['note']=$obj->note['en'];
+            }else{
+                $arr['title']=$obj->title['ar'];
+                $arr['note']=$obj->note['ar'];
+            }
+            $arr['item_id']=(int)$obj->item_id;
             $arr['published_from']=$obj->published_from();
             $data[]=$arr;
         }

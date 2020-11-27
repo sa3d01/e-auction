@@ -6,7 +6,7 @@ use App\Http\Resources\DropDownCollection;
 
 use App\AuctionType;
 
-class SaleTypeController extends MasterController
+class AuctionTypeController extends MasterController
 {
     protected $model;
 
@@ -16,7 +16,7 @@ class SaleTypeController extends MasterController
         parent::__construct();
     }
 
-    public function saleTypes(){
+    public function auctionTypes(){
         return $this->sendResponse(new DropDownCollection($this->model->all()));
     }
 

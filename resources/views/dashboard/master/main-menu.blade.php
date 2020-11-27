@@ -20,9 +20,12 @@
                 <ul class="sub-menu">
                     <li>
                         <a href="{{route('admin.item.status',['status'=>'pending'])}}"> السلع الجديدة </a>
-{{--                        <a href="{{route('admin.item.status',['status'=>'shown'])}}"> السلع المعروضة  </a>--}}
-{{--                        <a href="{{route('admin.item.status',['status'=>'sold'])}}"> السلع المباعة  </a>--}}
-{{--                        <a href="{{route('admin.item.status',['status'=>'rejected'])}}"> السلع المنتهية  </a>--}}
+                    </li>
+                    <li>
+                        <a href="{{route('admin.item.status',['status'=>'accepted'])}}"> السلع فى انتظار الاضافة لمزاد  </a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.item.status',['status'=>'rejected'])}}"> السلع المرفوضة  </a>
                     </li>
                 </ul>
             </div>

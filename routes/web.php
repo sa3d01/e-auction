@@ -44,6 +44,8 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
 
 
     Route::get('item/status/{status}', 'ItemController@items')->name('item.status');
+    Route::get('item/{id}/reject', 'ItemController@reject')->name('item.reject');
+    Route::get('item/{id}/accept', 'ItemController@accept')->name('item.accept');
     Route::resource('item', 'ItemController');
 
     Route::get('notification/admin_notify_type/{admin_notify_type}', 'NotificationController@notifications')->name('notification.admin_notify_type');
@@ -55,7 +57,6 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
     Route::resource('contact', 'ContactController');
     Route::get('send_single_notify/{receiver_id}/{note}', 'ContactController@send_single_notify');
 
-    Route::resource('item', 'WalletController');
 });
 Auth::routes();
 Route::get('/', function (){

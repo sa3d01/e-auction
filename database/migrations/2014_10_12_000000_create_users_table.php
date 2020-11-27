@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->char('email',50)->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->foreignId('package_id')->nullable();
-            $table->integer('purchasing_power')->nullable();
+            $table->integer('purchasing_power')->default(0);
             //for id and type --fcm
             $table->json('device')->nullable();
             $table->char('activation_code',6)->nullable();
@@ -32,6 +32,7 @@ class CreateUsersTable extends Migration
             $table->string('password')->nullable();
             $table->json('more_details')->nullable();
             $table->softDeletes('deleted_at', 0);
+            $table->integer('wallet')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

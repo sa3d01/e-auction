@@ -17,7 +17,7 @@ class CreateTransfersTable extends Migration
             $table->id();
             $table->string('money')->default(0);
             $table->foreignId('user_id')->nullable();
-            $table->enum('type',['item','item','auction','package','purchasing_power','other'])->default('item');
+            $table->enum('type',['wallet','item','auction','package','purchasing_power','other'])->default('wallet');
             $table->json('more_details')->nullable();
             $table->timestamps();
         });
