@@ -20,32 +20,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment=".">
-      <change afterPath="$PROJECT_DIR$/.idea/symfony2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/NotificationController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Notification.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_11_27_041348_create_notifications_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/1PzJLvjIXR.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/AOT1DiAZAX.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/user/UacnZdBwsa.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/user/Vq3gSXqzez.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/user/lKA4xH0aDK.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/user/wIryAIKvWL.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Auction.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AuctionItem.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/AuctionUser.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Favourite.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/DropDownController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Report.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_11_28_105825_create_reports_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_11_28_105942_create_auctions_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_11_28_105956_create_auction_items_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_11_28_110003_create_auction_users_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/migrations/2020_11_28_113522_create_favourites_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/item/Rvn0YekOtz.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/user/0uPMAMPCaw.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/user/qcR1dXeFud.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/dashboard/drop_down/create.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/dashboard/drop_down/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/dashboard/drop_down/show.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/AuctionType.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/AuctionType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/SaleTypeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/AuctionTypeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Resources/NotificationCollection.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/NotificationCollection.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Resources/NotificationResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/NotificationResource.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Item.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Item.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_15_232531_create_transfers_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_15_232531_create_transfers_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_15_232746_create_items_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_15_232746_create_items_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/item/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/item/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/item/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/item/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/DropDown.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/DropDown.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/MasterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/MasterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/PackageSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/PackageSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/master/cards.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/master/cards.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/dashboard/master/main-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/master/main-menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/master/mobile-main-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/master/mobile-main-menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/master/notification.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/master/notification.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -187,7 +185,7 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Controllers/Api" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/dashboard" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -199,11 +197,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app/Http/Controllers/Api" />
+      <recent name="$PROJECT_DIR$/resources/views/dashboard" />
       <recent name="$PROJECT_DIR$/app/Http/Controllers/Admin" />
+      <recent name="$PROJECT_DIR$/app/Http/Controllers/Api" />
       <recent name="$PROJECT_DIR$/public/media/images/drop_down" />
       <recent name="$PROJECT_DIR$/public/media/images/item" />
-      <recent name="$PROJECT_DIR$/public/media/images/page" />
     </key>
   </component>
   <component name="RunManager">
@@ -226,7 +224,8 @@
       <workItem from="1605544678899" duration="230000" />
       <workItem from="1606192027317" duration="13455000" />
       <workItem from="1606281491066" duration="13000" />
-      <workItem from="1606439925254" duration="14565000" />
+      <workItem from="1606439925254" duration="15196000" />
+      <workItem from="1606556315711" duration="8937000" />
     </task>
     <task id="LOCAL-00001" summary="auth">
       <created>1605159030152</created>
@@ -298,7 +297,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606442617262</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary=".">
+      <created>1606455617188</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1606455617188</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -335,10 +341,10 @@
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state x="795" y="124" width="382" height="874" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/72.27.1848.1053@72.27.1848.1053" timestamp="1606270365821" />
-    <state x="729" y="311" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1606451413163">
+    <state x="729" y="311" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1606564004649">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state x="729" y="311" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/72.27.1848.1053@72.27.1848.1053" timestamp="1606451413163" />
+    <state x="729" y="311" width="524" height="491" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/72.27.1848.1053@72.27.1848.1053" timestamp="1606564004649" />
     <state x="852" y="453" width="287" height="207" key="Github.ShareDialog" timestamp="1605145994995">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
@@ -347,10 +353,10 @@
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state x="681" y="240" width="620" height="633" key="Github.UntrackedFilesDialog/72.27.1848.1053@72.27.1848.1053" timestamp="1605146018815" />
-    <state x="591" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1606442619287">
+    <state x="591" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1606455619009">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state x="591" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1848.1053@72.27.1848.1053" timestamp="1606442619287" />
+    <state x="591" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1848.1053@72.27.1848.1053" timestamp="1606455619009" />
     <state x="687" y="292" width="659" height="522" key="find.popup" timestamp="1606279764484">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>

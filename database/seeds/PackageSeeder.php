@@ -17,7 +17,7 @@ class PackageSeeder extends Seeder
             'name->en'=>'free package',
             'note->ar'=>[
                 'السماح بالتصفح دون مميزات مدفوعة',
-                'السماح بالتصفح فقط'
+                'تخول المزايد لدخول ساحة الحفظ (المقرات التابعه للتطبيق)'
             ],
             'note->en'=>[
                 'only view',

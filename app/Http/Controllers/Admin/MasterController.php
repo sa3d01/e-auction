@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Contact;
 use App\Http\Controllers\Controller;
+use App\Item;
 use App\Order;
 use App\Setting;
 use App\User;
@@ -25,6 +26,7 @@ abstract class MasterController extends Controller
     public function __construct()
     {
         $users_count=User::count();
+        $new_items_count=Item::where('status','pending')->count();
         $new_contacts_count=Contact::where(['read'=>'false'])->count();
         $this->middleware('auth:admin');
         view()->share(array(
@@ -39,6 +41,7 @@ abstract class MasterController extends Controller
             'settings'=>Setting::first(),
             'users_count'=>$users_count,
             'new_contacts_count'=>$new_contacts_count,
+            'new_items_count'=>$new_items_count,
             'new_contacts'=>Contact::where('read','false')->get(),
         ));
     }

@@ -1,10 +1,10 @@
 <div class="menu-actions">
-    @can('view-contacts')
+{{--    @can('view-contacts')--}}
     <!--------------------
     START - Contacts Link in secondary top menu
     -------------------->
         <div class="messages-notifications os-dropdown-trigger os-dropdown-position-right">
-            <i class="os-icon os-icon-mail-14"></i>
+            <i class="os-icon os-icon-message-circle"></i>
             <div class="new-messages-count">
                 {{$new_contacts_count}}
             </div>
@@ -35,37 +35,37 @@
         <!--------------------
         END - Contacts Link in secondary top menu
         -------------------->
-    @endcan
+{{--    @endcan--}}
 <!--------------------
             START - Settings Link in secondary top menu
             -------------------->
     {{--@can('view-settings || view-pages || view-roles || view-admins')--}}
 
-    <div class="top-icon top-settings os-dropdown-trigger os-dropdown-position-right">
-        <i class="os-icon os-icon-ui-46"></i>
-        <div class="os-dropdown">
-            <div class="icon-w">
-                <i class="os-icon os-icon-ui-46"></i>
-            </div>
-            <ul>
-                @can('edit-settings')
-                    <li>
-                        <a href="{{route('admin.setting')}}"><i class="os-icon os-icon-ui-49"></i><span>إعدادات عامة</span></a>
-                    </li>
-                @endcan
-                @can('edit-roles')
-                    <li>
-                        <a href="{{route('admin.role.index')}}"><i class="os-icon os-icon-ui-83"></i><span>الصﻻحيات والأدوار</span></a>
-                    </li>
-                @endcan
-                @can('edit-admins')
-                    <li>
-                        <a href="{{route('admin.admin.index')}}"><i class="os-icon os-icon-ui-93"></i><span>أعضاء الإدارة</span></a>
-                    </li>
-                @endcan
-            </ul>
-        </div>
-    </div>
+{{--    <div class="top-icon top-settings os-dropdown-trigger os-dropdown-position-right">--}}
+{{--        <i class="os-icon os-icon-ui-46"></i>--}}
+{{--        <div class="os-dropdown">--}}
+{{--            <div class="icon-w">--}}
+{{--                <i class="os-icon os-icon-ui-46"></i>--}}
+{{--            </div>--}}
+{{--            <ul>--}}
+{{--                @can('edit-settings')--}}
+{{--                    <li>--}}
+{{--                        <a href="{{route('admin.setting')}}"><i class="os-icon os-icon-ui-49"></i><span>إعدادات عامة</span></a>--}}
+{{--                    </li>--}}
+{{--                @endcan--}}
+{{--                @can('edit-roles')--}}
+{{--                    <li>--}}
+{{--                        <a href="{{route('admin.role.index')}}"><i class="os-icon os-icon-ui-83"></i><span>الصلاحيات والأدوار</span></a>--}}
+{{--                    </li>--}}
+{{--                @endcan--}}
+{{--                @can('edit-admins')--}}
+{{--                    <li>--}}
+{{--                        <a href="{{route('admin.admin.index')}}"><i class="os-icon os-icon-ui-93"></i><span>أعضاء الإدارة</span></a>--}}
+{{--                    </li>--}}
+{{--                @endcan--}}
+{{--            </ul>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 {{--@endcan--}}
 <!--------------------
     END - Settings Link in secondary top menu

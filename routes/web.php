@@ -42,6 +42,11 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
     Route::resource('user', 'UserController');
     Route::get('user/activate/{id}', 'UserController@activate')->name('user.activate');
 
+    Route::post('drop_down/{id}', 'DropDownController@update')->name('drop_down.update');
+    Route::get('drop_down/{class}', 'DropDownController@list')->name('drop_down.list');
+    Route::resource('drop_down', 'DropDownController');
+    Route::get('drop_down/activate/{id}', 'DropDownController@activate')->name('drop_down.activate');
+
 
     Route::get('item/status/{status}', 'ItemController@items')->name('item.status');
     Route::get('item/{id}/reject', 'ItemController@reject')->name('item.reject');

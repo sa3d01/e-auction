@@ -9,6 +9,16 @@
                     <div class="col-sm-4 col-xxxl-3">
                         <a class="element-box el-tablo" href="#">
                             <div class="label">
+                                السلع الجديدة
+                            </div>
+                            <div class="value">
+                                {{$new_items_count}}
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-sm-4 col-xxxl-3">
+                        <a class="element-box el-tablo" href="#">
+                            <div class="label">
                                 المستخدمين
                             </div>
                             <div class="value">

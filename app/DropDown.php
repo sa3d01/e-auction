@@ -20,4 +20,7 @@ class DropDown extends Model
     public function nameForSelect(){
         return $this->name['ar'];
     }
+    public function parent(){
+        return $this->belongsTo(DropDown::class,'parent_id','id');
+    }
 }
