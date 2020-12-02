@@ -38,14 +38,24 @@ class DropDownController extends MasterController
     public function list($class)
     {
         $rows = $this->model->where('class',$class)->get();
+        if ($class=="Mark"||$class=="Partner"){
+            $image=true;
+        }else{
+            $image=false;
+        }
+        if ($class=="Model"){
+            $index_fields=['الاسم' => 'name','الماركة'=>'parent_id'];
+        }else{
+            $index_fields=['الاسم' => 'name'];
+        }
         return View('dashboard.drop_down.index', [
                 'rows' => $rows,
                 'type'=>$class,
                 'title'=>'قائمة البيانات',
-                'index_fields'=>['الاسم' => 'name'],
+                'index_fields'=>$index_fields,
                 'languages'=>true,
                 'status'=>true,
-                'image'=> $class=="Mark" ? true : false,
+                'image'=> $image,
             ]
         );
     }
@@ -82,22 +92,34 @@ class DropDownController extends MasterController
         $this->validate($request, $this->validation_func(2),$this->validation_msg());
         $data=$request->all();
         $name['ar']=$request['name_ar'];
+        $name['en']=$request['name_en'];
         $data['name']=$name;
         $this->model->find($id)->update($data);
-        return redirect('admin/' . $this->route . '')->with('updated', 'تم التعديل بنجاح');
+        return back()->with('updated', 'تم التعديل بنجاح');
     }
 
     public function show($id)
     {
         $row = DropDown::findOrFail($id);
-        return View('dashboard.show.show', [
+        if ($row->class=="Mark"||$row->class=="Partner"){
+            $image=true;
+        }else{
+            $image=false;
+        }
+        if ($row->class=="Model"){
+            $edit_fields=['الاسم' => 'name','الماركة'=>'parent_id'];
+        }else{
+            $edit_fields=['الاسم' => 'name'];
+        }
+        return View('dashboard.drop_down.show', [
             'row' => $row,
-            'type'=>'model',
-            'action'=>'admin.model.update',
-            'title'=>'موديل',
-            'edit_fields'=>['الإسم' => 'name','الماركة' => 'parent_id'],
+            'type'=>$row->class,
+            'action'=>'admin.drop_down.update',
+            'title'=>$row->class,
+            'edit_fields'=>$edit_fields,
             'languages'=>true,
-            'status'=>true
+            'status'=>true,
+            'image'=>$image
         ]);
     }
 

@@ -20,7 +20,7 @@
                                     <th>{{$key}}</th>
                                 @endforeach
                                 <th>الحالة</th>
-                                @if(isset($image))
+                                @if($image==true)
                                     <th>الصورة</th>
                                 @endif
                                 <th>المزيد</th>
@@ -33,7 +33,7 @@
                                     <th>{{$key}}</th>
                                 @endforeach
                                 <th>الحالة</th>
-                                @if(isset($image))
+                                @if($image==true)
                                     <th>الصورة</th>
                                 @endif
                                 <th>المزيد</th>
@@ -83,7 +83,7 @@
 {{--                                                <i class="fa fa-trash text-danger"></i>--}}
 {{--                                            </button>--}}
 {{--                                        </form>--}}
-                                        <a href="{{route('admin.item.show',$row->id)}}"><i class="os-icon os-icon-eye"></i></a>
+                                        <a href="{{route('admin.drop_down.show',$row->id)}}"><i class="os-icon os-icon-eye"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
