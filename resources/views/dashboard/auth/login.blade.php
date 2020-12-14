@@ -45,11 +45,11 @@
                     <label class="form-check-label"><input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>تذكرنى</label>
                 </div>
             </div>
-            <div class="form-group">
-                <div class="col-sm-12" style="margin-top: 10px">
-                    <a href="{{route('admin.password.request')}}" class="text-dark"><i class="fa fa-lock m-r-5"></i>نسيت كلمت المرور ؟</a>
-                </div>
-            </div>
+{{--            <div class="form-group">--}}
+{{--                <div class="col-sm-12" style="margin-top: 10px">--}}
+{{--                    <a href="{{route('admin.password.request')}}" class="text-dark"><i class="fa fa-lock m-r-5"></i>نسيت كلمت المرور ؟</a>--}}
+{{--                </div>--}}
+{{--            </div>--}}
         </form>
     </div>
 </div>
