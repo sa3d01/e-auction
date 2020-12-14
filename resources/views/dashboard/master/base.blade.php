@@ -43,7 +43,7 @@
     <div class="layout-w">
         <div class="menu-mobile menu-activated-on-click color-scheme-dark">
             <div class="mm-logo-buttons-w">
-                <a class="mm-logo" href="{{route('admin.home')}}"><img src="{{asset('media/images/logo.png')}}"><span>لوحة التحكم</span></a>
+                <a class="mm-logo" href="{{route('admin.home')}}"><img src="{{asset('media/images/logo.jpeg')}}"><span>لوحة التحكم</span></a>
                 <div class="mm-buttons">
                     <div class="content-panel-open">
                         <div class="os-icon os-icon-grid-circles"></div>
@@ -79,7 +79,7 @@
         <div class="menu-w color-scheme-dark color-style-bright menu-position-top menu-layout-compact sub-menu-style-over sub-menu-color-bright selected-menu-color-light menu-activated-on-hover menu-has-selected-link">
             <div class="logo-w">
                 <a class="logo" href="{{route('admin.home')}}">
-                    <div><img alt="" src="{{asset('media/images/logo.png')}}"></div>
+                    <div><img alt="" src="{{asset('media/images/logo.jpeg')}}"></div>
                 </a>
             </div>
             <div class="logged-user-w avatar-inline">

@@ -108,7 +108,7 @@
                                                 <i class="fa fa-trash text-danger"></i>
                                             </button>
                                         </form>
-                                        <a href="{{route('admin.'.$type.'.show',$row->id)}}"><i class="os-icon os-icon-grid-10"></i></a>
+{{--                                        <a href="{{route('admin.'.$type.'.show',$row->id)}}"><i class="os-icon os-icon-grid-10"></i></a>--}}
                                     </td>
                                 </tr>
                             @endforeach

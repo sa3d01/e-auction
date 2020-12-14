@@ -69,26 +69,38 @@
                     <li>
                         <a href="{{route('admin.item.status',['status'=>'pending'])}}"> السلع الجديدة </a>
                     </li>
-                    <li>
-                        <a href="{{route('admin.item.status',['status'=>'accepted'])}}"> السلع فى انتظار الاضافة لمزاد  </a>
-                    </li>
-                    <li>
-                        <a href="{{route('admin.item.status',['status'=>'rejected'])}}"> السلع المرفوضة  </a>
-                    </li>
+{{--                    <li>--}}
+{{--                        <a href="{{route('admin.item.status',['status'=>'accepted'])}}"> السلع فى انتظار الاضافة لمزاد  </a>--}}
+{{--                    </li>--}}
+{{--                    <li>--}}
+{{--                        <a href="{{route('admin.item.status',['status'=>'rejected'])}}"> السلع المرفوضة  </a>--}}
+{{--                    </li>--}}
                 </ul>
             </div>
         </div>
     </li>
-{{--contacts--}}
+{{--    //users--}}
     <li class="sub-header">
-        <span>رسائل الأعضاء</span>
+        <span>الأعضاء </span>
     </li>
     <li class="sub-menu">
-        <a href="{{route('admin.contact.index')}}">
+        <a href="{{route('admin.user.index')}}">
             <div class="icon-w">
-                <div class="os-icon os-icon-email-2-at"></div>
+                <div class="os-icon os-icon-user-male-circle2"></div>
             </div>
-            <span>رسائل الأعضاء</span>
+            <span> الأعضاء</span>
         </a>
     </li>
+{{--contacts--}}
+{{--    <li class="sub-header">--}}
+{{--        <span>رسائل الأعضاء</span>--}}
+{{--    </li>--}}
+{{--    <li class="sub-menu">--}}
+{{--        <a href="{{route('admin.contact.index')}}">--}}
+{{--            <div class="icon-w">--}}
+{{--                <div class="os-icon os-icon-email-2-at"></div>--}}
+{{--            </div>--}}
+{{--            <span>رسائل الأعضاء</span>--}}
+{{--        </a>--}}
+{{--    </li>--}}
 </ul>
