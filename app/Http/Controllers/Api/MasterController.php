@@ -34,7 +34,7 @@ class MasterController extends Controller
             'status' => $code,
             'message' => $error,
         ];
-        return response()->json($response, $code);
+        return response()->json($response, 200);
     }
 
     public function store(Request $request){

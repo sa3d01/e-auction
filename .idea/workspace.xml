@@ -20,11 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment=".">
+      <change afterPath="$PROJECT_DIR$/public/media/images/item/arXJb1nCpQ.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/DropDownController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/DropDownController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/drop_down/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/drop_down/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/drop_down/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/drop_down/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/MasterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/MasterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/master/base.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/master/base.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,6 +163,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/dashboard" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -206,7 +206,10 @@
       <workItem from="1606281491066" duration="13000" />
       <workItem from="1606439925254" duration="15196000" />
       <workItem from="1606556315711" duration="8966000" />
-      <workItem from="1606913514954" duration="3038000" />
+      <workItem from="1606913514954" duration="5748000" />
+      <workItem from="1606973615125" duration="10000" />
+      <workItem from="1607609972719" duration="599000" />
+      <workItem from="1607942033879" duration="1871000" />
     </task>
     <task id="LOCAL-00001" summary="auth">
       <created>1605159030152</created>
@@ -292,7 +295,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606631229135</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary=".">
+      <created>1606916818986</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1606916818986</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -341,10 +351,10 @@
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state x="681" y="240" width="620" height="633" key="Github.UntrackedFilesDialog/72.27.1848.1053@72.27.1848.1053" timestamp="1605146018815" />
-    <state x="591" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1606631232877">
+    <state x="591" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1606916821025">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state x="591" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1848.1053@72.27.1848.1053" timestamp="1606631232877" />
+    <state x="591" y="289" width="800" height="535" key="Vcs.Push.Dialog.v2/72.27.1848.1053@72.27.1848.1053" timestamp="1606916821025" />
     <state x="687" y="292" width="659" height="522" key="find.popup" timestamp="1606279764484">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
