@@ -69,12 +69,12 @@
                     <li>
                         <a href="{{route('admin.item.status',['status'=>'pending'])}}"> السلع الجديدة </a>
                     </li>
-{{--                    <li>--}}
-{{--                        <a href="{{route('admin.item.status',['status'=>'accepted'])}}"> السلع فى انتظار الاضافة لمزاد  </a>--}}
-{{--                    </li>--}}
-{{--                    <li>--}}
-{{--                        <a href="{{route('admin.item.status',['status'=>'rejected'])}}"> السلع المرفوضة  </a>--}}
-{{--                    </li>--}}
+                    <li>
+                        <a href="{{route('admin.item.status',['status'=>'accepted'])}}"> السلع فى انتظار الاعداد لمزاد </a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.item.status',['status'=>'rejected'])}}"> السلع المرفوضة  </a>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -37,7 +37,7 @@ Route::group(['prefix' => 'v1','namespace'=>'Api'], function () {
     });
 
     Route::group(['prefix' => '/auction_types'], function () {
-        Route::get('/', 'SaleTypeController@saleTypes');
+        Route::get('/', 'AuctionTypeController@saleTypes');
     });
 
     Route::group(['prefix' => '/feed_back'], function () {

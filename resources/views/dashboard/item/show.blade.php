@@ -33,6 +33,7 @@
                                 </g>
                             </svg>
                         </div>
+                        @if($row->status=='pending')
                         <div class="up-controls">
                             <div class="row">
                                 <div class="col-md-6">
@@ -43,6 +44,7 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
 {{--                end first box--}}
