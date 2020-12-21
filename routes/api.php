@@ -71,6 +71,7 @@ Route::group(['prefix' => 'v1','namespace'=>'Api'], function () {
         Route::post('/upload_images', 'ItemController@uploadImages')->middleware(CheckApiToken::class);
         Route::post('/', 'ItemController@store')->middleware(CheckApiToken::class);
     });
+
     Route::group(['prefix' => '/notification'], function () {
         Route::get('/', 'NotificationController@index')->middleware(CheckApiToken::class);
         Route::get('/{notification}', 'NotificationController@show')->middleware(CheckApiToken::class);

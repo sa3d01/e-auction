@@ -30,7 +30,8 @@ class CreateItemsTable extends Migration
             $table->foreignId('paper_status_id')->nullable();
             $table->string('paper_image')->nullable();
             $table->foreignId('auction_type_id')->default(1);
-            $table->string('price')->nullable();
+            $table->integer('price')->nullable();
+            $table->integer('auction_price')->nullable();
             $table->foreignId('city_id')->nullable();
             $table->json('location')->nullable();
             $table->json('more_details')->nullable();

@@ -22,7 +22,7 @@
                                             الإعدادات العامة
                                         </h5>
                                         <div class="element-inner-desc">
-                                            يرجى تحرى الحظر خﻻل عمليات التعديل فى هذه التعديﻻت
+                                            يرجى تحرى الحظر خلال عمليات التعديل فى هذه التعديلات
                                         </div>
                                     </div>
                                 </div>
@@ -31,65 +31,15 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <i class="os-icon os-icon-dollar-sign"></i>
-                                            <label for="">نسبة التطبيق على الطلب</label>
-                                            <input name="app_ratio" value="{{$row->more_details['app_ratio']}}" class="form-control" type="number" min="0">
-                                            <div class="help-block form-text with-errors form-control-feedback"></div>
-                                        </div>
-                                        <div class="form-group">
-                                            <i class="os-icon os-icon-calendar-time"></i>
-                                            <label for=""> الوقت المخصص لتقديم العروض</label>
-                                            <input name="deliver_offer_period" value="{{$row->more_details['deliver_offer_period']}}" class="form-control" type="number" min="1">
-                                            <div class="help-block form-text with-errors form-control-feedback"></div>
-                                        </div>
-                                        <div class="form-group">
-                                            <i class="os-icon os-icon-calendar-time"></i>
-                                            <label for="">الوقت المخصص لقبول الطلب</label>
-                                            <input name="accept_offer_period" value="{{$row->more_details['accept_offer_period']}}" class="form-control" type="number" min="1">
-                                            <div class="help-block form-text with-errors form-control-feedback"></div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <i class="os-icon os-icon-file-text"></i>
-                                            <label> عن التطبيق </label>
-                                            <textarea name="about" class="form-control" cols="80" rows="5">{{$row->about['user']}}</textarea>
-                                            <div class="help-block form-text with-errors form-control-feedback"></div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <i class="os-icon os-icon-paperclip"></i>
-                                            <label>شروط الاستخدام للمستخدمين </label>
-                                            <textarea name="licence_user" class="form-control" cols="80" rows="5">{{$row->licence['user']}}</textarea>
-                                            <div class="help-block form-text with-errors form-control-feedback"></div>
-                                        </div>
-                                        <div class="form-group">
-                                            <i class="os-icon os-icon-paperclip"></i>
-                                            <label>شروط الاستخدام لمزودى الخدمات </label>
-                                            <textarea name="licence_provider" class="form-control" cols="80" rows="5">{{$row->licence['provider']}}</textarea>
-                                            <div class="help-block form-text with-errors form-control-feedback"></div>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>
-                                                <i class="os-icon os-icon-twitter2"></i> رابط تويتر
-                                            </label>
-                                            <input name="twitter" value="{{$row->socials['twitter']??''}}" class="form-control" type="url">
-                                            <div class="help-block form-text with-errors form-control-feedback"></div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>
-                                                <img style="height: 20px;width: 20px" src="https://image.flaticon.com/icons/svg/169/169090.svg">
-                                                رابط سناب شات
-                                            </label>
-                                            <input name="snap" value="{{$row->socials['snap']??''}}" class="form-control" type="url">
-                                            <div class="help-block form-text with-errors form-control-feedback"></div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>
-                                                <i class="os-icon os-icon-instagram"></i> رابط  انستجرام
-                                            </label>
-                                            <input name="instagram" value="{{$row->socials['instagram']??''}}" class="form-control" type="url">
-                                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                                            <label for=""> اللغات المستخدمة</label>
+                                            <select name="languages[]" class="form-control select2" multiple="true">
+                                                <option value="ar" @if(in_array("ar",is_array($row->languages)? $row->languages:[])) selected="true" @endif>
+                                                    اللغة العربية
+                                                </option>
+                                                <option value="en" @if(in_array("en",is_array($row->languages)? $row->languages:[])) selected="true" @endif>
+                                                    اللغة الانجليزية
+                                                </option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>

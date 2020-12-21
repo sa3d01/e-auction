@@ -17,18 +17,9 @@
                     <h5 class="form-header">
                         {{$title}}
                     </h5>
-                    @if($status=='accepted')
-                        <div class="element-inner-desc centered-header" style="color: red">
-                            السلع التى يمكن اضافتها لمزاد هى السلع التى تم تحديد
-                            سعر ابتدائى
-                            لها للمزايدة واضافة
-                            تقرير فحص واحد
-                            على الأقل .. بجانب
-                            تسديد رسوم الإضافة
-                            من قبل صاحب السلعة
-                        </div>
-                        <br>
-                    @endif
+                    <div class="form-buttons-w">
+                        <a href="{{route('admin.'.$type.'.add',[$item_id])}}" class="btn btn-primary create-submit" ><label>+</label> إضافة</a>
+                    </div>
                     <div  class="table-responsive">
                         <table id="datatable" width="100%" class="table table-striped table-lightfont">
                             <thead>
@@ -37,18 +28,7 @@
                                 @foreach($index_fields as $key=>$value)
                                     <th>{{$key}}</th>
                                 @endforeach
-                                @if(isset($selects))
-                                    @foreach($selects as $select)
-                                        <th>{{$select['title']}}</th>
-                                    @endforeach
-                                @endif
-                                @if(isset($image))
-                                    <th>الصورة</th>
-                                @endif
-                                @if($status=='accepted')
-                                    <th>السعر المطروح للمزايدة</th>
-                                    <th>تقارير الفحص</th>
-                                @endif
+
                                 <th>المزيد</th>
                             </tr>
                             </thead>
@@ -58,18 +38,6 @@
                                 @foreach($index_fields as $key=>$value)
                                     <th>{{$key}}</th>
                                 @endforeach
-                                @if(isset($selects))
-                                    @foreach($selects as $select)
-                                        <th>{{$select['title']}}</th>
-                                    @endforeach
-                                @endif
-                                @if(isset($image))
-                                    <th>الصورة</th>
-                                @endif
-                                @if($status=='accepted')
-                                    <th>السعر المطروح للمزايدة</th>
-                                    <th>تقارير الفحص</th>
-                                @endif
                                 <th>المزيد</th>
                             </tr>
                             </tfoot>
@@ -77,52 +45,40 @@
                             @foreach($rows as $row)
                                 <tr>
                                     <td hidden>{{$row->id}}</td>
-                                    @foreach($index_fields as $key=>$value)
-                                        @if($value=='created_at')
-                                            <td>{{$row->published_at()}}</td>
-                                        @else
-                                            <td>{{$row->$value}}</td>
-                                        @endif
-                                    @endforeach
-                                    @if(isset($selects))
-                                        @foreach($selects as $select)
-                                            @php($related_model=$select['name'])
-                                            <td>{{$row->$related_model->nameForSelect()}}</td>
-                                        @endforeach
-                                    @endif
-                                    @if(isset($image))
-                                        <td data-toggle="modal" data-target="#imgModal{{$row->id}}">
-                                            <img width="50px" height="50px" class="img_preview" src="{{ $row->image}}">
-                                        </td>
-                                        <div id="imgModal{{$row->id}}" class="modal fade" role="img">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-body">
-                                                        <img data-toggle="modal" data-target="#imgModal{{$row->id}}" class="img-preview" src="{{ $row->image}}" style="max-height: 500px">
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal">إغلاق</button>
+                                    <td>{{$row->id}}</td>
+                                    <td>{{$row->title['ar']}}</td>
+                                    <td>{{$row->note['ar']}}</td>
+                                    <td data-toggle="modal" data-target="#imgModal{{$row->id}}">
+                                        <img style="border-radius: 10px;" width="50px" height="50px" class="img_preview" src="{{asset('media/images/').'/'.$type.'/'.$row->images[0]}}">
+                                    </td>
+                                    <div id="imgModal{{$row->id}}" class="modal fade" role="dialog">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body" id="dynamic-content">
+                                                    <div class="row">
+                                                        @foreach($row->images as $image)
+                                                            <div class="col"><img src="{{asset('media/images/report/'.$image)}}" class="img-fluid" alt=""/></div>
+                                                        @endforeach
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    @endif
-                                    @if($status=='accepted')
-                                        <td>{{$row->auction_price}}</td>
-                                        <td>
-                                            {!! $row->reportLabel() !!}
-                                        </td>
-                                    @endif
+                                    </div>
+                                    <td>{{$row->price==0?'مجانى':$row->price .'ريال'}}</td>
                                     <td>
-{{--                                        <form class="delete" data-id="{{$row->id}}" method="POST" action="{{ route('admin.'.$type.'.destroy',[$row->id]) }}">--}}
-{{--                                            @csrf--}}
-{{--                                            {{ method_field('DELETE') }}--}}
-{{--                                            <input type="hidden" value="{{$row->id}}">--}}
-{{--                                            <button type="button " class="btn p-0 no-bg">--}}
-{{--                                                <i class="fa fa-trash text-danger"></i>--}}
-{{--                                            </button>--}}
-{{--                                        </form>--}}
-                                        <a href="{{route('admin.item.show',$row->id)}}"><i class="os-icon os-icon-eye"></i></a>
+                                        <form class="delete" data-id="{{$row->id}}" method="POST" action="{{ route('admin.'.$type.'.destroy',[$row->id]) }}">
+                                            @csrf
+                                            {{ method_field('DELETE') }}
+                                            <input type="hidden" value="{{$row->id}}">
+                                            <button type="button " class="btn p-0 no-bg">
+                                                <i class="fa fa-trash text-danger"></i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

@@ -50,7 +50,11 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
     Route::get('item/status/{status}', 'ItemController@items')->name('item.status');
     Route::get('item/{id}/reject', 'ItemController@reject')->name('item.reject');
     Route::get('item/{id}/accept', 'ItemController@accept')->name('item.accept');
+    Route::get('item/{id}/reports', 'ItemController@reports')->name('item.reports');
     Route::resource('item', 'ItemController');
+
+    Route::get('report/add/{item_id}', 'ReportController@add')->name('report.add');
+    Route::resource('report', 'ReportController');
 
     Route::get('notification/admin_notify_type/{admin_notify_type}', 'NotificationController@notifications')->name('notification.admin_notify_type');
     Route::resource('notification', 'NotificationController');

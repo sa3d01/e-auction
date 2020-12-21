@@ -70,10 +70,39 @@
                         <a href="{{route('admin.item.status',['status'=>'pending'])}}"> السلع الجديدة </a>
                     </li>
                     <li>
-                        <a href="{{route('admin.item.status',['status'=>'accepted'])}}"> السلع فى انتظار الاعداد لمزاد </a>
+                        <a href="{{route('admin.item.status',['status'=>'rejected'])}}"> السلع المرفوضة  </a>
                     </li>
                     <li>
-                        <a href="{{route('admin.item.status',['status'=>'rejected'])}}"> السلع المرفوضة  </a>
+                        <a href="{{route('admin.item.status',['status'=>'accepted'])}}"> السلع فى انتظار الاعداد لمزاد </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </li>
+{{--    //reports--}}
+    <li class="sub-header">
+        <span>تقارير الفحص </span>
+    </li>
+    <li class=" has-sub-menu">
+        <a href="#">
+            <div class="icon-w">
+                <div class="os-icon os-icon-paperclip"></div>
+            </div>
+            <span>تقارير الفحص </span></a>
+        <div class="sub-menu-w">
+            <div class="sub-menu-header">
+                تقارير الفحص
+            </div>
+            <div class="sub-menu-icon">
+                <i class="os-icon os-icon-paperclip"></i>
+            </div>
+            <div class="sub-menu-i">
+                <ul class="sub-menu">
+                    <li>
+                        <a href="{{route('admin.report.index')}}"> التقارير الحالية </a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.report.create')}}"> إضافة تقرير  </a>
                     </li>
                 </ul>
             </div>

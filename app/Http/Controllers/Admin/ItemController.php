@@ -6,6 +6,7 @@ use App\Http\Resources\ItemResource;
 use App\Http\Resources\OrderResource;
 use App\Item;
 use App\Notification;
+use App\Report;
 use App\Setting;
 use Edujugon\PushNotification\PushNotification;
 use Illuminate\Http\Request;
@@ -23,22 +24,55 @@ class ItemController extends MasterController
     public function items($status)
     {
         $rows=$this->model->where('status',$status)->latest()->get();
-        return View('dashboard.item.index', [
-            'rows' => $rows,
-            'type'=>'item',
-            'title'=>'قائمة السلع',
-            'index_fields'=>['الرقم التسلسلى' => 'id','العنوان'=>'name','تاريخ الطلب'=>'created_at'],
-            'selects'=>[
-                [
-                    'name'=>'user',
-                    'title'=>'المستخدم'
+        if ($status=='accepted'){
+            return View('dashboard.item.index', [
+                'rows' => $rows,
+                'status'=>$status,
+                'type'=>'item',
+                'title'=>'قائمة السلع المطلوب اعدادها',
+                'index_fields'=>['الرقم التسلسلى' => 'id','العنوان'=>'name'],
+                'selects'=>[
+                    [
+                        'name'=>'user',
+                        'title'=>'المستخدم'
+                    ],
+                    [
+                        'name'=>'auction_type',
+                        'title'=>'نوع المزايدة'
+                    ],
                 ],
-                [
-                    'name'=>'auction_type',
-                    'title'=>'نوع المزايدة'
+            ]);
+        }else{
+            return View('dashboard.item.index', [
+                'rows' => $rows,
+                'status'=>$status,
+                'type'=>'item',
+                'title'=>'قائمة السلع',
+                'index_fields'=>['الرقم التسلسلى' => 'id','العنوان'=>'name','تاريخ الطلب'=>'created_at'],
+                'selects'=>[
+                    [
+                        'name'=>'user',
+                        'title'=>'المستخدم'
+                    ],
+                    [
+                        'name'=>'auction_type',
+                        'title'=>'نوع المزايدة'
+                    ],
                 ],
-            ],
-        ]);
+            ]);
+        }
+
+    }
+
+    public function reports($item_id){
+        return View('dashboard.report.index', [
+                'rows' => Report::where('item_id',$item_id)->latest()->get(),
+                'item_id'=>$item_id,
+                'type'=>'report',
+                'title'=>'قائمة تقارير الفحص',
+                'index_fields'=>['الرقم التسلسلى' => 'id','العنوان'=>'title','الوصف'=>'note','الصور'=>'images','السعر'=>'price'],
+            ]
+        );
     }
 
     public function show($id)
@@ -108,6 +142,7 @@ class ItemController extends MasterController
             'only_show'=>true,
         ]);
     }
+
     public function reject($id,Request $request){
         $item=$this->model->find($id);
         $reject_reason=$request['reject_reason'];
@@ -128,6 +163,7 @@ class ItemController extends MasterController
         $item->refresh();
         return redirect()->back()->with('updated');
     }
+
     public function accept($id,Request $request){
         $item=$this->model->find($id);
         $history[date('Y-m-d')]['accepted']=[
