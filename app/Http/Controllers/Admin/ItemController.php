@@ -74,6 +74,14 @@ class ItemController extends MasterController
             ]
         );
     }
+    public function auction_price($item_id,Request $request){
+        $item=$this->model->find($item_id);
+        $auction_price=$request['auction_price'];
+        $item->update([
+            'auction_price'=>$auction_price
+        ]);
+        return redirect()->back()->with('updated');
+    }
 
     public function show($id)
     {
@@ -176,7 +184,7 @@ class ItemController extends MasterController
                 'history'=>$history,
             ],
         ]);
-        if ($item->user->wallet >= Setting::value('add_item_tax')){
+        if ($item->pay_status==1){
             $note['ar']='تم قبول اضافة منتجك من قبل الادارة ..';
             $note['en']='your added item is accepted from admin  ..';
         }else{

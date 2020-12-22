@@ -20,25 +20,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment=".">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/ReportController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/gLS6lRCMzx.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/report/3Gm9bGzYLQ.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/report/BJRgaAbKhj.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/report/GBw7Cl7Y3H.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/report/LSqkwWjhTJ.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/report/Y6FB8dfuil.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/user/Lro2YVpbLA.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/user/xAii7clgrP.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/dashboard/report/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/dashboard/report/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/dashboard/report/show.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/AuctionController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/AuctionController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Resources/ItemCollection.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Resources/ReportCollection.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/item/1yIdS7Amhn.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/item/KOff1MMAAd.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/item/Mc6SyRtbmo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/item/QSjuhXgobI.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/item/bLW5SP7RrR.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/report/2m6CeTqsO8.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/report/LkCzHV5cIH.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/report/TJBQP5zIaK.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/report/jrUvkR4Uor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/report/nluJpdvKpD.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/report/uczqNvNdam.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/ItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/ItemController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/TransferController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/TransferController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/ItemResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/ItemResource.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Item.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Item.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_15_232746_create_items_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_15_232746_create_items_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Report.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Report.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Traits/ModelBaseFunctions.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Traits/ModelBaseFunctions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_28_105942_create_auctions_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_28_105942_create_auctions_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_28_110003_create_auction_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_28_110003_create_auction_users_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/create/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/create/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/index/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/index/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/dashboard/item/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/item/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/dashboard/master/main-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/master/main-menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/settings.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/settings.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
@@ -182,7 +193,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Controllers/Admin" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Resources" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -194,11 +205,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/Http/Resources" />
+      <recent name="$PROJECT_DIR$/app/Http/Controllers/Api" />
       <recent name="$PROJECT_DIR$/app/Http/Controllers/Admin" />
       <recent name="$PROJECT_DIR$/resources/views/dashboard" />
       <recent name="$PROJECT_DIR$/public/media/images" />
-      <recent name="$PROJECT_DIR$/app/Http/Controllers/Api" />
-      <recent name="$PROJECT_DIR$/public/media/images/drop_down" />
     </key>
   </component>
   <component name="RunManager">
@@ -228,7 +239,7 @@
       <workItem from="1607609972719" duration="599000" />
       <workItem from="1607942033879" duration="9117000" />
       <workItem from="1608470028459" duration="11288000" />
-      <workItem from="1608566941528" duration="6015000" />
+      <workItem from="1608566941528" duration="18605000" />
     </task>
     <task id="LOCAL-00001" summary="auth">
       <created>1605159030152</created>
@@ -356,7 +367,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608472675559</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary=".">
+      <created>1608573976627</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1608573976627</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

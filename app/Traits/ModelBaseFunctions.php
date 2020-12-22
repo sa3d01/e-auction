@@ -42,6 +42,7 @@ trait ModelBaseFunctions
             return asset($dest) . '/default.jpeg';
         }
     }
+
     protected function setLicenceImageAttribute()
     {
         $licence_image=request('licence_image');
@@ -120,7 +121,6 @@ trait ModelBaseFunctions
                 </a>";
     }
 
-
     public function activate()
     {
         $action = route('admin.'.$this->route.'.activate', ['id' => $this->attributes['id']]);
@@ -138,6 +138,20 @@ trait ModelBaseFunctions
         return "<a class='$class btn btn-$key btn-sm' data-href='$action' href='$action'><i class='os-icon os-icon-$icon-circle'></i><span>$name</span></a>";
     }
 
+    protected function setStartDateAttribute()
+    {
+        if (request('start_date')!=null){
+            if ( is_numeric(request('start_date')) && (int)request('start_date') == request('start_date') ){
+                $this->attributes['start_date'] = request('start_date');
+            }else{
+                $this->attributes['start_date'] = Carbon::parse(request('start_date'))->timestamp;
+            }
+        }
+    }
+    public function showTimeStampDate($timestamp)
+    {
+        return $this->ArabicTimeDate(Carbon::createFromTimestamp($timestamp));
+    }
     public function published_from()
     {
         $created_at = Carbon::parse($this->attributes['created_at']);
@@ -201,5 +215,26 @@ trait ModelBaseFunctions
         return str_replace($standard, $eastern_arabic_symbols, $current_date);
     }
 
+    function ArabicTimeDate($date)
+    {
+        $created_at = Carbon::parse($date);
+        $months = array("Jan" => "يناير", "Feb" => "فبراير", "Mar" => "مارس", "Apr" => "أبريل", "May" => "مايو", "Jun" => "يونيو", "Jul" => "يوليو", "Aug" => "أغسطس", "Sep" => "سبتمبر", "Oct" => "أكتوبر", "Nov" => "نوفمبر", "Dec" => "ديسمبر");
+        $your_date = $created_at->format('y-m-d');
+        $en_month = date("M", strtotime($your_date));
+        foreach ($months as $en => $ar) {
+            if ($en == $en_month) {
+                $ar_month = $ar;
+            }
+        }
+        $find = array("Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri");
+        $replace = array("السبت", "الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة");
+        $ar_day_format = $created_at->format('D');
+        $ar_day = str_replace($find, $replace, $ar_day_format);
+        header('Content-Type: text/html; charset=utf-8');
+        $standard = array("0", "1", "2", "3", "4", "5", "6", "7", "8", "9");
+        $eastern_arabic_symbols = array("٠", "١", "٢", "٣", "٤", "٥", "٦", "٧", "٨", "٩");
+        $current_date = $ar_day . ', ' . $created_at->format('d') . ' ' . $ar_month . ' ' . $created_at->format('Y'). ' ,' . '  الساعة ' . $created_at->format('H:i');
+        return str_replace($standard, $eastern_arabic_symbols, $current_date);
+    }
 
 }

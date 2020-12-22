@@ -19,6 +19,7 @@ class CreateAuctionsTable extends Migration
             $table->integer('start_date')->nullable();
             $table->integer('duration')->default(1);//seconds
             $table->foreignId('auction_type_id')->default(1);
+            $table->boolean('active')->default(1);
             $table->json('more_details')->nullable();
             $table->timestamps();
         });

@@ -81,28 +81,28 @@
     </li>
 {{--    //reports--}}
     <li class="sub-header">
-        <span>تقارير الفحص </span>
+        <span>المزادات </span>
     </li>
     <li class=" has-sub-menu">
         <a href="#">
             <div class="icon-w">
-                <div class="os-icon os-icon-paperclip"></div>
+                <div class="os-icon os-icon-activity"></div>
             </div>
-            <span>تقارير الفحص </span></a>
+            <span>المزادات </span></a>
         <div class="sub-menu-w">
             <div class="sub-menu-header">
-                تقارير الفحص
+                المزادات
             </div>
             <div class="sub-menu-icon">
-                <i class="os-icon os-icon-paperclip"></i>
+                <i class="os-icon os-icon-activity"></i>
             </div>
             <div class="sub-menu-i">
                 <ul class="sub-menu">
                     <li>
-                        <a href="{{route('admin.report.index')}}"> التقارير الحالية </a>
+                        <a href="{{route('admin.auction.index')}}"> المزادات الحالية </a>
                     </li>
                     <li>
-                        <a href="{{route('admin.report.create')}}"> إضافة تقرير  </a>
+                        <a href="{{route('admin.auction.create')}}"> إضافة مزاد  </a>
                     </li>
                 </ul>
             </div>

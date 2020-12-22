@@ -72,6 +72,12 @@ Route::group(['prefix' => 'v1','namespace'=>'Api'], function () {
         Route::post('/', 'ItemController@store')->middleware(CheckApiToken::class);
     });
 
+    Route::group(['prefix' => '/home'], function () {
+        Route::get('/', 'AuctionController@index');
+        Route::get('item/{item_id}', 'AuctionController@show');
+        Route::get('item/{item_id}/reports', 'AuctionController@reports');
+    });
+
     Route::group(['prefix' => '/notification'], function () {
         Route::get('/', 'NotificationController@index')->middleware(CheckApiToken::class);
         Route::get('/{notification}', 'NotificationController@show')->middleware(CheckApiToken::class);

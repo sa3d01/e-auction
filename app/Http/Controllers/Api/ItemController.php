@@ -7,6 +7,7 @@ use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Item;
 use App\Package;
+use App\Setting;
 use App\Transfer;
 use App\User;
 use Carbon\Carbon;
@@ -49,6 +50,12 @@ class ItemController extends MasterController
         $data=$request->all();
         $data['user_id']=$user->id;
         $item=$this->model->create($data);
+        $add_item_tax=Setting::first()->value('add_item_tax');
+        if ($add_item_tax < $user->wallet){
+            $item->update(['pay_status'=>1]);
+            $wallet=$user->wallet-$add_item_tax;
+            $user->update(['wallet'=>$wallet]);
+        }
         return $this->sendResponse('تم ارسال طلب إضافة المنتج بنجاح');
     }
 

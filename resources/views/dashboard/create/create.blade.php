@@ -59,7 +59,7 @@
                                                             <textarea name="{{$value}}" class="form-control" cols="80" rows="5"></textarea>
                                                         </div>
                                                     </div>
-                                                @elseif(strpos($value, 'price'))
+                                                @elseif(strpos($value, 'price') || $value=='duration')
                                                     <div class="col-sm-12">
                                                         <div class="form-group" id="{{$value}}">
                                                             <label for=""> {{$key}}</label>

@@ -15,10 +15,10 @@ class CreateAuctionUsersTable extends Migration
     {
         Schema::create('auction_users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable();
-            $table->foreignId('auction_id')->nullable();
             $table->foreignId('item_id')->nullable();
+            $table->foreignId('auction_id')->nullable();
             $table->integer('charge_price')->default(0);
+            $table->foreignId('user_id')->nullable();
             $table->json('more_details')->nullable();
             $table->timestamps();
         });

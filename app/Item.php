@@ -62,6 +62,7 @@ class Item extends Model
         return $this->hasMany(Report::class,'item_id','id');
     }
 
+
     public function imagesArray(){
         return $this->attributes['images'];
     }
@@ -73,5 +74,19 @@ class Item extends Model
         return"<a  href='$route' class='badge badge-success-inverted'>
                 $count
                 </a>";
+    }
+    public function auctionPriceLabel()
+    {
+        $route=route('admin.item.auction_price',$this->id);
+        $auction_price=$this->attributes['auction_price'];
+        if ($auction_price==null){
+            return"<a data-id='$this->id'  data-href='$route' href='$route' class='auction_price badge badge-warning'><i class='os-icon os-icon-map-pin'></i><span>غير محدد </span></a>";
+        }else{
+            return"<a data-id='$this->id'  data-href='$route' href='$route' class='auction_price badge badge-info'><span> $auction_price  </span></a>";
+        }
+    }
+
+    public function nameForSelect(){
+        return $this->id.'-'.$this->name;
     }
 }

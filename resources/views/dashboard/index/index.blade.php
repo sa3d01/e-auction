@@ -73,6 +73,8 @@
                                 @foreach($index_fields as $key=>$value)
                                     @if($value=='created_at')
                                         <td>{{$row->published_at()}}</td>
+                                    @elseif($value=='start_date' || $value=='end_date')
+                                        <td>{{$row->showTimeStampDate($row->$value)}}</td>
                                     @elseif($value=='role')
                                         @if($row->hasRole(\Spatie\Permission\Models\Role::all()))
                                             <td>{{$row->getRoleArabicName()}}</td>

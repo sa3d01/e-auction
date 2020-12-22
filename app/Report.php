@@ -23,4 +23,7 @@ class Report extends Model
     public function item(){
         return $this->belongsTo(Item::class);
     }
+    public function imagesArray(){
+        return $this->attributes['images'];
+    }
 }

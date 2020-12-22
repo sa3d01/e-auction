@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Package;
+use App\Setting;
 use App\Transfer;
 use App\User;
 use Carbon\Carbon;
@@ -33,6 +34,17 @@ class TransferController extends MasterController
         }elseif ($request['type'] == 'purchasing_power'){
             Transfer::create($data);
             $user->update(['purchasing_power'=>$request['money']]);
+        }elseif ($request['type']=='wallet'){
+            Transfer::create($data);
+            $add_item_tax=Setting::first()->value('add_item_tax');
+            $wallet=$user->wallet+$request['money'];
+            foreach ($user->items as $item){
+                if (($item->pay_status==0) && ($add_item_tax < $wallet)){
+                    $item->update(['pay_status'=>1]);
+                    $wallet=$wallet-$add_item_tax;
+                }
+            }
+            $user->update(['wallet'=>$wallet]);
         }
         $data= new UserResource($user);
         $token = auth()->login($user);

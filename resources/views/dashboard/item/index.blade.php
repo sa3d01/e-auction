@@ -108,7 +108,7 @@
                                         </div>
                                     @endif
                                     @if($status=='accepted')
-                                        <td>{{$row->auction_price}}</td>
+                                        <td>{!! $row->auctionPriceLabel() !!}</td>
                                         <td>
                                             {!! $row->reportLabel() !!}
                                         </td>
@@ -197,23 +197,26 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script>
-        $(document).on('click', '.delete', function (e) {
+        $(document).on('click', '.auction_price', function (e) {
             e.preventDefault();
             var id = $(this).data('id');
             Swal.fire({
-                title: "هل انت متأكد من الحذف ؟",
-                text: "لن تستطيع استعادة هذا العنصر مرة أخرى!",
-                type: "warning",
+                title: 'من فضلك اذكر سعر المزايدة الابتدائى',
+                input: 'number',
                 showCancelButton: true,
-                confirmButtonClass: 'btn-danger',
-                confirmButtonText: 'نعم , قم بالحذف!',
-                cancelButtonText: 'ﻻ , الغى عملية الحذف!',
-                closeOnConfirm: false,
-                closeOnCancel: false,
-                preConfirm: () => {
-                    $("form[data-id='" + id + "']").submit();
+                confirmButtonText: 'إتمام',
+                cancelButtonText: 'الغاء',
+                showLoaderOnConfirm: true,
+                preConfirm: (auction_price) => {
+                    $.ajax({
+                        url: $(this).data('href'),
+                        type:'GET',
+                        data: {auction_price}
+                    })
                 },
                 allowOutsideClick: () => !Swal.isLoading()
+            }).then(() => {
+                location.href = "/admin/item/status/accepted";
             })
         });
     </script>
