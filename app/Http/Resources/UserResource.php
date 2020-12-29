@@ -26,6 +26,7 @@ class UserResource extends JsonResource
             'activation_code'=> $this->activation_code ? (int)$this->activation_code : '',
             'package'=> $this->package?new PackageResource($this->package) : new Object_(),
             'purchasing_power'=> (double)$this->purchasing_power ?? 0,
+            'wallet'=> (double)$this->wallet ?? 0,
         ];
     }
 }
