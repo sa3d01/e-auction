@@ -216,7 +216,7 @@
                 },
                 allowOutsideClick: () => !Swal.isLoading()
             }).then(() => {
-                location.href = "/public/admin/item/status/accepted";
+                location.reload();
             })
         });
     </script>

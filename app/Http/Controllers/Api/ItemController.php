@@ -29,7 +29,7 @@ class ItemController extends MasterController
         $validate = Validator::make($request->all(),
             [
                 'images' => 'required',
-                 'images.*' => 'image|mimes:jpeg,jpg,png,jpg,gif,svg|max:6048'
+                 'images.*' => 'image|mimes:jpeg,jpg,png,jpg,gif,svg'
             ]
         );
         if ($validate->fails()) {

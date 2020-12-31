@@ -31,10 +31,14 @@ class SettingController extends MasterController
         if (\request()->header('lang')=='en'){
             $data['about']=$setting->about['en'];
             $data['licence']=$setting->licence['en'];
+            $data['purchasing_power_text']=$setting->purchasing_power_text['en'];
         }else{
             $data['about']=$setting->about['ar'];
             $data['licence']=$setting->licence['ar'];
+            $data['purchasing_power_text']=$setting->purchasing_power_text['ar'];
         }
+        $data['app_ratio']=$setting->app_ratio;
+        $data['tax_ratio']=$setting->tax_ratio;
         $data['add_item_tax']=$setting->add_item_tax;
         $data['socials']=$setting->socials;
         return $this->sendResponse($data);

@@ -47,6 +47,35 @@
             </div>
         </div>
     </li>
+{{--    //packages--}}
+    <li class="sub-header">
+        <span>الباقات </span>
+    </li>
+    <li class=" has-sub-menu">
+        <a href="#">
+            <div class="icon-w">
+                <div class="os-icon os-icon-package"></div>
+            </div>
+            <span>الباقات </span></a>
+        <div class="sub-menu-w">
+            <div class="sub-menu-header">
+                الباقات
+            </div>
+            <div class="sub-menu-icon">
+                <i class="os-icon os-icon-package"></i>
+            </div>
+            <div class="sub-menu-i">
+                <ul class="sub-menu">
+                    <li>
+                        <a href="{{route('admin.package.index')}}"> قائمة البيانات </a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.package.create')}}"> إضافة </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </li>
 {{--    //items--}}
     <li class="sub-header">
         <span>السلع </span>
@@ -121,15 +150,15 @@
         </a>
     </li>
 {{--contacts--}}
-{{--    <li class="sub-header">--}}
-{{--        <span>رسائل الأعضاء</span>--}}
-{{--    </li>--}}
-{{--    <li class="sub-menu">--}}
-{{--        <a href="{{route('admin.contact.index')}}">--}}
-{{--            <div class="icon-w">--}}
-{{--                <div class="os-icon os-icon-email-2-at"></div>--}}
-{{--            </div>--}}
-{{--            <span>رسائل الأعضاء</span>--}}
-{{--        </a>--}}
-{{--    </li>--}}
+    <li class="sub-header">
+        <span>رسائل الأعضاء</span>
+    </li>
+    <li class="sub-menu">
+        <a href="{{route('admin.contact.index')}}">
+            <div class="icon-w">
+                <div class="os-icon os-icon-email-2-at"></div>
+            </div>
+            <span>رسائل الأعضاء</span>
+        </a>
+    </li>
 </ul>

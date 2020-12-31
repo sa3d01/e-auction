@@ -66,7 +66,7 @@ class ContactController extends MasterController
         $admin_replays_notifies=Notification::where(['receiver_id'=>$contact->user_id,'admin_notify_type'=>'single','type'=>'admin'])->where('more_details->contact_id',$contact->id)->get();
         $replies=[];
         foreach ($admin_replays_notifies as $admin_replays_notify){
-            $arr['msg']=$admin_replays_notify->note;
+            $arr['msg']=$admin_replays_notify->note['ar'];
             $arr['date']=$admin_replays_notify->published_from();
             $replies[]=$arr;
         }
@@ -107,25 +107,33 @@ class ContactController extends MasterController
         ]);
     }
     public function send_single_notify($receiver_id,$note){
+        $title['ar']='رسالة إدارية';
+        $title['en']='admin message ';
+        $note['ar']=$note;
+        $note['en']=$note;
         $data=[];
-        $data['title']='رسالة إدارية';
+        $data['title']=$title;
         $data['receiver_id']=$receiver_id;
         $data['note']=$note;
         $data['type']='admin';
         Notification::create($data);
-        $this->notify(User::find($receiver_id),$note);
+//        $this->notify(User::find($receiver_id),$note);
         return true;
     }
     public function send_single_contact(Request $request){
+        $title['ar']='رسالة إدارية';
+        $title['en']='admin message ';
+        $note['ar']=$request['note'];
+        $note['en']=$request['note'];
         $data=[];
-        $data['title']='رسالة إدارية';
+        $data['title']=$title;
         $data['receiver_id']=$request['user_id'];
-        $data['note']=$request['note'];
+        $data['note']=$note;
         $data['type']='admin';
         $data['admin_notify_type']='single';
         $data['more_details']['contact_id']=$request['contact_id'];
         Notification::create($data);
-        $this->notify(User::find($request['user_id']),$request['note']);
+//        $this->notify(User::find($request['user_id']),$request['note']);
         return redirect()->route('admin.contact.index')->with('created');
     }
 

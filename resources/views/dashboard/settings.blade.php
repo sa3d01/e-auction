@@ -31,15 +31,87 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for=""> اللغات المستخدمة</label>
-                                            <select name="languages[]" class="form-control select2" multiple="true">
-                                                <option value="ar" @if(in_array("ar",is_array($row->languages)? $row->languages:[])) selected="true" @endif>
-                                                    اللغة العربية
-                                                </option>
-                                                <option value="en" @if(in_array("en",is_array($row->languages)? $row->languages:[])) selected="true" @endif>
-                                                    اللغة الانجليزية
-                                                </option>
-                                            </select>
+                                            <label>
+                                                <i class="os-icon os-icon-percent"></i>نسبة التطبيق على المزايد
+                                            </label>
+                                            <input name="app_ratio" value="{{$row->app_ratio}}" class="form-control" type="number" min="0">
+                                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>
+                                                <i class="os-icon os-icon-dollar-sign"></i>رسوم اضافة منتج
+                                            </label>
+                                            <input name="app_ratio" value="{{$row->add_item_tax}}" class="form-control" type="number" min="0">
+                                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <i class="os-icon os-icon-file-text"></i>
+                                            <label> عن التطبيق باللغة العربية</label>
+                                            <textarea name="about_ar" class="form-control" cols="80" rows="5">{{$row->about['ar']}}</textarea>
+                                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <i class="os-icon os-icon-file-text"></i>
+                                            <label> عن التطبيق باللغة الانجليزية</label>
+                                            <textarea name="about_en" class="form-control" cols="80" rows="5">{{$row->about['en']}}</textarea>
+                                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <i class="os-icon os-icon-file-text"></i>
+                                            <label>شروط الاستخدام باللغة العربية </label>
+                                            <textarea name="licence_ar" class="form-control" cols="80" rows="5">{{$row->licence['ar']}}</textarea>
+                                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <i class="os-icon os-icon-file-text"></i>
+                                            <label>شروط الاستخدام باللغة الانجليزية </label>
+                                            <textarea name="licence_en" class="form-control" cols="80" rows="5">{{$row->licence['en']}}</textarea>
+                                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <i class="os-icon os-icon-file-text"></i>
+                                            <label>النص التعريفى للقوة الشرائية باللغة العربية </label>
+                                            <textarea name="purchasing_power_text_ar" class="form-control" cols="80" rows="5">{{$row->purchasing_power_text['ar']}}</textarea>
+                                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <i class="os-icon os-icon-file-text"></i>
+                                            <label>النص التعريفى للقوة الشرائية باللغة الانجليزية </label>
+                                            <textarea name="purchasing_power_text_en" class="form-control" cols="80" rows="5">{{$row->purchasing_power_text['en']}}</textarea>
+                                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>
+                                                <i class="os-icon os-icon-twitter2"></i> رابط تويتر
+                                            </label>
+                                            <input name="twitter" value="{{$row->socials['twitter']??''}}" class="form-control" type="url">
+                                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>
+                                                <i class="os-icon os-icon-facebook2"></i> رابط فيسبوك
+                                            </label>
+                                            <input name="facebook" value="{{$row->socials['facebook']??''}}" class="form-control" type="url">
+                                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>
+                                                <img style="height: 20px;width: 20px" src="https://image.flaticon.com/icons/svg/169/169090.svg">
+                                                رابط سناب شات
+                                            </label>
+                                            <input name="snap" value="{{$row->socials['snap']??''}}" class="form-control" type="url">
+                                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>
+                                                <i class="os-icon os-icon-instagram"></i> رابط  انستجرام
+                                            </label>
+                                            <input name="instagram" value="{{$row->socials['instagram']??''}}" class="form-control" type="url">
+                                            <div class="help-block form-text with-errors form-control-feedback"></div>
                                         </div>
                                     </div>
                                 </div>

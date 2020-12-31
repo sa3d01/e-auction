@@ -57,6 +57,7 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
     Route::get('report/add/{item_id}', 'ReportController@add')->name('report.add');
     Route::resource('report', 'ReportController');
 
+    Route::resource('package', 'PackageController');
     Route::resource('auction', 'AuctionController');
 
     Route::get('notification/admin_notify_type/{admin_notify_type}', 'NotificationController@notifications')->name('notification.admin_notify_type');

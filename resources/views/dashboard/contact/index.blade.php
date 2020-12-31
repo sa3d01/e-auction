@@ -29,9 +29,9 @@
                             </div>
                         </div>
                         <div class="aei-content">
-                            <div class="aei-timestamp">
-                                {{$row->published_from()}}
-                            </div>
+{{--                            <div class="aei-timestamp">--}}
+{{--                                {{$row->published_from()}}--}}
+{{--                            </div>--}}
                             <h6 class="aei-title">
                                 {{$row->user->name}}
                             </h6>
