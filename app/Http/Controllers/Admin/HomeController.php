@@ -26,20 +26,18 @@ class HomeController extends MasterController
         $data=$request->all();
 
         $socials['twitter']=$request['twitter'];
+        $socials['facebook']=$request['facebook'];
         $socials['snap']=$request['snap'];
         $socials['instagram']=$request['instagram'];
         $data['socials']=$socials;
 
-        $more_details['app_ratio']=$request['app_ratio'];
-        $more_details['accept_offer_period']=$request['accept_offer_period'];
-        $more_details['deliver_offer_period']=$request['deliver_offer_period'];
-        $data['more_details']=$more_details;
 
-        $about['user']=$request['about'];
+        $about['ar']=$request['about_ar'];
+        $about['en']=$request['about_en'];
         $data['about']=$about;
 
-        $licence['user']=$request['licence_user'];
-        $licence['provider']=$request['licence_provider'];
+        $licence['ar']=$request['licence_ar'];
+        $licence['en']=$request['licence_en'];
         $data['licence']=$licence;
 
         Setting::updateOrCreate(['id'=>1],$data);

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Favourite;
+use App\Http\Resources\ItemCollection;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
+use App\Item;
 use App\Package;
 use App\User;
 use Carbon\Carbon;
@@ -269,5 +272,11 @@ class UserController extends MasterController
         $user = User::find($id);
         $data= new UserResource($user);
         return $this->sendResponse($data);
+    }
+    public function favourite()
+    {
+        $item_ids=Favourite::where('user_id',\request()->user()->id)->pluck('item_id');
+        $items=new ItemCollection(Item::whereIn('id',$item_ids)->latest()->get());
+        return $this->sendResponse($items);
     }
 }

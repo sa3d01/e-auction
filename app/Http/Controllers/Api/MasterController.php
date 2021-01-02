@@ -16,6 +16,7 @@ class MasterController extends Controller
 {
     protected $model;
     protected $auth_key;
+    protected $purchasing_power_ratio;
     public function __construct()
     {
         parent::__construct();

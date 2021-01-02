@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Favourite;
+use App\Http\Resources\ItemCollection;
 use App\Http\Resources\ItemResource;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
@@ -58,5 +60,18 @@ class ItemController extends MasterController
         }
         return $this->sendResponse('تم ارسال طلب إضافة المنتج بنجاح');
     }
+    public function favouriteModification($item_id){
+        $is_favourite=Favourite::where(['user_id'=>\request()->user()->id, 'item_id'=>$item_id])->first();
+        if ($is_favourite){
+            $is_favourite->delete();
+            return $this->sendResponse('تم الحذف من المفضلة');
 
+        }else{
+            Favourite::create([
+                'user_id'=>\request()->user()->id,
+                'item_id'=>$item_id
+            ]);
+            return $this->sendResponse('تمت الإضافة بنجاح');
+        }
+    }
 }

@@ -26,7 +26,7 @@ class ItemCollection extends ResourceCollection
         $data=[];
         foreach ($this as $obj){
             $auction=Auction::where('items', 'like', '%'.$obj->id.'%')->first();
-            $favourite=Favourite::where(['user_id'=>\request()->user()->id, 'item_id'=>$obj->id, 'auction_id'=>$auction->id])->first();
+            $favourite=Favourite::where(['user_id'=>\request()->user()->id, 'item_id'=>$obj->id])->first();
             if ($favourite){
                 $is_favourite=true;
             }else{

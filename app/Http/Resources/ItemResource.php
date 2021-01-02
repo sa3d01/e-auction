@@ -26,7 +26,7 @@ class ItemResource extends JsonResource
     public function toArray($request)
     {
         $auction=Auction::where('items', 'like', '%'.$this->id.'%')->first();
-        $favourite=Favourite::where(['user_id'=>\request()->user()->id, 'item_id'=>$this->id, 'auction_id'=>$auction->id])->first();
+        $favourite=Favourite::where(['user_id'=>\request()->user()->id, 'item_id'=>$this->id])->first();
         if ($favourite){
             $is_favourite=true;
         }else{

@@ -64,17 +64,21 @@ Route::group(['prefix' => 'v1','namespace'=>'Api'], function () {
         Route::post('/update', 'UserController@update')->middleware(CheckApiToken::class);
         Route::get('/logout', 'UserController@logout')->middleware(CheckApiToken::class);
         Route::get('/profile', 'UserController@profile')->middleware(CheckApiToken::class);
+        Route::get('/favourite', 'UserController@favourite');
         Route::get('/{id}', 'UserController@show');
     });
 
     Route::group(['prefix' => '/item'], function () {
         Route::post('/upload_images', 'ItemController@uploadImages')->middleware(CheckApiToken::class);
         Route::post('/', 'ItemController@store')->middleware(CheckApiToken::class);
+        Route::post('/{item}/bid', 'BidController@bid')->middleware(CheckApiToken::class);
+
     });
 
     Route::group(['prefix' => '/home'], function () {
         Route::get('/', 'AuctionController@index');
         Route::get('item/{item_id}', 'AuctionController@show');
+        Route::post('item/{item}/favourite', 'ItemController@favouriteModification')->middleware(CheckApiToken::class);
         Route::get('item/{item_id}/reports', 'AuctionController@reports');
         Route::get('my_items', 'AuctionController@my_items');
         Route::get('my_auctions', 'AuctionController@my_auctions');

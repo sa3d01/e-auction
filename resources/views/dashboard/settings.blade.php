@@ -41,7 +41,23 @@
                                             <label>
                                                 <i class="os-icon os-icon-dollar-sign"></i>رسوم اضافة منتج
                                             </label>
-                                            <input name="app_ratio" value="{{$row->add_item_tax}}" class="form-control" type="number" min="0">
+                                            <input name="add_item_tax" value="{{$row->add_item_tax}}" class="form-control" type="number" min="0">
+                                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>
+                                                <i class="os-icon os-icon-calendar-time"></i>مدة الزيادة على المزاد الموشك على الانتهاء
+                                            </label>
+                                            <input name="auction_increasing_period" value="{{$row->auction_increasing_period}}" class="form-control" type="number" min="0">
+                                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>
+                                                <i class="os-icon os-icon-percent"></i>نسبة القوة الشرائية
+                                            </label>
+                                            <input name="purchasing_power_ratio" value="{{$row->purchasing_power_ratio}}" class="form-control" type="number" min="0">
                                             <div class="help-block form-text with-errors form-control-feedback"></div>
                                         </div>
 
