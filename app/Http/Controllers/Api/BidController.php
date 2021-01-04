@@ -19,11 +19,16 @@ class BidController extends MasterController
     public function bid($item_id,Request $request){
         $user=$request->user();
         $item=Item::find($item_id);
-        $this->purchasing_power($item,$user);
-
+        return $this->validate_purchasing_power($item,$user);
     }
 
-    protected function purchasing_power($item_id,$user){
+    protected function validate_purchasing_power($item,$user){
+        $user_purchasing_power=$user->purchasing_power;
+        if ($user->package){
+            $user_purchasing_power=$user_purchasing_power+$user->package->purchasing_power_increase;
+        }
+        $purchasing_power_admin_percent=$this->purchasing_power_ratio;
 
+        return true;
     }
 }

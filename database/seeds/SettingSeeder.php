@@ -17,18 +17,18 @@ class SettingSeeder extends Seeder
             'about->en' => 'about',
             'licence->ar' => 'الشروط والأحكام',
             'licence->en' => 'licence',
-            'purchasing_power_text->ar' => 'القوة الشرائية',
-            'purchasing_power_text->en' => 'purchasing power nfo',
-            'auction_period' => 90,//second
-            'auction_increasing_period' => 10,//second
-            'app_ratio' => 2,//percent
-            'purchasing_power_ratio' => 10,//percent
-            'tax_ratio' => 1,//percent
-            'add_item_tax' => 100,//fixed amount
             'socials->twitter'=>'https://',
             'socials->snap'=>'https://',
             'socials->instagram'=>'https://',
             'socials->facebook'=>'https://',
+            'purchasing_power_text->ar' => 'القوة الشرائية',
+            'purchasing_power_text->en' => 'purchasing power nfo',
+            'purchasing_power_ratio' => 10,//percent
+            'auction_increasing_period' => 10,//second
+            'app_ratio' => 2,//percent
+            'add_item_tax' => 100,//fixed amount
+            'tax_ratio' => 1,//percent
+            'auction_period' => 90,//second
         ]);
     }
 }

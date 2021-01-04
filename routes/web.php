@@ -58,6 +58,7 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
     Route::resource('report', 'ReportController');
 
     Route::resource('package', 'PackageController');
+    Route::get('auction/{auction}/items', 'AuctionController@items')->name('auction.items');
     Route::resource('auction', 'AuctionController');
 
     Route::get('notification/admin_notify_type/{admin_notify_type}', 'NotificationController@notifications')->name('notification.admin_notify_type');

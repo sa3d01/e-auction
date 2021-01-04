@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Auction;
+use App\AuctionItem;
 use App\Favourite;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
@@ -25,7 +26,7 @@ class ItemCollection extends ResourceCollection
     {
         $data=[];
         foreach ($this as $obj){
-            $auction=Auction::where('items', 'like', '%'.$obj->id.'%')->first();
+            $auction_item=AuctionItem::where('item_id',$obj->id)->latest()->first();
             $favourite=Favourite::where(['user_id'=>\request()->user()->id, 'item_id'=>$obj->id])->first();
             if ($favourite){
                 $is_favourite=true;
@@ -36,9 +37,9 @@ class ItemCollection extends ResourceCollection
             $arr['name']=$obj->name;
             $arr['item_status']= $obj->item_status->name[$this->lang()];
             $arr['auction_type']= $obj->auction_type->name[$this->lang()];
-            $arr['start_date']= $auction->start_date;
+            $arr['start_date']= $auction_item->start_date;
             $arr['image']=$obj->images[0];
-            $arr['auction_price']=$obj->auction_price;
+            $arr['auction_price']=$auction_item->price;
             $arr['is_favourite']=$is_favourite;
             $data[]=$arr;
         }

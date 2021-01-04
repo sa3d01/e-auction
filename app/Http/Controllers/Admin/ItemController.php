@@ -61,7 +61,6 @@ class ItemController extends MasterController
                 ],
             ]);
         }
-
     }
 
     public function reports($item_id){

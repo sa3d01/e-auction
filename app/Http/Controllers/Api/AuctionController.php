@@ -21,11 +21,14 @@ class AuctionController extends MasterController
     }
 
     public function index(){
-        $active_auctions=Auction::where('active',1)->get();
+//        $active_auctions=Auction::where('active',1)->get();
         $items_query=Item::where('status','shown');
-        foreach ($active_auctions as $auction){
-            $items_query=$items_query->whereIn('id',$auction->items);
-        }
+//        foreach ($active_auctions as $auction){
+//            $items_query=$items_query->whereIn('id',$auction->items);
+//        }
+
+
+
         $data['vip']=new ItemCollection($items_query->take(4)->get());
         $data['data']=new ItemCollection($items_query->get());
         return $this->sendResponse($data);

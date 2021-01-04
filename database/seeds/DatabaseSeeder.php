@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
          $this->call([
              SettingSeeder::class,
              AdminSeeder::class,
+//             UserSeeder::class,
              PackageSeeder::class,
              CategorySeeder::class,
              CarSeeder::class,
@@ -21,8 +22,8 @@ class DatabaseSeeder extends Seeder
              CitySeeder::class,
              AuctionTypeSeeder::class,
              AskSeeder::class,
+//             ItemSeeder::class,
+//             AuctionSeeder::class
          ]);
-
-
     }
 }

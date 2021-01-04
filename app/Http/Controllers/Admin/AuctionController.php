@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Auction;
+use App\AuctionItem;
 use App\Http\Resources\ItemResource;
 use App\Http\Resources\OrderResource;
 use App\Item;
@@ -40,8 +41,7 @@ class AuctionController extends MasterController
     }
     public function create()
     {
-        //todo : order items
-        return View('dashboard.create.create', [
+        return View('dashboard.auction.create', [
             'type'=>'auction',
             'action'=>'admin.auction.store',
             'title'=>'أضافة مزاد',
@@ -56,20 +56,22 @@ class AuctionController extends MasterController
     public function store(Request $request)
     {
         $this->validate($request, $this->validation_func(1),$this->validation_msg());
-        $now=Carbon::now();
-        if($request['start_date'] < $now){
+        if($request['start_date'] < Carbon::now()){
             return redirect()->back()->withErrors('تأكد من اختيار تاريخ صحيح');
         }
-        foreach ($request['items'] as $item_id){
-            Item::find($item_id)->update(['status'=>'shown']);
+        $data=$request->all();
+        $data['items']=$request['items'];
+        if (gettype($request['items'])=='string'){
+            $data['items']=explode(',',$request['items']);
         }
-        $this->model->create($request->all());
+        $auction=$this->model->create($data);
+        $this->auction_items($auction);
         return redirect()->route('admin.auction.index')->with('created', 'تمت الاضافة بنجاح');
     }
     public function index()
     {
         $rows=$this->model->latest()->get();
-        return View('dashboard.index.index', [
+        return View('dashboard.auction.index', [
             'rows' => $rows,
             'type'=>'auction',
             'title'=>'قائمة المزادات',
@@ -77,4 +79,45 @@ class AuctionController extends MasterController
         ]);
     }
 
+    public function items($auction_id)
+    {
+        $auction=Auction::find($auction_id);
+        $rows=Item::whereIn('id',$auction->items)->latest()->get();
+        return View('dashboard.item.index', [
+            'rows' => $rows,
+            'status'=>'shown',
+            'type'=>'item',
+            'title'=>'قائمة السلع ',
+            'index_fields'=>['الرقم التسلسلى' => 'id','العنوان'=>'name'],
+            'selects'=>[
+                [
+                    'name'=>'user',
+                    'title'=>'المستخدم'
+                ],
+                [
+                    'name'=>'auction_type',
+                    'title'=>'نوع المزايدة'
+                ],
+            ],
+        ]);
+    }
+
+    protected function auction_items($auction){
+        foreach ($auction->items as $key=>$item_id){
+            $item=Item::find($item_id);
+            $item->update(['status'=>'shown']);
+            $auction_start_date=Carbon::createFromTimestamp($auction->start_date);
+            if ($key==0){
+                $item_start_date=$auction_start_date;
+            }else{
+                $item_start_date=$auction_start_date->addSeconds($key*$auction->duration);
+            }
+            AuctionItem::create([
+                'item_id'=>$item_id,
+                'auction_id'=>$auction->id,
+                'price'=>$item->auction_price,
+                'start_date'=>$item_start_date
+            ]);
+        }
+    }
 }

@@ -19,6 +19,8 @@ class CreateAuctionItemsTable extends Migration
             $table->foreignId('auction_id')->nullable();
             $table->integer('price')->default(0);
             $table->integer('latest_charge')->default(0);
+            $table->integer('start_date')->nullable();
+            $table->enum('vip',['true','false'])->default('false');
             $table->json('more_details')->nullable();
             $table->timestamps();
         });
