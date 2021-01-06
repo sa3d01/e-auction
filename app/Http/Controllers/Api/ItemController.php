@@ -51,6 +51,19 @@ class ItemController extends MasterController
         $user = auth()->user();
         $data=$request->all();
         $data['user_id']=$user->id;
+        $items_images=[];
+        if ($request->images){
+            $file=$request->images[0];
+            $filename=null;
+            if (is_file($file)) {
+                $filename = Str::random(10) . '.' . $file->getClientOriginalExtension();
+                $file->move('media/images/item/', $filename);
+            }elseif (filter_var($file, FILTER_VALIDATE_URL) === True) {
+                $filename = $file;
+            }
+            $items_images[]=$filename;
+            $data['images'] = $items_images;
+        }
         $item=$this->model->create($data);
         $add_item_tax=Setting::first()->value('add_item_tax');
         if ($add_item_tax < $user->wallet){
