@@ -20,49 +20,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment=".">
-      <change afterPath="$PROJECT_DIR$/database/seeds/AuctionSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/seeds/ItemSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/seeds/UserSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/2I2Yv8V5Jc.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/BDymn8WaWg.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/ORtcqSkWqV.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/UXfw989eEf.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/VFL4Vcdal2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/iuOIMxNNpn.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/lfGISqJd4Z.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/r0vBmoICpl.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/s86i75o0KP.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/vXwo493IUR.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/report/2JDoN5pvxi.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/report/2MS7M7YKu6.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/report/4XUXavnvEU.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/report/57sQldpY6I.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/report/87ASqgGzLX.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/report/8BNElvEsM2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/report/ENYpK9hQ2Z.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/report/Ki6vml3sLv.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/report/OnhJu3oWHv.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/report/PPrXTjBGO6.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/report/UqumXR94TK.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/report/ijZqPIgfLF.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/report/l8KADEkYCr.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/report/paG3KUlH96.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/user/7Wvm9O4DJM.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/user/ZngleFPQiX.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/dashboard/auction/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/dashboard/auction/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/dashboard/auction/show.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/item/9ZGBJBlSmk.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/item/N7rwCb0C1Z.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/item/akp06OsFnu.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/report/48lxECmUZA.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/report/8XlkyzRxBl.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/report/ETw3hdxgg6.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/AuctionItem.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/AuctionItem.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/AuctionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/AuctionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/AuctionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/AuctionController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/BidController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/BidController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Resources/ItemCollection.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/ItemCollection.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_28_105956_create_auction_items_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_28_105956_create_auction_items_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/SettingSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/SettingSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/ItemResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/ItemResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -261,7 +231,7 @@
       <workItem from="1609553955867" duration="712000" />
       <workItem from="1609599960585" duration="7071000" />
       <workItem from="1609680440553" duration="10000" />
-      <workItem from="1609706197576" duration="15963000" />
+      <workItem from="1609706197576" duration="22605000" />
     </task>
     <task id="LOCAL-00001" summary="auth">
       <created>1605159030152</created>
@@ -438,7 +408,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609608983850</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary=".">
+      <created>1609723508462</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1609723508462</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

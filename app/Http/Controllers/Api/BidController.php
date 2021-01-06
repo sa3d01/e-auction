@@ -29,6 +29,8 @@ class BidController extends MasterController
         }
         $purchasing_power_admin_percent=$this->purchasing_power_ratio;
 
+        
+
         return true;
     }
 }

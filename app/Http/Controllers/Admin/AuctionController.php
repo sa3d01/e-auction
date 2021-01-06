@@ -39,6 +39,7 @@ class AuctionController extends MasterController
             'required' => 'يجب ملئ جميع الحقول',
         );
     }
+
     public function create()
     {
         return View('dashboard.auction.create', [
@@ -53,6 +54,7 @@ class AuctionController extends MasterController
             ],
         ]);
     }
+
     public function store(Request $request)
     {
         $this->validate($request, $this->validation_func(1),$this->validation_msg());
@@ -68,6 +70,7 @@ class AuctionController extends MasterController
         $this->auction_items($auction);
         return redirect()->route('admin.auction.index')->with('created', 'تمت الاضافة بنجاح');
     }
+
     public function index()
     {
         $rows=$this->model->latest()->get();

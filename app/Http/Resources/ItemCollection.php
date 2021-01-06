@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use App\Auction;
 use App\AuctionItem;
 use App\Favourite;
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class ItemCollection extends ResourceCollection
@@ -32,6 +33,13 @@ class ItemCollection extends ResourceCollection
                 $is_favourite=true;
             }else{
                 $is_favourite=false;
+            }
+            if (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration) < Carbon::now()){
+                $arr['auction_status']='expired';
+            }elseif ((Carbon::createFromTimestamp($auction_item->start_date) <= Carbon::now() )  &&  (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration) >= Carbon::now())){
+                $arr['auction_status']='live';
+            }else{
+                $arr['auction_status']='soon';
             }
             $arr['id']=(int)$obj->id;
             $arr['name']=$obj->name;
