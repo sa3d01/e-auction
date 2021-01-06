@@ -58,10 +58,11 @@ class ItemController extends MasterController
             if (is_file($file)) {
                 $filename = Str::random(10) . '.' . $file->getClientOriginalExtension();
                 $file->move('media/images/item/', $filename);
+                $local_name=asset('media/images/item/').'/'.$filename;
             }else {
-                $filename = $file;
+                $local_name = $file;
             }
-            $items_images[]=$filename;
+            $items_images[]=$local_name;
             $data['images'] = $items_images;
         }
         $item=$this->model->create($data);
