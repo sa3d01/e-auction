@@ -58,7 +58,7 @@ class ItemController extends MasterController
             if (is_file($file)) {
                 $filename = Str::random(10) . '.' . $file->getClientOriginalExtension();
                 $file->move('media/images/item/', $filename);
-            }elseif (filter_var($file, FILTER_VALIDATE_URL) === True) {
+            }else {
                 $filename = $file;
             }
             $items_images[]=$filename;
