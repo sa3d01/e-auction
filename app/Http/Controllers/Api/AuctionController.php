@@ -10,6 +10,7 @@ use App\Http\Resources\ItemResource;
 use App\Http\Resources\ReportCollection;
 use App\Item;
 use App\Report;
+use Illuminate\Http\Request;
 
 class AuctionController extends MasterController
 {
@@ -25,6 +26,10 @@ class AuctionController extends MasterController
         $vip_items=AuctionItem::where('vip','true')->pluck('item_id');
         $data['vip']=new ItemCollection(Item::whereIn('id',$vip_items)->latest()->get());
         $data['data']=new ItemCollection(Item::where('status','shown')->latest()->get());
+        return $this->sendResponse($data);
+    }
+    public function search(Request $request){
+        $data=new ItemCollection(Item::where('name','LIKE','%'.$request['name'].'%')->latest()->get());
         return $this->sendResponse($data);
     }
     public function show($id){

@@ -41,6 +41,11 @@ class SettingController extends MasterController
         $data['tax_ratio']=$setting->tax_ratio;
         $data['add_item_tax']=$setting->add_item_tax;
         $data['socials']=$setting->socials;
+
+        $data['less_tenThousand']=$setting->more_details['less_tenThousand'];
+        $data['less_hundredThousand']=$setting->more_details['less_hundredThousand'];
+        $data['more_hundredThousand']=$setting->more_details['more_hundredThousand'];
+
         return $this->sendResponse($data);
     }
 

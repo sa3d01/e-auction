@@ -40,6 +40,11 @@ class HomeController extends MasterController
         $licence['en']=$request['licence_en'];
         $data['licence']=$licence;
 
+        $more_details['less_tenThousand']=$request['less_tenThousand'];
+        $more_details['less_hundredThousand']=$request['less_hundredThousand'];
+        $more_details['more_hundredThousand']=$request['more_hundredThousand'];
+        $data['more_details']=$more_details;
+
         Setting::updateOrCreate(['id'=>1],$data);
         return redirect()->back()->with('updated', 'تم التعديل بنجاح');
     }

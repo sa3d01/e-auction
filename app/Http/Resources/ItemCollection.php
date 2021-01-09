@@ -34,26 +34,28 @@ class ItemCollection extends ResourceCollection
             }else{
                 $is_favourite=false;
             }
-            if (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration) < Carbon::now()){
-                $arr['auction_status']='expired';
-                $auction_item->update([
-                   'more_details'=>[
-                       'status'=>'expired'
-                   ]
-                ]);
-            }elseif ((Carbon::createFromTimestamp($auction_item->start_date) <= Carbon::now() )  &&  (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration) >= Carbon::now())){
-                $arr['auction_status']='live';
-            }else{
-                $arr['auction_status']='soon';
+            if ($auction_item){
+                if (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration) < Carbon::now()){
+                    $arr['auction_status']='expired';
+                    $auction_item->update([
+                        'more_details'=>[
+                            'status'=>'expired'
+                        ]
+                    ]);
+                }elseif ((Carbon::createFromTimestamp($auction_item->start_date) <= Carbon::now() )  &&  (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration) >= Carbon::now())){
+                    $arr['auction_status']='live';
+                }else{
+                    $arr['auction_status']='soon';
+                }
+                $arr['auction_type']= $obj->auction_type->name[$this->lang()];
+                $arr['start_date']= $auction_item->start_date;
+                $arr['auction_duration']=$auction_item->auction->duration;
+                $arr['auction_price']=$auction_item->price;
             }
             $arr['id']=(int)$obj->id;
             $arr['name']=$obj->name;
             $arr['item_status']= $obj->item_status->name[$this->lang()];
-            $arr['auction_type']= $obj->auction_type->name[$this->lang()];
-            $arr['start_date']= $auction_item->start_date;
-            $arr['auction_duration']=$auction_item->auction->duration;
             $arr['image']=$obj->images[0];
-            $arr['auction_price']=$auction_item->price;
             $arr['is_favourite']=$is_favourite;
             $data[]=$arr;
         }

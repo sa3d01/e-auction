@@ -29,6 +29,9 @@ class SettingSeeder extends Seeder
             'add_item_tax' => 100,//fixed amount
             'tax_ratio' => 1,//percent
             'auction_period' => 90,//second
+            'more_details->less_tenThousand'=>100,
+            'more_details->less_hundredThousand'=>1000,
+            'more_details->more_hundredThousand'=>5000,
         ]);
     }
 }

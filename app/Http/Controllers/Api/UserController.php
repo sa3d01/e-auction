@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\AuctionUser;
 use App\Favourite;
 use App\Http\Resources\ItemCollection;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Item;
 use App\Package;
+use App\Transfer;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -264,9 +266,23 @@ class UserController extends MasterController
      }
     public function profile(){
         $user = auth()->user();
-        $token = auth()->login($user);
-        $data= new UserResource($user);
-        return $this->sendResponse($data)->withHeaders(['apiToken'=>$token,'tokenType'=>'bearer']);
+        $data['user']= new UserResource($user);
+        $data['my_items']=new ItemCollection(Item::where('user_id',$user->id)->latest()->get());
+        $auction_users=AuctionUser::where('user_id',$user->id)->pluck('item_id');
+        $data['my_auctions']=new ItemCollection(Item::whereIn('id',$auction_users)->latest()->get());
+        return $this->sendResponse($data);
+    }
+    public function auctionReports(){
+        $user = auth()->user();
+        $data=[];
+        $transfers=Transfer::where('user_id',$user->id)->latest()->get();
+        foreach ($transfers as $transfer){
+            $arr['type']=$transfer->type;
+            $arr['money']=$transfer->money;
+            $arr['time']=Carbon::parse($transfer->created_at)->diffForHumans();
+            $data[]=$arr;
+        }
+        return $this->sendResponse($data);
     }
     public function show($id){
         $user = User::find($id);

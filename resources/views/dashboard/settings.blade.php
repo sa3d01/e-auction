@@ -32,6 +32,28 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label>
+                                                <i class="os-icon os-icon-dollar-sign"></i>مقدار المزايدة على السلع الأقل سعرها من عشرة الاف
+                                            </label>
+                                            <input name="less_tenThousand" value="{{$row->more_details['less_tenThousand']}}" class="form-control" type="number" min="0">
+                                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>
+                                                <i class="os-icon os-icon-dollar-sign"></i>مقدار المزايدة على السلع الأقل سعرها من مئة ألف
+                                            </label>
+                                            <input name="less_hundredThousand" value="{{$row->more_details['less_hundredThousand']}}" class="form-control" type="number" min="0">
+                                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>
+                                                <i class="os-icon os-icon-dollar-sign"></i>مقدار المزايدة على السلع الأعلى من مئة ألف
+                                            </label>
+                                            <input name="more_hundredThousand" value="{{$row->more_details['more_hundredThousand']}}" class="form-control" type="number" min="0">
+                                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>
                                                 <i class="os-icon os-icon-percent"></i>نسبة التطبيق على المزايد
                                             </label>
                                             <input name="app_ratio" value="{{$row->app_ratio}}" class="form-control" type="number" min="0">

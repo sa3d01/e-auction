@@ -65,6 +65,7 @@ Route::group(['prefix' => 'v1','namespace'=>'Api'], function () {
         Route::get('/logout', 'UserController@logout')->middleware(CheckApiToken::class);
         Route::get('/profile', 'UserController@profile')->middleware(CheckApiToken::class);
         Route::get('/favourite', 'UserController@favourite');
+        Route::get('/auction_reports', 'UserController@auctionReports');
         Route::get('/{id}', 'UserController@show');
     });
 
@@ -72,8 +73,8 @@ Route::group(['prefix' => 'v1','namespace'=>'Api'], function () {
         Route::post('/upload_images', 'ItemController@uploadImages')->middleware(CheckApiToken::class);
         Route::post('/', 'ItemController@store')->middleware(CheckApiToken::class);
         Route::get('/live', 'BidController@liveItem')->middleware(CheckApiToken::class);
+        Route::post('/search', 'AuctionController@search')->middleware(CheckApiToken::class);
         Route::post('/{item}/bid', 'BidController@bid')->middleware(CheckApiToken::class);
-
     });
 
     Route::group(['prefix' => '/home'], function () {
