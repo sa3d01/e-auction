@@ -48,6 +48,8 @@
                                 @if($status=='accepted')
                                     <th>السعر المطروح للمزايدة</th>
                                     <th>تقارير الفحص</th>
+                                @elseif($status=='shown')
+                                    <th>VIP</th>
                                 @endif
                                 <th>المزيد</th>
                             </tr>
@@ -69,6 +71,8 @@
                                 @if($status=='accepted')
                                     <th>السعر المطروح للمزايدة</th>
                                     <th>تقارير الفحص</th>
+                                @elseif($status=='shown')
+                                    <th>VIP</th>
                                 @endif
                                 <th>المزيد</th>
                             </tr>
@@ -112,6 +116,8 @@
                                         <td>
                                             {!! $row->reportLabel() !!}
                                         </td>
+                                    @elseif($status=='shown')
+                                        <td>{!! $row->vip() !!}</td>
                                     @endif
                                     <td>
 {{--                                        <form class="delete" data-id="{{$row->id}}" method="POST" action="{{ route('admin.'.$type.'.destroy',[$row->id]) }}">--}}

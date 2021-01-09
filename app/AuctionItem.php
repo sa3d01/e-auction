@@ -11,7 +11,7 @@ class AuctionItem extends Model
 
     private $route='auction_item';
     private $images_link='media/images/auction_item/';
-    protected $fillable = ['more_details','start_date','latest_charge','price','auction_id','item_id'];
+    protected $fillable = ['more_details','start_date','latest_charge','price','auction_id','item_id','vip'];
     protected $casts = [
         'more_details' => 'json',
     ];

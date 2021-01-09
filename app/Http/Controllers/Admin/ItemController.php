@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\AuctionItem;
 use App\Http\Resources\ItemResource;
 use App\Http\Resources\OrderResource;
 use App\Item;
@@ -25,42 +26,51 @@ class ItemController extends MasterController
     {
         $rows=$this->model->where('status',$status)->latest()->get();
         if ($status=='accepted'){
-            return View('dashboard.item.index', [
-                'rows' => $rows,
-                'status'=>$status,
-                'type'=>'item',
-                'title'=>'قائمة السلع المطلوب اعدادها',
-                'index_fields'=>['الرقم التسلسلى' => 'id','العنوان'=>'name'],
-                'selects'=>[
-                    [
-                        'name'=>'user',
-                        'title'=>'المستخدم'
-                    ],
-                    [
-                        'name'=>'auction_type',
-                        'title'=>'نوع المزايدة'
-                    ],
-                ],
-            ]);
+            $title='قائمة السلع المطلوب اعدادها';
+            $index_fields=['الرقم التسلسلى' => 'id','العنوان'=>'name'];
         }else{
-            return View('dashboard.item.index', [
-                'rows' => $rows,
-                'status'=>$status,
-                'type'=>'item',
-                'title'=>'قائمة السلع',
-                'index_fields'=>['الرقم التسلسلى' => 'id','العنوان'=>'name','تاريخ الطلب'=>'created_at'],
-                'selects'=>[
-                    [
-                        'name'=>'user',
-                        'title'=>'المستخدم'
-                    ],
-                    [
-                        'name'=>'auction_type',
-                        'title'=>'نوع المزايدة'
-                    ],
-                ],
-            ]);
+            $title='قائمة السلع';
+            $index_fields=['الرقم التسلسلى' => 'id','العنوان'=>'name','تاريخ الطلب'=>'created_at'];
         }
+        return View('dashboard.item.index', [
+            'rows' => $rows,
+            'status'=>$status,
+            'type'=>'item',
+            'title'=>$title,
+            'index_fields'=>$index_fields,
+            'selects'=>[
+                [
+                    'name'=>'user',
+                    'title'=>'المستخدم'
+                ],
+                [
+                    'name'=>'auction_type',
+                    'title'=>'نوع المزايدة'
+                ],
+            ],
+        ]);
+    }
+
+    public function vip_auction_items(){
+        $row_ids=AuctionItem::where('vip','true')->pluck('item_id');
+        $rows=Item::whereIn('id',$row_ids)->latest()->get();
+        return View('dashboard.item.index', [
+            'rows' => $rows,
+            'status'=>'shown',
+            'type'=>'item',
+            'title'=>'قائمة السلع المميزة',
+            'index_fields'=>['الرقم التسلسلى' => 'id','العنوان'=>'name'],
+            'selects'=>[
+                [
+                    'name'=>'user',
+                    'title'=>'المستخدم'
+                ],
+                [
+                    'name'=>'auction_type',
+                    'title'=>'نوع المزايدة'
+                ],
+            ],
+        ]);
     }
 
     public function reports($item_id){
@@ -73,12 +83,27 @@ class ItemController extends MasterController
             ]
         );
     }
+
     public function auction_price($item_id,Request $request){
         $item=$this->model->find($item_id);
         $auction_price=$request['auction_price'];
         $item->update([
             'auction_price'=>$auction_price
         ]);
+        return redirect()->back()->with('updated');
+    }
+    public function update_vip($item_id){
+        $auction_item=AuctionItem::where('item_id',$item_id)->latest()->first();
+        if ($auction_item->vip == "true"){
+            $auction_item->update([
+                'vip'=>'false'
+            ]);
+        }else{
+            $auction_item->update([
+                'vip'=>'true'
+            ]);
+        }
+        $auction_item->refresh();
         return redirect()->back()->with('updated');
     }
 

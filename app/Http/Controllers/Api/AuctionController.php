@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Auction;
+use App\AuctionItem;
 use App\Http\Resources\DropDownCollection;
 use App\Http\Resources\ItemCollection;
 use App\Http\Resources\ItemResource;
@@ -21,13 +22,15 @@ class AuctionController extends MasterController
     }
 
     public function index(){
-        $data['vip']=new ItemCollection(Item::where('status','shown')->take(4)->get());
+        $vip_items=AuctionItem::where('vip','true')->pluck('item_id');
+        $data['vip']=new ItemCollection(Item::whereIn('id',$vip_items)->latest()->get());
         $data['data']=new ItemCollection(Item::where('status','shown')->latest()->get());
         return $this->sendResponse($data);
     }
     public function show($id){
-        $date['item']=new ItemResource(Item::find($id));
-        $date['similar']=new ItemCollection(Item::where('status','shown')->take(4)->get());
+        $item=Item::find($id);
+        $date['item']=new ItemResource($item);
+        $date['similar']=new ItemCollection(Item::where('id','!=',$id)->where(['status'=>'shown','mark_id'=>$item->mark_id])->take(4)->get());
         return $this->sendResponse($date);
     }
     public function reports($id){

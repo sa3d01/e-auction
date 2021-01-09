@@ -85,6 +85,19 @@ class Item extends Model
             return"<a data-id='$this->id'  data-href='$route' href='$route' class='auction_price badge badge-info'><span> $auction_price  </span></a>";
         }
     }
+    public function vip()
+    {
+        $auction_item=AuctionItem::where('item_id',$this->id)->latest()->first();
+        if (!$auction_item){
+            return"";
+        }
+        $action = route('admin.item_vip.update', [$this->attributes['id']]);
+        if ($auction_item->vip == "true"){
+            return "<a class='block btn btn-success btn-sm' data-href='$action' href='$action'><i class='os-icon os-icon-check-circle'></i><span>سلعة مميزة | الغاء </span></a>";
+        }else{
+            return "<a class='block btn btn-info btn-sm' data-href='$action' href='$action'><i class='os-icon os-icon-activity'></i><span>تمميز السلعة !</span></a>";
+        }
+    }
 
     public function nameForSelect(){
         return $this->id.'-'.$this->name;

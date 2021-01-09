@@ -29,6 +29,11 @@ class ItemResource extends JsonResource
         $start_auction=Carbon::createFromTimestamp($auction_item->start_date);
         if ($end_auction < Carbon::now()){
             $auction_status='expired';
+            $auction_item->update([
+               'more_details'=>[
+                   'status'=>'expired'
+               ]
+            ]);
         }elseif (($start_auction <= Carbon::now() )  &&  ($end_auction >= Carbon::now())){
             $auction_status='live';
         }else{
@@ -44,6 +49,7 @@ class ItemResource extends JsonResource
             'id'=> (int) $this->id,
             'images'=> $this->images,
             'start_date'=> $auction_item->start_date,
+            'auction_duration'=>$auction_item->auction->duration,
             'item_status'=> $this->item_status->name[$this->lang()],
             'auction_price'=> $auction_item->price,
             'name'=> $this->name,

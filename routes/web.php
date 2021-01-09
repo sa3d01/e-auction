@@ -53,6 +53,8 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
     Route::get('item/{id}/reports', 'ItemController@reports')->name('item.reports');
     Route::get('item/{id}/auction_price', 'ItemController@auction_price')->name('item.auction_price');
     Route::resource('item', 'ItemController');
+    Route::get('vip_items', 'ItemController@vip_auction_items')->name('items.vip');
+    Route::get('update_vip/{item_id}', 'ItemController@update_vip')->name('item_vip.update');
 
     Route::get('report/add/{item_id}', 'ReportController@add')->name('report.add');
     Route::resource('report', 'ReportController');

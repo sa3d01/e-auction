@@ -104,6 +104,9 @@
                     <li>
                         <a href="{{route('admin.item.status',['status'=>'accepted'])}}"> السلع فى انتظار الاعداد لمزاد </a>
                     </li>
+                    <li>
+                        <a href="{{route('admin.items.vip')}}"> السلع المميزة </a>
+                    </li>
                 </ul>
             </div>
         </div>
