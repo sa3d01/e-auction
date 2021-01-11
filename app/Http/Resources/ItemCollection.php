@@ -28,11 +28,12 @@ class ItemCollection extends ResourceCollection
         $data=[];
         foreach ($this as $obj){
             $auction_item=AuctionItem::where('item_id',$obj->id)->latest()->first();
-            $favourite=Favourite::where(['user_id'=>\request()->user()->id, 'item_id'=>$obj->id])->first();
-            if ($favourite){
-                $is_favourite=true;
-            }else{
-                $is_favourite=false;
+            $is_favourite=false;
+            if (\request()->user()){
+                $favourite=Favourite::where(['user_id'=>\request()->user()->id, 'item_id'=>$obj->id])->first();
+                if ($favourite){
+                    $is_favourite=true;
+                }
             }
             if ($auction_item){
                 if (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration) < Carbon::now()){

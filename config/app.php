@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'Africa/Cairo',//Asia/Riyadh
+    'timezone' => 'Asia/Riyadh',//Asia/Riyadh
 
     /*
     |--------------------------------------------------------------------------

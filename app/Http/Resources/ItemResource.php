@@ -39,11 +39,12 @@ class ItemResource extends JsonResource
         }else{
             $auction_status='soon';
         }
-        $favourite=Favourite::where(['user_id'=>\request()->user()->id, 'item_id'=>$this->id])->first();
-        if ($favourite){
-            $is_favourite=true;
-        }else{
-            $is_favourite=false;
+        $is_favourite=false;
+        if (\request()->user()){
+            $favourite=Favourite::where(['user_id'=>\request()->user()->id, 'item_id'=>$this->id])->first();
+            if ($favourite){
+                $is_favourite=true;
+            }
         }
         return [
             'id'=> (int) $this->id,

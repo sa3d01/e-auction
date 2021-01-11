@@ -72,8 +72,8 @@ Route::group(['prefix' => 'v1','namespace'=>'Api'], function () {
     Route::group(['prefix' => '/item'], function () {
         Route::post('/upload_images', 'ItemController@uploadImages')->middleware(CheckApiToken::class);
         Route::post('/', 'ItemController@store')->middleware(CheckApiToken::class);
-        Route::get('/live', 'BidController@liveItem')->middleware(CheckApiToken::class);
-        Route::post('/search', 'AuctionController@search')->middleware(CheckApiToken::class);
+        Route::get('/live', 'BidController@liveItem');
+        Route::post('/search', 'AuctionController@search');
         Route::post('/{item}/bid', 'BidController@bid')->middleware(CheckApiToken::class);
     });
 
@@ -82,8 +82,8 @@ Route::group(['prefix' => 'v1','namespace'=>'Api'], function () {
         Route::get('item/{item_id}', 'AuctionController@show');
         Route::post('item/{item}/favourite', 'ItemController@favouriteModification')->middleware(CheckApiToken::class);
         Route::get('item/{item_id}/reports', 'AuctionController@reports');
-        Route::get('my_items', 'AuctionController@my_items');
-        Route::get('my_auctions', 'AuctionController@my_auctions');
+        Route::get('my_items', 'AuctionController@my_items')->middleware(CheckApiToken::class);
+        Route::get('my_auctions', 'AuctionController@my_auctions')->middleware(CheckApiToken::class);
     });
 
     Route::group(['prefix' => '/notification'], function () {
