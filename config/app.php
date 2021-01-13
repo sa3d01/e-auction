@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'Asia/Riyadh',//Asia/Riyadh
+    'timezone' => 'Asia/Riyadh',
 
     /*
     |--------------------------------------------------------------------------

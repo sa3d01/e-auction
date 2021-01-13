@@ -13,6 +13,7 @@ use App\Setting;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\Object_;
 
 class BidController extends MasterController
 {
@@ -35,7 +36,7 @@ class BidController extends MasterController
                 return $this->sendResponse(new ItemResource($item));
             }
         }
-        return $this->sendResponse('ﻻ يوجد مزاد مباشر الآن');
+        return $this->sendResponse(new Object_());
     }
 
     public function bid($item_id,Request $request){
