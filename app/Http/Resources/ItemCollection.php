@@ -50,6 +50,7 @@ class ItemCollection extends ResourceCollection
                 }
                 $arr['auction_type']= $obj->auction_type->name[$this->lang()];
                 $arr['start_date']= $auction_item->start_date;
+                $arr['start_date_text']= Carbon::createFromTimestamp($auction_item->start_date);
                 $arr['auction_duration']=$auction_item->auction->duration;
                 $arr['auction_price']=$auction_item->price;
             }
