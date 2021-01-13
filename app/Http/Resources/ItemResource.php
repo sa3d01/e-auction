@@ -27,14 +27,14 @@ class ItemResource extends JsonResource
         $auction_item=AuctionItem::where('item_id',$this->id)->latest()->first();
         $end_auction=Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration);
         $start_auction=Carbon::createFromTimestamp($auction_item->start_date);
-        if ($end_auction < Carbon::now()){
+        if ($end_auction < Carbon::now(app()->get('timezone'))){
             $auction_status='expired';
             $auction_item->update([
                'more_details'=>[
                    'status'=>'expired'
                ]
             ]);
-        }elseif (($start_auction <= Carbon::now() )  &&  ($end_auction >= Carbon::now())){
+        }elseif (($start_auction <= Carbon::now(app()->get('timezone')) )  &&  ($end_auction >= Carbon::now(app()->get('timezone')))){
             $auction_status='live';
         }else{
             $auction_status='soon';
