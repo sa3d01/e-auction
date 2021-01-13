@@ -25,8 +25,8 @@ class ItemResource extends JsonResource
     public function toArray($request)
     {
         $auction_item=AuctionItem::where('item_id',$this->id)->latest()->first();
-        $end_auction=Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration);
-        $start_auction=Carbon::createFromTimestamp($auction_item->start_date);
+        $end_auction=Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration)->setTimezone('Africa/Cairo');
+        $start_auction=Carbon::createFromTimestamp($auction_item->start_date)->setTimezone('Africa/Cairo');
         if ($end_auction < Carbon::now('Africa/Cairo')){
             $auction_status='expired';
             $auction_item->update([

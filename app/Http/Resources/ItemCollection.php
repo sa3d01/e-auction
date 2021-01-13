@@ -36,21 +36,21 @@ class ItemCollection extends ResourceCollection
                 }
             }
             if ($auction_item){
-                if (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration) < Carbon::now('Africa/Cairo')){
+                if (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration)->setTimezone('Africa/Cairo') < Carbon::now('Africa/Cairo')){
                     $arr['auction_status']='expired';
                     $auction_item->update([
                         'more_details'=>[
                             'status'=>'expired'
                         ]
                     ]);
-                }elseif ((Carbon::createFromTimestamp($auction_item->start_date) <= Carbon::now('Africa/Cairo') )  &&  (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration) >= Carbon::now('Africa/Cairo'))){
+                }elseif ((Carbon::createFromTimestamp($auction_item->start_date)->setTimezone('Africa/Cairo') <= Carbon::now('Africa/Cairo') )  &&  (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration)->setTimezone('Africa/Cairo') >= Carbon::now('Africa/Cairo'))){
                     $arr['auction_status']='live';
                 }else{
                     $arr['auction_status']='soon';
                 }
                 $arr['auction_type']= $obj->auction_type->name[$this->lang()];
                 $arr['start_date']= $auction_item->start_date;
-                $arr['start_date_text']= Carbon::createFromTimestamp($auction_item->start_date)->format('Y-m-d H:i');
+                $arr['start_date_text']= Carbon::createFromTimestamp($auction_item->start_date)->setTimezone('Africa/Cairo')->format('Y-m-d H:i');
                 $arr['now_date']= Carbon::now('Africa/Cairo')->format('Y-m-d H:i');
                 $arr['auction_duration']=$auction_item->auction->duration;
                 $arr['auction_price']=$auction_item->price;
