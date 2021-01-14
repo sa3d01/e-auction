@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Traits\ModelBaseFunctions;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class AuctionItem extends Model
@@ -20,5 +21,9 @@ class AuctionItem extends Model
     }
     public function auction(){
         return $this->belongsTo(Auction::class);
+    }
+    protected function setStartDateAttribute($start_date)
+    {
+        $this->attributes['start_date'] = $start_date;
     }
 }

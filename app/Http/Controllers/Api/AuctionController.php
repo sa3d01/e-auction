@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Auction;
 use App\AuctionItem;
+use App\Http\Resources\AuctionCollection;
 use App\Http\Resources\DropDownCollection;
 use App\Http\Resources\ItemCollection;
 use App\Http\Resources\ItemResource;
@@ -28,8 +29,26 @@ class AuctionController extends MasterController
         $data['data']=new ItemCollection(Item::where('status','shown')->latest()->get());
         return $this->sendResponse($data);
     }
+    public function auctions(){
+        return $this->sendResponse(new AuctionCollection(Auction::all()));
+    }
     public function search(Request $request){
-        $data=new ItemCollection(Item::where('name','LIKE','%'.$request['name'].'%')->latest()->get());
+        if ($request['name']){
+            $data=new ItemCollection(Item::where('name','LIKE','%'.$request['name'].'%')->latest()->get());
+        }else{
+            $q=Item::query();
+            if ($request['from_date'] && $request['to_date']){
+                $from=$request['from_date'];
+                $to=$request['to_date'];
+                $ids=AuctionItem::whereBetween('start_date', [$from, $to])->pluck('item_id');
+                $q=$q->whereIn('id',$ids);
+            }
+            foreach ($request->input() as $key=>$value){
+                if ($value=='' || $value==null || $key=='from_date' || $key=='to_date') continue;
+                $q=$q->where($key,$value);
+            }
+            $data=new ItemCollection($q->latest()->get());
+        }
         return $this->sendResponse($data);
     }
     public function show($id){

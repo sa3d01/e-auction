@@ -4,17 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Auction;
 use App\AuctionItem;
-use App\Http\Resources\ItemResource;
-use App\Http\Resources\OrderResource;
 use App\Item;
-use App\Notification;
-use App\Report;
-use App\Setting;
 use Carbon\Carbon;
-use Edujugon\PushNotification\PushNotification;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 
 class AuctionController extends MasterController
 {
@@ -24,6 +16,7 @@ class AuctionController extends MasterController
         $this->route = 'auction';
         parent::__construct();
     }
+
     public function validation_func($method, $id = null)
     {
         return [
@@ -43,84 +36,91 @@ class AuctionController extends MasterController
     public function create()
     {
         return View('dashboard.auction.create', [
-            'type'=>'auction',
-            'action'=>'admin.auction.store',
-            'title'=>'أضافة مزاد',
-            'create_fields'=>['موعد بداية المزاد' => 'start_date','مدة المزايدة على السلعة (بالثوانى)'=>'duration'],
-            'multi_select'=>[
-                'rows'=>Item::where(['status'=>'accepted','pay_status'=>1])->whereHas('reports')->where('auction_price','!=','null')->get(),
-                'title'=>'السلع',
-                'input_name'=>'items'
+            'type' => 'auction',
+            'action' => 'admin.auction.store',
+            'title' => 'أضافة مزاد',
+            'create_fields' => ['موعد بداية المزاد' => 'start_date', 'مدة المزايدة على السلعة (بالثوانى)' => 'duration'],
+            'multi_select' => [
+                'rows' => Item::where(['status' => 'accepted', 'pay_status' => 1])->whereHas('reports')->where('auction_price', '!=', 'null')->get(),
+                'title' => 'السلع',
+                'input_name' => 'items'
             ],
         ]);
     }
 
     public function store(Request $request)
     {
-        $this->validate($request, $this->validation_func(1),$this->validation_msg());
-        if($request['start_date'] < Carbon::now()){
+        $this->validate($request, $this->validation_func(1), $this->validation_msg());
+        if ($request['start_date'] < Carbon::now()) {
             return redirect()->back()->withErrors('تأكد من اختيار تاريخ صحيح');
         }
-        $data=$request->all();
-        $data['items']=$request['items'];
-        if (gettype($request['items'])=='string'){
-            $data['items']=explode(',',$request['items']);
+        $data = $request->all();
+        $data['items'] = $request['items'];
+        if (gettype($request['items']) == 'string') {
+            $data['items'] = explode(',', $request['items']);
         }
-        $auction=$this->model->create($data);
+        $auction = $this->model->create($data);
         $this->auction_items($auction);
         return redirect()->route('admin.auction.index')->with('created', 'تمت الاضافة بنجاح');
     }
 
     public function index()
     {
-        $rows=$this->model->latest()->get();
+        $rows = $this->model->latest()->get();
         return View('dashboard.auction.index', [
             'rows' => $rows,
-            'type'=>'auction',
-            'title'=>'قائمة المزادات',
-            'index_fields'=>['الرقم التسلسلى' => 'id','موعد بداية المزاد'=>'start_date','مدة المزايدة بالثوانى'=>'duration'],
+            'type' => 'auction',
+            'title' => 'قائمة المزادات',
+            'index_fields' => ['الرقم التسلسلى' => 'id', 'موعد بداية المزاد' => 'start_date', 'مدة المزايدة بالثوانى' => 'duration'],
         ]);
     }
 
     public function items($auction_id)
     {
-        $auction=Auction::find($auction_id);
-        $rows=Item::whereIn('id',$auction->items)->latest()->get();
+        $auction = Auction::find($auction_id);
+        $rows = Item::whereIn('id', $auction->items)->latest()->get();
         return View('dashboard.item.index', [
             'rows' => $rows,
-            'status'=>'shown',
-            'type'=>'item',
-            'title'=>'قائمة السلع ',
-            'index_fields'=>['الرقم التسلسلى' => 'id','العنوان'=>'name'],
-            'selects'=>[
+            'status' => 'shown',
+            'type' => 'item',
+            'title' => 'قائمة السلع ',
+            'index_fields' => ['الرقم التسلسلى' => 'id', 'العنوان' => 'name'],
+            'selects' => [
                 [
-                    'name'=>'user',
-                    'title'=>'المستخدم'
+                    'name' => 'user',
+                    'title' => 'المستخدم'
                 ],
                 [
-                    'name'=>'auction_type',
-                    'title'=>'نوع المزايدة'
+                    'name' => 'auction_type',
+                    'title' => 'نوع المزايدة'
                 ],
             ],
         ]);
     }
 
-    protected function auction_items($auction){
-        foreach ($auction->items as $key=>$item_id){
-            $item=Item::find($item_id);
-            $item->update(['status'=>'shown']);
-            $auction_start_date=Carbon::createFromTimestamp($auction->start_date);
-            if ($key==0){
-                $item_start_date=$auction_start_date;
-            }else{
-                $item_start_date=$auction_start_date->addSeconds($key*$auction->duration);
-            }
+    public function auction_items($auction)
+    {
+        $key = 0;
+        $start_date = $auction->start_date;
+        foreach ($auction->items as $item_id) {
+            $seconds = $key * ($auction->duration);
+            $item = Item::find($item_id);
+            $item->update(['status' => 'shown']);
+            $start_date = Carbon::createFromTimestamp($auction->start_date)->addSeconds($seconds)->timestamp;
             AuctionItem::create([
-                'item_id'=>$item_id,
-                'auction_id'=>$auction->id,
-                'price'=>$item->auction_price,
-                'start_date'=>$item_start_date
+                'item_id' => $item_id,
+                'auction_id' => $auction->id,
+                'price' => $item->auction_price,
+                'start_date' => $start_date,
             ]);
+            $key++;
         }
+        $end_date = Carbon::createFromTimestamp($start_date)->addSeconds($auction->duration)->timestamp;
+        $auction->update([
+            'more_details'=>[
+                'end_date'=>$end_date
+            ]
+        ]);
+
     }
 }
