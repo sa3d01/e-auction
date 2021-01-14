@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Auction;
+use App\AuctionItem;
 use App\AuctionUser;
 use App\Favourite;
 use App\Http\Resources\ItemCollection;
@@ -282,6 +284,29 @@ class UserController extends MasterController
             $arr['time']=Carbon::parse($transfer->created_at)->diffForHumans();
             $data[]=$arr;
         }
+        return $this->sendResponse($data);
+    }
+    public function productsReports(){
+        $user = auth()->user();
+        $pre_auction_items=0;
+        $live_auction_items=0;
+        foreach ($user->items() as $item){
+            $auction_item=AuctionItem::where('item_id',$item->id)->latest()->first();
+            $auction_items=AuctionItem::where('item_id',$item->id)->count();
+            if ((Carbon::createFromTimestamp($auction_item->start_date) <= Carbon::now() )  &&  (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_items*$auction_item->auction->duration) >= Carbon::now())){
+                $live_auction_items++;
+            }else{
+                $pre_auction_items++;
+            }
+        }
+        $data=[];
+        //todo
+        $data['money']=0;
+        //todo
+        $data['success_paid']=0;
+        $data['rejected_items']=$user->items()->where('status','rejected')->count();
+        $data['pre_auction_items']=$pre_auction_items;
+        $data['live_auction_items']=$live_auction_items;
         return $this->sendResponse($data);
     }
     public function show($id){
