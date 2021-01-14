@@ -94,9 +94,6 @@ class BidController extends MasterController
             $user_purchasing_power=$user_purchasing_power+$user->package->purchasing_power_increase;
         }
         $purchasing_power_admin_percent=$this->purchasing_power_ratio;
-
-
-
         return true;
     }
 }

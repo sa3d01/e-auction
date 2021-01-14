@@ -59,6 +59,9 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
     Route::get('report/add/{item_id}', 'ReportController@add')->name('report.add');
     Route::resource('report', 'ReportController');
 
+    Route::resource('feed_back', 'FeedBackController');
+    Route::get('feed_back/{id}/activate', 'FeedBackController@activate')->name('feed_back.activate');
+
     Route::resource('package', 'PackageController');
     Route::get('auction/{auction}/items', 'AuctionController@items')->name('auction.items');
     Route::resource('auction', 'AuctionController');

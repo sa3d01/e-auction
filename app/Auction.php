@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Traits\ModelBaseFunctions;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Auction extends Model
@@ -18,5 +19,16 @@ class Auction extends Model
     ];
     public function auction_type(){
         return $this->belongsTo(AuctionType::class);
+    }
+
+    public function auctionStatus()
+    {
+        if (Carbon::createFromTimestamp($this->more_details['end_date']) < Carbon::now()){
+            return"<span> مزاد منتهى  </span>";
+        }elseif ((Carbon::createFromTimestamp($this->start_date) <= Carbon::now() )  &&  (Carbon::createFromTimestamp($this->more_details['end_date']) >= Carbon::now())){
+            return"<span> مزاد مباشر  </span>";
+        }else{
+            return"<span> مزاد قبل مباشر  </span>";
+        }
     }
 }

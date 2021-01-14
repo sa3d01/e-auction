@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Auction;
 use App\AuctionItem;
+use App\AuctionUser;
 use App\Item;
 
 class AuctionObserver
@@ -17,6 +18,11 @@ class AuctionObserver
                'status'=>'accepted'
             ]);
             $auction_item->delete();
+        }
+
+        $auction_users=AuctionUser::where('auction_id',$auction->id)->get();
+        foreach ($auction_users as $auction_user){
+            $auction_user->delete();
         }
     }
 }

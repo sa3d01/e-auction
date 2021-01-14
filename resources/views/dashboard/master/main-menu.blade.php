@@ -111,7 +111,7 @@
             </div>
         </div>
     </li>
-{{--    //reports--}}
+{{--    //auctions--}}
     <li class="sub-header">
         <span>المزادات </span>
     </li>
@@ -161,7 +161,29 @@
             <div class="icon-w">
                 <div class="os-icon os-icon-email-2-at"></div>
             </div>
+            @if($new_contacts_count > 0)
+                <span style="border-radius: 50%;padding: 5px;background:#fff;border: 2px solid blue;color: orangered;text-align: center;">
+                    {{$new_contacts_count}}
+                </span>
+            @endif
             <span>رسائل الأعضاء</span>
+        </a>
+    </li>
+{{--feed_backs--}}
+    <li class="sub-header">
+        <span>آراء العملاء</span>
+    </li>
+    <li class="sub-menu">
+        <a href="{{route('admin.feed_back.index')}}">
+            <div class="icon-w">
+                <div class="os-icon os-icon-feather"></div>
+            </div>
+            @if($new_feed_backs_count > 0)
+                <span style="border-radius: 50%;padding: 5px;background:#fff;border: 2px solid blue;color: orangered;text-align: center;">
+                    {{$new_feed_backs_count}}
+                </span>
+            @endif
+            <span>آراء العملاء</span>
         </a>
     </li>
 </ul>

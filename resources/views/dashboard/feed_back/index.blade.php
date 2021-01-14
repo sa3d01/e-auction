@@ -25,8 +25,12 @@
                                 @foreach($index_fields as $key=>$value)
                                     <th>{{$key}}</th>
                                 @endforeach
-                                <th>السلع المعروضة</th>
-                                <th>حالة المزاد</th>
+                                @if(isset($selects))
+                                    @foreach($selects as $select)
+                                        <th>{{$select['title']}}</th>
+                                    @endforeach
+                                @endif
+                                <th>الحالة</th>
                                 <th>المزيد</th>
                             </tr>
                             </thead>
@@ -36,8 +40,12 @@
                                 @foreach($index_fields as $key=>$value)
                                     <th>{{$key}}</th>
                                 @endforeach
-                                <th>السلع المعروضة</th>
-                                <th>حالة المزاد</th>
+                                @if(isset($selects))
+                                    @foreach($selects as $select)
+                                        <th>{{$select['title']}}</th>
+                                    @endforeach
+                                @endif
+                                <th>الحالة</th>
                                 <th>المزيد</th>
                             </tr>
                             </tfoot>
@@ -46,20 +54,19 @@
                                 <tr>
                                     <td hidden>{{$row->id}}</td>
                                     @foreach($index_fields as $key=>$value)
-                                        @if($value=='start_date')
-                                            <td>{{$row->showTimeStampDate($row->$value)}}</td>
+                                        @if($value=='created_at')
+                                            <td>{{$row->published_at()}}</td>
                                         @else
                                             <td>{{$row->$value}}</td>
                                         @endif
                                     @endforeach
-                                    <td>
-                                        <a  href='{{route('admin.auction.items',[$row->id])}}' class='badge badge-success-inverted'>
-                                            {{count($row->items)}}
-                                        </a>
-                                    </td>
-                                    <td>
-                                        {!! $row->auctionStatus() !!}
-                                    </td>
+                                    @if(isset($selects))
+                                        @foreach($selects as $select)
+                                            @php($related_model=$select['name'])
+                                            <td><a href="{{route('admin.user.show',$row->user_id)}}"> {{$row->$related_model->nameForSelect()}}</a></td>
+                                        @endforeach
+                                    @endif
+                                    <td>{!! $row->activate() !!}</td>
                                     <td>
                                         <form class="delete" data-id="{{$row->id}}" method="POST" action="{{ route('admin.'.$type.'.destroy',[$row->id]) }}">
                                             @csrf
@@ -69,7 +76,6 @@
                                                 <i class="fa fa-trash text-danger"></i>
                                             </button>
                                         </form>
-{{--                                        <a href="{{route('admin.item.show',$row->id)}}"><i class="os-icon os-icon-eye"></i></a>--}}
                                     </td>
                                 </tr>
                             @endforeach
@@ -144,23 +150,26 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script>
-        $(document).on('click', '.delete', function (e) {
+        $(document).on('click', '.auction_price', function (e) {
             e.preventDefault();
             var id = $(this).data('id');
             Swal.fire({
-                title: "هل انت متأكد من الحذف ؟",
-                text: "لن تستطيع استعادة هذا العنصر مرة أخرى!",
-                type: "warning",
+                title: 'من فضلك اذكر سعر المزايدة الابتدائى',
+                input: 'number',
                 showCancelButton: true,
-                confirmButtonClass: 'btn-danger',
-                confirmButtonText: 'نعم , قم بالحذف!',
-                cancelButtonText: 'ﻻ , الغى عملية الحذف!',
-                closeOnConfirm: false,
-                closeOnCancel: false,
-                preConfirm: () => {
-                    $("form[data-id='" + id + "']").submit();
+                confirmButtonText: 'إتمام',
+                cancelButtonText: 'الغاء',
+                showLoaderOnConfirm: true,
+                preConfirm: (auction_price) => {
+                    $.ajax({
+                        url: $(this).data('href'),
+                        type:'GET',
+                        data: {auction_price}
+                    })
                 },
                 allowOutsideClick: () => !Swal.isLoading()
+            }).then(() => {
+                location.reload();
             })
         });
     </script>

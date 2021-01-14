@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\AuctionItem;
 use App\Contact;
+use App\FeedBack;
 use App\Http\Controllers\Controller;
 use App\Item;
 use App\Order;
 use App\Setting;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 abstract class MasterController extends Controller
@@ -28,6 +31,22 @@ abstract class MasterController extends Controller
         $users_count=User::count();
         $new_items_count=Item::where('status','pending')->count();
         $new_contacts_count=Contact::where(['read'=>'false'])->count();
+        $new_feed_backs_count=FeedBack::where(['status'=>'pending'])->count();
+
+        $pre_auction_items=0;
+        $expire_auction_items=0;
+        $live_auction_items=0;
+        foreach (AuctionItem::all() as $auction_item){
+            $auction_items=AuctionItem::where('auction_id',$auction_item->auction_id)->count();
+            if (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_items*$auction_item->auction->duration) < Carbon::now()){
+                $expire_auction_items++;
+            }elseif ((Carbon::createFromTimestamp($auction_item->start_date) <= Carbon::now() )  &&  (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_items*$auction_item->auction->duration) >= Carbon::now())){
+                $live_auction_items++;
+            }else{
+                $pre_auction_items++;
+            }
+        }
+
         $this->middleware('auth:admin');
         view()->share(array(
             'module_name' => $this->module_name,
@@ -43,6 +62,10 @@ abstract class MasterController extends Controller
             'new_contacts_count'=>$new_contacts_count,
             'new_items_count'=>$new_items_count,
             'new_contacts'=>Contact::where('read','false')->get(),
+            'new_feed_backs_count'=>$new_feed_backs_count,
+            'pre_auction_items'=>$pre_auction_items,
+            'expire_auction_items'=>$expire_auction_items,
+            'live_auction_items'=>$live_auction_items,
         ));
     }
 
