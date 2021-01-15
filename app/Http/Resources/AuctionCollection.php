@@ -26,7 +26,7 @@ class AuctionCollection extends ResourceCollection
             $arr['end_date'] = $obj->more_details ? $obj->more_details['end_date'] : '';
             if (Carbon::createFromTimestamp($obj->more_details['end_date']) < Carbon::now()) {
                 $arr['auction_status'] = 'expired';
-            } elseif ((Carbon::createFromTimestamp($obj->start_date) <= Carbon::now()) && ($obj->more_details['end_date']) >= Carbon::now()) {
+            } elseif ((Carbon::createFromTimestamp($obj->start_date) <= Carbon::now()) && (Carbon::createFromTimestamp($obj->more_details['end_date'])) >= Carbon::now()) {
                 $arr['auction_status'] = 'live';
             } else {
                 $arr['auction_status'] = 'soon';
