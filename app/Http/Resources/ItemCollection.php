@@ -61,6 +61,7 @@ class ItemCollection extends ResourceCollection
             $arr['city']= $obj->city->name[$this->lang()];
             $arr['image']=$obj->images[0];
             $arr['is_favourite']=$is_favourite;
+            $arr['win']=$is_favourite;
             $data[]=$arr;
         }
         return $data;
