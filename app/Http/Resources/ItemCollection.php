@@ -56,7 +56,7 @@ class ItemCollection extends ResourceCollection
                 $arr['auction_price']=$auction_item->price;
             }
             $arr['id']=(int)$obj->id;
-            $arr['name']=$this->mark->name[$this->lang()].' '.$this->model->name[$this->lang()];
+            $arr['name']=$obj->mark->name[$this->lang()].' '.$obj->model->name[$this->lang()];
             $arr['item_status']= $obj->item_status->name[$this->lang()];
             $arr['city']= $obj->city->name[$this->lang()];
             $arr['image']=$obj->images[0];
