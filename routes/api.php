@@ -22,6 +22,7 @@ Route::group(['prefix' => 'v1','namespace'=>'Api'], function () {
         Route::get('/setting', 'SettingController@index');
         Route::get('/asks', 'SettingController@asks');
         Route::get('/auctions', 'AuctionController@auctions');
+        Route::get('/auctions/{id}', 'AuctionController@auctionItems');
     });
 
     Route::group(['prefix' => '/drop_down'], function () {

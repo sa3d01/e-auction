@@ -32,6 +32,10 @@ class AuctionController extends MasterController
     public function auctions(){
         return $this->sendResponse(new AuctionCollection(Auction::all()));
     }
+    public function auctionItems($auction_id){
+        $auction_items=AuctionItem::where('auction_id',$auction_id)->pluck('item_id');
+        return $this->sendResponse(new ItemCollection(Item::whereIn('id',$auction_items)->latest()->get()));
+    }
     public function search(Request $request){
         if ($request['name']){
             $data=new ItemCollection(Item::where('name','LIKE','%'.$request['name'].'%')->latest()->get());
