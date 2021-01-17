@@ -57,7 +57,7 @@
                             @if($admin_notification->item_id!=null)
                                 <a href="{{route('admin.item.show',[$admin_notification->item_id])}}">
                                     <div class="user-avatar-w">
-                                        <img alt="" src="{{asset('media/images/item/').'/'.$admin_notification->item->images[0]}}">
+                                        <img alt="" src="{{$admin_notification->item->images[0]}}">
                                     </div>
                                     <div class="message-content">
                                         <h6 class="message-from">
