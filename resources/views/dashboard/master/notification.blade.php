@@ -41,7 +41,7 @@
             START - Settings Link in secondary top menu
             -------------------->
 
-    <div class="messages-notifications os-dropdown-trigger os-dropdown-position-right">
+    <div class="messages-notifications os-dropdown-trigger os-dropdown-position-left">
         <i class="os-icon os-icon-zap"></i>
         <div class="new-messages-count">
             {{count($admin_notifications)}}
@@ -61,7 +61,7 @@
                                     </div>
                                     <div class="message-content">
                                         <h6 class="message-from">
-                                            {{$admin_notification->item->id}}
+                                            {{$admin_notification->item->user->name}}
                                         </h6>
                                         <h6 class="message-title">
                                             {{$admin_notification->title['ar']}}
