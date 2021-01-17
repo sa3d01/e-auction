@@ -109,6 +109,10 @@ class ItemController extends MasterController
 
     public function show($id)
     {
+        $unread_notifications=Notification::where(['receiver_id'=>null,'item_id'=>$id,'read'=>'false'])->get();
+        foreach ($unread_notifications as $unread_notification){
+            $unread_notification->update(['read'=>'true']);
+        }
         $row=$this->model->findOrFail($id);
         $fields=[
             'الرقم التسلسلى' => 'id',

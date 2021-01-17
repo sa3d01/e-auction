@@ -20,12 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment=".">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/MasterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/MasterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/BidController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/BidController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/FeedBackController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/FeedBackController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/ItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/ItemController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/master/notification.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/master/notification.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -236,28 +231,7 @@
       <workItem from="1610547646974" duration="4492000" />
       <workItem from="1610638890616" duration="29647000" />
       <workItem from="1610829523167" duration="365000" />
-      <workItem from="1610837248062" duration="10681000" />
-    </task>
-    <task id="LOCAL-00016" summary=".">
-      <created>1607956294864</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1607956294864</updated>
-    </task>
-    <task id="LOCAL-00017" summary=".">
-      <created>1608472632997</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1608472632997</updated>
-    </task>
-    <task id="LOCAL-00018" summary=".">
-      <created>1608472675559</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1608472675559</updated>
+      <workItem from="1610837248062" duration="11556000" />
     </task>
     <task id="LOCAL-00019" summary=".">
       <created>1608573976627</created>
@@ -581,7 +555,28 @@
       <option name="project" value="LOCAL" />
       <updated>1610884602717</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary=".">
+      <created>1610887389682</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1610887389682</updated>
+    </task>
+    <task id="LOCAL-00066" summary=".">
+      <created>1610887597288</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1610887597288</updated>
+    </task>
+    <task id="LOCAL-00067" summary=".">
+      <created>1610887829086</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1610887829086</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
