@@ -84,7 +84,9 @@ class AuctionController extends MasterController
             'status' => 'shown',
             'type' => 'item',
             'title' => 'قائمة السلع ',
-            'index_fields' => ['الرقم التسلسلى' => 'id', 'العنوان' => 'name'],
+            'index_fields' => ['الرقم التسلسلى' => 'id',
+//                'العنوان' => 'name'
+            ],
             'selects' => [
                 [
                     'name' => 'user',

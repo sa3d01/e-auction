@@ -30,7 +30,9 @@ class ItemController extends MasterController
             $index_fields=['الرقم التسلسلى' => 'id','العنوان'=>'name'];
         }else{
             $title='قائمة السلع';
-            $index_fields=['الرقم التسلسلى' => 'id','العنوان'=>'name','تاريخ الطلب'=>'created_at'];
+            $index_fields=['الرقم التسلسلى' => 'id',
+//                'العنوان'=>'name',
+                'تاريخ الطلب'=>'created_at'];
         }
         return View('dashboard.item.index', [
             'rows' => $rows,
@@ -59,7 +61,9 @@ class ItemController extends MasterController
             'status'=>'shown',
             'type'=>'item',
             'title'=>'قائمة السلع المميزة',
-            'index_fields'=>['الرقم التسلسلى' => 'id','العنوان'=>'name'],
+            'index_fields'=>['الرقم التسلسلى' => 'id',
+//                'العنوان'=>'name'
+            ],
             'selects'=>[
                 [
                     'name'=>'user',
@@ -116,7 +120,7 @@ class ItemController extends MasterController
         $row=$this->model->findOrFail($id);
         $fields=[
             'الرقم التسلسلى' => 'id',
-            'العنوان'=>'name',
+//            'العنوان'=>'name',
             'تاريخ الطلب'=>'created_at',
             'صور السلعة'=>'images',
             'عدد السندرات'=>'sunder_count',

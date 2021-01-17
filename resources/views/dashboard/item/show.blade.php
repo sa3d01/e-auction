@@ -59,7 +59,7 @@
                                         </div>
                                         <div class="element-info-text">
                                             <h5 class="element-inner-header">
-                                                البيانات
+                                                البيانات المضافة من قبل المستخدم
                                             </h5>
                                         </div>
                                     </div>
