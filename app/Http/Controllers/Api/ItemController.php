@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Favourite;
 use App\Item;
+use App\Notification;
 use App\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -64,6 +65,8 @@ class ItemController extends MasterController
             $wallet=$user->wallet-$add_item_tax;
             $user->update(['wallet'=>$wallet]);
         }
+        $title['ar'] = 'تم إضافة سلعة جديدة عن طريق مستخدم رقم '. $user->id;
+        $this->notify_admin($title,$item);
         return $this->sendResponse('تم ارسال طلب إضافة المنتج بنجاح');
     }
     public function favouriteModification($item_id){
@@ -79,5 +82,13 @@ class ItemController extends MasterController
             ]);
             return $this->sendResponse('تمت الإضافة بنجاح');
         }
+    }
+
+    public function notify_admin($title,$item){
+        $data['title']=$title;
+        $data['item_id']=$item->id;
+        $data['type']='admin';
+        $data['admin_notify_type']='all';
+        Notification::create($data);
     }
 }

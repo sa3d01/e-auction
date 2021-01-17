@@ -39,7 +39,6 @@ class FeedBackController extends MasterController
         $data=$request->all();
         $data['user_id']=auth()->user()->id;
         $this->model->create($data);
-        //todo only approved feeds
         return $this->sendResponse(new FeedBackCollection($this->model->where('status','approved')->latest()->get()));
     }
     public function index(){

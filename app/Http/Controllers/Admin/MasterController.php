@@ -7,7 +7,7 @@ use App\Contact;
 use App\FeedBack;
 use App\Http\Controllers\Controller;
 use App\Item;
-use App\Order;
+use App\Notification;
 use App\Setting;
 use App\User;
 use Carbon\Carbon;
@@ -66,6 +66,7 @@ abstract class MasterController extends Controller
             'pre_auction_items'=>$pre_auction_items,
             'expire_auction_items'=>$expire_auction_items,
             'live_auction_items'=>$live_auction_items,
+            'admin_notifications'=>Notification::where(['receiver_id'=>null,'read'=>'false'])->latest()->get(),
         ));
     }
 
