@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Auction;
 use App\AuctionItem;
+use App\DropDown;
 use App\Http\Resources\AuctionCollection;
 use App\Http\Resources\DropDownCollection;
 use App\Http\Resources\ItemCollection;
@@ -38,7 +39,10 @@ class AuctionController extends MasterController
     }
     public function search(Request $request){
         if ($request['name']){
-            $data=new ItemCollection(Item::where('name','LIKE','%'.$request['name'].'%')->latest()->get());
+            $marks=DropDown::whereClass('Mark')->where('name','LIKE','%'.$request['name'].'%')->pluck('id');
+            $models=DropDown::whereClass('Model')->where('name','LIKE','%'.$request['name'].'%')->pluck('id');
+            $data=new ItemCollection(Item::whereIn('mark_id',$marks)->orWhereIn('model_id',$models)->latest()->get());
+//            $data=new ItemCollection(Item::where('name','LIKE','%'.$request['name'].'%')->latest()->get());
         }else{
             $q=Item::query();
             if ($request['from_date'] && $request['to_date']){
