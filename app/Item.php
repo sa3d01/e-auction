@@ -95,7 +95,7 @@ class Item extends Model
         }
     }
     public function nameForSelect(){
-        return $this->id.'-'.$this->name;
+        return $this->id.'-'.$this->model->name['ar'].'-'.$this->auction_type->name['ar'];
     }
     public function itemStatusIcon()
     {
