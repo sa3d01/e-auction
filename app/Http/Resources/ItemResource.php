@@ -16,36 +16,35 @@ class ItemResource extends JsonResource
             return 'ar';
         }
     }
+    public function auction_type_features($auction){
+        return 'a';
+    }
     /**
      * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return array
      */
+
     public function toArray($request)
     {
         $auction_item=AuctionItem::where('item_id',$this->id)->latest()->first();
-        $end_auction=Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration)->setTimezone('Africa/Cairo');
-        $start_auction=Carbon::createFromTimestamp($auction_item->start_date)->setTimezone('Africa/Cairo');
-        if ($end_auction < Carbon::now('Africa/Cairo')){
-            $auction_status='expired';
-            $auction_item->update([
-               'more_details'=>[
-                   'status'=>'expired'
-               ]
-            ]);
-        }elseif (($start_auction <= Carbon::now('Africa/Cairo') )  &&  ($end_auction >= Carbon::now('Africa/Cairo'))){
-            $auction_status='live';
-        }else{
-            $auction_status='soon';
-        }
         $is_favourite=false;
         if (\request()->user()){
+            //favourite
             $favourite=Favourite::where(['user_id'=>\request()->user()->id, 'item_id'=>$this->id])->first();
             if ($favourite){
                 $is_favourite=true;
             }
+            $features=$auction_item->auctionTypeFeatures(auth()->user()->id);
+        }else{
+            $features=$auction_item->auctionTypeFeatures();
         }
+        //status
+        $auction_status=$features['status'];
+        $negotiation=$features['negotiation'];
+        $direct_pay=$features['direct_pay'];
+        $user_price=$features['user_price'];
         return [
             'id'=> (int) $this->id,
             'images'=> $this->images,
@@ -65,6 +64,9 @@ class ItemResource extends JsonResource
             'auction_type'=> $this->auction_type->name[$this->lang()],
             'is_favourite'=> $is_favourite,
             'auction_status'=>$auction_status,
+            'negotiation'=>$negotiation,
+            'direct_pay'=>$direct_pay,
+            'user_price'=>$user_price,
         ];
     }
 }

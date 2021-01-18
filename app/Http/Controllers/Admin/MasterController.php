@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\AuctionItem;
+use App\AuctionUser;
 use App\Contact;
 use App\FeedBack;
 use App\Http\Controllers\Controller;
@@ -32,7 +33,7 @@ abstract class MasterController extends Controller
         $new_items_count=Item::where('status','pending')->count();
         $new_contacts_count=Contact::where(['read'=>'false'])->count();
         $new_feed_backs_count=FeedBack::where(['status'=>'pending'])->count();
-
+        $this->auctionItemStatusUpdate();
         $pre_auction_items=0;
         $expire_auction_items=0;
         $live_auction_items=0;
@@ -112,6 +113,63 @@ abstract class MasterController extends Controller
     {
         $row = $this->model->find($id);
         return View('admin.' . $this->route . '.show', compact('row'));
+    }
+
+    public function auctionItemStatusUpdate(){
+        $auction_items=AuctionItem::all();
+        foreach ($auction_items as $auction_item){
+            if ((Carbon::createFromTimestamp($auction_item->start_date) <= Carbon::now() )  &&  (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration) >= Carbon::now())){
+                $auction_item->update([
+                    'more_details'=>[
+                        'status'=>'live'
+                    ]
+                ]);
+            }elseif (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration) < Carbon::now()){
+                if ($auction_item->item->auction_type_id==4 || $auction_item->item->auction_type_id==2){
+                    $soon_winner=AuctionUser::where('item_id',$auction_item->item_id)->latest()->first();
+                    if ($soon_winner){
+                        $auction_item->update([
+                            'more_details'=>[
+                                'status'=>'negotiation'
+                            ]
+                        ]);
+                    }else{
+                        $auction_item->update([
+                            'more_details'=>[
+                                'status'=>'expired'
+                            ]
+                        ]);
+                    }
+                }elseif ($auction_item->item->auction_type_id==3){
+                    $soon_winner=AuctionUser::where('item_id',$auction_item->item_id)->latest()->first();
+                    if ($soon_winner && ($soon_winner->price < $auction_item->item->price)){
+                        $auction_item->update([
+                            'more_details'=>[
+                                'status'=>'negotiation'
+                            ]
+                        ]);
+                    }else{
+                        $auction_item->update([
+                            'more_details'=>[
+                                'status'=>'expired'
+                            ]
+                        ]);
+                    }
+                }else{
+                    $auction_item->update([
+                        'more_details'=>[
+                            'status'=>'expired'
+                        ]
+                    ]);
+                }
+            }else{
+                $auction_item->update([
+                    'more_details'=>[
+                        'status'=>'soon'
+                    ]
+                ]);
+            }
+        }
     }
 
 }

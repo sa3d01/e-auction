@@ -36,18 +36,16 @@ class ItemCollection extends ResourceCollection
                 }
             }
             if ($auction_item){
-                if (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration) < Carbon::now()){
-                    $arr['auction_status']='expired';
-                    $auction_item->update([
-                        'more_details'=>[
-                            'status'=>'expired'
-                        ]
-                    ]);
-                }elseif ((Carbon::createFromTimestamp($auction_item->start_date) <= Carbon::now() )  &&  (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration) >= Carbon::now())){
-                    $arr['auction_status']='live';
+                if (\request()->user()){
+                    $features=$auction_item->auctionTypeFeatures(auth()->user()->id);
                 }else{
-                    $arr['auction_status']='soon';
+                    $features=$auction_item->auctionTypeFeatures();
                 }
+                $arr['auction_status']=$features['status'];
+                $arr['negotiation']=$features['negotiation'];
+                $arr['direct_pay']=$features['direct_pay'];
+                $arr['user_price']=$features['user_price'];
+
                 $arr['auction_type']= $obj->auction_type->name[$this->lang()];
                 $arr['start_date']= $auction_item->start_date;
                 $arr['start_date_text']= Carbon::createFromTimestamp($auction_item->start_date)->format('Y-m-d h:i:s A');

@@ -27,7 +27,9 @@ class ItemController extends MasterController
         $rows=$this->model->where('status',$status)->latest()->get();
         if ($status=='accepted'){
             $title='قائمة السلع المطلوب اعدادها';
-            $index_fields=['الرقم التسلسلى' => 'id','العنوان'=>'name'];
+            $index_fields=['الرقم التسلسلى' => 'id',
+//                'العنوان'=>'name'
+            ];
         }else{
             $title='قائمة السلع';
             $index_fields=['الرقم التسلسلى' => 'id',

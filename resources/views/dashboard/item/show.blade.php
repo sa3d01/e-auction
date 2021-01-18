@@ -33,8 +33,8 @@
                                 </g>
                             </svg>
                         </div>
-                        @if($row->status=='pending')
                         <div class="up-controls">
+                        @if($row->status=='pending')
                             <div class="row">
                                 <div class="col-md-6">
                                     <a class='reject btn btn-danger btn-sm' data-href='{{route('admin.item.reject',$row->id)}}' href=''><i class='os-icon os-icon-cancel-circle'></i><span>رفض السلعة</span></a>
@@ -43,9 +43,116 @@
                                     <a class='accept btn btn-success btn-sm' data-href='{{route('admin.item.accept',$row->id)}}' href=''><i class='os-icon os-icon-shopping-cart'></i><span>قبول السلعة</span></a>
                                 </div>
                             </div>
-                        </div>
+                        @else
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="value-pair">
+                                        <div class="label" style="font-size: large">
+                                            الحالة
+                                        </div>
+                                        <div class="icon-action-redo">
+                                            {!!$row->itemStatusIcon()!!}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         @endif
+                        </div>
                     </div>
+
+                    <div class="element-wrapper">
+                        <div class="row">
+                                @if(\App\AuctionItem::where('item_id',$row->id)->first())
+                                    <div class="col-sm-6">
+                                        <a class="element-box el-tablo centered trend-in-corner padded bold-label">
+                                            <div class="value">
+                                                {{\App\AuctionItem::where('item_id',$row->id)->value('auction_id')}}
+                                            </div>
+                                            <div class="label">
+                                                الرقم التسلسلى للمزاد
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <a class="element-box el-tablo centered trend-in-corner padded bold-label">
+                                            <div class="value">
+                                                {{\App\AuctionItem::where('item_id',$row->id)->value('price')}}
+                                            </div>
+                                            <div class="label">
+                                                السعر الأخير
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <a class="element-box el-tablo centered trend-in-corner padded bold-label">
+                                            <div class="value">
+                                                {{\App\AuctionUser::where('item_id',$row->id)->count()}}
+                                            </div>
+                                            <div class="label">
+                                                عدد المزايدات
+                                            </div>
+                                        </a>
+                                    </div>
+                                @endif
+                                @if(\App\AuctionUser::where('item_id',$row->id)->count() > 0)
+                                    <div class="col-sm-6">
+                                        <a class="element-box el-tablo centered trend-in-corner padded bold-label" href="{{route('admin.user.show',[\App\AuctionUser::where('item_id',$row->id)->latest()->value('user_id')])}}">
+                                            <div class="value">
+                                                {{\App\User::whereId(\App\AuctionUser::where('item_id',$row->id)->latest()->value('user_id'))->value('name')}}
+                                            </div>
+                                            <div class="label">
+                                                الأعلى مزايدة
+                                            </div>
+                                        </a>
+                                    </div>
+                                @endif
+                        </div>
+                    </div>
+                    <div class="element-wrapper">
+                        <div class="element-box">
+                            <h6 class="element-header">
+                                اخر النشاطات
+                            </h6>
+                            <div class="timed-activities compact" style="overflow:scroll;max-height: 500px">
+                                @if(\App\AuctionUser::where('item_id',$row->id)->latest()->count() > 0)
+                                    @foreach(\App\AuctionUser::where('item_id',$row->id)->latest()->get() as $auction_user)
+                                        @php
+                                            $user_route=route('admin.user.show',$auction_user->user_id);
+                                            $user_name=\App\User::whereId($auction_user->user_id)->value('name');
+                                            $item_route=route('admin.item.show',$auction_user->item_id);
+                                            $item_name=$auction_user->item->mark->name['ar'].' '.$auction_user->item->model->name['ar'];
+                                            $user_href="<a href='".$user_route."'>".$user_name."</a>";
+                                            $item_href="<a href='".$item_route."'>".$item_name."</a>";
+                                        @endphp
+                                        <div class="timed-activity">
+                                            <div class="ta-date">
+                                                <span>{{$auction_user->ArabicTimeDate($auction_user->created_at)}}</span>
+                                            </div>
+                                            <div class="ta-record-w">
+                                                <div class="ta-record">
+                                                    <div class="ta-timestamp">
+                                                        <strong>{{\Carbon\Carbon::parse($auction_user->created_at)->format('H:i A')}}</strong>
+                                                    </div>
+                                                    <div class="ta-activity">
+                                                        {!! $item_href. 'قام بمزايدة بمبلغ ' .$auction_user->charge_price. ' ريال على سلعة ' . $user_href !!}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <div class="ta-activity font-italic">
+                                        ﻻ يوجد اى نشاطات بعد
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+
                 </div>
 {{--                end first box--}}
 {{--                show fields--}}

@@ -6,7 +6,6 @@ use App\Auction;
 use App\AuctionItem;
 use App\DropDown;
 use App\Http\Resources\AuctionCollection;
-use App\Http\Resources\DropDownCollection;
 use App\Http\Resources\ItemCollection;
 use App\Http\Resources\ItemResource;
 use App\Http\Resources\ReportCollection;

@@ -20,14 +20,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment=".">
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/AXHed2HIyo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/HAbcjr1kKa.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/eYTJL9Izij.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/ex9c1Cfu9w.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/AuctionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/AuctionController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/item/ACtOGboeqB.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/item/Dg6MH4CrI2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/item/IQ32TGXzfv.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/item/SwIQpoPN7Q.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/report/6RSvU7S6XG.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/report/EkR1gfYqAu.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/user/iLmBiHo6gJ.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/user/mMUWfTSkoJ.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/AuctionItem.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/AuctionItem.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/MasterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/MasterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/AuctionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/AuctionController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/BidController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/BidController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/MasterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/MasterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/TransferController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/TransferController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/ItemCollection.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/ItemCollection.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/ItemResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/ItemResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Item.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Item.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/dashboard/item/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/item/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -239,6 +253,7 @@
       <workItem from="1610638890616" duration="29647000" />
       <workItem from="1610829523167" duration="365000" />
       <workItem from="1610837248062" duration="13756000" />
+      <workItem from="1610972682923" duration="13957000" />
     </task>
     <task id="LOCAL-00020" summary=".">
       <created>1608600213283</created>

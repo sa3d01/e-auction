@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Traits\ModelBaseFunctions;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
@@ -44,7 +45,6 @@ class Item extends Model
     public function city(){
         return $this->belongsTo(DropDown::class,'city_id','id');
     }
-
     public function fetes(){
         return $this->belongsTo(DropDown::class,'fetes_id','id');
     }
@@ -57,16 +57,12 @@ class Item extends Model
     public function paper_status(){
         return $this->belongsTo(DropDown::class,'paper_status_id','id');
     }
-
     public function reports(){
         return $this->hasMany(Report::class,'item_id','id');
     }
-
-
     public function imagesArray(){
         return $this->attributes['images'];
     }
-
     public function reportLabel()
     {
         $count=$this->reports()->count();
@@ -98,8 +94,44 @@ class Item extends Model
             return "<a class='block btn btn-info btn-sm' data-href='$action' href='$action'><i class='os-icon os-icon-activity'></i><span>تمميز السلعة !</span></a>";
         }
     }
-
     public function nameForSelect(){
         return $this->id.'-'.$this->name;
+    }
+    public function itemStatusIcon()
+    {
+        $auction_item=AuctionItem::where('item_id',$this->id)->latest()->first();
+        if(!$auction_item){
+            $name= 'فى انتظار الاعداد لمزاد';
+            $key = 'info';
+        }else{
+            $end_auction=Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration);
+            $start_auction=Carbon::createFromTimestamp($auction_item->start_date);
+            if ($end_auction < Carbon::now()){
+                if (is_array($auction_item->more_details)){
+                    if ($auction_item->more_details['status']=='paid') {
+                        $name= 'سلعة مباعة';
+                        $key = 'success';
+                    }elseif ($auction_item->more_details['status']=='negotiation'){
+                        $name= 'انتهت المزايدة و جارى المفاوضة عليها';
+                        $key = 'warning';
+                    }else{
+                        $name= 'انتهت المزايدة ولم يتم البيع';
+                        $key = 'danger';
+                    }
+                }else{
+                    $name= 'انتهت المزايدة ولم يتم البيع';
+                    $key = 'danger';
+                }
+            }elseif (($start_auction <= Carbon::now())  &&  ($end_auction >= Carbon::now())){
+                $name= 'بمزاد مباشر';
+                $key = 'info';
+            }else{
+                $name= 'بمزاد قبل مباشر';
+                $key = 'info';
+            }
+        }
+        return "<a class='badge badge-$key-inverted'>
+                $name
+                </a>";
     }
 }

@@ -149,17 +149,6 @@ class UserController extends MasterController
         return $this->sendResponse($data)->withHeaders(['apiToken'=>$token,'tokenType'=>'bearer']);
     }
 
-
-
-
-
-
-
-
-
-
-
-
     function native_phone($user){
         return trim($user->phone,$user->phone_details['country_key']);
     }
@@ -290,6 +279,12 @@ class UserController extends MasterController
         $user = auth()->user();
         $pre_auction_items=0;
         $live_auction_items=0;
+        $user_items_ids=$user->items()->pluck('id');
+        $paid_auction_items=AuctionItem::whereIn('item_id',$user_items_ids)->where('more_details->status','paid')->get();
+        $money=0;
+        foreach ($paid_auction_items as $paid_auction_item){
+            $money+=$paid_auction_item->price;
+        }
         foreach ($user->items() as $item){
             $auction_item=AuctionItem::where('item_id',$item->id)->latest()->first();
             $auction_items=AuctionItem::where('item_id',$item->id)->count();
@@ -300,10 +295,8 @@ class UserController extends MasterController
             }
         }
         $data=[];
-        //todo
-        $data['money']=0;
-        //todo
-        $data['success_paid']=0;
+        $data['money']=$money;
+        $data['success_paid']=count($paid_auction_items);
         $data['rejected_items']=$user->items()->where('status','rejected')->count();
         $data['pre_auction_items']=$pre_auction_items;
         $data['live_auction_items']=$live_auction_items;

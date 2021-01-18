@@ -7,11 +7,14 @@ use App\AuctionUser;
 use App\Favourite;
 use App\Http\Resources\ItemCollection;
 use App\Http\Resources\ItemResource;
+use App\Http\Resources\OrderResource;
 use App\Item;
 use App\Notification;
+use App\Offer;
 use App\Setting;
 use App\User;
 use Carbon\Carbon;
+use Edujugon\PushNotification\PushNotification;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Types\Object_;
 
@@ -66,6 +69,47 @@ class BidController extends MasterController
         //todo : increase duration of auction
         return $this->sendResponse('تمت المزايدة بنجاح');
     }
+    public function sendOffer($item_id,Request $request){
+        $item=Item::find($item_id);
+        $auction_item=AuctionItem::where('item_id',$item_id)->latest()->first();
+        $sender=$request->user();
+        $receiver=User::find($item->user_id);
+        $offer=Offer::create([
+           'sender_id'=>$sender->id,
+            'receiver_id'=>$receiver->id,
+            'auction_item_id'=>$auction_item->id,
+            'price'=>$request['price'],
+            'status'=>'pending'
+        ]);
+        $this->notify($offer);
+        return $this->sendResponse('تم الإرسال بنجاح');
+    }
+    public function notify($offer){
+        $title['ar'] = 'تم إرسال عرض اليك على المزاد رقم '. $offer->auction_item->item_id;
+        $title['en'] = 'تم إرسال عرض اليك على المزاد رقم '. $offer->auction_item->item_id;
+        $data=[];
+        $data['title']=$title;
+        $data['note']=$title;
+        $data['receiver_id']=$offer->receiver_id;
+        $data['item_id']=$offer->auction_item->item_id;
+        Notification::create($data);
+        $offer->receiver->device['type'] =='IOS'? $fcm_notification=array('title'=>$title, 'sound' => 'default') : $fcm_notification=null;
+        $push = new PushNotification('fcm');
+        $msg = [
+            'notification' => $fcm_notification,
+            'data' => [
+                'title' => $title,
+                'body' => $title,
+                'status' => $offer->status,
+                'type'=>'offer',
+                'item'=>new ItemResource(Item::find($offer->auction_item->item_id)),
+            ],
+            'priority' => 'high',
+        ];
+        $push->setMessage($msg)
+            ->setDevicesToken($offer->receiver->device['id'])
+            ->send();
+    }
     public function charge_notify($auction_item,$user,$charge_price){
         $users_id=AuctionUser::where(['item_id'=>$auction_item->item_id,'auction_id'=>$auction_item->auction_id])->groupBy('user_id')->pluck('user_id')->toArray();
         $fav_users_id=Favourite::where(['item_id'=>$auction_item->item_id,'auction_id'=>$auction_item->auction_id])->groupBy('user_id')->pluck('user_id')->toArray();
@@ -81,6 +125,22 @@ class BidController extends MasterController
             $data['receiver_id']=$user_notify->id;
             $data['item_id']=$auction_item->item_id;
             Notification::create($data);
+            $user_notify->device['type'] =='IOS'? $fcm_notification=array('title'=>$title, 'sound' => 'default') : $fcm_notification=null;
+            $push = new PushNotification('fcm');
+            $msg = [
+                'notification' => $fcm_notification,
+                'data' => [
+                    'title' => $title,
+                    'body' => $title,
+                    'status' => 'auction',
+                    'type'=>'auction',
+                    'item'=>new ItemResource(Item::find($auction_item->item_id)),
+                ],
+                'priority' => 'high',
+            ];
+            $push->setMessage($msg)
+                ->setDevicesToken($user_notify->device['id'])
+                ->send();
         }
         $this->notify_admin($title,$auction_item);
     }
