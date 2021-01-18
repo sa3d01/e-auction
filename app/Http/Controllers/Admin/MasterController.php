@@ -156,11 +156,20 @@ abstract class MasterController extends Controller
                         ]);
                     }
                 }else{
-                    $auction_item->update([
-                        'more_details'=>[
-                            'status'=>'expired'
-                        ]
-                    ]);
+                    $soon_winner=AuctionUser::where('item_id',$auction_item->item_id)->latest()->first();
+                    if ($soon_winner){
+                        $auction_item->update([
+                            'more_details'=>[
+                                'status'=>'paid'
+                            ]
+                        ]);
+                    }else{
+                        $auction_item->update([
+                            'more_details'=>[
+                                'status'=>'expired'
+                            ]
+                        ]);
+                    }
                 }
             }else{
                 $auction_item->update([
