@@ -113,7 +113,8 @@ class BidController extends MasterController
     public function charge_notify($auction_item,$user,$charge_price){
         $users_id=AuctionUser::where(['item_id'=>$auction_item->item_id,'auction_id'=>$auction_item->auction_id])->groupBy('user_id')->pluck('user_id')->toArray();
         $fav_users_id=Favourite::where(['item_id'=>$auction_item->item_id,'auction_id'=>$auction_item->auction_id])->groupBy('user_id')->pluck('user_id')->toArray();
-        $users = User::whereIn('id',array_merge($users_id,$fav_users_id))->get();
+        $item_owner=
+        $users = User::whereIn('id',array_merge($users_id,$fav_users_id,(array)$auction_item->item->user_id))->get();
         $title['ar'] = 'تم إضافة مزايدة جديدة بقيمة '. $charge_price . 'ريال سعودى عن طريق مستخدم رقم ' .$user->name .'بمزاد '.$auction_item->item->id;
         $title['en'] = 'تم إضافة مزايدة جديدة بقيمة '. $charge_price . 'ريال سعودى عن طريق مستخدم رقم ' .$user->name .'بمزاد '.$auction_item->item->id;
         foreach ($users as $user_notify) {
