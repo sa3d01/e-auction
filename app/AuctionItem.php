@@ -58,7 +58,7 @@ class AuctionItem extends Model
             //مع اعلى مزايد بعد انتهاء المزاد لو المزاد موصلش للسعر المطلوب
             if ($end_auction < Carbon::now()){
                 $soon_winner=AuctionUser::where('item_id',$this->attributes['item_id'])->latest()->first();
-                if ($soon_winner && ($soon_winner->price < $this->item()->price)){
+                if ($soon_winner && ($soon_winner->price < $this->item->price)){
                     $this->update([
                         'more_details'=>[
                             'status'=>'negotiation'
