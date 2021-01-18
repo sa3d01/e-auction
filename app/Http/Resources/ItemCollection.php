@@ -28,11 +28,15 @@ class ItemCollection extends ResourceCollection
         $data=[];
         foreach ($this as $obj){
             $auction_item=AuctionItem::where('item_id',$obj->id)->latest()->first();
+            $my_item=false;
             $is_favourite=false;
             if (\request()->user()){
                 $favourite=Favourite::where(['user_id'=>\request()->user()->id, 'item_id'=>$obj->id])->first();
                 if ($favourite){
                     $is_favourite=true;
+                }
+                if ($obj->user_id==\request()->user()->id){
+                    $my_item=true;
                 }
             }
             if ($auction_item){
@@ -60,6 +64,7 @@ class ItemCollection extends ResourceCollection
             $arr['image']=$obj->images[0];
             $arr['is_favourite']=$is_favourite;
             $arr['win']=$is_favourite;
+            $arr["my_item"]=$my_item;
             $data[]=$arr;
         }
         return $data;

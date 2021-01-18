@@ -30,11 +30,15 @@ class ItemResource extends JsonResource
     {
         $auction_item=AuctionItem::where('item_id',$this->id)->latest()->first();
         $is_favourite=false;
+        $my_item=false;
         if (\request()->user()){
             //favourite
             $favourite=Favourite::where(['user_id'=>\request()->user()->id, 'item_id'=>$this->id])->first();
             if ($favourite){
                 $is_favourite=true;
+            }
+            if ($this->user_id==\request()->user()->id){
+                $my_item=true;
             }
             $features=$auction_item->auctionTypeFeatures(auth()->user()->id);
         }else{
@@ -67,6 +71,7 @@ class ItemResource extends JsonResource
             'negotiation'=>$negotiation,
             'direct_pay'=>$direct_pay,
             'user_price'=>$user_price,
+            'my_item'=>$my_item,
         ];
     }
 }
