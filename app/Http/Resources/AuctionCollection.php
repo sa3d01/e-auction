@@ -35,6 +35,7 @@ class AuctionCollection extends ResourceCollection
             foreach ($items as $item) {
                 $images[] = $item->images[0];
             }
+            $arr['items_count']=count($items);
             $arr['images'] = $images;
             $data[] = $arr;
         }
