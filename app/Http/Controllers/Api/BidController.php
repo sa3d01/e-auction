@@ -94,7 +94,7 @@ class BidController extends MasterController
             $arr['user_id']=$offer->sender_id;
             $data[]=$arr;
         }
-        $data['item']=new ItemResource(Item::find($item_id));
+//        $data['item']=new ItemResource(Item::find($item_id));
         return $this->sendResponse($data);
     }
     public function notify($offer){
