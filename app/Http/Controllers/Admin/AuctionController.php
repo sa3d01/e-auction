@@ -114,6 +114,9 @@ class AuctionController extends MasterController
                 'auction_id' => $auction->id,
                 'price' => $item->auction_price,
                 'start_date' => $start_date,
+                'more_details'=>[
+                    'status'=>'soon'
+                ]
             ]);
             $key++;
         }
