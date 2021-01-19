@@ -60,7 +60,7 @@ class MasterController extends Controller
     }
 
     public function auctionItemStatusUpdate(){
-        $auction_items=AuctionItem::all();
+        $auction_items=AuctionItem::where('more_details->status','!=','paid')->where('more_details->status','!=','expired')->get();
         foreach ($auction_items as $auction_item){
             if ((Carbon::createFromTimestamp($auction_item->start_date) <= Carbon::now() )  &&  (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration) >= Carbon::now())){
                 $auction_item->update([
