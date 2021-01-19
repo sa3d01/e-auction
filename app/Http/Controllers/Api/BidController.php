@@ -98,6 +98,31 @@ class BidController extends MasterController
         $this->charge_notify($auction_item,$user,$charge_price);
         return $this->sendResponse('تمت العملية بنجاح');
     }
+    public function acceptOffer($item_id,$offer_id,Request $request){
+        $user=$request->user();
+        $auction_item=AuctionItem::where('item_id',$item_id)->latest()->first();
+        if ($auction_item->more_details['status']=='expired'  || $auction_item->more_details['status']=='paid'){
+            return $this->sendError('هذا السلعة قد انتهى وقت المزايدة عليها :(');
+        }
+        $offer=Offer::find($offer_id);
+        $charge_price=$offer->price;
+        AuctionUser::create([
+            'user_id'=>$user->id,
+            'item_id'=>$item_id,
+            'auction_id'=>$auction_item->auction_id,
+            'charge_price'=>$charge_price
+        ]);
+        $auction_item->update([
+            'price'=>$auction_item->item->price,
+            'latest_charge'=>$charge_price,
+            'more_details'=>[
+                'status'=>'paid',
+                'pay_type'=>'negotiation'
+            ]
+        ]);
+        $this->charge_notify($auction_item,$user,$charge_price);
+        return $this->sendResponse('تمت العملية بنجاح');
+    }
     public function sendOffer($item_id,Request $request){
         $item=Item::find($item_id);
         $auction_item=AuctionItem::where('item_id',$item_id)->latest()->first();
@@ -119,6 +144,7 @@ class BidController extends MasterController
         $offers=Offer::where('receiver_id',$user->id)->where('auction_item_id',$auction_item->id)->latest()->get();
         $data=[];
         foreach ($offers as $offer){
+            $arr['id']=$offer->id;
             $arr['price']=$offer->price;
             $arr['user_id']=$offer->sender_id;
             $arr['item']=new ItemResource(Item::find($item_id));
