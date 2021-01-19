@@ -50,7 +50,7 @@ class BidController extends MasterController
         $auction_item=AuctionItem::where('item_id',$item_id)->latest()->first();
         //todo : check purchasing_power
         if ($auction_item->more_details!=null){
-            if ($auction_item->more_details['status']=='expired'){
+            if ($auction_item->more_details['status']=='expired'  || $auction_item->more_details['status']=='paid'){
                 return $this->sendError('هذا السلعة قد انتهى وقت المزايدة عليها :(');
             }
         }
@@ -68,6 +68,35 @@ class BidController extends MasterController
         //todo : add key of soon winner
         //todo : increase duration of auction
         return $this->sendResponse('تمت المزايدة بنجاح');
+    }
+    public function directPay($item_id,Request $request){
+        $user=$request->user();
+        $auction_item=AuctionItem::where('item_id',$item_id)->latest()->first();
+        if ($auction_item->more_details['status']=='expired'  || $auction_item->more_details['status']=='paid'){
+            return $this->sendError('هذا السلعة قد انتهى وقت المزايدة عليها :(');
+        }
+        $latest_auction_user=AuctionUser::where('item_id',$item_id)->latest()->first();
+        if ($latest_auction_user){
+            $charge_price=$auction_item->item->price-$auction_item->price;
+        }else{
+            $charge_price=$auction_item->item->price;
+        }
+        AuctionUser::create([
+            'user_id'=>$user->id,
+            'item_id'=>$item_id,
+            'auction_id'=>$auction_item->auction_id,
+            'charge_price'=>$charge_price
+        ]);
+        $auction_item->update([
+            'price'=>$auction_item->item->price,
+            'latest_charge'=>$charge_price,
+            'more_details'=>[
+                'status'=>'paid',
+                'pay_type'=>'direct_pay'
+            ]
+        ]);
+        $this->charge_notify($auction_item,$user,$charge_price);
+        return $this->sendResponse('تمت العملية بنجاح');
     }
     public function sendOffer($item_id,Request $request){
         $item=Item::find($item_id);

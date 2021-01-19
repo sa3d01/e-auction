@@ -79,6 +79,7 @@ Route::group(['prefix' => 'v1','namespace'=>'Api'], function () {
         Route::post('/search', 'AuctionController@search');
         Route::post('/{item}/bid', 'BidController@bid')->middleware(CheckApiToken::class);
         Route::post('/{item}/offer', 'BidController@sendOffer')->middleware(CheckApiToken::class);
+        Route::post('/{item}/direct_pay', 'BidController@directPay')->middleware(CheckApiToken::class);
         Route::get('/{item}/offer', 'BidController@itemOffers')->middleware(CheckApiToken::class);
     });
 
