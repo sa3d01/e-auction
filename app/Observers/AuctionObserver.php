@@ -6,12 +6,14 @@ use App\Auction;
 use App\AuctionItem;
 use App\AuctionUser;
 use App\Item;
+use App\Notification;
 
 class AuctionObserver
 {
     public function deleting(Auction $auction)
     {
         $auction_items=AuctionItem::where('auction_id',$auction->id)->get();
+        $item_ids=AuctionItem::where('auction_id',$auction->id)->pluck('item_id');
         foreach ($auction_items as $auction_item){
             $item=Item::find($auction_item->item_id);
             $item->update([
@@ -24,5 +26,11 @@ class AuctionObserver
         foreach ($auction_users as $auction_user){
             $auction_user->delete();
         }
+
+        $notifications=Notification::whereIn('item_id',$item_ids)->get();
+        foreach ($notifications as $notification){
+            $notification->delete();
+        }
+
     }
 }
