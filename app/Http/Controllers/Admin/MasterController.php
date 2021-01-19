@@ -116,7 +116,7 @@ abstract class MasterController extends Controller
     }
 
     public function auctionItemStatusUpdate(){
-        $auction_items=AuctionItem::where('more_details->status','!=','paid')->where('more_details->status','!=','expired')->get();
+        $auction_items=AuctionItem::all();
         foreach ($auction_items as $auction_item){
             if ((Carbon::createFromTimestamp($auction_item->start_date) <= Carbon::now() )  &&  (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration) >= Carbon::now())){
                 $auction_item->update([
@@ -130,48 +130,54 @@ abstract class MasterController extends Controller
                 ]);
                 if ($auction_item->item->auction_type_id==4 || $auction_item->item->auction_type_id==2){
                     $soon_winner=AuctionUser::where('item_id',$auction_item->item_id)->latest()->first();
-                    if ($soon_winner){
-                        $auction_item->update([
-                            'more_details'=>[
-                                'status'=>'negotiation'
-                            ]
-                        ]);
-                    }else{
-                        $auction_item->update([
-                            'more_details'=>[
-                                'status'=>'expired'
-                            ]
-                        ]);
+                    if ($auction_item->more_details['status']!='paid'){
+                        if ($soon_winner){
+                            $auction_item->update([
+                                'more_details'=>[
+                                    'status'=>'negotiation'
+                                ]
+                            ]);
+                        }else{
+                            $auction_item->update([
+                                'more_details'=>[
+                                    'status'=>'expired'
+                                ]
+                            ]);
+                        }
                     }
                 }elseif ($auction_item->item->auction_type_id==3){
                     $soon_winner=AuctionUser::where('item_id',$auction_item->item_id)->latest()->first();
-                    if ($soon_winner && ($soon_winner->price < $auction_item->item->price)){
-                        $auction_item->update([
-                            'more_details'=>[
-                                'status'=>'negotiation'
-                            ]
-                        ]);
-                    }else{
-                        $auction_item->update([
-                            'more_details'=>[
-                                'status'=>'expired'
-                            ]
-                        ]);
+                    if ($auction_item->more_details['status']!='paid'){
+                        if ($soon_winner && ($soon_winner->price < $auction_item->item->price)){
+                            $auction_item->update([
+                                'more_details'=>[
+                                    'status'=>'negotiation'
+                                ]
+                            ]);
+                        }else{
+                            $auction_item->update([
+                                'more_details'=>[
+                                    'status'=>'expired'
+                                ]
+                            ]);
+                        }
                     }
                 }else{
                     $soon_winner=AuctionUser::where('item_id',$auction_item->item_id)->latest()->first();
-                    if ($soon_winner){
-                        $auction_item->update([
-                            'more_details'=>[
-                                'status'=>'paid'
-                            ]
-                        ]);
-                    }else{
-                        $auction_item->update([
-                            'more_details'=>[
-                                'status'=>'expired'
-                            ]
-                        ]);
+                    if ($auction_item->more_details['status']!='paid'){
+                        if ($soon_winner){
+                            $auction_item->update([
+                                'more_details'=>[
+                                    'status'=>'paid'
+                                ]
+                            ]);
+                        }else{
+                            $auction_item->update([
+                                'more_details'=>[
+                                    'status'=>'expired'
+                                ]
+                            ]);
+                        }
                     }
                 }
             }else{
