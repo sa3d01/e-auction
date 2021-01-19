@@ -92,9 +92,9 @@ class BidController extends MasterController
         foreach ($offers as $offer){
             $arr['price']=$offer->price;
             $arr['user_id']=$offer->sender_id;
+            $arr['item']=new ItemResource(Item::find($item_id));
             $data[]=$arr;
         }
-//        $data['item']=new ItemResource(Item::find($item_id));
         return $this->sendResponse($data);
     }
     public function notify($offer){
