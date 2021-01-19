@@ -84,6 +84,19 @@ class BidController extends MasterController
         $this->notify($offer);
         return $this->sendResponse('تم الإرسال بنجاح');
     }
+    public function itemOffers($item_id):object{
+        $user=\request()->user();
+        $auction_item=AuctionItem::where('item_id',$item_id)->latest()->first();
+        $offers=Offer::where('receiver_id',$user->id)->where('auction_item_id',$auction_item->id)->latest()->get();
+        $data=[];
+        foreach ($offers as $offer){
+            $arr['price']=$offer->price;
+            $arr['user_id']=$offer->sender_id;
+            $data[]=$arr;
+        }
+        $data['item']=new ItemResource(Item::find($item_id));
+        return $this->sendResponse($data);
+    }
     public function notify($offer){
         $title['ar'] = 'تم إرسال عرض اليك على المزاد رقم '. $offer->auction_item->item_id;
         $title['en'] = 'تم إرسال عرض اليك على المزاد رقم '. $offer->auction_item->item_id;
