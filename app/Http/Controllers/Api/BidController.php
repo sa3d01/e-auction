@@ -170,6 +170,7 @@ class BidController extends MasterController
         $data['note']=$title;
         $data['receiver_id']=$offer->receiver_id;
         $data['item_id']=$offer->auction_item->item_id;
+        $data['more_details']['offer_id']=$offer->id;
         Notification::create($data);
         $push = new PushNotification('fcm');
         $msg = [
