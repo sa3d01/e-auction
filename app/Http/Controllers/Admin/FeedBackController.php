@@ -48,7 +48,7 @@ class FeedBackController extends MasterController
         $feed_back->user->device['type'] == 'IOS' ? $fcm_notification = array('title' => $note, 'sound' => 'default') : $fcm_notification = null;
         $push = new PushNotification('fcm');
         $msg = [
-            'notification' => $fcm_notification,
+            'notification' => array('title' => $note, 'sound' => 'default'),
             'data' => [
                 'title' => $note,
                 'body' => $note,
