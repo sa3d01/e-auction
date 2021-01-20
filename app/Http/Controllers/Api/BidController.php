@@ -142,7 +142,7 @@ class BidController extends MasterController
         $auction_item=AuctionItem::where('item_id',$item_id)->latest()->first();
         $sender=$request->user();
         if ($sender->id == $item->user_id){
-            $latest_offer=Offer::where('auction_item_id',$auction_item)->latest()->first();
+            $latest_offer=Offer::where('auction_item_id',$auction_item->id)->latest()->first();
             if ($latest_offer->sender_id==$sender->id){
                 $receiver=User::find($latest_offer->receiver_id);
             }else{
