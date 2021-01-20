@@ -79,7 +79,8 @@ class FeedBackController extends MasterController
         $note['ar'] = 'تم قبول اضافة رأيك بالتطبيق من قبل الادارة ..';
         $note['en'] = 'your added feed back is accepted from admin  ..';
         $fcm_feed_back=$this->notify($feed_back, $note);
-        return $fcm_feed_back;
+        print_r( $fcm_feed_back);
+        return ;
         $feed_back->refresh();
         return redirect()->back()->with('updated');
     }
