@@ -131,6 +131,10 @@ class BidController extends MasterController
             'reason'=>'resale'
         ]);
         $auction_item->delete();
+        $notifications=Notification::where('item_id',$item_id)->get();
+        foreach ($notifications as $notification){
+            $notification->delete();
+        }
         return $this->sendResponse('تمت العملية بنجاح');
     }
     public function sendOffer($item_id,Request $request){
