@@ -16,7 +16,7 @@ class Item extends Model
         'user_id','category_id','status','pay_status'
         ,'name','images','mark_id','model_id','item_status_id','sunder_count','fetes_id',
         'color_id','kms_count','scan_status_id','paper_status_id','paper_image'
-        ,'auction_type_id','price','auction_price','city_id','shipping_by','location'
+        ,'auction_type_id','price','auction_price','city_id','shipping_by','tax','location'
         ,'more_details'
     ];
     protected $casts = [

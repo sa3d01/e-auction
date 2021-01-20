@@ -128,7 +128,8 @@ class BidController extends MasterController
         $auction_item=AuctionItem::where('item_id',$item_id)->latest()->first();
         $item=Item::find($auction_item->item_id);
         $item->update([
-            'status'=>'accepted'
+            'status'=>'accepted',
+            'reason'=>'resale'
         ]);
         $auction_item->delete();
         return $this->sendResponse('تمت العملية بنجاح');

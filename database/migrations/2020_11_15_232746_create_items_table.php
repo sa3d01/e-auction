@@ -36,6 +36,8 @@ class CreateItemsTable extends Migration
             $table->json('location')->nullable();
             $table->json('more_details')->nullable();
             $table->enum('shipping_by',['user','app'])->default('app');
+            //سجل نظام ضريبي
+            $table->enum('tax',['true','false'])->default('false');
             //pay throw item
             $table->enum('status',['pending','accepted','rejected','shown','sold'])->default('pending');
             $table->boolean('pay_status')->default(0);
