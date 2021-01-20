@@ -45,13 +45,12 @@ class FeedBackController extends MasterController
             'title' => $note,
             'note' => $note,
         ]);
-        $feed_back->user->device['type'] == 'IOS' ? $fcm_notification = array('title' => $note, 'sound' => 'default') : $fcm_notification = null;
         $push = new PushNotification('fcm');
         $msg = [
-            'notification' => array('title' => $note, 'sound' => 'default'),
+            'notification' => array('title' => $note['ar'], 'sound' => 'default'),
             'data' => [
-                'title' => $note,
-                'body' => $note,
+                'title' => $note['ar'],
+                'body' => $note['ar'],
                 'type' => 'feed_back',
             ],
             'priority' => 'high',
@@ -60,7 +59,6 @@ class FeedBackController extends MasterController
             ->setDevicesToken($feed_back->user->device['id'])
             ->send()
             ->getFeedback();
-        return $fcm_feed_back;
     }
 
     public function activate($id, Request $request)
@@ -78,9 +76,7 @@ class FeedBackController extends MasterController
         ]);
         $note['ar'] = 'تم قبول اضافة رأيك بالتطبيق من قبل الادارة ..';
         $note['en'] = 'your added feed back is accepted from admin  ..';
-        $fcm_feed_back=$this->notify($feed_back, $note);
-        print_r( $fcm_feed_back);
-        return ;
+        $this->notify($feed_back, $note);
         $feed_back->refresh();
         return redirect()->back()->with('updated');
     }
