@@ -151,6 +151,9 @@ class BidController extends MasterController
     public function itemOffers($item_id):object{
         $user=\request()->user();
         $auction_item=AuctionItem::where('item_id',$item_id)->latest()->first();
+        if (!$auction_item){
+            return $this->sendError('توجد مشكله ما');
+        }
         $offers=Offer::where('receiver_id',$user->id)->where('auction_item_id',$auction_item->id)->latest()->get();
         $data=[];
         foreach ($offers as $offer){
