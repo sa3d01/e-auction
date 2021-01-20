@@ -28,6 +28,9 @@ class NotificationCollection extends ResourceCollection
             }
             $arr['item_id']=(int)$obj->item_id;
             $arr['published_from']=$obj->published_from();
+            if ($obj->more_details!=null){
+                $arr['offer_id']=(int)$obj->more_details['offer_id'];
+            }
             $data[]=$arr;
         }
         return $data;

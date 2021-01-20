@@ -182,6 +182,10 @@ class BidController extends MasterController
                 'status' => $offer->status,
                 'type'=>'offer',
                 'item'=>new ItemResource(Item::find($offer->auction_item->item_id)),
+                'more_details'=>[
+                    'type'=>'offer',
+                    'offer_id'=>$offer->id
+                ]
             ],
             'priority' => 'high',
         ];
