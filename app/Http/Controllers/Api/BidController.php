@@ -123,6 +123,16 @@ class BidController extends MasterController
         $this->charge_notify($auction_item,$user,$charge_price);
         return $this->sendResponse('تمت العملية بنجاح');
     }
+    public function refuseOffer($item_id,Request $request){
+        $user=$request->user();
+        $auction_item=AuctionItem::where('item_id',$item_id)->latest()->first();
+        $item=Item::find($auction_item->item_id);
+        $item->update([
+            'status'=>'accepted'
+        ]);
+        $auction_item->delete();
+        return $this->sendResponse('تمت العملية بنجاح');
+    }
     public function sendOffer($item_id,Request $request){
         $item=Item::find($item_id);
         $auction_item=AuctionItem::where('item_id',$item_id)->latest()->first();

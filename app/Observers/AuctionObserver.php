@@ -7,6 +7,7 @@ use App\AuctionItem;
 use App\AuctionUser;
 use App\Item;
 use App\Notification;
+use App\Offer;
 
 class AuctionObserver
 {
@@ -20,6 +21,10 @@ class AuctionObserver
                'status'=>'accepted'
             ]);
             $auction_item->delete();
+            $offers=Offer::where('auction_item_id',$auction_item->id)->get();
+            foreach ($offers as $offer){
+                $offer->delete();
+            }
         }
 
         $auction_users=AuctionUser::where('auction_id',$auction->id)->get();
