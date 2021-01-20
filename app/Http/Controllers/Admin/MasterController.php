@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\AuctionItem;
-use App\AuctionUser;
 use App\Contact;
 use App\FeedBack;
 use App\Http\Controllers\Controller;
@@ -29,21 +28,21 @@ abstract class MasterController extends Controller
 
     public function __construct()
     {
-        $users_count=User::count();
-        $new_items_count=Item::where('status','pending')->count();
-        $new_contacts_count=Contact::where(['read'=>'false'])->count();
-        $new_feed_backs_count=FeedBack::where(['status'=>'pending'])->count();
+        $users_count = User::count();
+        $new_items_count = Item::where('status', 'pending')->count();
+        $new_contacts_count = Contact::where(['read' => 'false'])->count();
+        $new_feed_backs_count = FeedBack::where(['status' => 'pending'])->count();
         $this->auctionItemStatusUpdate();
-        $pre_auction_items=0;
-        $expire_auction_items=0;
-        $live_auction_items=0;
-        foreach (AuctionItem::all() as $auction_item){
-            $auction_items=AuctionItem::where('auction_id',$auction_item->auction_id)->count();
-            if (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_items*$auction_item->auction->duration) < Carbon::now()){
+        $pre_auction_items = 0;
+        $expire_auction_items = 0;
+        $live_auction_items = 0;
+        foreach (AuctionItem::all() as $auction_item) {
+            $auction_items = AuctionItem::where('auction_id', $auction_item->auction_id)->count();
+            if (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_items * $auction_item->auction->duration) < Carbon::now()) {
                 $expire_auction_items++;
-            }elseif ((Carbon::createFromTimestamp($auction_item->start_date) <= Carbon::now() )  &&  (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_items*$auction_item->auction->duration) >= Carbon::now())){
+            } elseif ((Carbon::createFromTimestamp($auction_item->start_date) <= Carbon::now()) && (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_items * $auction_item->auction->duration) >= Carbon::now())) {
                 $live_auction_items++;
-            }else{
+            } else {
                 $pre_auction_items++;
             }
         }
@@ -58,16 +57,16 @@ abstract class MasterController extends Controller
             'create_fields' => $this->create_fields,
             'update_fields' => $this->update_fields,
             'json_fields' => $this->json_fields,
-            'settings'=>Setting::first(),
-            'users_count'=>$users_count,
-            'new_contacts_count'=>$new_contacts_count,
-            'new_items_count'=>$new_items_count,
-            'new_contacts'=>Contact::where('read','false')->get(),
-            'new_feed_backs_count'=>$new_feed_backs_count,
-            'pre_auction_items'=>$pre_auction_items,
-            'expire_auction_items'=>$expire_auction_items,
-            'live_auction_items'=>$live_auction_items,
-            'admin_notifications'=>Notification::where(['receiver_id'=>null,'read'=>'false'])->latest()->get(),
+            'settings' => Setting::first(),
+            'users_count' => $users_count,
+            'new_contacts_count' => $new_contacts_count,
+            'new_items_count' => $new_items_count,
+            'new_contacts' => Contact::where('read', 'false')->get(),
+            'new_feed_backs_count' => $new_feed_backs_count,
+            'pre_auction_items' => $pre_auction_items,
+            'expire_auction_items' => $expire_auction_items,
+            'live_auction_items' => $live_auction_items,
+            'admin_notifications' => Notification::where(['receiver_id' => null, 'read' => 'false'])->latest()->get(),
         ));
     }
 
@@ -84,7 +83,7 @@ abstract class MasterController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, $this->validation_func(1),$this->validation_msg());
+        $this->validate($request, $this->validation_func(1), $this->validation_msg());
         $this->model->create($request->all());
         return redirect('admin/' . $this->route . '')->with('created', 'تمت الاضافة بنجاح');
     }
@@ -97,7 +96,7 @@ abstract class MasterController extends Controller
 
     public function update($id, Request $request)
     {
-        $this->validate($request, $this->validation_func(2, $id),$this->validation_msg());
+        $this->validate($request, $this->validation_func(2, $id), $this->validation_msg());
         $obj = $this->model->find($id);
         $obj->update($request->all());
         return redirect()->back()->with('updated', 'تم التعديل بنجاح');

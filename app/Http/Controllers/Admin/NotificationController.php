@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Notification;
 use App\User;
-use Edujugon\PushNotification\PushNotification;
 use Illuminate\Http\Request;
 
 class NotificationController extends MasterController
@@ -40,50 +39,27 @@ class NotificationController extends MasterController
     public function store(Request $request){
         $admin_notify_type=$request['admin_notify_type'];
         $receivers=User::all();
-
         $receivers_ids=$receivers->pluck('id');
         $title['ar']='رسالة إدارية';
         $title['en']='admin message';
         $note['ar']=$request['note'];
         $note['en']=$request['note'];
-//        $push = new PushNotification('fcm');
-//        $android_msg = [
-//            'notification' => null,
-//            'data' => [
-//                'title' => $title,
-//                'body' => $note,
-//                'status' => 'admin',
-//                'type'=>'admin',
-//            ],
-//            'priority' => 'high',
-//        ];
-//        $ios_msg = [
-//            'notification' => array('title'=>$title, 'sound' => 'default'),
-//            'data' => [
-//                'title' => $title,
-//                'body' => $note,
-//                'status' => 'admin',
-//                'type'=>'admin',
-//            ],
-//            'priority' => 'high',
-//        ];
-//        $android_receivers=[];
-//        $ios_receivers=[];
-//        foreach ($receivers as $receiver){
-//            if(array_key_exists("type",(array)$receiver->device)){
-//                if ($receiver->device['type'] =='IOS'){
-//                    $ios_receivers[]=$receiver->device['id'];
-//                }else{
-//                    $android_receivers[]=$receiver->device['id'];
-//                }
-//            }
-//        }
-//        $push->setMessage($ios_msg)
-//            ->setDevicesToken($ios_receivers)
-//            ->send();
-//        $push->setMessage($android_msg)
-//            ->setDevicesToken($android_receivers)
-//            ->send();
+        $push = new PushNotification('fcm');
+        $msg = [
+            'notification' => array('title'=>$title['ar'], 'sound' => 'default'),
+            'data' => [
+                'title' => $title['ar'],
+                'body' => $note['ar'],
+                'status' => 'admin',
+                'type'=>'admin',
+            ],
+            'priority' => 'high',
+        ];
+        foreach ($receivers as $receiver){
+            $push->setMessage($msg)
+                ->setDevicesToken($receiver->device['id'])
+                ->send();
+        }
         $notification=new Notification();
         $notification->type='admin';
         $notification->receivers=$receivers_ids;

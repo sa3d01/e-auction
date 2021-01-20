@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Resources\OrderResource;
 use App\Notification;
 use App\User;
 use Edujugon\PushNotification\PushNotification;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class UserController extends MasterController
 {
@@ -109,15 +107,14 @@ class UserController extends MasterController
                     'item'=>$user->wallet-$wallet_decrement_value,
                 ]
             );
-            $user->device['type'] =='IOS'? $fcm_notification=array('title'=>'رسالة ادارية', 'sound' => 'default') : $fcm_notification=null;
             $push = new PushNotification('fcm');
             $msg = [
-                'notification' => $fcm_notification,
+                'notification' => array('title' => 'رسالة ادارية', 'sound' => 'default'),
                 'data' => [
                     'title' => 'رسالة ادارية',
-                    'body' => 'اليك من محفظتك'.$wallet_decrement_value.'تم سداد مبلغ ',
-                    'status' =>'admin',
-                    'type'=>'admin',
+                    'body' => 'اليك من محفظتك' . $wallet_decrement_value . 'تم سداد مبلغ ',
+                    'status' => 'admin',
+                    'type' => 'admin',
                 ],
                 'priority' => 'high',
             ];

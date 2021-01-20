@@ -2,12 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\AuctionItem;
 use App\FeedBack;
-use App\Http\Resources\ItemResource;
-use App\Item;
 use App\Notification;
-use App\Report;
 use Edujugon\PushNotification\PushNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -55,7 +51,7 @@ class FeedBackController extends MasterController
             ],
             'priority' => 'high',
         ];
-        $fcm_feed_back=$push->setMessage($msg)
+        $push->setMessage($msg)
             ->setDevicesToken($feed_back->user->device['id'])
             ->send()
             ->getFeedback();

@@ -171,13 +171,12 @@ class BidController extends MasterController
         $data['receiver_id']=$offer->receiver_id;
         $data['item_id']=$offer->auction_item->item_id;
         Notification::create($data);
-        $offer->receiver->device['type'] =='IOS'? $fcm_notification=array('title'=>$title, 'sound' => 'default') : $fcm_notification=null;
         $push = new PushNotification('fcm');
         $msg = [
-            'notification' => $fcm_notification,
+            'notification' => array('title'=>$title['ar'], 'sound' => 'default'),
             'data' => [
-                'title' => $title,
-                'body' => $title,
+                'title' => $title['ar'],
+                'body' => $title['ar'],
                 'status' => $offer->status,
                 'type'=>'offer',
                 'item'=>new ItemResource(Item::find($offer->auction_item->item_id)),
@@ -207,13 +206,12 @@ class BidController extends MasterController
             $data['receiver_id']=$user_notify->id;
             $data['item_id']=$auction_item->item_id;
             Notification::create($data);
-            $user_notify->device['type'] =='IOS'? $fcm_notification=array('title'=>$title, 'sound' => 'default') : $fcm_notification=null;
             $push = new PushNotification('fcm');
             $msg = [
-                'notification' => $fcm_notification,
+                'notification' => array('title'=>$title['ar'], 'sound' => 'default'),
                 'data' => [
-                    'title' => $title,
-                    'body' => $title,
+                    'title' => $title['ar'],
+                    'body' => $title['ar'],
                     'status' => 'auction',
                     'type'=>'auction',
                     'item'=>new ItemResource(Item::find($auction_item->item_id)),

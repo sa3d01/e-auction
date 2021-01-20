@@ -4,11 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\AuctionItem;
 use App\Http\Resources\ItemResource;
-use App\Http\Resources\OrderResource;
 use App\Item;
 use App\Notification;
 use App\Report;
-use App\Setting;
 use Edujugon\PushNotification\PushNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -237,15 +235,14 @@ class ItemController extends MasterController
             'title'=>$note,
             'note'=>$note,
         ]);
-        $item->user->device['type'] =='IOS'? $fcm_notification=array('title'=>$note, 'sound' => 'default') : $fcm_notification=null;
         $push = new PushNotification('fcm');
         $msg = [
-            'notification' => $fcm_notification,
+            'notification' => array('title' => $note['ar'], 'sound' => 'default'),
             'data' => [
-                'title' => $note,
-                'body' => $note,
-                'type'=>'item',
-                'item'=>new ItemResource($item),
+                'title' => $note['ar'],
+                'body' => $note['ar'],
+                'type' => 'item',
+                'item' => new ItemResource($item),
             ],
             'priority' => 'high',
         ];

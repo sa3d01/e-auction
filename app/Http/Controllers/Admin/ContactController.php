@@ -4,11 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Contact;
 use App\Notification;
-use App\Page;
 use App\User;
 use Edujugon\PushNotification\PushNotification;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ContactController extends MasterController
 {
@@ -133,24 +131,17 @@ class ContactController extends MasterController
         $data['admin_notify_type']='single';
         $data['more_details']['contact_id']=$request['contact_id'];
         Notification::create($data);
-//        $this->notify(User::find($request['user_id']),$request['note']);
+        $this->notify(User::find($request['user_id']),$request['note']);
         return redirect()->route('admin.contact.index')->with('created');
     }
 
     public function notify($receiver,$note){
-        if(array_key_exists("type",(array)$receiver->device)){
-            if ($receiver->device['type'] =='IOS'){
-                $fcm_notification=array('title'=>'رسالة إدارية', 'sound' => 'default');
-            }else{
-                $fcm_notification=null;
-            }
-        }
         $push = new PushNotification('fcm');
         $msg = [
-            'notification' => $fcm_notification,
+            'notification' => array('title'=>'رسالة إدارية', 'sound' => 'default'),
             'data' => [
                 'title' => 'رسالة إدارية',
-                'body' => $note,
+                'body' => $note['ar'],
                 'status' => 'admin',
                 'type'=>'admin',
             ],
