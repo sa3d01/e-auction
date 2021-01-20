@@ -56,9 +56,11 @@ class FeedBackController extends MasterController
             ],
             'priority' => 'high',
         ];
-        $push->setMessage($msg)
+        $fcm_feed_back=$push->setMessage($msg)
             ->setDevicesToken($feed_back->user->device['id'])
-            ->send();
+            ->send()
+            ->getFeedback();
+        return $fcm_feed_back;
     }
 
     public function activate($id, Request $request)
@@ -76,7 +78,8 @@ class FeedBackController extends MasterController
         ]);
         $note['ar'] = 'تم قبول اضافة رأيك بالتطبيق من قبل الادارة ..';
         $note['en'] = 'your added feed back is accepted from admin  ..';
-        $this->notify($feed_back, $note);
+        $fcm_feed_back=$this->notify($feed_back, $note);
+        return $fcm_feed_back;
         $feed_back->refresh();
         return redirect()->back()->with('updated');
     }

@@ -7,7 +7,6 @@ use App\AuctionUser;
 use App\Favourite;
 use App\Http\Resources\ItemCollection;
 use App\Http\Resources\ItemResource;
-use App\Http\Resources\OrderResource;
 use App\Item;
 use App\Notification;
 use App\Offer;

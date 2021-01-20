@@ -2,16 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\AuctionItem;
-use App\AuctionUser;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\OrderResource;
-use App\Notification;
-use App\User;
-use Carbon\Carbon;
-use Edujugon\PushNotification\PushNotification;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Exceptions\UserNotDefinedException;
 
