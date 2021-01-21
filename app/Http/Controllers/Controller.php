@@ -141,8 +141,7 @@ class Controller extends BaseController
 
     function autoSendOffer($auction_item)
     {
-        $auction_item = AuctionItem::where('item_id', $auction_item->item_id)->latest()->first();
-        $auction_user = AuctionUser::where('auction_item_id', $auction_item->id)->latest()->first();
+        $auction_user = AuctionUser::where('item_id', $auction_item->item_id)->latest()->first();
         $offer = Offer::create([
             'sender_id' => $auction_user->user_id,
             'receiver_id' => $auction_item->item->user_id,
