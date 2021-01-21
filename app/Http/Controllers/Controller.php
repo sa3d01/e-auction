@@ -59,12 +59,21 @@ class Controller extends BaseController
                 }elseif ($auction_item->item->auction_type_id==3){
                     $soon_winner=AuctionUser::where('item_id',$auction_item->item_id)->latest()->first();
                     if ($auction_item->more_details['status']!='paid'){
-                        if ($soon_winner && ($soon_winner->price < $auction_item->item->price)){
-                            $auction_item->update([
-                                'more_details'=>[
-                                    'status'=>'negotiation'
-                                ]
-                            ]);
+                        if ($soon_winner){
+                            if ($auction_item->price < $auction_item->item->price){
+                                $auction_item->update([
+                                    'more_details'=>[
+                                        'status'=>'negotiation'
+                                    ]
+                                ]);
+                            }else{
+                                $auction_item->update([
+                                    'more_details'=>[
+                                        'status'=>'paid'
+                                    ]
+                                ]);
+                            }
+
                         }else{
                             $auction_item->update([
                                 'more_details'=>[
