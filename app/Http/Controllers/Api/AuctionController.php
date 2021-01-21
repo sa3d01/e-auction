@@ -11,6 +11,7 @@ use App\Http\Resources\ItemResource;
 use App\Http\Resources\ReportCollection;
 use App\Item;
 use App\Report;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AuctionController extends MasterController
@@ -30,7 +31,8 @@ class AuctionController extends MasterController
         return $this->sendResponse($data);
     }
     public function auctions(){
-        return $this->sendResponse(new AuctionCollection(Auction::all()));
+        $auctions=Auction::where('more_details->end_date','<',Carbon::now()->timestamp)->get();
+        return $this->sendResponse(new AuctionCollection($auctions));
     }
     public function auctionItems($auction_id){
         $auction_items=AuctionItem::where('auction_id',$auction_id)->pluck('item_id');
