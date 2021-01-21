@@ -65,6 +65,7 @@ class ItemCollection extends ResourceCollection
             $arr['is_favourite']=$is_favourite;
             $arr['win']=$is_favourite;
             $arr["my_item"]=$my_item;
+            $arr["live"]=false;
             $data[]=$arr;
         }
         return $data;
