@@ -31,7 +31,7 @@ class AuctionController extends MasterController
         return $this->sendResponse($data);
     }
     public function auctions(){
-        $auctions=Auction::where('more_details->end_date','<',Carbon::now()->timestamp)->get();
+        $auctions=Auction::where('more_details->end_date','>',Carbon::now()->timestamp)->get();
         return $this->sendResponse(new AuctionCollection($auctions));
     }
     public function auctionItems($auction_id){
