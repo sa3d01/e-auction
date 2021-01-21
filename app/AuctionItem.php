@@ -40,7 +40,7 @@ class AuctionItem extends Model
             if ($this->item->auction_type_id == 4) {
                 //البيع المباشر
                 $arr['user_price'] = $this->item->price;
-                if ($start_auction < Carbon::now()) {
+                if (Carbon::createFromTimestamp($this->start_date) < Carbon::now()) {
                     $arr['negotiation'] = true;
                     $arr['direct_pay'] = true;
                 }
