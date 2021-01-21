@@ -94,7 +94,12 @@ class BidController extends MasterController
                 'pay_type'=>'direct_pay'
             ]
         ]);
-        $this->charge_notify($auction_item,$user,$charge_price);
+        $winner_title['ar'] = 'تهانينا اليك ! لقد فزت فى المزاد الذى قمت بالمشاركة به رقم ' . $auction_item->item_id;
+        $owner_title['ar'] = 'تهانينا اليك ! لقد تم بيع سلعتك بمزاد رقم ' . $auction_item->item_id;
+        $admin_title['ar'] = 'تم بيع السلعة رقم ' . $auction_item->item_id;
+        $this->base_notify($winner_title, $user->id, $auction_item->item_id);
+        $this->base_notify($owner_title, $auction_item->item->user_id, $auction_item->item_id);
+        $this->notify_admin($admin_title, $auction_item);
         return $this->sendResponse('تمت العملية بنجاح');
     }
     public function acceptOffer($item_id,$offer_id,Request $request){
@@ -119,7 +124,12 @@ class BidController extends MasterController
                 'pay_type'=>'negotiation'
             ]
         ]);
-        $this->charge_notify($auction_item,$user,$charge_price);
+        $winner_title['ar'] = 'تهانينا اليك ! لقد فزت فى المزاد الذى قمت بالمشاركة به رقم ' . $auction_item->item_id;
+        $owner_title['ar'] = 'تهانينا اليك ! لقد تم بيع سلعتك بمزاد رقم ' . $auction_item->item_id;
+        $admin_title['ar'] = 'تم بيع السلعة رقم ' . $auction_item->item_id;
+        $this->base_notify($winner_title, $user->id, $auction_item->item_id);
+        $this->base_notify($owner_title, $auction_item->item->user_id, $auction_item->item_id);
+        $this->notify_admin($admin_title, $auction_item);
         return $this->sendResponse('تمت العملية بنجاح');
     }
     public function refuseOffer($item_id,Request $request){
