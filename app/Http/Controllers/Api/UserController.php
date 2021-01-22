@@ -39,15 +39,22 @@ class UserController extends MasterController
             return $this->sendError('يجب ادخال وسيلة ارسال واحدة على الأقل');
         }
         $activation_code = 2021;// rand(1111, 9999);
-        $this->send_code($activation_code, $request['email'], $request['phone']);
-        $user = User::where('email', $request['email'])->orWhere('phone', $request['phone'])->first();
+        if ($request->has('email') && $request->has('phone')){
+            $user = User::where('email', $request['email'])->where('phone', $request['phone'])->first();
+        }elseif ($request->has('email')){
+            $user = User::where('email', $request['email'])->first();
+        }else{
+            $user = User::where('phone', $request['phone'])->first();
+        }
         $all = $request->all();
         $all['activation_code'] = $activation_code;
         if (!$user) {
+            $all['wallet']=10000;
             User::create($all);
         } else {
             $user->update($all);
         }
+        $this->send_code($activation_code, $request['email'], $request['phone']);
         return $this->sendResponse(['activation_code' => $activation_code]);
     }
 
@@ -99,7 +106,13 @@ class UserController extends MasterController
         if (!$request->has('email') && !$request->has('phone')) {
             return $this->sendError('يجب ادخال وسيلة ارسال واحدة على الأقل');
         }
-        $user = User::where('email', $request['email'])->orWhere('phone', $request['phone'])->first();
+        if ($request->has('email') && $request->has('phone')){
+            $user = User::where('email', $request['email'])->where('phone', $request['phone'])->first();
+        }elseif ($request->has('email')){
+            $user = User::where('email', $request['email'])->first();
+        }else{
+            $user = User::where('phone', $request['phone'])->first();
+        }
         if (!$user) {
             return $this->sendError('المستخدم غير مسجل');
         }
