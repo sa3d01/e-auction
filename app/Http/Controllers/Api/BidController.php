@@ -149,6 +149,33 @@ class BidController extends MasterController
         foreach ($notifications as $notification){
             $notification->delete();
         }
+        $latest_offer=Offer::where('auction_item_id',$auction_item->id)->latest()->first();
+        if ($latest_offer->sender_id==$user->id){
+            $receiver=User::find($latest_offer->receiver_id);
+        }else{
+            $receiver=User::find($latest_offer->sender_id);
+        }
+        $title['ar'] = 'لقد تم رفض عرض السعر المقدم من قبلك على المزاد رقم '. $auction_item->item_id;
+        $data=[];
+        $data['title']=$title;
+        $data['note']=$title;
+        $data['receiver_id']=$receiver->id;
+        $data['item_id']=$auction_item->item_id;
+        Notification::create($data);
+        $push = new PushNotification('fcm');
+        $msg = [
+            'notification' => array('title'=>$title['ar'], 'sound' => 'default'),
+            'data' => [
+                'title' => $title['ar'],
+                'body' => $title['ar'],
+                'status' => 'refuse_offer',
+                'type'=>'refuse_offer',
+            ],
+            'priority' => 'high',
+        ];
+        $push->setMessage($msg)
+            ->setDevicesToken($receiver->device['id'])
+            ->send();
         return $this->sendResponse('تمت العملية بنجاح');
     }
     public function sendOffer($item_id,Request $request){
