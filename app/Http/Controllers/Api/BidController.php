@@ -117,7 +117,7 @@ class BidController extends MasterController
             'charge_price'=>$charge_price
         ]);
         $auction_item->update([
-            'price'=>$auction_item->item->price,
+            'price'=>$offer->price,
             'latest_charge'=>$charge_price,
             'more_details'=>[
                 'status'=>'paid',
