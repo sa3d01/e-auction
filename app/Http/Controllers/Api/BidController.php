@@ -102,7 +102,7 @@ class BidController extends MasterController
         $this->notify_admin($admin_title, $auction_item);
         return $this->sendResponse('تمت العملية بنجاح');
     }
-    public function acceptOffer($item_id,$offer_id,Request $request){
+    public function acceptOffer($item_id,$offer_id,Request $request):string{
         $user=$request->user();
         $auction_item=AuctionItem::where('item_id',$item_id)->latest()->first();
         if ($auction_item->more_details['status']=='expired'  || $auction_item->more_details['status']=='paid'){
@@ -111,7 +111,7 @@ class BidController extends MasterController
         $offer=Offer::find($offer_id);
         $charge_price=$offer->price;
         AuctionUser::create([
-            'user_id'=>$user->id,
+            'user_id'=>$offer->sender_id,
             'item_id'=>$item_id,
             'auction_id'=>$auction_item->auction_id,
             'charge_price'=>$charge_price
@@ -127,9 +127,13 @@ class BidController extends MasterController
         $winner_title['ar'] = 'تهانينا اليك ! لقد فزت فى المزاد الذى قمت بالمشاركة به رقم ' . $auction_item->item_id;
         $owner_title['ar'] = 'تهانينا اليك ! لقد تم بيع سلعتك بمزاد رقم ' . $auction_item->item_id;
         $admin_title['ar'] = 'تم بيع السلعة رقم ' . $auction_item->item_id;
-        $this->base_notify($winner_title, $user->id, $auction_item->item_id);
+        $this->base_notify($winner_title, $offer->sender_id, $auction_item->item_id);
         $this->base_notify($owner_title, $auction_item->item->user_id, $auction_item->item_id);
         $this->notify_admin($admin_title, $auction_item);
+        $offers=Offer::where('auction_item_id',$auction_item->id)->get();
+        foreach ($offers as $offer){
+            $offer->delete();
+        }
         return $this->sendResponse('تمت العملية بنجاح');
     }
     public function refuseOffer($item_id,Request $request){

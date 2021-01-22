@@ -19,7 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="..">
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment=".">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -236,14 +236,8 @@
       <workItem from="1611016098843" duration="28000" />
       <workItem from="1611059900768" duration="10305000" />
       <workItem from="1611151514346" duration="9788000" />
-      <workItem from="1611259919650" duration="11100000" />
-    </task>
-    <task id="LOCAL-00065" summary=".">
-      <created>1610887389682</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1610887389682</updated>
+      <workItem from="1611259919650" duration="12149000" />
+      <workItem from="1611274781113" duration="48000" />
     </task>
     <task id="LOCAL-00066" summary=".">
       <created>1610887597288</created>
@@ -581,7 +575,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611271858743</updated>
     </task>
-    <option name="localTasksCounter" value="114" />
+    <task id="LOCAL-00114" summary=".">
+      <created>1611273122096</created>
+      <option name="number" value="00114" />
+      <option name="presentableId" value="LOCAL-00114" />
+      <option name="project" value="LOCAL" />
+      <updated>1611273122096</updated>
+    </task>
+    <option name="localTasksCounter" value="115" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -603,8 +604,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="auth" />
     <MESSAGE value="critical" />
-    <MESSAGE value="." />
     <MESSAGE value=".." />
-    <option name="LAST_COMMIT_MESSAGE" value=".." />
+    <MESSAGE value="." />
+    <option name="LAST_COMMIT_MESSAGE" value="." />
   </component>
 </project>
