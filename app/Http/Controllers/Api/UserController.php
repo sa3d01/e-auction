@@ -290,7 +290,8 @@ class UserController extends MasterController
     {
         $user = auth()->user();
         $data['user'] = new UserResource($user);
-        $data['my_items'] = new ItemCollection(Item::where('user_id', $user->id)->latest()->get());
+        $my_items=Item::where('user_id', $user->id)->whereHas('reports')->where('auction_price', '!=', 'null')->latest()->get();
+        $data['my_items'] = new ItemCollection($my_items);
         $auction_users = AuctionUser::where('user_id', $user->id)->pluck('item_id');
         $data['my_auctions'] = new ItemCollection(Item::whereIn('id', $auction_users)->latest()->get());
         return $this->sendResponse($data);
