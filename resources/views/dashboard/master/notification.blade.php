@@ -61,7 +61,13 @@
                                     </div>
                                     <div class="message-content">
                                         <h6 class="message-from">
-                                            {{$admin_notification->item->user->name}}
+                                            @php
+                                                try{
+                                                    {{$admin_notification->item->user->name}}
+                                                }catch (Exception $e){
+
+                                                }
+                                            @endphp
                                         </h6>
                                         <h6 class="message-title">
                                             {{$admin_notification->title['ar']}}
