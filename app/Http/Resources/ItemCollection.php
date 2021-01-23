@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\Auction;
 use App\AuctionItem;
+use App\AuctionUser;
 use App\Favourite;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\ResourceCollection;
@@ -29,6 +30,7 @@ class ItemCollection extends ResourceCollection
         foreach ($this as $obj){
             $auction_item=AuctionItem::where('item_id',$obj->id)->latest()->first();
             $my_item=false;
+            $win=false;
             $is_favourite=false;
             if (\request()->user()){
                 $favourite=Favourite::where(['user_id'=>\request()->user()->id, 'item_id'=>$obj->id])->first();
@@ -42,6 +44,12 @@ class ItemCollection extends ResourceCollection
             if ($auction_item){
                 if (\request()->user()){
                     $features=$auction_item->auctionTypeFeatures(auth()->user()->id);
+                    if ($auction_item->more_details['status']=='paid'){
+                        $winner=AuctionUser::where('item_id',$obj->id)->latest()->value('user_id');
+                        if ($winner==\request()->user()->id){
+                            $win=true;
+                        }
+                    }
                 }else{
                     $features=$auction_item->auctionTypeFeatures();
                 }
@@ -52,9 +60,9 @@ class ItemCollection extends ResourceCollection
                 $arr['live']=$features['live'];
 
                 $arr['auction_type']= $obj->auction_type->name[$this->lang()];
-                $arr['start_date']= $auction_item->start_date;
-                $arr['start_date_text']= Carbon::createFromTimestamp($auction_item->start_date)->format('Y-m-d h:i:s A');
-                $arr['now_date']= Carbon::now()->format('Y-m-d h:i:s A');
+                $arr['start_date']= $auction_item->auction->start_date;
+//                $arr['start_date_text']= Carbon::createFromTimestamp($auction_item->start_date)->format('Y-m-d h:i:s A');
+//                $arr['now_date']= Carbon::now()->format('Y-m-d h:i:s A');
                 $arr['auction_duration']=$auction_item->auction->duration;
                 $arr['auction_price']=$auction_item->price;
             }
@@ -64,7 +72,7 @@ class ItemCollection extends ResourceCollection
             $arr['city']= $obj->city->name[$this->lang()];
             $arr['image']=$obj->images[0];
             $arr['is_favourite']=$is_favourite;
-            $arr['win']=$is_favourite;
+            $arr['win']=$win;
             $arr["my_item"]=$my_item;
             $data[]=$arr;
         }
