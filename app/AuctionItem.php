@@ -30,7 +30,7 @@ class AuctionItem extends Model
         $arr['negotiation']=false;
         $arr['direct_pay']=false;
         $arr['user_price'] = "";
-        $arr['live'] = false;
+        $arr['live'] = true;
         $arr['status'] = $this->more_details['status'];
         $start_auction = Carbon::createFromTimestamp($this->auction->start_date);
         if (($this->auction->more_details['end_date'] < Carbon::now()->timestamp) && ($this->auction->start_date > Carbon::now()->timestamp)) {
