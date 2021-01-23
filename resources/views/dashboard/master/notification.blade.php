@@ -63,11 +63,12 @@
                                         <h6 class="message-from">
                                             @php
                                                 try{
-                                                    {{$admin_notification->item->user->name}}
+                                                    $handle_name=$admin_notification->item->user->name;
                                                 }catch (Exception $e){
-
+                                                    $handle_name='';
                                                 }
                                             @endphp
+                                            {{$handle_name}}
                                         </h6>
                                         <h6 class="message-title">
                                             {{$admin_notification->title['ar']}}
