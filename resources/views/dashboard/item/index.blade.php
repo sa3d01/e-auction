@@ -120,14 +120,14 @@
                                         <td>{!! $row->vip() !!}</td>
                                     @endif
                                     <td>
-{{--                                        <form class="delete" data-id="{{$row->id}}" method="POST" action="{{ route('admin.'.$type.'.destroy',[$row->id]) }}">--}}
-{{--                                            @csrf--}}
-{{--                                            {{ method_field('DELETE') }}--}}
-{{--                                            <input type="hidden" value="{{$row->id}}">--}}
-{{--                                            <button type="button " class="btn p-0 no-bg">--}}
-{{--                                                <i class="fa fa-trash text-danger"></i>--}}
-{{--                                            </button>--}}
-{{--                                        </form>--}}
+                                        <form class="delete" data-id="{{$row->id}}" method="POST" action="{{ route('admin.'.$type.'.destroy',[$row->id]) }}">
+                                            @csrf
+                                            {{ method_field('DELETE') }}
+                                            <input type="hidden" value="{{$row->id}}">
+                                            <button type="button " class="btn p-0 no-bg">
+                                                <i class="fa fa-trash text-danger"></i>
+                                            </button>
+                                        </form>
                                         <a href="{{route('admin.item.show',$row->id)}}"><i class="os-icon os-icon-eye"></i></a>
                                     </td>
                                 </tr>

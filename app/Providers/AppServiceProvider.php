@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Auction;
+use App\Item;
 use App\Observers\AuctionObserver;
+use App\Observers\ItemObserver;
 use App\Observers\UserObserver;
 use App\User;
 use Illuminate\Support\ServiceProvider;
@@ -29,5 +31,6 @@ class AppServiceProvider extends ServiceProvider
     {
         User::observe(UserObserver::class);
         Auction::observe(AuctionObserver::class);
+        Item::observe(ItemObserver::class);
     }
 }
