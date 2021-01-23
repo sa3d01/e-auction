@@ -30,14 +30,13 @@ class AuctionItem extends Model
         $arr['negotiation']=false;
         $arr['direct_pay']=false;
         $arr['user_price'] = "";
-        $arr['live'] = true;
+        $arr['live'] = false;
         $arr['status'] = $this->more_details['status'];
         $start_auction = Carbon::createFromTimestamp($this->auction->start_date);
-        if (($this->auction->more_details['end_date'] < Carbon::now()->timestamp) && ($this->auction->start_date > Carbon::now()->timestamp)) {
-            $arr['live'] = true;
-        }
         if ($this->more_details['status']!='paid' && $this->more_details['status']!='expired') {
-
+            if ((Carbon::createFromTimestamp($this->auction->more_details['end_date']) <= Carbon::now()) && ($start_auction >= Carbon::now())) {
+                $arr['live'] = true;
+            }
             if ($this->item->auction_type_id == 4) {
                 //البيع المباشر
                 $arr['user_price'] = $this->item->price;
