@@ -30,11 +30,14 @@ class UserObserver
         $items=Item::where('user_id',$user->id)->get();
         foreach ($items as $item) {
             $auction_item = AuctionItem::where('item_id', $item->id)->first();
-            $auction_item->delete();
-            $offers = Offer::where('auction_item_id', $auction_item->id)->get();
-            foreach ($offers as $offer) {
-                $offer->delete();
+            if ($auction_item){
+                $offers = Offer::where('auction_item_id', $auction_item->id)->get();
+                foreach ($offers as $offer) {
+                    $offer->delete();
+                }
+                $auction_item->delete();
             }
+
             $auction_users = AuctionUser::where('item_id', $item->id)->get();
             foreach ($auction_users as $auction_user) {
                 $auction_user->delete();
