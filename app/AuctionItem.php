@@ -33,7 +33,7 @@ class AuctionItem extends Model
         $arr['live'] = false;
         $arr['status'] = $this->more_details['status'];
         $start_auction = Carbon::createFromTimestamp($this->auction->start_date);
-        if (($start_auction <= Carbon::now())) {
+        if ( (Carbon::createFromTimestamp($this->auction->more_details['end_date']) >= Carbon::now()) && ($start_auction <= Carbon::now()) ) {
             $arr['live'] = true;
         }
         if ($this->more_details['status']!='paid' && $this->more_details['status']!='expired') {
