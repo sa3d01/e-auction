@@ -57,11 +57,7 @@ class ItemCollection extends ResourceCollection
                 $arr['negotiation']=$features['negotiation'];
                 $arr['direct_pay']=$features['direct_pay'];
                 $arr['user_price']=$features['user_price'];
-                $arr['live']=false;
-
-                if ((Carbon::createFromTimestamp($auction_item->auction->more_details['end_date']) <= Carbon::now()) && (Carbon::createFromTimestamp($auction_item->auction->start_dte) >= Carbon::now())) {
-                    $arr['live'] = true;
-                }
+                $arr['live']=$features['live'];
 
                 $arr['auction_type']= $obj->auction_type->name[$this->lang()];
                 $arr['start_date']= $auction_item->auction->start_date;
