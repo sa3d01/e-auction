@@ -24,7 +24,7 @@ class ItemObserver
         foreach ($auction_users as $auction_user) {
             $auction_user->delete();
         }
-        $notifications = Notification::whereIn('item_id', $item->id)->get();
+        $notifications = Notification::where('item_id', $item->id)->get();
         foreach ($notifications as $notification) {
             $notification->delete();
         }
