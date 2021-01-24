@@ -103,7 +103,6 @@ class AuctionController extends MasterController
     public function auction_items($auction)
     {
         $key = 0;
-        $start_date = $auction->start_date;
         foreach ($auction->items as $item_id) {
             $seconds = $key * ($auction->duration);
             $item = Item::find($item_id);
