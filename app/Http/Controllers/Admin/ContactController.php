@@ -141,7 +141,7 @@ class ContactController extends MasterController
             'notification' => array('title'=>'رسالة إدارية', 'sound' => 'default'),
             'data' => [
                 'title' => 'رسالة إدارية',
-                'body' => $note['ar'],
+                'body' => $note,
                 'status' => 'admin',
                 'type'=>'admin',
             ],
