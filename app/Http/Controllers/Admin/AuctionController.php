@@ -120,7 +120,7 @@ class AuctionController extends MasterController
             ]);
             $key++;
         }
-        $end_date = Carbon::createFromTimestamp($start_date)->addSeconds($key*$auction->duration)->timestamp;
+        $end_date = Carbon::createFromTimestamp($start_date)->addSeconds(count($auction->items)*$auction->duration)->timestamp;
         $auction->update([
             'more_details'=>[
                 'end_date'=>$end_date
