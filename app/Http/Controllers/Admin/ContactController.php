@@ -138,7 +138,7 @@ class ContactController extends MasterController
     public function notify($receiver,$note){
         $push = new PushNotification('fcm');
         $msg = [
-            'notification' => array('title'=>'رسالة إدارية', 'sound' => 'default'),
+            'notification' => array('title'=>$note, 'sound' => 'default'),
             'data' => [
                 'title' => 'رسالة إدارية',
                 'body' => $note,
