@@ -102,6 +102,40 @@ class BidController extends MasterController
         $this->notify_admin($admin_title, $auction_item);
         return $this->sendResponse('تمت العملية بنجاح');
     }
+    public function sendOffer($item_id,Request $request){
+        $item=Item::find($item_id);
+        $auction_item=AuctionItem::where('item_id',$item_id)->latest()->first();
+        $sender=$request->user();
+        if ($sender->id == $item->user_id){
+            $latest_offer=Offer::where('auction_item_id',$auction_item->id)->latest()->first();
+            if ($latest_offer->sender_id==$sender->id){
+                $receiver=User::find($latest_offer->receiver_id);
+            }else{
+                $receiver=User::find($latest_offer->sender_id);
+            }
+        }else{
+            $receiver=User::find($item->user_id);
+        }
+        $pending_offer=Offer::where(['sender_id'=>$sender->id,'receiver_id'=>$receiver->id,'auction_item_id'=>$auction_item->id,'status'=>'pending'])->latest()->first();
+        if ($pending_offer){
+            return $this->sendError('لم يتم الرد على عرضك الأخير');
+        }
+        $offer=Offer::create([
+            'sender_id'=>$sender->id,
+            'receiver_id'=>$receiver->id,
+            'auction_item_id'=>$auction_item->id,
+            'price'=>$request['price'],
+            'status'=>'pending'
+        ]);
+        $offers=Offer::where(['auction_item_id'=>$auction_item->id,'receiver_id'=>$receiver->id])->orWhere(['auction_item_id'=>$auction_item->id,'sender_id'=>$receiver->id])->latest()->get();
+        foreach ($offers as $old_offer){
+            $old_offer->update([
+                'status'=>'opposite'
+            ]);
+        }
+        $this->notify($offer);
+        return $this->sendResponse('تم الإرسال بنجاح');
+    }
     public function acceptOffer($item_id,$offer_id,Request $request):string{
         $user=$request->user();
         $auction_item=AuctionItem::where('item_id',$item_id)->latest()->first();
@@ -177,30 +211,6 @@ class BidController extends MasterController
             ->setDevicesToken($receiver->device['id'])
             ->send();
         return $this->sendResponse('تمت العملية بنجاح');
-    }
-    public function sendOffer($item_id,Request $request){
-        $item=Item::find($item_id);
-        $auction_item=AuctionItem::where('item_id',$item_id)->latest()->first();
-        $sender=$request->user();
-        if ($sender->id == $item->user_id){
-            $latest_offer=Offer::where('auction_item_id',$auction_item->id)->latest()->first();
-            if ($latest_offer->sender_id==$sender->id){
-                $receiver=User::find($latest_offer->receiver_id);
-            }else{
-                $receiver=User::find($latest_offer->sender_id);
-            }
-        }else{
-            $receiver=User::find($item->user_id);
-        }
-        $offer=Offer::create([
-           'sender_id'=>$sender->id,
-            'receiver_id'=>$receiver->id,
-            'auction_item_id'=>$auction_item->id,
-            'price'=>$request['price'],
-            'status'=>'pending'
-        ]);
-        $this->notify($offer);
-        return $this->sendResponse('تم الإرسال بنجاح');
     }
     public function itemOffers($item_id):object{
         $user=\request()->user();

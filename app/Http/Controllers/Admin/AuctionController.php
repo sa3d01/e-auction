@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Auction;
 use App\AuctionItem;
+use App\Http\Resources\ItemResource;
 use App\Item;
 use Carbon\Carbon;
+use Edujugon\PushNotification\PushNotification;
 use Illuminate\Http\Request;
 
 class AuctionController extends MasterController
@@ -61,6 +63,19 @@ class AuctionController extends MasterController
         }
         $auction = $this->model->create($data);
         $this->auction_items($auction);
+        $push = new PushNotification('fcm');
+        $msg = [
+            'notification' => array('title'=>'', 'sound' => 'default'),
+            'data' => [
+                'title' => '',
+                'body' => '',
+                'type'=>'new_auction',
+            ],
+            'priority' => 'high',
+        ];
+        $push->setMessage($msg)
+            ->sendByTopic('new_auction')
+            ->send();
         return redirect()->route('admin.auction.index')->with('created', 'تمت الاضافة بنجاح');
     }
 
@@ -84,9 +99,7 @@ class AuctionController extends MasterController
             'status' => 'shown',
             'type' => 'item',
             'title' => 'قائمة السلع ',
-            'index_fields' => ['الرقم التسلسلى' => 'id',
-//                'العنوان' => 'name'
-            ],
+            'index_fields' => ['الرقم التسلسلى' => 'id'],
             'selects' => [
                 [
                     'name' => 'user',
