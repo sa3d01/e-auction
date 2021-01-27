@@ -32,6 +32,7 @@ class SettingController extends MasterController
         $data['app_ratio'] = $setting->app_ratio;
         $data['tax_ratio'] = $setting->tax_ratio;
         $data['owner_tax_ratio'] = $setting->owner_tax_ratio;
+        $data['finish_papers'] = $setting->finish_papers;
         $data['add_item_tax'] = $setting->add_item_tax;
         $data['socials'] = $setting->socials;
         $data['purchasing_power_ratio'] = $setting->purchasing_power_ratio;

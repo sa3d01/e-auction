@@ -25,12 +25,13 @@ class CreateSettingsTable extends Migration
             $table->integer('auction_period')->default(60);
             $table->integer('auction_increasing_period')->default(60);
             //علي الشاري
+            $table->integer('finish_papers')->default(0);
+            $table->integer('tax_ratio')->default(60);
             $table->integer('owner_tax_ratio')->default(15);
             $table->integer('app_ratio')->default(2);
             $table->integer('add_item_tax')->default(60);
             //نسبة بتضرب فى القوة الشرائية والنتيجة يقدر يزايد بيها
             $table->integer('purchasing_power_ratio')->default(60);
-            $table->integer('tax_ratio')->default(60);
             $table->json('more_details')->nullable();
             $table->timestamps();
         });

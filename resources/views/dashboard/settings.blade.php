@@ -61,6 +61,27 @@
                                         </div>
                                         <div class="form-group">
                                             <label>
+                                                <i class="os-icon os-icon-percent"></i>نسبة الضريبة المضافة
+                                            </label>
+                                            <input name="owner_tax_ratio" value="{{$row->owner_tax_ratio}}" class="form-control" type="number" min="0">
+                                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>
+                                                <i class="os-icon os-icon-dollar-sign"></i> رسوم نقل الملكية
+                                            </label>
+                                            <input name="finish_papers" value="{{$row->finish_papers}}" class="form-control" type="number" min="0">
+                                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>
+                                                <i class="os-icon os-icon-dollar-sign"></i> الرسوم الإدارية
+                                            </label>
+                                            <input name="tax_ratio" value="{{$row->tax_ratio}}" class="form-control" type="number" min="0">
+                                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>
                                                 <i class="os-icon os-icon-dollar-sign"></i>رسوم اضافة منتج
                                             </label>
                                             <input name="add_item_tax" value="{{$row->add_item_tax}}" class="form-control" type="number" min="0">
