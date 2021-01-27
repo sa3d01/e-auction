@@ -72,7 +72,7 @@ class ItemResource extends JsonResource
             'direct_pay'=>$direct_pay,
             'user_price'=>$user_price,
             'my_item'=>$my_item,
-            'tax'=>$this->tax,
+            'tax'=> $this->tax=='true'?true:false,
         ];
     }
 }
