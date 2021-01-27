@@ -29,17 +29,17 @@ class SettingController extends MasterController
             $data['licence'] = $setting->licence['ar'];
             $data['purchasing_power_text'] = $setting->purchasing_power_text['ar'];
         }
-        $data['app_ratio'] = $setting->app_ratio;
-        $data['tax_ratio'] = $setting->tax_ratio;
-        $data['owner_tax_ratio'] = $setting->owner_tax_ratio;
-        $data['finish_papers'] = $setting->finish_papers;
-        $data['add_item_tax'] = $setting->add_item_tax;
+        $data['app_ratio'] = (integer)$setting->app_ratio;
+        $data['tax_ratio'] = (integer)$setting->tax_ratio;
+        $data['owner_tax_ratio'] = (integer)$setting->owner_tax_ratio;
+        $data['finish_papers'] = (integer)$setting->finish_papers;
+        $data['add_item_tax'] = (integer)$setting->add_item_tax;
         $data['socials'] = $setting->socials;
-        $data['purchasing_power_ratio'] = $setting->purchasing_power_ratio;
+        $data['purchasing_power_ratio'] = (integer)$setting->purchasing_power_ratio;
 
-        $data['less_tenThousand'] = $setting->more_details['less_tenThousand'];
-        $data['less_hundredThousand'] = $setting->more_details['less_hundredThousand'];
-        $data['more_hundredThousand'] = $setting->more_details['more_hundredThousand'];
+        $data['less_tenThousand'] = (integer)$setting->more_details['less_tenThousand'];
+        $data['less_hundredThousand'] = (integer)$setting->more_details['less_hundredThousand'];
+        $data['more_hundredThousand'] = (integer)$setting->more_details['more_hundredThousand'];
 
         return $this->sendResponse($data);
     }
