@@ -120,6 +120,12 @@ class BidController extends MasterController
         if ($pending_offer){
             return $this->sendError('لم يتم الرد على عرضك الأخير');
         }
+        $offers=Offer::where(['auction_item_id'=>$auction_item->id,'receiver_id'=>$receiver->id])->orWhere(['auction_item_id'=>$auction_item->id,'sender_id'=>$receiver->id])->latest()->get();
+        foreach ($offers as $old_offer){
+            $old_offer->update([
+                'status'=>'opposite'
+            ]);
+        }
         $offer=Offer::create([
             'sender_id'=>$sender->id,
             'receiver_id'=>$receiver->id,
@@ -127,12 +133,7 @@ class BidController extends MasterController
             'price'=>$request['price'],
             'status'=>'pending'
         ]);
-        $offers=Offer::where(['auction_item_id'=>$auction_item->id,'receiver_id'=>$receiver->id])->orWhere(['auction_item_id'=>$auction_item->id,'sender_id'=>$receiver->id])->latest()->get();
-        foreach ($offers as $old_offer){
-            $old_offer->update([
-                'status'=>'opposite'
-            ]);
-        }
+
         $this->notify($offer);
         return $this->sendResponse('تم الإرسال بنجاح');
     }
