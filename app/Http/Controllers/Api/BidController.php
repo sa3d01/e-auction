@@ -120,6 +120,9 @@ class BidController extends MasterController
         if ($pending_offer){
             return $this->sendError('لم يتم الرد على عرضك الأخير');
         }
+        if (($item->price!=null) && ($item->price < $request['price'])){
+            return $this->sendError('عرض السعر المقدم أعلى من السعر المحدد من المالك');
+        }
         $offers=Offer::where(['auction_item_id'=>$auction_item->id,'receiver_id'=>$receiver->id])->orWhere(['auction_item_id'=>$auction_item->id,'sender_id'=>$receiver->id])->latest()->get();
         foreach ($offers as $old_offer){
             $old_offer->update([
@@ -174,15 +177,17 @@ class BidController extends MasterController
     public function refuseOffer($item_id,Request $request){
         $user=$request->user();
         $auction_item=AuctionItem::where('item_id',$item_id)->latest()->first();
-        $item=Item::find($auction_item->item_id);
-        $item->update([
-            'status'=>'accepted',
-            'reason'=>'resale'
-        ]);
-        $auction_item->delete();
-        $notifications=Notification::where('item_id',$item_id)->get();
-        foreach ($notifications as $notification){
-            $notification->delete();
+        $item=Item::find($item_id);
+        if (($user->id==$item->user_id) && ($auction_item->status=='negotiation')){
+            $item->update([
+                'status'=>'accepted',
+                'reason'=>'resale'
+            ]);
+            $auction_item->delete();
+            $notifications=Notification::where('item_id',$item_id)->get();
+            foreach ($notifications as $notification){
+                $notification->delete();
+            }
         }
         $latest_offer=Offer::where('auction_item_id',$auction_item->id)->latest()->first();
         if ($latest_offer->sender_id==$user->id){

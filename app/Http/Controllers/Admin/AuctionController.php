@@ -65,7 +65,7 @@ class AuctionController extends MasterController
         $this->auction_items($auction);
         $push = new PushNotification('fcm');
         $msg = [
-            'notification' => array('title'=>'', 'sound' => 'default'),
+            'notification' => null,
             'data' => [
                 'title' => '',
                 'body' => '',
