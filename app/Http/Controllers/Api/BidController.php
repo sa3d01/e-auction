@@ -192,7 +192,7 @@ class BidController extends MasterController
         }
         $latest_offer=Offer::where('auction_item_id',$auction_item->id)->latest()->first();
         $latest_offer->update([
-            'status'=>'rejected'
+            'status'=>'pending'
         ]);
         if ($latest_offer->sender_id==$user->id){
             $receiver=User::find($latest_offer->receiver_id);
