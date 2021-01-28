@@ -179,8 +179,7 @@ class BidController extends MasterController
         $user=$request->user();
         $auction_item=AuctionItem::where('item_id',$item_id)->latest()->first();
         $item=Item::find($item_id);
-        return $this->sendError($user->id.' '.$item->user_id.' '.$auction_item->status);
-        if (($user->id==$item->user_id) && ($auction_item->status=='negotiation')){
+        if (($user->id==$item->user_id) && ($auction_item->more_details['status']=='negotiation')){
             $item->update([
                 'status'=>'accepted',
                 'reason'=>'resale'
