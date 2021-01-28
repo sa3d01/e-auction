@@ -175,31 +175,33 @@ class BidController extends MasterController
         }
         return $this->sendResponse('تمت العملية بنجاح');
     }
-    public function refuseOffer($item_id,Request $request){
+    public function refuseOffer($offer_id,Request $request){
         $user=$request->user();
-        $auction_item=AuctionItem::where('item_id',$item_id)->latest()->first();
-        $item=Item::find($item_id);
+        $offer=Offer::find($offer_id);
+        $auction_item=AuctionItem::find($offer->auction_item_id);
+        $item=Item::find($auction_item->item_id);
         if (($user->id==$item->user_id) && ($auction_item->status=='negotiation')){
             $item->update([
                 'status'=>'accepted',
                 'reason'=>'resale'
             ]);
             $auction_item->delete();
-            $notifications=Notification::where('item_id',$item_id)->get();
+            $notifications=Notification::where('item_id',$auction_item->item_id)->get();
             foreach ($notifications as $notification){
                 $notification->delete();
+            }
+        }else{
+            $opposite_offer=Offer::where('auction_item_id',$auction_item->id)->where('status','opposite')->latest()->first();
+            if ($opposite_offer){
+                $opposite_offer->update([
+                    'status'=>'pending'
+                ]);
             }
         }
         $latest_offer=Offer::where('auction_item_id',$auction_item->id)->latest()->first();
         $latest_offer->update([
             'status'=>'rejected'
         ]);
-        $opposite_offer=Offer::where('auction_item_id',$auction_item->id)->where('status','opposite')->latest()->first();
-        if ($opposite_offer){
-            $opposite_offer->update([
-               'status'=>'pending'
-            ]);
-        }
         if ($latest_offer->sender_id==$user->id){
             $receiver=User::find($latest_offer->receiver_id);
         }else{
