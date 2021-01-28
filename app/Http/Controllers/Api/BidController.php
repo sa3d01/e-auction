@@ -212,7 +212,6 @@ class BidController extends MasterController
         $data['note']=$title;
         $data['receiver_id']=$receiver->id;
         $data['item_id']=$auction_item->item_id;
-        $data['more_details']=['offer_id'=>$latest_offer->id];
         Notification::create($data);
         $push = new PushNotification('fcm');
         $msg = [
@@ -222,7 +221,6 @@ class BidController extends MasterController
                 'body' => $title['ar'],
                 'status' => 'refuse_offer',
                 'type'=>'refuse_offer',
-                'offer_id'=>$latest_offer->id
             ],
             'priority' => 'high',
         ];
