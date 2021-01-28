@@ -192,8 +192,14 @@ class BidController extends MasterController
         }
         $latest_offer=Offer::where('auction_item_id',$auction_item->id)->latest()->first();
         $latest_offer->update([
-            'status'=>'pending'
+            'status'=>'rejected'
         ]);
+        $opposite_offer=Offer::where('auction_item_id',$auction_item->id)->where('status','opposite')->latest()->first();
+        if ($opposite_offer){
+            $opposite_offer->update([
+               'status'=>'pending'
+            ]);
+        }
         if ($latest_offer->sender_id==$user->id){
             $receiver=User::find($latest_offer->receiver_id);
         }else{
@@ -230,7 +236,7 @@ class BidController extends MasterController
         if (!$auction_item){
             return $this->sendError('توجد مشكله ما');
         }
-        $offers=Offer::where(['auction_item_id'=>$auction_item->id])->where('status','!=','opposite')->latest()->get();
+        $offers=Offer::where(['auction_item_id'=>$auction_item->id])->where('status','pending')->latest()->get();
         $data=[];
         foreach ($offers as $offer){
             $arr['id']=$offer->id;
