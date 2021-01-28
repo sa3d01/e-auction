@@ -20,10 +20,10 @@ class NotificationCollection extends ResourceCollection
             $arr['type']=$obj->type;
             $arr['read']=($obj->read == 'true') ? true : false;
             if (\request()->header('lang')=='en'){
-                $arr['title']=$obj->title['en'];
+                $arr['title']=$obj->note['en'];
                 $arr['note']=$obj->note['en'];
             }else{
-                $arr['title']=$obj->title['ar'];
+                $arr['title']=$obj->note['ar'];
                 $arr['note']=$obj->note['ar'];
             }
             $arr['item_id']=(int)$obj->item_id;
