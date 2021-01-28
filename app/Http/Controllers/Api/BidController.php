@@ -120,8 +120,10 @@ class BidController extends MasterController
         if ($pending_offer){
             return $this->sendError('لم يتم الرد على عرضك الأخير');
         }
-        if (($item->price!=null) && ($item->price < $request['price'])){
-            return $this->sendError('عرض السعر المقدم أعلى من السعر المحدد من المالك');
+        if ($item->price!=null){
+            if ($item->price < $request['price']){
+                return $this->sendError('عرض السعر المقدم أعلى من السعر المحدد من المالك');
+            }
         }
         $offers=Offer::where(['auction_item_id'=>$auction_item->id,'receiver_id'=>$receiver->id])->orWhere(['auction_item_id'=>$auction_item->id,'sender_id'=>$receiver->id])->latest()->get();
         foreach ($offers as $old_offer){
