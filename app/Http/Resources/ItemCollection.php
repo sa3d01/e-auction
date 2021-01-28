@@ -73,7 +73,7 @@ class ItemCollection extends ResourceCollection
                 $arr['direct_pay']=false;
                 $arr['user_price']="";
                 $arr['live']=false;
-                $arr['auction_type']= "";
+                $arr['auction_type']= $obj->auction_type->name[$this->lang()];
                 $arr['start_date']= 123;
                 $arr['auction_duration']=1;
                 $arr['auction_price']=0;
