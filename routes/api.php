@@ -72,17 +72,19 @@ Route::group(['prefix' => 'v1','namespace'=>'Api'], function () {
         Route::get('/{id}', 'UserController@show');
     });
 
+    Route::get('/negotiation_items', 'NegotiationController@myNegotiationItems')->middleware(CheckApiToken::class);
+
     Route::group(['prefix' => '/item'], function () {
         Route::post('/upload_images', 'ItemController@uploadImages')->middleware(CheckApiToken::class);
         Route::post('/', 'ItemController@store')->middleware(CheckApiToken::class);
         Route::get('/live', 'BidController@liveItem');
         Route::post('/search', 'AuctionController@search');
         Route::post('/{item}/bid', 'BidController@bid')->middleware(CheckApiToken::class);
-        Route::post('/{item}/offer', 'BidController@sendOffer')->middleware(CheckApiToken::class);
-        Route::post('/{item}/accept_offer/{offer}', 'BidController@acceptOffer')->middleware(CheckApiToken::class);
-        Route::post('/{item}/refuse_offer', 'BidController@refuseOffer')->middleware(CheckApiToken::class);
-        Route::get('/{item}/offer', 'BidController@itemOffers')->middleware(CheckApiToken::class);
-        Route::post('/{item}/direct_pay', 'BidController@directPay')->middleware(CheckApiToken::class);
+        Route::post('/{item}/offer', 'NegotiationController@sendOffer')->middleware(CheckApiToken::class);
+        Route::post('/{item}/accept_offer/{offer}', 'NegotiationController@acceptOffer')->middleware(CheckApiToken::class);
+        Route::post('/{item}/refuse_offer', 'NegotiationController@refuseOffer')->middleware(CheckApiToken::class);
+        Route::get('/{item}/offer', 'NegotiationController@itemOffers')->middleware(CheckApiToken::class);
+        Route::post('/{item}/direct_pay', 'NegotiationController@directPay')->middleware(CheckApiToken::class);
     });
 
     Route::group(['prefix' => '/home'], function () {

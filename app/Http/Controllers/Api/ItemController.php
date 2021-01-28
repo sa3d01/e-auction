@@ -19,7 +19,7 @@ class ItemController extends MasterController
         $this->model = $model;
         parent::__construct();
     }
-    public function uploadImages(Request $request)
+    public function uploadImages(Request $request):object
     {
         $validate = Validator::make($request->all(),
             [
@@ -40,7 +40,7 @@ class ItemController extends MasterController
         }
         return $this->sendResponse($data);
     }
-    public function store(Request $request){
+    public function store(Request $request):object{
         $user = auth()->user();
         $data=$request->all();
         $data['user_id']=$user->id;
@@ -66,10 +66,10 @@ class ItemController extends MasterController
             $user->update(['wallet'=>$wallet]);
         }
         $title['ar'] = 'تم إضافة سلعة جديدة عن طريق مستخدم رقم '. $user->id;
-        $this->notify_admin($title,$item);
+        $this->new_item_notify_admin($title,$item);
         return $this->sendResponse('تم ارسال طلب إضافة المنتج بنجاح');
     }
-    public function favouriteModification($item_id){
+    public function favouriteModification($item_id):object{
         $is_favourite=Favourite::where(['user_id'=>\request()->user()->id, 'item_id'=>$item_id])->first();
         if ($is_favourite){
             $is_favourite->delete();
@@ -84,7 +84,7 @@ class ItemController extends MasterController
         }
     }
 
-    public function notify_admin($title,$item){
+    public function new_item_notify_admin($title,$item){
         $data['title']=$title;
         $data['item_id']=$item->id;
         $data['type']='admin';
