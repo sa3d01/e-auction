@@ -74,8 +74,8 @@ class ItemCollection extends ResourceCollection
                 $arr['user_price']="";
                 $arr['live']=false;
                 $arr['auction_type']= "";
-                $arr['start_date']= "";
-                $arr['auction_duration']=0;
+                $arr['start_date']= 123;
+                $arr['auction_duration']=1;
                 $arr['auction_price']=0;
             }
             $arr['id']=(int)$obj->id;
