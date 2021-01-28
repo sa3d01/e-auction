@@ -230,7 +230,7 @@ class BidController extends MasterController
         if (!$auction_item){
             return $this->sendError('توجد مشكله ما');
         }
-        $offers=Offer::where(['auction_item_id'=>$auction_item->id,'status'=>'pending'])->latest()->get();
+        $offers=Offer::where(['auction_item_id'=>$auction_item->id])->where('status','!=','opposite')->latest()->get();
         $data=[];
         foreach ($offers as $offer){
             $arr['id']=$offer->id;
