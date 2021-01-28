@@ -80,7 +80,7 @@ Route::group(['prefix' => 'v1','namespace'=>'Api'], function () {
         Route::post('/{item}/bid', 'BidController@bid')->middleware(CheckApiToken::class);
         Route::post('/{item}/offer', 'BidController@sendOffer')->middleware(CheckApiToken::class);
         Route::post('/{item}/accept_offer/{offer}', 'BidController@acceptOffer')->middleware(CheckApiToken::class);
-        Route::post('/{offer}/refuse_offer', 'BidController@refuseOffer')->middleware(CheckApiToken::class);
+        Route::post('/{item}/refuse_offer', 'BidController@refuseOffer')->middleware(CheckApiToken::class);
         Route::get('/{item}/offer', 'BidController@itemOffers')->middleware(CheckApiToken::class);
         Route::post('/{item}/direct_pay', 'BidController@directPay')->middleware(CheckApiToken::class);
     });
