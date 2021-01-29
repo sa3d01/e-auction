@@ -20,6 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment=".">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/NegotiationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/NegotiationController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -247,14 +248,7 @@
       <workItem from="1611750989763" duration="7329000" />
       <workItem from="1611842080859" duration="916000" />
       <workItem from="1611844394998" duration="11457000" />
-      <workItem from="1611874072824" duration="3470000" />
-    </task>
-    <task id="LOCAL-00129" summary=".">
-      <created>1611364303934</created>
-      <option name="number" value="00129" />
-      <option name="presentableId" value="LOCAL-00129" />
-      <option name="project" value="LOCAL" />
-      <updated>1611364303934</updated>
+      <workItem from="1611874072824" duration="4382000" />
     </task>
     <task id="LOCAL-00130" summary=".">
       <created>1611364600593</created>
@@ -592,7 +586,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611877276472</updated>
     </task>
-    <option name="localTasksCounter" value="178" />
+    <task id="LOCAL-00178" summary=".">
+      <created>1611877618226</created>
+      <option name="number" value="00178" />
+      <option name="presentableId" value="LOCAL-00178" />
+      <option name="project" value="LOCAL" />
+      <updated>1611877618226</updated>
+    </task>
+    <option name="localTasksCounter" value="179" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

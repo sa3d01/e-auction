@@ -25,7 +25,7 @@ class NegotiationController extends MasterController
         parent::__construct();
     }
 
-    public function directPay($item_id, Request $request)
+    public function directPay($item_id, Request $request):object
     {
         $user = $request->user();
         $auction_item = AuctionItem::where('item_id', $item_id)->latest()->first();
@@ -61,7 +61,7 @@ class NegotiationController extends MasterController
         return $this->sendResponse('تمت العملية بنجاح');
     }
 
-    public function sendOffer($item_id, Request $request)
+    public function sendOffer($item_id, Request $request):object
     {
         $item = Item::find($item_id);
         $auction_item = AuctionItem::where('item_id', $item_id)->latest()->first();
@@ -138,7 +138,7 @@ class NegotiationController extends MasterController
         return $this->sendResponse('تمت العملية بنجاح');
     }
 
-    public function refuseOffer($item_id, Request $request)
+    public function refuseOffer($item_id, Request $request):object
     {
         $user = $request->user();
         $auction_item = AuctionItem::where('item_id', $item_id)->latest()->first();
@@ -196,7 +196,6 @@ class NegotiationController extends MasterController
 
     public function itemOffers($item_id): object
     {
-        $user = \request()->user();
         $auction_item = AuctionItem::where('item_id', $item_id)->latest()->first();
         if (!$auction_item) {
             return $this->sendError('توجد مشكله ما');
