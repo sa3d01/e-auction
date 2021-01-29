@@ -27,7 +27,7 @@
                                 @endforeach
                                 <th>السلع المعروضة</th>
                                 <th>حالة المزاد</th>
-                                <th>المزيد</th>
+{{--                                <th>المزيد</th>--}}
                             </tr>
                             </thead>
                             <tfoot>
@@ -38,7 +38,7 @@
                                 @endforeach
                                 <th>السلع المعروضة</th>
                                 <th>حالة المزاد</th>
-                                <th>المزيد</th>
+{{--                                <th>المزيد</th>--}}
                             </tr>
                             </tfoot>
                             <tbody>
@@ -60,17 +60,17 @@
                                     <td>
                                         {!! $row->auctionStatus() !!}
                                     </td>
-                                    <td>
-                                        <form class="delete" data-id="{{$row->id}}" method="POST" action="{{ route('admin.'.$type.'.destroy',[$row->id]) }}">
-                                            @csrf
-                                            {{ method_field('DELETE') }}
-                                            <input type="hidden" value="{{$row->id}}">
-                                            <button type="button " class="btn p-0 no-bg">
-                                                <i class="fa fa-trash text-danger"></i>
-                                            </button>
-                                        </form>
+{{--                                    <td>--}}
+{{--                                        <form class="delete" data-id="{{$row->id}}" method="POST" action="{{ route('admin.'.$type.'.destroy',[$row->id]) }}">--}}
+{{--                                            @csrf--}}
+{{--                                            {{ method_field('DELETE') }}--}}
+{{--                                            <input type="hidden" value="{{$row->id}}">--}}
+{{--                                            <button type="button " class="btn p-0 no-bg">--}}
+{{--                                                <i class="fa fa-trash text-danger"></i>--}}
+{{--                                            </button>--}}
+{{--                                        </form>--}}
 {{--                                        <a href="{{route('admin.item.show',$row->id)}}"><i class="os-icon os-icon-eye"></i></a>--}}
-                                    </td>
+{{--                                    </td>--}}
                                 </tr>
                             @endforeach
                             </tbody>

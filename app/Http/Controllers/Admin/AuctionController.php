@@ -43,7 +43,7 @@ class AuctionController extends MasterController
             'title' => 'أضافة مزاد',
             'create_fields' => ['موعد بداية المزاد' => 'start_date', 'مدة المزايدة على السلعة (بالثوانى)' => 'duration'],
             'multi_select' => [
-                'rows' => Item::where(['status' => 'accepted', 'pay_status' => 1])->whereHas('reports')->where('auction_price', '!=', 'null')->get(),
+                'rows' => Item::where(['status' => 'accepted', 'pay_status' => 1])->orWhere(['status' => 'expired', 'pay_status' => 1])->whereHas('reports')->where('auction_price', '!=', 'null')->get(),
                 'title' => 'السلع',
                 'input_name' => 'items'
             ],

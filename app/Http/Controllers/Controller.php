@@ -68,6 +68,9 @@ class Controller extends BaseController
                                 'status' => 'expired'
                             ]
                         ]);
+                        $auction_item->item->update([
+                            'status'=>'expired'
+                        ]);
                     }
                 }elseif ($auction_item->item->auction_type_id==3) {
                     $soon_winner = AuctionUser::where('item_id', $auction_item->item_id)->latest()->first();
@@ -102,6 +105,9 @@ class Controller extends BaseController
                                 'status' => 'expired'
                             ]
                         ]);
+                        $auction_item->item->update([
+                            'status'=>'expired'
+                        ]);
                     }
                 }else {
                     $soon_winner = AuctionUser::where('item_id', $auction_item->item_id)->latest()->first();
@@ -126,6 +132,9 @@ class Controller extends BaseController
                             'more_details' => [
                                 'status' => 'expired'
                             ]
+                        ]);
+                        $auction_item->item->update([
+                            'status'=>'expired'
                         ]);
                     }
                 }
