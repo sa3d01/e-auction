@@ -219,10 +219,11 @@ class NegotiationController extends MasterController
             return $this->sendError('توجد مشكله ما');
         }
         if (auth()->user()->id == $auction_item->item->user_id) {
-            $offers = Offer::where(['auction_item_id' => $auction_item->id])->where('status', 'pending')->latest()->get();
+            $q_offers = Offer::where(['auction_item_id' => $auction_item->id]);
         }else{
-            $offers = Offer::where(['auction_item_id' => $auction_item->id,'status'=>'pending','sender_id'=>$auction_item->item->user_id,'receiver_id'=>auth()->user()->id])->orWhere(['auction_item_id' => $auction_item->id,'status'=>'pending','receiver_id'=>$auction_item->item->user_id,'sender_id'=>auth()->user()->id])->latest()->get();
+            $q_offers = Offer::where(['auction_item_id' => $auction_item->id,'sender_id'=>$auction_item->item->user_id,'receiver_id'=>auth()->user()->id])->orWhere(['auction_item_id' => $auction_item->id,'receiver_id'=>$auction_item->item->user_id,'sender_id'=>auth()->user()->id]);
         }
+        $offers=$q_offers->where('status','pending')->latest()->get();
         $data = [];
         foreach ($offers as $offer) {
             $arr['id'] = $offer->id;
