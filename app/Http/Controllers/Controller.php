@@ -46,9 +46,6 @@ class Controller extends BaseController
                     ]
                 ]);
             } elseif (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration) < Carbon::now()) {
-//                $auction_item->update([
-//                    'vip' => 'false'
-//                ]);
                 if ($auction_item->item->auction_type_id==4 || $auction_item->item->auction_type_id==2) {
                     $soon_winner = AuctionUser::where('item_id', $auction_item->item_id)->latest()->first();
                     if ($soon_winner) {
