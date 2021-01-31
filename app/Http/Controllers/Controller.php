@@ -45,6 +45,12 @@ class Controller extends BaseController
                         'status' => 'live'
                     ]
                 ]);
+                $expired_offers=Offer::where('auction_item_id',$auction_item->id)->get();
+                foreach ($expired_offers as $expired_offer){
+                    $expired_offer->update([
+                       'status'=>'expired'
+                    ]);
+                }
             } elseif (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration) < Carbon::now()) {
                 if ($auction_item->item->auction_type_id==4 || $auction_item->item->auction_type_id==2) {
                     $soon_winner = AuctionUser::where('item_id', $auction_item->item_id)->latest()->first();
