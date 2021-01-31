@@ -211,6 +211,7 @@ class NegotiationController extends MasterController
         $q_offers = Offer::where('auction_item_id' , $auction_item->id);
 
         if (\request()->user()->id != $auction_item->item->user_id) {
+            return 'a';
             $q_offers = $q_offers->where(['sender_id'=>$auction_item->item->user_id,'receiver_id'=>\request()->user()->id])
                 ->orWhere(['receiver_id'=>$auction_item->item->user_id,'sender_id'=>\request()->user()->id]);
         }
