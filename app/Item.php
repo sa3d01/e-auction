@@ -88,7 +88,7 @@ class Item extends Model
             return"";
         }
         $action = route('admin.item_vip.update', [$this->attributes['id']]);
-        if ($auction_item->vip == "true"){
+        if ($auction_item->vip === "true"){
             return "<a class='block btn btn-success btn-sm' data-href='$action' href='$action'><i class='os-icon os-icon-check-circle'></i><span>سلعة مميزة | الغاء </span></a>";
         }else{
             return "<a class='block btn btn-info btn-sm' data-href='$action' href='$action'><i class='os-icon os-icon-activity'></i><span>تمميز السلعة !</span></a>";

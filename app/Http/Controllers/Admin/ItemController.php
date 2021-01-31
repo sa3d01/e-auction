@@ -98,7 +98,7 @@ class ItemController extends MasterController
     }
     public function update_vip($item_id){
         $auction_item=AuctionItem::where('item_id',$item_id)->latest()->first();
-        if ($auction_item->vip == "true"){
+        if ($auction_item->vip === "true"){
             $auction_item->update([
                 'vip'=>'false'
             ]);
@@ -107,6 +107,7 @@ class ItemController extends MasterController
                 'vip'=>'true'
             ]);
         }
+        $auction_item->refresh();
         $auction_item->refresh();
         return redirect()->back()->with('updated');
     }
