@@ -37,14 +37,6 @@ class Controller extends BaseController
 
     function auctionItemStatusUpdate()
     {
-        $vip_auction_items = AuctionItem::all();
-        foreach ($vip_auction_items as $vip_auction_item){
-            if (Carbon::createFromTimestamp($vip_auction_item->start_date)->addSeconds($vip_auction_item->auction->duration) > Carbon::now()) {
-                $vip_auction_item->update([
-                    'vip' => 'false'
-                ]);
-            }
-        }
         $auction_items = AuctionItem::where('more_details->status', '!=', 'paid')->where('more_details->status', '!=', 'expired')->where('more_details->status', '!=', 'negotiation')->get();
         foreach ($auction_items as $auction_item) {
             if ((Carbon::createFromTimestamp($auction_item->start_date) <= Carbon::now()) && (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration) >= Carbon::now())) {
@@ -54,9 +46,9 @@ class Controller extends BaseController
                     ]
                 ]);
             } elseif (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration) < Carbon::now()) {
-//                $auction_item->update([
-//                    'vip' => 'false'
-//                ]);
+                $auction_item->update([
+                    'vip' => 'false'
+                ]);
                 if ($auction_item->item->auction_type_id==4 || $auction_item->item->auction_type_id==2) {
                     $soon_winner = AuctionUser::where('item_id', $auction_item->item_id)->latest()->first();
                     if ($soon_winner) {
