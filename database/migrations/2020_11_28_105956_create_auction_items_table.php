@@ -20,7 +20,7 @@ class CreateAuctionItemsTable extends Migration
             $table->integer('price')->default(0);
             $table->integer('latest_charge')->default(0);
             $table->integer('start_date')->nullable();
-            $table->enum('vip',['true','false'])->default('false');
+            $table->char('vip')->default('false');
             $table->json('more_details')->nullable();
             $table->timestamps();
         });
