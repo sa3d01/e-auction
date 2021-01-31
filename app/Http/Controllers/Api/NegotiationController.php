@@ -176,7 +176,9 @@ class NegotiationController extends MasterController
         $data['note'] = $title;
         $data['receiver_id'] = $receiver->id;
         $data['item_id'] = $auction_item->item_id;
-        $data['offer_id'] = $latest_offer->id;
+        $data['more_details'] =[
+            'offer_id'=>$latest_offer->id
+        ];
         Notification::create($data);
         $push = new PushNotification('fcm');
         $msg = [
