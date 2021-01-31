@@ -209,7 +209,8 @@ class NegotiationController extends MasterController
             return $this->sendError('توجد مشكله ما');
         }
         $q_offers=Offer::query();
-        $q_offers=$q_offers->where(['status'=>'pending','auction_item_id'=>$auction_item->id]);
+        $q_offers=$q_offers->where('auction_item_id',$auction_item->id);
+        $q_offers=$q_offers->where('status','pending');
         if (\request()->user()->id != $auction_item->item->user_id) {
             $q_offers = $q_offers->where('receiver_id',\request()->user()->id)->orWhere('sender_id',\request()->user()->id);
         }
