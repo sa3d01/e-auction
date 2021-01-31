@@ -67,15 +67,28 @@ class NegotiationController extends MasterController
         $item = Item::find($item_id);
         $auction_item = AuctionItem::where('item_id', $item_id)->latest()->first();
         $sender = $request->user();
-        if ($sender->id == $item->user_id) {
-            $latest_offer = Offer::where('auction_item_id', $auction_item->id)->latest()->first();
-            if ($latest_offer->sender_id == $sender->id) {
-                $receiver = User::find($latest_offer->receiver_id);
+        if ($request->has('offer_id')){
+            $latest_offer=Offer::find($request['offer_id']);
+            if ($sender->id == $item->user_id) {
+                if ($latest_offer->sender_id == $sender->id) {
+                    $receiver = User::find($latest_offer->receiver_id);
+                } else {
+                    $receiver = User::find($latest_offer->sender_id);
+                }
             } else {
-                $receiver = User::find($latest_offer->sender_id);
+                $receiver = User::find($item->user_id);
             }
-        } else {
-            $receiver = User::find($item->user_id);
+        }else{
+            if ($sender->id == $item->user_id) {
+                $latest_offer = Offer::where('auction_item_id', $auction_item->id)->latest()->first();
+                if ($latest_offer->sender_id == $sender->id) {
+                    $receiver = User::find($latest_offer->receiver_id);
+                } else {
+                    $receiver = User::find($latest_offer->sender_id);
+                }
+            } else {
+                $receiver = User::find($item->user_id);
+            }
         }
         $pending_offer = Offer::where(['sender_id' => $sender->id, 'receiver_id' => $receiver->id, 'auction_item_id' => $auction_item->id, 'status' => 'pending'])->latest()->first();
         if ($pending_offer) {
@@ -86,7 +99,7 @@ class NegotiationController extends MasterController
                 return $this->sendError('عرض السعر المقدم أعلى من السعر المحدد من المالك');
             }
         }
-        $offers = Offer::where(['auction_item_id' => $auction_item->id,'receiver_id' => $receiver->id,'sender_id' => auth()->user()->id])->orWhere(['auction_item_id' => $auction_item->id,'receiver_id'=>auth()->user()->id, 'sender_id' => $receiver->id])->latest()->get();
+        $offers = Offer::where(['auction_item_id' => $auction_item->id,'receiver_id' => $receiver->id,'sender_id' => auth()->user()->id])->orWhere(['auction_item_id' => $auction_item->id,'receiver_id'=>auth()->user()->id,'sender_id' => $receiver->id])->latest()->get();
         foreach ($offers as $old_offer) {
             $old_offer->update([
                 'status' => 'opposite'
