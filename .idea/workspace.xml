@@ -35,6 +35,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
+  </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/phpunit/php-text-template" />
@@ -250,6 +253,8 @@
       <workItem from="1611842080859" duration="916000" />
       <workItem from="1611844394998" duration="11457000" />
       <workItem from="1611874072824" duration="9049000" />
+      <workItem from="1611962632963" duration="2068000" />
+      <workItem from="1612109347028" duration="695000" />
     </task>
     <task id="LOCAL-00133" summary=".">
       <created>1611365160457</created>
