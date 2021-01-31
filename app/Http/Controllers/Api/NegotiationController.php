@@ -154,6 +154,7 @@ class NegotiationController extends MasterController
 
     public function refuseOffer($item_id, Request $request):object
     {
+        $refused_offer=Offer::find($request['offer_id']);
         $user = $request->user();
         $auction_item = AuctionItem::where('item_id', $item_id)->latest()->first();
         $item = Item::find($item_id);
@@ -168,21 +169,20 @@ class NegotiationController extends MasterController
                 $notification->delete();
             }
         } else {
-            $opposite_offer = Offer::where('auction_item_id', $auction_item->id)->where('status', 'opposite')->latest()->first();
+            $opposite_offer = Offer::where(['auction_item_id'=> $auction_item->id,'sender_id'=>$user->id,'receiver_id'=>$refused_offer->sender_id])->where('status', 'opposite')->latest()->first();
             if ($opposite_offer) {
                 $opposite_offer->update([
                     'status' => 'pending'
                 ]);
             }
         }
-        $latest_offer = Offer::where('auction_item_id', $auction_item->id)->latest()->first();
-        $latest_offer->update([
+        $refused_offer->update([
             'status' => 'rejected'
         ]);
-        if ($latest_offer->sender_id == $user->id) {
-            $receiver = User::find($latest_offer->receiver_id);
+        if ($refused_offer->sender_id == $user->id) {
+            $receiver = User::find($refused_offer->receiver_id);
         } else {
-            $receiver = User::find($latest_offer->sender_id);
+            $receiver = User::find($refused_offer->sender_id);
         }
         $title['ar'] = 'لقد تم رفض عرض السعر المقدم من قبلك على المزاد رقم ' . $auction_item->item_id;
         $data = [];
@@ -191,7 +191,7 @@ class NegotiationController extends MasterController
         $data['receiver_id'] = $receiver->id;
         $data['item_id'] = $auction_item->item_id;
         $data['more_details'] =[
-            'offer_id'=>$latest_offer->id
+            'offer_id'=>$refused_offer->id
         ];
         Notification::create($data);
         $push = new PushNotification('fcm');
@@ -202,7 +202,7 @@ class NegotiationController extends MasterController
                 'body' => $title['ar'],
                 'status' => 'refuse_offer',
                 'type' => 'refuse_offer',
-                'offer_id' => $latest_offer->id,
+                'offer_id' => $refused_offer->id,
             ],
             'priority' => 'high',
         ];
@@ -218,7 +218,11 @@ class NegotiationController extends MasterController
         if (!$auction_item) {
             return $this->sendError('توجد مشكله ما');
         }
-        $offers = Offer::where(['auction_item_id' => $auction_item->id])->where('status', 'pending')->latest()->get();
+        if (auth()->user()->id == $auction_item->item->user_id) {
+            $offers = Offer::where(['auction_item_id' => $auction_item->id])->where('status', 'pending')->latest()->get();
+        }else{
+            $offers = Offer::where(['auction_item_id' => $auction_item->id,'status'=>'pending','sender_id'=>$auction_item->item->user_id,'receiver_id'=>auth()->user()->id])->orWhere(['auction_item_id' => $auction_item->id,'status'=>'pending','receiver_id'=>$auction_item->item->user_id,'sender_id'=>auth()->user()->id])->latest()->get();
+        }
         $data = [];
         foreach ($offers as $offer) {
             $arr['id'] = $offer->id;
