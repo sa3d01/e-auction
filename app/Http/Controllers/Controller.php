@@ -37,10 +37,10 @@ class Controller extends BaseController
 
     function auctionItemStatusUpdate()
     {
-        $auction_items = AuctionItem::all();
-        foreach ($auction_items as $auction_item){
-            if (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration) > Carbon::now()) {
-                $auction_item->update([
+        $vip_auction_items = AuctionItem::all();
+        foreach ($vip_auction_items as $vip_auction_item){
+            if (Carbon::createFromTimestamp($vip_auction_item->start_date)->addSeconds($vip_auction_item->auction->duration) > Carbon::now()) {
+                $vip_auction_item->update([
                     'vip' => 'false'
                 ]);
             }
