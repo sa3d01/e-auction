@@ -85,7 +85,7 @@ class NegotiationController extends MasterController
                 return $this->sendError('عرض السعر المقدم أعلى من السعر المحدد من المالك');
             }
         }
-        $offers = Offer::where(['auction_item_id' => $auction_item->id, 'receiver_id' => $receiver->id])->orWhere(['auction_item_id' => $auction_item->id, 'sender_id' => $receiver->id])->latest()->get();
+        $offers = Offer::where(['auction_item_id' => $auction_item->id,'receiver_id' => $receiver->id,'sender_id' => auth()->user()->id])->orWhere(['auction_item_id' => $auction_item->id,'receiver_id'=>auth()->user()->id, 'sender_id' => $receiver->id])->latest()->get();
         foreach ($offers as $old_offer) {
             $old_offer->update([
                 'status' => 'opposite'
