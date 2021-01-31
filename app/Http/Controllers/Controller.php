@@ -46,13 +46,14 @@ class Controller extends BaseController
                     ]
                 ]);
             } elseif (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration) < Carbon::now()) {
-                $auction_item->update([
-                    'vip' => 'false'
-                ]);
+//                $auction_item->update([
+//                    'vip' => 'false'
+//                ]);
                 if ($auction_item->item->auction_type_id==4 || $auction_item->item->auction_type_id==2) {
                     $soon_winner = AuctionUser::where('item_id', $auction_item->item_id)->latest()->first();
                     if ($soon_winner) {
                         $auction_item->update([
+                            'vip' => 'false',
                             'more_details' => [
                                 'status' => 'negotiation'
                             ]
@@ -64,6 +65,7 @@ class Controller extends BaseController
                         $owner_title['ar'] = 'حظ أوفر المره القادمه ! لم يتم المزايده من قبل أحد على مزادك رقم ' . $auction_item->item_id;
                         $this->base_notify($owner_title, $auction_item->item->user_id, $auction_item->item_id);
                         $auction_item->update([
+                            'vip' => 'false',
                             'more_details' => [
                                 'status' => 'expired'
                             ]
@@ -77,6 +79,7 @@ class Controller extends BaseController
                     if ($soon_winner) {
                         if ($auction_item->price < $auction_item->item->price) {
                             $auction_item->update([
+                                'vip' => 'false',
                                 'more_details' => [
                                     'status' => 'negotiation'
                                 ]
@@ -90,6 +93,7 @@ class Controller extends BaseController
                             $this->base_notify($owner_title, $auction_item->item->user_id, $auction_item->item_id);
                             $this->notify_admin($admin_title, $auction_item);
                             $auction_item->update([
+                                'vip' => 'false',
                                 'more_details' => [
                                     'status' => 'paid'
                                 ]
@@ -101,6 +105,7 @@ class Controller extends BaseController
                         $owner_title['ar'] = 'حظ أوفر المره القادمه ! لم يتم المزايده من قبل أحد على مزادك رقم ' . $auction_item->item_id;
                         $this->base_notify($owner_title, $auction_item->item->user_id, $auction_item->item_id);
                         $auction_item->update([
+                            'vip' => 'false',
                             'more_details' => [
                                 'status' => 'expired'
                             ]
@@ -119,6 +124,7 @@ class Controller extends BaseController
                         $this->base_notify($owner_title, $auction_item->item->user_id, $auction_item->item_id);
                         $this->notify_admin($admin_title, $auction_item);
                         $auction_item->update([
+                            'vip' => 'false',
                             'more_details' => [
                                 'status' => 'paid'
                             ]
@@ -129,6 +135,7 @@ class Controller extends BaseController
                         $owner_title['ar'] = 'حظ أوفر المره القادمه ! لم يتم المزايده من قبل أحد على مزادك رقم ' . $auction_item->item_id;
                         $this->base_notify($owner_title, $auction_item->item->user_id, $auction_item->item_id);
                         $auction_item->update([
+                            'vip' => 'false',
                             'more_details' => [
                                 'status' => 'expired'
                             ]
