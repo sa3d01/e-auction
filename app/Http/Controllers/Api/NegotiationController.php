@@ -45,6 +45,7 @@ class NegotiationController extends MasterController
             'charge_price' => $charge_price
         ]);
         $auction_item->update([
+            'vip'=>'false',
             'price' => $auction_item->item->price,
             'latest_charge' => $charge_price,
             'more_details' => [
