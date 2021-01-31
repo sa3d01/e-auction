@@ -208,9 +208,9 @@ class NegotiationController extends MasterController
             $arr['user_id'] = $offer->sender_id;
             $arr['item'] = new ItemResource(Item::find($item_id));
             if ($offer->sender_id==auth()->user()->id && $offer->status=='pending'){
-                $arr['replied']=false;
-            }else{
                 $arr['replied']=true;
+            }else{
+                $arr['replied']=false;
             }
             $data[] = $arr;
         }
