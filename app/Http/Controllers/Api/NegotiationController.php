@@ -216,7 +216,6 @@ class NegotiationController extends MasterController
                 $query->where('receiver_id',\request()->user()->id)
                     ->orWhere('sender_id',\request()->user()->id);
             });
-//            $q_offers = $q_offers->where('receiver_id',\request()->user()->id)->orWhere('sender_id',\request()->user()->id);
         }
         $offers=$q_offers->latest()->get();
         $data = [];

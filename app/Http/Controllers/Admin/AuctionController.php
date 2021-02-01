@@ -37,13 +37,21 @@ class AuctionController extends MasterController
 
     public function create()
     {
+        $q_items=Item::query();
+        $q_items=$q_items->where('pay_status',1);
+        $q_items=$q_items->whereHas('reports');
+        $q_items=$q_items->where('auction_price', '!=', 'null');
+        $q_items = $q_items->where(function($query) {
+            $query->where('status','accepted')
+                ->orWhere('status','expired');
+        });
         return View('dashboard.auction.create', [
             'type' => 'auction',
             'action' => 'admin.auction.store',
             'title' => 'أضافة مزاد',
             'create_fields' => ['موعد بداية المزاد' => 'start_date', 'مدة المزايدة على السلعة (بالثوانى)' => 'duration'],
             'multi_select' => [
-                'rows' => Item::where(['status' => 'accepted', 'pay_status' => 1])->orWhere(['status' => 'expired', 'pay_status' => 1])->whereHas('reports')->where('auction_price', '!=', 'null')->get(),
+                'rows' => $q_items->get(),
                 'title' => 'السلع',
                 'input_name' => 'items'
             ],
