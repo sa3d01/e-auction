@@ -39,7 +39,7 @@ class CreateItemsTable extends Migration
             //سجل نظام ضريبي
             $table->enum('tax',['true','false'])->default('false');
             //pay throw item
-            $table->enum('status',['pending','accepted','rejected','shown','sold'])->default('pending');
+            $table->enum('status',['pending','accepted','rejected','shown','sold','expired'])->default('pending');
             $table->boolean('pay_status')->default(0);
             $table->timestamps();
         });
