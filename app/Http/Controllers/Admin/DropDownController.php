@@ -62,7 +62,7 @@ class DropDownController extends MasterController
     {
         return View('dashboard.create.create', [
             'type'=>'model',
-            'action'=>'admin.model.store',
+            'action'=>'admin.drop_down.store',
             'title'=>'أضافة ماركة',
             'create_fields'=>['الإسم' => 'name'],
             'languages'=>true,
