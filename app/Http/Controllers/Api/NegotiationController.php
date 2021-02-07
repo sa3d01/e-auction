@@ -53,7 +53,7 @@ class NegotiationController extends MasterController
                 'pay_type' => 'direct_pay'
             ]
         ]);
-        $winner_title['ar'] = 'تهانينا اليك ! لقد فزت فى المزاد الذى قمت بالمشاركة به رقم ' . $auction_item->item_id;
+        $winner_title['ar'] = 'تهانينا اليك ! لقد تمت عملية الشراء بنجاح .. سلعة رقم ' . $auction_item->item_id;
         $owner_title['ar'] = 'تهانينا اليك ! لقد تم بيع سلعتك بمزاد رقم ' . $auction_item->item_id;
         $admin_title['ar'] = 'تم بيع السلعة رقم ' . $auction_item->item_id;
         $this->base_notify($winner_title, $user->id, $auction_item->item_id);
@@ -266,7 +266,14 @@ class NegotiationController extends MasterController
     }
 
     public function myNegotiationItems():object{
-        $my_negotiations_auction_items = Offer::where(['sender_id' => \request()->user(), 'status' => 'pending'])->orWhere(['receiver_id' => \request()->user(), 'status' => 'pending'])->pluck('auction_item_id');
+        $q_offers=Offer::query();
+        $q_offers=$q_offers->where('status','pending');
+        $q_offers = $q_offers->where(function($query) {
+            $query->where('receiver_id',\request()->user()->id)
+                ->orWhere('sender_id',\request()->user()->id);
+        });
+//        $my_negotiations_auction_items = Offer::where(['sender_id' => \request()->user(), 'status' => 'pending'])->orWhere(['receiver_id' => \request()->user(), 'status' => 'pending'])->pluck('auction_item_id');
+        $my_negotiations_auction_items = $q_offers->pluck('auction_item_id');
         $item_ids=AuctionItem::whereIn('id',$my_negotiations_auction_items)->pluck('item_id');
         return $this->sendResponse(new ItemCollection(Item::whereIn('id',$item_ids)->latest()->get()));
     }
