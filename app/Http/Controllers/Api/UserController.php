@@ -5,12 +5,19 @@ namespace App\Http\Controllers\Api;
 use App\AuctionItem;
 use App\AuctionUser;
 use App\Favourite;
+use App\Http\Requests\Api\Auth\LoginRequest;
+use App\Http\Requests\Api\Auth\ProfileUpdateRequest;
+use App\Http\Requests\Api\Auth\ResendPhoneVerificationRequest;
+use App\Http\Requests\Api\Auth\VerifyPhoneRequest;
 use App\Http\Resources\ItemCollection;
 use App\Http\Resources\UserResource;
 use App\Item;
 use App\Transfer;
 use App\User;
+use App\Utils\PreparePhone;
 use Carbon\Carbon;
+use GuzzleHttp\Client;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -24,24 +31,13 @@ class UserController extends MasterController
         parent::__construct();
     }
 
-    public function authPhoneAndMail(Request $request)
+    public function authPhoneAndMail(LoginRequest $request):object
     {
-        $validator = Validator::make($request->only('email', 'phone'),
-            [
-                'email' => 'nullable|email|max:50',
-                'phone' => 'nullable|regex:/(05)[0-9]{8}/|max:10'
-            ]
-            , $this->validation_messages());
-        if ($validator->fails()) {
-            return $this->sendError($validator->errors()->first());
-        }
         if (!$request->has('email') && !$request->has('phone')) {
             return $this->sendError('يجب ادخال وسيلة ارسال واحدة على الأقل');
         }
-        $activation_code = 2021;// rand(1111, 9999);
-        if ($request->has('email') && $request->has('phone')){
-            $user = User::where('email', $request['email'])->where('phone', $request['phone'])->first();
-        }elseif ($request->has('email')){
+        $activation_code = rand(1111, 9999);
+        if ($request->has('email')){
             $user = User::where('email', $request['email'])->first();
         }else{
             $user = User::where('phone', $request['phone'])->first();
@@ -84,31 +80,34 @@ class UserController extends MasterController
     {
 //        Mail::to($email)->send(new ConfirmCode($activation_code));
     }
-
+    private function buildHttpClient()
+    {
+        $endpoint = 'https://www.hisms.ws/api.php/?send_sms';
+        return new Client(['base_uri' => $endpoint]);
+    }
     function sendToPhone($phone, $activation_code)
     {
-        //todo remove 0 and add key country
-        //Mail::to($email)->send(new ConfirmCode($activation_code));
+        $normalizedPhone = substr($phone, 1); // remove +
+        $client = $this->buildHttpClient();
+        $response = $client->request('POST', 'index.php', [
+            'query' => [
+                'Username' => "5f0f0941ed252",
+                'password' => "6667",
+                'numbers' => $normalizedPhone,
+                'sender' => "text",
+                'message' => $activation_code,
+            ]
+        ]);
+        $array = json_decode($response->getBody(), true);
+        return $array;
     }
 
-    public function verifyUser(Request $request)
+    public function verifyUser(VerifyPhoneRequest $request)
     {
-        $validator = Validator::make($request->only('email', 'activation_code'),
-            [
-                'activation_code' => 'required',
-                'email' => 'nullable|email|max:50',
-                'phone' => 'nullable|regex:/(05)[0-9]{8}/|max:10'
-            ]
-            , $this->validation_messages());
-        if ($validator->fails()) {
-            return $this->sendError($validator->errors()->first());
-        }
         if (!$request->has('email') && !$request->has('phone')) {
             return $this->sendError('يجب ادخال وسيلة ارسال واحدة على الأقل');
         }
-        if ($request->has('email') && $request->has('phone')){
-            $user = User::where('email', $request['email'])->where('phone', $request['phone'])->first();
-        }elseif ($request->has('email')){
+        if ($request->has('email')){
             $user = User::where('email', $request['email'])->first();
         }else{
             $user = User::where('phone', $request['phone'])->first();
@@ -136,113 +135,32 @@ class UserController extends MasterController
         }
     }
 
-    public function update(Request $request)
+    public function update(ProfileUpdateRequest $request)
     {
         $user = auth()->user();
-        $validator = Validator::make($request->all(), $this->validation_rules(2, $user->id), $this->validation_messages());
-        if ($validator->fails()) {
-            return $this->sendError($validator->errors()->first());
-        }
-        $user->update($request->except(['package_id', 'purchasing_power']));
+        $user->update($request->except(['package_id', 'wallet','purchasing_power']));
         $data = new UserResource($user);
         $token = auth()->login($user);
         return $this->sendResponse($data)->withHeaders(['apiToken' => $token, 'tokenType' => 'bearer']);
     }
 
-    public function validation_rules($method, $id = null)
+    public function resendCode(ResendPhoneVerificationRequest $request)
     {
-        if ($method == 2) {
-            $rules['phone'] = 'nullable|regex:/(05)[0-9]{8}/|max:10|unique:users,phone,' . $id;
-            $rules['email'] = 'nullable|email|max:50|unique:users,email,' . $id;
-            $rules['name'] = 'nullable|max:30';
-            $rules['device'] = 'required';
-        } else {
-            $rules = [
-                'phone' => 'required|unique:users|max:10|regex:/(05)[0-9]{8}/',
-                'email' => 'required|unique:users|email|max:50',
-                'name' => 'required|max:30',
-                'password' => 'required|min:8',
-                'device' => 'required',
-            ];
+        if (!$request->has('email') && !$request->has('phone')) {
+            return $this->sendError('يجب ادخال وسيلة ارسال واحدة على الأقل');
         }
-        return $rules;
-    }
-
-    public function register(Request $request)
-    {
-        $validator = Validator::make($request->all(), $this->validation_rules(1), $this->validation_messages());
-        if ($validator->fails()) {
-            return $this->sendError($validator->errors()->first());
+        if ($request->has('email')){
+            $user = User::where('email', $request['email'])->first();
+        }else{
+            $user = User::where('phone', $request['phone'])->first();
         }
-        $activation_code = rand(1111, 9999);
-        $this->send_code($activation_code, $request['email'], $request['phone']);
-        $all = $request->all();
-        $all['activation_code'] = $activation_code;
-        $user = User::create($all);
-        $token = auth()->login($user);
-        $data = new UserResource($user);
-        return $this->sendResponse($data)->withHeaders(['apiToken' => $token, 'tokenType' => 'bearer']);
-    }
-
-    public function resendCode(Request $request)
-    {
-        $validator = Validator::make($request->only('email'), ['email' => 'required|email|max:50'], $this->validation_messages());
-        if ($validator->fails()) {
-            return $this->sendError($validator->errors()->first());
-        }
-        $user = User::where('email', $request['email'])->first();
         if (!$user) {
             return $this->sendError('المستخدم غير مسجل');
         }
         $activation_code = rand(1111, 9999);
-        $this->send_code($user->phone, $activation_code);
+        $this->send_code($activation_code, $request['email'], $request['phone']);
         $user->update(['activation_code' => $activation_code]);
         return $this->sendResponse(['activation_code' => $activation_code]);
-    }
-
-    public function forgetPassword(Request $request)
-    {
-        $validator = Validator::make(
-            $request->only('password'),
-            [
-                'password' => 'required|min:8',
-            ],
-            $this->validation_messages());
-        if ($validator->fails()) {
-            return $this->sendError($validator->errors()->first());
-        }
-        $user = auth()->user();
-        if ($user) {
-            $user->update(['password' => $request['password']]);
-            $token = auth()->login($user);
-            $data = new UserResource($user);
-            return $this->sendResponse($data)->withHeaders(['apiToken' => $token, 'tokenType' => 'bearer']);
-        } else {
-            return $this->sendError('يوجد مشكلة بالبيانات');
-        }
-    }
-
-    public function login(Request $request)
-    {
-        $validator = Validator::make($request->only('phone_details', 'phone', 'password', 'device'), ['device' => 'required', 'phone' => 'required|max:10|regex:/[0-9]{10}/'], $this->validation_messages());
-        if ($validator->fails()) {
-            return $this->sendError($validator->errors()->first());
-        }
-        $cred = $request->only(['phone', 'password']);
-        $token = auth()->attempt($cred);
-        if ($token) {
-            $user = auth()->user();
-            $user->update([
-                'device' => [
-                    'id' => $request->device['id'],
-                    'type' => $request->device['type'],
-                ]
-            ]);
-            $data = new UserResource($user);
-            return $this->sendResponse($data)->withHeaders(['apiToken' => $token, 'tokenType' => 'bearer']);
-        } else {
-            return $this->sendError('يوجد مشكلة بالبيانات');
-        }
     }
 
     public function logout(Request $request)
@@ -256,34 +174,6 @@ class UserController extends MasterController
         ]);
         auth()->logout();
         return $this->sendResponse('');
-    }
-
-    public function updatePassword(Request $request)
-    {
-        $validator = Validator::make(
-            $request->only('password', 'old_password'),
-            [
-                'old_password' => 'required',
-                'password' => 'required|min:8',
-            ],
-            $this->validation_messages());
-        if ($validator->fails()) {
-            return $this->sendError($validator->errors()->first());
-        }
-        $user = auth()->user();
-        $token = auth()->attempt(['phone' => $this->native_phone($user), 'password' => $request['old_password']]);
-        if ($token) {
-            $user->update(['password' => $request['password']]);
-            $data = new UserResource($user);
-            return $this->sendResponse($data)->withHeaders(['apiToken' => $token, 'tokenType' => 'bearer']);
-        } else {
-            return $this->sendError('كلمة المرور القديمة غير صحيحة');
-        }
-    }
-
-    function native_phone($user)
-    {
-        return trim($user->phone, $user->phone_details['country_key']);
     }
 
     public function profile()

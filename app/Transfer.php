@@ -12,7 +12,7 @@ class Transfer extends Model
     private $route='transfer';
     private $images_link='media/images/transfer/';
 //'item','item','sale','package','purchasing_power','other'
-    protected $fillable = ['money','user_id','type','more_details'];
+    protected $fillable = ['purchasing_type','money','user_id','type','more_details'];
     protected $casts = [
         'more_details' => 'json',
     ];

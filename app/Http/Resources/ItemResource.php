@@ -16,9 +16,7 @@ class ItemResource extends JsonResource
             return 'ar';
         }
     }
-    public function auction_type_features($auction){
-        return 'a';
-    }
+
     /**
      * Transform the resource into an array.
      *

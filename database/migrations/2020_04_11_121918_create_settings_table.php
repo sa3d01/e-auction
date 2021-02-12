@@ -24,6 +24,7 @@ class CreateSettingsTable extends Migration
             //in seconds
             $table->integer('auction_period')->default(60);
             $table->integer('auction_increasing_period')->default(60);
+            $table->integer('negotiation_period')->default(360);
             //علي الشاري
             $table->integer('finish_papers')->default(0);
             $table->integer('tax_ratio')->default(60);

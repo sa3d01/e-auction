@@ -15,9 +15,10 @@ class CreateTransfersTable extends Migration
     {
         Schema::create('transfers', function (Blueprint $table) {
             $table->id();
+            $table->enum('purchasing_type',['online','bank'])->default('online');
             $table->string('money')->default(0);
             $table->foreignId('user_id')->nullable();
-            $table->enum('type',['wallet','item','auction','package','purchasing_power','other'])->default('wallet');
+            $table->enum('type',['wallet','package','purchasing_power','buy_item'])->default('wallet');
             $table->json('more_details')->nullable();
             $table->timestamps();
         });
