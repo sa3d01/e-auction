@@ -117,7 +117,16 @@
                                             {!! $row->reportLabel() !!}
                                         </td>
                                     @elseif($status=='shown')
-                                        <td>{!! $row->vip() !!}</td>
+                                        <?php
+                                            $vip='انتهى المزاد المباشر';
+                                            $auction_item=\App\AuctionItem::where('item_id',$row->id)->latest()->first();
+                                            if($auction_item){
+                                                if($auction_item->more_details['status']=='soon' || $auction_item->more_details['status']=='live'){
+                                                    $vip=$row->vip();
+                                                }
+                                            }
+                                        ?>
+                                        <td>{!! $vip !!}</td>
                                     @endif
                                     <td>
                                         <form class="delete" data-id="{{$row->id}}" method="POST" action="{{ route('admin.'.$type.'.destroy',[$row->id]) }}">

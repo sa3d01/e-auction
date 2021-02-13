@@ -20,15 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment=".">
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/GBA0GYWJzM.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/lkV3VXRSq7.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/user/Dc6ui2Tgei.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/user/KCTI0TAdW4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/report/xWcRzFO2Ef.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/NegotiationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/NegotiationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Resources/ItemCollection.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/ItemCollection.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/item/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/item/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/settings.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/settings.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -274,14 +269,7 @@
       <workItem from="1612967994876" duration="1812000" />
       <workItem from="1613145840101" duration="6185000" />
       <workItem from="1613175445822" duration="1923000" />
-      <workItem from="1613226945445" duration="4399000" />
-    </task>
-    <task id="LOCAL-00167" summary=".">
-      <created>1611853465306</created>
-      <option name="number" value="00167" />
-      <option name="presentableId" value="LOCAL-00167" />
-      <option name="project" value="LOCAL" />
-      <updated>1611853465306</updated>
+      <workItem from="1613226945445" duration="5488000" />
     </task>
     <task id="LOCAL-00168" summary=".">
       <created>1611854139886</created>
@@ -619,7 +607,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613228085111</updated>
     </task>
-    <option name="localTasksCounter" value="216" />
+    <task id="LOCAL-00216" summary=".">
+      <created>1613231587699</created>
+      <option name="number" value="00216" />
+      <option name="presentableId" value="LOCAL-00216" />
+      <option name="project" value="LOCAL" />
+      <updated>1613231587699</updated>
+    </task>
+    <option name="localTasksCounter" value="217" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
