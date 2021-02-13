@@ -117,13 +117,6 @@
     <script>
         $(document).on('click', '#reject', function (e) {
             e.preventDefault();
-            let type=$(this).data('type');
-            var redirect;
-            if (type==='charge'){
-                redirect='/admin/transfer';
-            }else{
-                redirect='/admin/refund';
-            }
             Swal.fire({
                 title: 'من فضلك اذكر سبب الرفض',
                 input: 'text',
@@ -140,27 +133,18 @@
                 },
                 allowOutsideClick: () => !Swal.isLoading()
             }).then(() => {
-                location.href = redirect;
+                location.href = '/admin/transfer';
             })
         });
         $(document).on('click', '#accept', function (e) {
             e.preventDefault();
-            let type=$(this).data('type');
-            var confirmButtonText,redirect;
-            if (type==='charge'){
-                 confirmButtonText='نعم , قم بقبول التحويل!';
-                 redirect='/admin/transfer';
-            }else{
-                 confirmButtonText='نعم , قم بتأكيد التحويل!';
-                redirect='/admin/refund';
-            }
             Swal.fire({
                 title: "هل انت متأكد من القبول ؟",
                 text: "تأكد من اجابتك قبل التأكيد!",
                 type: "warning",
                 showCancelButton: true,
                 confirmButtonClass: 'btn-danger',
-                confirmButtonText: confirmButtonText,
+                confirmButtonText: 'نعم , قم بتأكيد التحويل!',
                 cancelButtonText: 'ﻻ , الغى العملية !',
                 closeOnConfirm: false,
                 closeOnCancel: false,
@@ -172,7 +156,7 @@
                 },
                 allowOutsideClick: () => !Swal.isLoading()
             }).then(() => {
-                window.location.href = redirect;
+                window.location.href = '/admin/transfer';
             })
         });
     </script>
