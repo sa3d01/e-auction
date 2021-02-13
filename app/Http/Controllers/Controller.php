@@ -48,7 +48,9 @@ class Controller extends BaseController
                 $negotiation_auction_item->update([
                     'vip' => 'false',
                     'more_details' => [
-                        'status' => 'expired'
+                        'start_negotiation'=>$negotiation_auction_item->more_details['start_negotiation'],
+                        'end_negotiation'=>Carbon::now()->timestamp,
+                        'status' => 'expired',
                     ]
                 ]);
                 $negotiation_auction_item->item->update([
