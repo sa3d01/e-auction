@@ -151,7 +151,7 @@
                  confirmButtonText='نعم , قم بقبول التحويل!';
                  redirect='/admin/transfer';
             }else{
-                 confirmButtonText='نعم , قم بتصفير الحساب وتأكيد التحويل!';
+                 confirmButtonText='نعم , قم بتأكيد التحويل!';
                 redirect='/admin/refund';
             }
             Swal.fire({
