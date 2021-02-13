@@ -21,7 +21,7 @@
                         </div>
                         <div class="up-controls">
                             <div class="row">
-                                @if($row->status=='pending')
+                                @if($row->status===0)
                                 <div class="col-md-6">
                                     <form class="POST" name="reject" enctype="multipart/form-data" method="POST" style="width: 125px" data-href="{{route('admin.transfer.reject',$row->id)}}" action="{{route('admin.transfer.reject',$row->id)}}" data-type="{{$type}}" id="reject">
                                         @csrf
@@ -71,65 +71,37 @@
                             </div>
                             <fieldset class="form-group">
                                 <div class="row">
-                                    @if($type=='charge')
-                                        <div class="col-sm-12">
-                                            <div class="white-box">
-                                                <label for="input-file-now-custom-1">الصورة</label>
-                                                <div>
-                                                    <iframe id="iframe" src="{{$row->image}}" style="width:100%; height:500px;" frameborder="0"></iframe>
-                                                </div>
+                                    <div class="col-sm-12">
+                                        <div class="white-box">
+                                            <label for="input-file-now-custom-1">الصورة</label>
+                                            <div>
+                                                <iframe id="iframe" src="{{asset('media/images/transfer/'.$row->more_details['image'])}}" style="width:100%; height:500px;" frameborder="0"></iframe>
                                             </div>
                                         </div>
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label for="">صاحب التحويل</label>
-                                                <a href="{{route('admin.user.show',$row->user_id)}}"><br>
-                                                    <span>{{$row->user->name}}</span>
-                                                </a>
-                                            </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="">صاحب التحويل</label>
+                                            {{--                                                <a href="{{route('admin.user.show',$row->user_id)}}"><br>--}}
+                                            <span>{{$row->user->name}}</span>
+                                            {{--                                                </a>--}}
                                         </div>
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label for="">المبلغ المحول</label><br>
-                                                <span class="fa-sort-amount-asc">{{$row->amount}}</span>
-                                                ريال
-                                            </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="">السلعة</label>
+                                            <a href="{{route('admin.item.show',$row->more_details['item_id'])}}"><br>
+                                                <span>{{$row->more_details['item_id']}}</span>
+                                            </a>
                                         </div>
-                                    @else
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label for="">صاحب الطلب</label>
-                                                <a href="{{route('admin.user.show',$row->user_id)}}"><br>
-                                                    <span>{{$row->user->name}}</span>
-                                                </a>
-                                            </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="">المبلغ المحول</label><br>
+                                            <span class="fa-sort-amount-asc">{{$row->money}}</span>
+                                            ريال
                                         </div>
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label for="">المبلغ المطلوب</label><br>
-                                                <span class="fa-sort-amount-asc">{{$row->amount}}</span>
-                                                ريال
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label for="">اسم البنك </label><br>
-                                                <span class="fa-sort-amount-asc">{{$row->bank_name}}</span>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label for="">رقم الحساب</label><br>
-                                                <span class="fa-sort-amount-asc">{{$row->account_number}}</span>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label for="">الاسم الرباعى</label><br>
-                                                <span class="fa-sort-amount-asc">{{$row->full_name}}</span>
-                                            </div>
-                                        </div>
-                                    @endif
+                                    </div>
                                 </div>
                             </fieldset>
                         </div>

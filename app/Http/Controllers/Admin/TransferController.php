@@ -7,6 +7,7 @@ use App\DropDown;
 use App\Notification;
 use App\Transfer;
 use App\User;
+use Edujugon\PushNotification\PushNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,7 +41,6 @@ class TransferController extends MasterController
             'type'=>'transfer',
             'action'=>'admin.transfer.update',
             'title'=>'حوالة بنكية',
-            'status'=>true,
         ]);
     }
 
@@ -48,27 +48,13 @@ class TransferController extends MasterController
         $row=$this->model->find($id);
         $row->update(
             [
-                'status'=>'approved',
+                'status'=>1,
             ]
         );
         $user=User::find($row->user_id);
-        if ($row->type=='charge'){
-            $current_wallet=$user->wallet;
-            $user->update([
-                'wallet'=> $current_wallet+$row->amount
-            ]);
-            $data['title']='تم الموافقة على تحويلك البنكى بنجاح :) ';
-        }else{
-            $current_wallet=$user->wallet;
-            $user->update([
-                'wallet'=> $current_wallet-$row->amount
-            ]);
-            $data['title']='تم الموافقة على ارسال رسومك الى حسابك المرسل..ويرجى التواصل مع الادارة فى حالة وجود أية مشاكل باستردادك الرسوم :) ';
-        }
-        $data['receiver_id']=$user->id;
-        $data['type']='admin';
-        $data['admin_notify_type']='single';
-        Notification::create($data);
+        $note['ar'] = 'تم الموافقة على تحويلك البنكى بنجاح :)';
+        $note['en'] = 'your transfer is accepted from admin  ..';
+        $this->notify($user, $note);
         $row->refresh();
         return redirect()->back()->with('updated');
     }
@@ -76,20 +62,36 @@ class TransferController extends MasterController
         $row=$this->model->find($id);
         $row->update(
             [
-                'status'=>'rejected',
+                'status'=>-1,
             ]
         );
         $user=User::find($row->user_id);
-        if ($row->type=='charge'){
-            $data['title']='تم رفض تحويلك البنكى للسبب التالى : '.$request['reject_reason'];
-        }else{
-            $data['title']='تم رفض ارسال رسومك الى حسابك المرسل للسبب التالى : '.$request['reject_reason'];
-        }
-        $data['receiver_id']=$user->id;
-        $data['type']='admin';
-        $data['admin_notify_type']='single';
-        Notification::create($data);
+        $note['ar']='تم رفض تحويلك البنكى للسبب التالى : '.$request['reject_reason'];
+        $note['en'] = 'your transfer is rejected from admin  ..'.$request['reject_reason'];
+        $this->notify($user, $note);
         $row->refresh();
         return redirect()->back()->with('updated');
+    }
+    function notify($user, $note)
+    {
+        Notification::create([
+            'receiver_id' => $user->id,
+            'title' => $note,
+            'note' => $note,
+        ]);
+        $push = new PushNotification('fcm');
+        $msg = [
+            'notification' => array('title' => $note['ar'], 'sound' => 'default'),
+            'data' => [
+                'title' => $note['ar'],
+                'body' => $note['ar'],
+                'type' => 'transfer',
+            ],
+            'priority' => 'high',
+        ];
+        $push->setMessage($msg)
+            ->setDevicesToken($user->device['id'])
+            ->send()
+            ->getFeedback();
     }
 }
