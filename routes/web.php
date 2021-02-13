@@ -75,6 +75,8 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
     Route::resource('contact', 'ContactController');
     Route::get('send_single_notify/{receiver_id}/{note}', 'ContactController@send_single_notify');
 
+    Route::resource('transfer', 'TransferController');
+
 });
 Auth::routes();
 Route::get('/', function (){

@@ -152,6 +152,18 @@
             <span> الأعضاء</span>
         </a>
     </li>
+{{--    //transfers--}}
+    <li class="sub-header">
+        <span>الحوالات البنكية </span>
+    </li>
+    <li class="sub-menu">
+        <a href="{{route('admin.transfer.index')}}">
+            <div class="icon-w">
+                <div class="os-icon os-icon-mail"></div>
+            </div>
+            <span> الحوالات البنكية</span>
+        </a>
+    </li>
 {{--contacts--}}
     <li class="sub-header">
         <span>رسائل الأعضاء</span>

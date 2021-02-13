@@ -101,6 +101,15 @@
     </li>
 
     <li class="sub-menu">
+        <a href="{{route('admin.transfer.index')}}">
+            <div class="icon-w">
+                <div class="os-icon os-icon-mail"></div>
+            </div>
+            <span> الحوالات البنكية</span>
+        </a>
+    </li>
+
+    <li class="sub-menu">
         <a href="{{route('admin.contact.index')}}">
             <div class="icon-w">
                 <div class="os-icon os-icon-email-2-at"></div>
