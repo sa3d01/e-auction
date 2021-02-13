@@ -44,9 +44,9 @@ class ItemCollection extends ResourceCollection
             if ($auction_item){
                 if (\request()->user()){
                     $features=$auction_item->auctionTypeFeatures(auth()->user()->id);
-                    if ($auction_item->more_details['status']=='paid'){
-                        $winner=AuctionUser::where('item_id',$obj->id)->latest()->value('user_id');
-                        if ($winner==\request()->user()->id){
+                    $soon_winner=AuctionUser::where('item_id',$obj->id)->latest()->value('user_id');
+                    if ($soon_winner){
+                        if ($soon_winner==\request()->user()->id){
                             $win=true;
                         }
                     }
@@ -67,10 +67,12 @@ class ItemCollection extends ResourceCollection
                 $arr['auction_duration']=$auction_item->auction->duration;
                 $arr['auction_price']=$auction_item->price;
             }else{
-                if ($obj->auction_price==null){
+                if($obj->status=='pending'){
+                    $arr['auction_status']='pending';
+                }elseif ($obj->status=='accepted' && $obj->auction_price==null){
                     $arr['auction_status']='delivery_waiting';
                 }else{
-                    $arr['auction_status']='pending';
+                    $arr['auction_status']=$obj->status;
                 }
                 $arr['negotiation']=false;
                 $arr['direct_pay']=false;

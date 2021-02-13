@@ -25,14 +25,10 @@ class ItemController extends MasterController
         $rows=$this->model->where('status',$status)->latest()->get();
         if ($status=='accepted'){
             $title='قائمة السلع المطلوب اعدادها';
-            $index_fields=['الرقم التسلسلى' => 'id',
-//                'العنوان'=>'name'
-            ];
+            $index_fields=['الرقم التسلسلى' => 'id'];
         }else{
             $title='قائمة السلع';
-            $index_fields=['الرقم التسلسلى' => 'id',
-//                'العنوان'=>'name',
-                'تاريخ الطلب'=>'created_at'];
+            $index_fields=['الرقم التسلسلى' => 'id','تاريخ الطلب'=>'created_at'];
         }
         return View('dashboard.item.index', [
             'rows' => $rows,
@@ -61,9 +57,7 @@ class ItemController extends MasterController
             'status'=>'shown',
             'type'=>'item',
             'title'=>'قائمة السلع المميزة',
-            'index_fields'=>['الرقم التسلسلى' => 'id',
-//                'العنوان'=>'name'
-            ],
+            'index_fields'=>['الرقم التسلسلى' => 'id'],
             'selects'=>[
                 [
                     'name'=>'user',
@@ -109,6 +103,19 @@ class ItemController extends MasterController
         }
         $auction_item->refresh();
         $auction_item->refresh();
+        $push = new PushNotification('fcm');
+        $msg = [
+            'notification' => null,
+            'data' => [
+                'title' => '',
+                'body' => '',
+                'type'=>'new_auction',
+            ],
+            'priority' => 'high',
+        ];
+        $push->setMessage($msg)
+            ->sendByTopic('new_auction')
+            ->send();
         return redirect()->back()->with('updated');
     }
 
@@ -121,7 +128,6 @@ class ItemController extends MasterController
         $row=$this->model->findOrFail($id);
         $fields=[
             'الرقم التسلسلى' => 'id',
-//            'العنوان'=>'name',
             'تاريخ الطلب'=>'created_at',
             'صور السلعة'=>'images',
             'عدد السندرات'=>'sunder_count',

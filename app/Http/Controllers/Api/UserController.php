@@ -82,20 +82,21 @@ class UserController extends MasterController
     }
     private function buildHttpClient()
     {
-        $endpoint = 'https://www.hisms.ws/api.php/?send_sms';
+        $endpoint = 'https://www.hisms.ws/';
         return new Client(['base_uri' => $endpoint]);
     }
     function sendToPhone($phone, $activation_code)
     {
         $normalizedPhone = substr($phone, 1); // remove +
         $client = $this->buildHttpClient();
-        $response = $client->request('POST', 'index.php', [
+        $response = $client->request('GET', 'api.php', [
             'query' => [
-                'Username' => "5f0f0941ed252",
-                'password' => "6667",
+                'username' => "966595073103",
+                'password' => "H123m456",
                 'numbers' => $normalizedPhone,
-                'sender' => "text",
+                'sender' => "Active-code",
                 'message' => $activation_code,
+                'send_sms' => true,
             ]
         ]);
         $array = json_decode($response->getBody(), true);

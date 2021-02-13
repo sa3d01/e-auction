@@ -70,6 +70,9 @@ class NegotiationController extends MasterController
         if ($request->has('offer_id') && $request['offer_id']!=null){
             $latest_offer=Offer::find($request['offer_id']);
             if ($sender->id == $item->user_id) {
+                if ($latest_offer->price > $request['price']) {
+                    return $this->sendError('لا يمكن تقديم عرض سعر أقل من عرض السعر المقدم من المزايد !');
+                }
                 if ($latest_offer->sender_id == $sender->id) {
                     $receiver = User::find($latest_offer->receiver_id);
                 } else {
