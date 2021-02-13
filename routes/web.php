@@ -75,6 +75,8 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
     Route::resource('contact', 'ContactController');
     Route::get('send_single_notify/{receiver_id}/{note}', 'ContactController@send_single_notify');
 
+    Route::get('transfer/reject/{id}', 'TransferController@reject')->name('transfer.reject');
+    Route::get('transfer/accept/{id}', 'TransferController@accept')->name('transfer.accept');
     Route::resource('transfer', 'TransferController');
 
 });

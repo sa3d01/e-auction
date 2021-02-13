@@ -59,7 +59,10 @@
                                                 $related_model_val=$row->user->name;
                                             @endphp
                                             @if ($value=='user_id')
-                                                <td><a href="{{route('admin.user.show',$row->user_id)}}"> {{$related_model_val}}</a></td>
+                                                <td>
+{{--                                                    <a href="{{route('admin.user.show',$row->user_id)}}"> {{$related_model_val}}</a>--}}
+                                                    {{$related_model_val}}
+                                                </td>
                                             @endif
                                         @else
                                             <td>{{$row->$value}}</td>
