@@ -61,14 +61,17 @@ class ItemCollection extends ResourceCollection
 
                 $arr['auction_type']= $obj->auction_type->name[$this->lang()];
                 $arr['start_date']= $auction_item->auction->start_date;
-//                $arr['start_date_text']= Carbon::createFromTimestamp($auction_item->start_date)->format('Y-m-d h:i:s A');
                 $arr['now_date']= Carbon::now()->format('Y-m-d h:i:s A');
                 $arr['end_string_date']=Carbon::createFromTimestamp($auction_item->auction->more_details['end_date'])->format('Y-m-d h:i:s A');
                 $arr['start_string_date']=Carbon::createFromTimestamp($auction_item->auction->start_date)->format('Y-m-d h:i:s A');
                 $arr['auction_duration']=$auction_item->auction->duration;
                 $arr['auction_price']=$auction_item->price;
             }else{
-                $arr['auction_status']='pending';
+                if ($obj->auction_price==null){
+                    $arr['auction_status']='delivery_waiting';
+                }else{
+                    $arr['auction_status']='pending';
+                }
                 $arr['negotiation']=false;
                 $arr['direct_pay']=false;
                 $arr['user_price']="";
