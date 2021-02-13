@@ -15,4 +15,7 @@ class Transfer extends Model
     protected $casts = [
         'more_details' => 'json',
     ];
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }
