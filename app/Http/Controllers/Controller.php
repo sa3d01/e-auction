@@ -40,7 +40,7 @@ class Controller extends BaseController
     {
         $negotiation_auction_items=AuctionItem::where('more_details->status', 'negotiation')->get();
         foreach ($negotiation_auction_items as $negotiation_auction_item){
-            if ( (Carbon::createFromTimestamp($negotiation_auction_item->more_details['start_negotiation'])->addSeconds(Setting::value('negotiation_period')) > Carbon::now()) ) {
+            if ( Carbon::createFromTimestamp($negotiation_auction_item->more_details['start_negotiation'])->addSeconds(Setting::value('negotiation_period'))->timestamp > Carbon::now()->timestamp ) {
                 $admin_title['ar'] = 'تم انتهاء مدة المفاوضة على السلعة رقم ' . $negotiation_auction_item->item_id;
                 $this->notify_admin($admin_title, $negotiation_auction_item);
                 $owner_title['ar'] = 'حظ أوفر المره القادمه ! تم انتهاء مدة المفاوضة على سلعتك رقم ' . $negotiation_auction_item->item_id;
