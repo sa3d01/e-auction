@@ -22,17 +22,6 @@ class TransferController extends MasterController
 
     public function index()
     {
-        $rows = $this->model->where('type','charge')->latest()->get();
-        return View('dashboard.transfer.index', [
-            'rows' => $rows,
-            'type'=>'transfer',
-            'title'=>'قائمة الحوالات',
-            'index_fields'=>['المستخدم' => 'user_id','المبلغ' => 'amount','تاريخ الطلب' => 'created_at'],
-            'status'=>true,
-        ]);
-    }
-    public function refund()
-    {
         $rows = $this->model->where('purchasing_type','bank')->latest()->get();
         return View('dashboard.transfer.index', [
             'rows' => $rows,
@@ -42,55 +31,16 @@ class TransferController extends MasterController
             'status'=>true,
         ]);
     }
+
     public function show($id)
     {
-        $notify=Notification::where('transfer_id',$id)->first();
-        if ($notify){
-            $notify->update([
-                'read'=>'true'
-            ]);
-        }
-        $row = Transfer::findOrFail($id);
-        if ($row->type=='charge'){
-            return View('dashboard.transfer.show', [
-                'row' => $row,
-                'type'=>'charge',
-                'action'=>'admin.transfer.update',
-                'title'=>'حوالة بنكية',
-                'languages'=>true,
-                'image'=>true,
-                'status'=>true,
-                'only_show'=>true,
-            ]);
-        }else{
-            return View('dashboard.transfer.show', [
-                'row' => $row,
-                'type'=>'refund',
-                'action'=>'admin.transfer.update',
-                'title'=>'طلب استرداد رسوم',
-                'languages'=>true,
-                'status'=>true,
-                'only_show'=>true,
-            ]);
-        }
-    }
-    public function refund_show($id)
-    {
-        $notify=Notification::where('transfer_id',$id)->first();
-        if ($notify){
-            $notify->update([
-                'read'=>'true'
-            ]);
-        }
         $row = Transfer::findOrFail($id);
         return View('dashboard.transfer.show', [
             'row' => $row,
-            'type'=>'refund',
+            'type'=>'transfer',
             'action'=>'admin.transfer.update',
-            'title'=>'طلب استرداد رسوم',
-            'languages'=>true,
+            'title'=>'حوالة بنكية',
             'status'=>true,
-            'only_show'=>true,
         ]);
     }
 
