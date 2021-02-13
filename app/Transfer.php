@@ -23,6 +23,9 @@ class Transfer extends Model
         if ($this->attributes['status'] === 1){
             $name = 'تم القبول';
             $key = 'success';
+        }elseif ($this->attributes['status'] === -1){
+            $name = 'تم الرفض';
+            $key = 'danger';
         }else{
             $name = 'معلق';
             $key = 'warning';
