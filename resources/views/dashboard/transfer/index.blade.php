@@ -28,9 +28,7 @@
                                 @if(isset($status))
                                     <th>الحالة</th>
                                 @endif
-                                @if(isset($image) || isset($images))
-                                    <th>الصورة</th>
-                                @endif
+                                <th>السلعة</th>
                                 <th>المزيد</th>
                             </tr>
                             </thead>
@@ -43,9 +41,7 @@
                                 @if(isset($status))
                                     <th>الحالة</th>
                                 @endif
-                                @if(isset($image) || isset($images))
-                                    <th>الصورة</th>
-                                @endif
+                                <th>السلعة</th>
                                 <th>المزيد</th>
                             </tr>
                             </tfoot>
@@ -71,21 +67,9 @@
                                     <td>
                                         {!!$row->getStatusIcon()!!}
                                     </td>
-{{--                                    <td data-toggle="modal" data-target="#imgModal{{$row->id}}">--}}
-{{--                                        <img width="50px" height="50px" class="img_preview" src="{{ $row->image}}">--}}
-{{--                                    </td>--}}
-{{--                                    <div id="imgModal{{$row->id}}" class="modal fade" role="img">--}}
-{{--                                        <div class="modal-dialog">--}}
-{{--                                            <div class="modal-content">--}}
-{{--                                                <div class="modal-body">--}}
-{{--                                                    <img data-toggle="modal" data-target="#imgModal{{$row->id}}" class="img-preview" src="{{ $row->image}}" style="max-height: 500px">--}}
-{{--                                                </div>--}}
-{{--                                                <div class="modal-footer">--}}
-{{--                                                    <button type="button" class="btn btn-default" data-dismiss="modal">إغلاق</button>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
+                                    <td>
+                                         <a href="{{route('admin.item.show',$row->more_details['item_id'])}}"> {{$row->more_details['item_id']}}</a>
+                                    </td>
                                     <td>
                                         <div class=" row border-0">
                                             <div class="col-sm-3 mx-auto text-center">

@@ -18,4 +18,17 @@ class Transfer extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+    public function getStatusIcon()
+    {
+        if ($this->attributes['status'] === 1){
+            $name = 'تم القبول';
+            $key = 'success';
+        }else{
+            $name = 'معلق';
+            $key = 'warning';
+        }
+        return "<a class='badge badge-$key-inverted'>
+                $name
+                </a>";
+    }
 }
