@@ -50,6 +50,7 @@ class Controller extends BaseController
                     'more_details' => [
                         'start_negotiation'=>$negotiation_auction_item->more_details['start_negotiation'],
                         'end_negotiation'=>Carbon::now()->timestamp,
+                        'true_end'=>Carbon::createFromTimestamp($negotiation_auction_item->more_details['start_negotiation'])->addSeconds(Setting::value('negotiation_period'))->timestamp,
                         'status' => 'expired',
                     ]
                 ]);
