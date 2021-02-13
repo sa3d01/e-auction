@@ -6,7 +6,8 @@
             <div class="row">
                 <div class="col-sm-5">
                     <div class="user-profile compact">
-                        <div class="up-head-w" style="background-image:url({{$row->image}})">
+                        @php($item=\App\Item::find($row->more_details['item_id']))
+                        <div class="up-head-w" style="background-image:url({{$item->images[0]}})">
                             <div class="up-main-info">
                                 <h2 class="up-header">
                                    {{$row->user->name}}
