@@ -8,6 +8,7 @@ use App\Http\Resources\ItemResource;
 use App\Item;
 use App\Notification;
 use App\Offer;
+use App\Setting;
 use App\User;
 use Carbon\Carbon;
 use Edujugon\PushNotification\PushNotification;
@@ -37,6 +38,25 @@ class Controller extends BaseController
 
     function auctionItemStatusUpdate()
     {
+        $negotiation_auction_items=AuctionItem::where('more_details->status', 'negotiation')->get();
+        foreach ($negotiation_auction_items as $negotiation_auction_item){
+            if ( (Carbon::createFromTimestamp($negotiation_auction_item->more_details['start_negotiation'])->addSeconds(Setting::value('negotiation_period')) > Carbon::now()) ) {
+                $admin_title['ar'] = 'تم انتهاء مدة المفاوضة على السلعة رقم ' . $negotiation_auction_item->item_id;
+                $this->notify_admin($admin_title, $negotiation_auction_item);
+                $owner_title['ar'] = 'حظ أوفر المره القادمه ! تم انتهاء مدة المفاوضة على سلعتك رقم ' . $negotiation_auction_item->item_id;
+                $this->base_notify($owner_title, $negotiation_auction_item->item->user_id, $negotiation_auction_item->item_id);
+                $negotiation_auction_item->update([
+                    'vip' => 'false',
+                    'more_details' => [
+                        'status' => 'expired'
+                    ]
+                ]);
+                $negotiation_auction_item->item->update([
+                    'status'=>'expired'
+                ]);
+            }
+        }
+
         $auction_items = AuctionItem::where('more_details->status', '!=', 'paid')->where('more_details->status', '!=', 'expired')->where('more_details->status', '!=', 'negotiation')->get();
         foreach ($auction_items as $auction_item) {
             if ((Carbon::createFromTimestamp($auction_item->start_date) <= Carbon::now()) && (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration) >= Carbon::now())) {
@@ -58,7 +78,8 @@ class Controller extends BaseController
                         $auction_item->update([
                             'vip' => 'false',
                             'more_details' => [
-                                'status' => 'negotiation'
+                                'status' => 'negotiation',
+                                'start_negotiation'=>Carbon::now()->timestamp
                             ]
                         ]);
                         $this->autoSendOffer($auction_item);
@@ -84,7 +105,8 @@ class Controller extends BaseController
                             $auction_item->update([
                                 'vip' => 'false',
                                 'more_details' => [
-                                    'status' => 'negotiation'
+                                    'status' => 'negotiation',
+                                    'start_negotiation'=>Carbon::now()->timestamp
                                 ]
                             ]);
                             $this->autoSendOffer($auction_item);
