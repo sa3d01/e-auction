@@ -59,12 +59,12 @@ class ItemController extends MasterController
             $data['images'] = $items_images;
         }
         $item=$this->model->create($data);
-//        $add_item_tax=Setting::first()->value('add_item_tax');
-//        if ($add_item_tax < $user->wallet){
-//            $item->update(['pay_status'=>1]);
-//            $wallet=$user->wallet-$add_item_tax;
-//            $user->update(['wallet'=>$wallet]);
-//        }
+        $add_item_tax=Setting::first()->value('add_item_tax');
+        if ($add_item_tax < $user->wallet){
+            $item->update(['pay_status'=>1]);
+            $wallet=$user->wallet-$add_item_tax;
+            $user->update(['wallet'=>$wallet]);
+        }
         $title['ar'] = 'تم إضافة سلعة جديدة عن طريق مستخدم رقم '. $user->id;
         $this->new_item_notify_admin($title,$item);
         return $this->sendResponse('تم ارسال طلب إضافة المنتج بنجاح');
