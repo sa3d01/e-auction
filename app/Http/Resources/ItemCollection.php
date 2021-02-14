@@ -69,10 +69,10 @@ class ItemCollection extends ResourceCollection
             }else{
                 if($obj->status=='pending'){
                     $arr['auction_status']='pending';
-                }elseif ($obj->status=='accepted' && $obj->auction_price==null){
-                    $arr['auction_status']='delivery_waiting';
+                }elseif ($obj->status=='rejected'){
+                    $arr['auction_status']='rejected';
                 }else{
-                    $arr['auction_status']=$obj->status;
+                    $arr['auction_status']='delivery_waiting';
                 }
                 $arr['negotiation']=false;
                 $arr['direct_pay']=false;
