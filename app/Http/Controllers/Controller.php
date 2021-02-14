@@ -57,6 +57,12 @@ class Controller extends BaseController
                 $negotiation_auction_item->item->update([
                     'status'=>'expired'
                 ]);
+                $expired_offers=Offer::where('auction_item_id',$negotiation_auction_item->id)->get();
+                foreach ($expired_offers as $expired_offer){
+                    $expired_offer->update([
+                        'status'=>'expired'
+                    ]);
+                }
             }
         }
 
