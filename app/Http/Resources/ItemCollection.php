@@ -59,6 +59,12 @@ class ItemCollection extends ResourceCollection
                 $arr['user_price']=$features['user_price'];
                 $arr['live']=$features['live'];
 
+                if ($features['status']=='delivered'){
+                    $arr['is_paid']=true;
+                }else{
+                    $arr['is_paid']=false;
+                }
+
                 $arr['auction_type']= $obj->auction_type->name[$this->lang()];
                 $arr['start_date']= $auction_item->auction->start_date;
                 $arr['now_date']= Carbon::now()->format('Y-m-d h:i:s A');
