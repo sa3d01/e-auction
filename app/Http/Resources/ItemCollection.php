@@ -6,6 +6,7 @@ use App\Auction;
 use App\AuctionItem;
 use App\AuctionUser;
 use App\Favourite;
+use App\Transfer;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
@@ -59,10 +60,11 @@ class ItemCollection extends ResourceCollection
                 $arr['user_price']=$features['user_price'];
                 $arr['live']=$features['live'];
 
-                if ($features['status']=='delivered'){
-                    $arr['is_paid']=true;
-                }else{
-                    $arr['is_paid']=false;
+                $arr['is_paid']=false;
+                if ($features['status']=='paid'){
+                    if (Transfer::where('more_details->item_id',$obj->id)->where('status',0)->latest()->first()){
+                        $arr['is_paid']=true;
+                    }
                 }
 
                 $arr['auction_type']= $obj->auction_type->name[$this->lang()];
