@@ -140,7 +140,7 @@ class NegotiationController extends MasterController
         $winner_title['ar'] = 'تهانينا اليك ! لقد فزت فى المزاد الذى قمت بالمشاركة به رقم ' . $auction_item->item_id;
         $owner_title['ar'] = 'تهانينا اليك ! لقد تم بيع سلعتك بمزاد رقم ' . $auction_item->item_id;
         $admin_title['ar'] = 'تم بيع السلعة رقم ' . $auction_item->item_id;
-        $this->base_notify($winner_title, $offer->sender_id, $auction_item->item_id);
+        $this->base_notify($winner_title, $auction_user_id, $auction_item->item_id);
         $this->base_notify($owner_title, $auction_item->item->user_id, $auction_item->item_id);
         $this->notify_admin($admin_title, $auction_item);
         $offers = Offer::where('auction_item_id', $auction_item->id)->get();
