@@ -50,7 +50,7 @@ class UserController extends MasterController
         } else {
             $user->update($all);
         }
-        $this->send_code($activation_code, $request['email'], $request['phone']);
+        //$this->send_code($activation_code, $request['email'], $request['phone']);
         return $this->sendResponse(['activation_code' => $activation_code]);
     }
 
