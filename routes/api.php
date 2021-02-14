@@ -69,6 +69,7 @@ Route::group(['prefix' => 'v1','namespace'=>'Api'], function () {
         Route::get('/favourite', 'UserController@favourite')->middleware(CheckApiToken::class);
         Route::get('/auction_reports', 'UserController@auctionReports')->middleware(CheckApiToken::class);
         Route::get('/products_reports', 'UserController@productsReports')->middleware(CheckApiToken::class);
+        Route::get('/my-paid-items', 'UserController@myPaidItems')->middleware(CheckApiToken::class);
         Route::get('/{id}', 'UserController@show');
     });
 

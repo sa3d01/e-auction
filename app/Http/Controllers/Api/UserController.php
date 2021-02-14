@@ -188,6 +188,17 @@ class UserController extends MasterController
         return $this->sendResponse($data);
     }
 
+    public function myPaidItems(){
+        $user = auth()->user();
+        $paid_auction_items=AuctionItem::where('more_details->status','paid')->get();
+        $item_ids_query = AuctionUser::where('user_id', $user->id);
+        foreach ($paid_auction_items as $paid_auction_item){
+            $item_ids_query = $item_ids_query->where('charge_price',$paid_auction_item->latest_charge);
+        }
+        $item_ids=$item_ids_query->pluck('item_id');
+        return $this->sendResponse(new ItemCollection(Item::whereIn('id',$item_ids)->latest()->get()));
+    }
+
     public function auctionReports()
     {
         $user = auth()->user();
