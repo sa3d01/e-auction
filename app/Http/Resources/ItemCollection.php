@@ -65,6 +65,8 @@ class ItemCollection extends ResourceCollection
                     if (Transfer::where('more_details->item_id',$obj->id)->where('status',0)->latest()->first()){
                         $arr['is_paid']=true;
                     }
+                }elseif ($features['status']=='delivered'){
+                    $arr['is_paid']=true;
                 }
 
                 $arr['auction_type']= $obj->auction_type->name[$this->lang()];
