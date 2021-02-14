@@ -126,6 +126,14 @@ class Controller extends BaseController
                                     'status' => 'paid'
                                 ]
                             ]);
+
+                            $expired_offers=Offer::where('auction_item_id',$auction_item->id)->get();
+                            foreach ($expired_offers as $expired_offer){
+                                $expired_offer->update([
+                                    'status'=>'expired'
+                                ]);
+                            }
+
                         }
                     } else {
                         $admin_title['ar'] = 'تم انتهاء المزاد على السلعة رقم ' . $auction_item->item_id;
@@ -157,6 +165,12 @@ class Controller extends BaseController
                                 'status' => 'paid'
                             ]
                         ]);
+                        $expired_offers=Offer::where('auction_item_id',$auction_item->id)->get();
+                        foreach ($expired_offers as $expired_offer){
+                            $expired_offer->update([
+                                'status'=>'expired'
+                            ]);
+                        }
                     } else {
                         $admin_title['ar'] = 'تم انتهاء المزاد على السلعة رقم ' . $auction_item->item_id;
                         $this->notify_admin($admin_title, $auction_item);
