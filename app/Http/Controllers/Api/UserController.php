@@ -190,8 +190,14 @@ class UserController extends MasterController
 
     public function myPaidItems(){
         $user = auth()->user();
-        $paid_auction_items_latest_charge=AuctionItem::where('more_details->status','paid')->pluck('latest_charge');
-        $item_ids = AuctionUser::where('user_id', $user->id)->whereIn('charge_price',$paid_auction_items_latest_charge)->pluck('item_id');
+        $paid_auction_items=AuctionItem::where('more_details->status','paid')->get();
+        $item_ids=[];
+        foreach ($paid_auction_items as $paid_auction_item){
+            $winner=AuctionUser::where(['auction_id'=>$paid_auction_item->auction_id,'item_id'=>$paid_auction_item->item_id])->latest()->value('user_id');
+            if ($winner==$user->id){
+                $item_ids[]=$paid_auction_item->item_id;
+            }
+        }
         return $this->sendResponse(new ItemCollection(Item::whereIn('id',$item_ids)->latest()->get()));
     }
 
