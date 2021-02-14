@@ -68,11 +68,11 @@ class ItemCollection extends ResourceCollection
                 $arr['auction_price']=$auction_item->price;
             }else{
                 if($obj->status=='pending'){
-                    $arr['auction_status']='pending';
+                    $arr['auction_status']='فى انتظار موافقة الادارة';
                 }elseif ($obj->status=='rejected'){
-                    $arr['auction_status']='rejected';
+                    $arr['auction_status']='تم رفض السلعة من قبل الادارة';
                 }else{
-                    $arr['auction_status']='delivery_waiting';
+                    $arr['auction_status']='فى انتظار شحن السلعة';
                 }
                 $arr['negotiation']=false;
                 $arr['direct_pay']=false;
