@@ -118,8 +118,13 @@ class NegotiationController extends MasterController
         }
         $offer = Offer::find($offer_id);
         $charge_price = $offer->price;
+        if ($offer->sender_id==$auction_item->item->user_id){
+            $auction_user_id=$offer->receiver_id;
+        }else{
+            $auction_user_id=$offer->sender_id;
+        }
         AuctionUser::create([
-            'user_id' => $offer->sender_id,
+            'user_id' => $auction_user_id,
             'item_id' => $item_id,
             'auction_id' => $auction_item->auction_id,
             'charge_price' => $charge_price
