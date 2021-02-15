@@ -76,9 +76,8 @@ class TransferController extends MasterController
         if (Transfer::where(['type'=>'refund','status'=>0,'user_id'=>$user->id])->latest()->first()){
             return $this->sendError('يرجى انتظار رد الإدارة على طلبك السابق');
         }
-        //name , account_number , bank_name
-        $data['money']=$credit;
-        $data['type']='refund';
+        $data['money']=$request['money'];
+        $data['type']=$request['type'];
         $data['purchasing_type']='bank';
         $data['more_details']=[
             'name'=>$request['name'],
