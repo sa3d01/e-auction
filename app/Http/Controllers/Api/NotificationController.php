@@ -36,7 +36,7 @@ class NotificationController extends MasterController
     {
         $notifies = new NotificationCollection($this->model->where('receiver_id', request()->user()->id)->latest()->get());
         $unread = $this->model->where('receiver_id', request()->user()->id)->where('read', 'false')->count();
-        return $this->sendResponse(['data' => $notifies, 'unread' => $unread]);
+        return $this->sendResponse(['data' => [], 'unread' => 0]);
     }
 
     public function notifications($admin_notify_type)

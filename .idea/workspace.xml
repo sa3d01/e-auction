@@ -19,10 +19,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="sms">
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="notifications admin">
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/NotificationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/NotificationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/master/main-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/master/main-menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/master/mobile-main-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/master/mobile-main-menu.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -272,35 +270,7 @@
       <workItem from="1613259932339" duration="22000" />
       <workItem from="1613312390592" duration="18331000" />
       <workItem from="1613350366490" duration="2074000" />
-      <workItem from="1613393440162" duration="8824000" />
-    </task>
-    <task id="LOCAL-00223" summary=".">
-      <created>1613237097375</created>
-      <option name="number" value="00223" />
-      <option name="presentableId" value="LOCAL-00223" />
-      <option name="project" value="LOCAL" />
-      <updated>1613237097376</updated>
-    </task>
-    <task id="LOCAL-00224" summary=".">
-      <created>1613238294199</created>
-      <option name="number" value="00224" />
-      <option name="presentableId" value="LOCAL-00224" />
-      <option name="project" value="LOCAL" />
-      <updated>1613238294199</updated>
-    </task>
-    <task id="LOCAL-00225" summary=".">
-      <created>1613238440985</created>
-      <option name="number" value="00225" />
-      <option name="presentableId" value="LOCAL-00225" />
-      <option name="project" value="LOCAL" />
-      <updated>1613238440985</updated>
-    </task>
-    <task id="LOCAL-00226" summary=".">
-      <created>1613238609843</created>
-      <option name="number" value="00226" />
-      <option name="presentableId" value="LOCAL-00226" />
-      <option name="project" value="LOCAL" />
-      <updated>1613238609843</updated>
+      <workItem from="1613393440162" duration="9773000" />
     </task>
     <task id="LOCAL-00227" summary=".">
       <created>1613238787055</created>
@@ -617,7 +587,35 @@
       <option name="project" value="LOCAL" />
       <updated>1613401185549</updated>
     </task>
-    <option name="localTasksCounter" value="272" />
+    <task id="LOCAL-00272" summary="notifications admin">
+      <created>1613402469567</created>
+      <option name="number" value="00272" />
+      <option name="presentableId" value="LOCAL-00272" />
+      <option name="project" value="LOCAL" />
+      <updated>1613402469567</updated>
+    </task>
+    <task id="LOCAL-00273" summary="notifications admin">
+      <created>1613402629896</created>
+      <option name="number" value="00273" />
+      <option name="presentableId" value="LOCAL-00273" />
+      <option name="project" value="LOCAL" />
+      <updated>1613402629896</updated>
+    </task>
+    <task id="LOCAL-00274" summary="notifications admin">
+      <created>1613402714701</created>
+      <option name="number" value="00274" />
+      <option name="presentableId" value="LOCAL-00274" />
+      <option name="project" value="LOCAL" />
+      <updated>1613402714701</updated>
+    </task>
+    <task id="LOCAL-00275" summary="notifications admin">
+      <created>1613403234713</created>
+      <option name="number" value="00275" />
+      <option name="presentableId" value="LOCAL-00275" />
+      <option name="project" value="LOCAL" />
+      <updated>1613403234713</updated>
+    </task>
+    <option name="localTasksCounter" value="276" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -644,6 +642,7 @@
     <MESSAGE value="refund" />
     <MESSAGE value="auctionItemStatusUpdate" />
     <MESSAGE value="sms" />
-    <option name="LAST_COMMIT_MESSAGE" value="sms" />
+    <MESSAGE value="notifications admin" />
+    <option name="LAST_COMMIT_MESSAGE" value="notifications admin" />
   </component>
 </project>
