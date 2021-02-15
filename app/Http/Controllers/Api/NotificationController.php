@@ -60,29 +60,17 @@ class NotificationController extends MasterController
     }
 
     public function store(Request $request){
-        $admin_notify_type=$request['admin_notify_type'];
-        if ($admin_notify_type=='user'){
-            $receivers=User::where('user_type_id',1)->get();
-        }elseif ($admin_notify_type=='provider'){
-            $receivers=User::where('user_type_id',3)->orWhere('user_type_id',4)->get();
-        }else{
-            $receivers=User::all();
-        }
-        $receivers_ids=$receivers->pluck('id');
+        $receivers=User::all();
         $title='رسالة إدارية';
         $note=$request['note'];
+        $token_receivers=[];
+        foreach ($receivers as $receiver){
+            if ($receiver->device['id'] !='null'){
+                $token_receivers[]=$receiver->device['id'];
+            }
+        }
         $push = new PushNotification('fcm');
-        $android_msg = [
-            'notification' => null,
-            'data' => [
-                'title' => $title,
-                'body' => $note,
-                'status' => 'admin',
-                'type'=>'admin',
-            ],
-            'priority' => 'high',
-        ];
-        $ios_msg = [
+        $push->setMessage([
             'notification' => array('title'=>$title, 'sound' => 'default'),
             'data' => [
                 'title' => $title,
@@ -91,31 +79,9 @@ class NotificationController extends MasterController
                 'type'=>'admin',
             ],
             'priority' => 'high',
-        ];
-        $android_receivers=[];
-        $ios_receivers=[];
-        foreach ($receivers as $receiver){
-            if(array_key_exists("type",(array)$receiver->device)){
-                if ($receiver->device['type'] =='IOS'){
-                    $ios_receivers[]=$receiver->device['id'];
-                }else{
-                    $android_receivers[]=$receiver->device['id'];
-                }
-            }
-        }
-        $push->setMessage($ios_msg)
-            ->setDevicesToken($ios_receivers)
+        ])
+            ->setDevicesToken($token_receivers)
             ->send();
-        $push->setMessage($android_msg)
-            ->setDevicesToken($android_receivers)
-            ->send();
-        $notification=new Notification();
-        $notification->type='admin';
-        $notification->receivers=$receivers_ids;
-        $notification->title=$title;
-        $notification->note=$note;
-        $notification->admin_notify_type=$admin_notify_type;
-        $notification->save();
         return redirect()->back()->with('created');
     }
 
