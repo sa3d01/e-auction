@@ -36,8 +36,7 @@ class Controller extends BaseController
         return $user;
     }
 
-    function auctionItemStatusUpdate()
-    {
+    function check_negotiation_auctions(){
         $negotiation_auction_items=AuctionItem::where('more_details->status', 'negotiation')->get();
         foreach ($negotiation_auction_items as $negotiation_auction_item){
             if ( Carbon::createFromTimestamp($negotiation_auction_item->more_details['start_negotiation'])->addSeconds(Setting::value('negotiation_period'))->timestamp < Carbon::now()->timestamp ) {
@@ -65,164 +64,115 @@ class Controller extends BaseController
                 }
             }
         }
+    }
 
+    function auctionItemStatusUpdate()
+    {
+        $this->check_negotiation_auctions();
         $auction_items = AuctionItem::where('more_details->status', '!=', 'paid')->where('more_details->status', '!=', 'delivered')->where('more_details->status', '!=', 'expired')->where('more_details->status', '!=', 'negotiation')->get();
         foreach ($auction_items as $auction_item) {
+            //notifies
+            $admin_expired_title['ar'] = 'تم انتهاء المزاد على السلعة رقم ' . $auction_item->item_id;
+            $admin_paid_title['ar'] = 'تم بيع السلعة رقم ' . $auction_item->item_id;
+            $owner_expired_title['ar'] = 'حظ أوفر المره القادمه ! لم يتم المزايده من قبل أحد على مزادك رقم ' . $auction_item->item_id;
+            $owner_paid_title['ar'] = 'تهانينا اليك ! لقد تم بيع سلعتك بمزاد رقم ' . $auction_item->item_id;
+            $winner_title['ar'] = 'تهانينا اليك ! لقد فزت فى المزاد الذى قمت بالمشاركة به رقم ' . $auction_item->item_id;
+
+
             if ((Carbon::createFromTimestamp($auction_item->start_date) <= Carbon::now()) && (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration) >= Carbon::now())) {
-                $auction_item->update([
-                    'more_details' => [
-                        'status' => 'live'
-                    ]
-                ]);
-                $expired_offers=Offer::where('auction_item_id',$auction_item->id)->get();
-                foreach ($expired_offers as $expired_offer){
-                    $expired_offer->update([
-                       'status'=>'expired'
-                    ]);
-                }
+                $this->auction_item_update($auction_item,'live');
+                $this->expire_offers(Offer::where('auction_item_id',$auction_item->id)->get());
             } elseif (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration) < Carbon::now()) {
                 if ($auction_item->item->auction_type_id==4 || $auction_item->item->auction_type_id==2) {
                     $soon_winner = AuctionUser::where('item_id', $auction_item->item_id)->latest()->first();
                     if ($soon_winner) {
-                        $auction_item->update([
-                            'vip' => 'false',
-                            'more_details' => [
-                                'status' => 'negotiation',
-                                'start_negotiation'=>Carbon::now()->timestamp
-                            ]
-                        ]);
+                        $this->auction_item_update($auction_item,'negotiation');
                         $this->autoSendOffer($auction_item);
                     } else {
-                        $admin_title['ar'] = 'تم انتهاء المزاد على السلعة رقم ' . $auction_item->item_id;
-                        $this->notify_admin($admin_title, $auction_item);
-                        $owner_title['ar'] = 'حظ أوفر المره القادمه ! لم يتم المزايده من قبل أحد على مزادك رقم ' . $auction_item->item_id;
-                        $this->base_notify($owner_title, $auction_item->item->user_id, $auction_item->item_id);
-                        $auction_item->update([
-                            'vip' => 'false',
-                            'more_details' => [
-                                'status' => 'expired'
-                            ]
-                        ]);
-                        $auction_item->item->update([
-                            'status'=>'expired'
-                        ]);
-                        $expired_offers=Offer::where('auction_item_id',$auction_item->id)->get();
-                        foreach ($expired_offers as $expired_offer){
-                            $expired_offer->update([
-                                'status'=>'expired'
-                            ]);
-                        }
+                        $this->notify_admin($admin_expired_title, $auction_item);
+                        $this->base_notify($owner_expired_title, $auction_item->item->user_id, $auction_item->item_id);
+                        $this->auction_item_update($auction_item,'expired');
+                        $this->expire_item($auction_item->item);
+                        $this->expire_offers(Offer::where('auction_item_id',$auction_item->id)->get());
                     }
                 }elseif ($auction_item->item->auction_type_id==3) {
                     $soon_winner = AuctionUser::where('item_id', $auction_item->item_id)->latest()->first();
                     if ($soon_winner) {
                         if ($auction_item->price < $auction_item->item->price) {
-                            $auction_item->update([
-                                'vip' => 'false',
-                                'more_details' => [
-                                    'status' => 'negotiation',
-                                    'start_negotiation'=>Carbon::now()->timestamp
-                                ]
-                            ]);
+                            $this->auction_item_update($auction_item,'negotiation');
                             $this->autoSendOffer($auction_item);
                         } else {
-                            $winner_title['ar'] = 'تهانينا اليك ! لقد فزت فى المزاد الذى قمت بالمشاركة به رقم ' . $auction_item->item_id;
-                            $owner_title['ar'] = 'تهانينا اليك ! لقد تم بيع سلعتك بمزاد رقم ' . $auction_item->item_id;
-                            $admin_title['ar'] = 'تم بيع السلعة رقم ' . $auction_item->item_id;
                             $this->base_notify($winner_title, $soon_winner->user_id, $auction_item->item_id);
-                            $this->base_notify($owner_title, $auction_item->item->user_id, $auction_item->item_id);
-                            $this->notify_admin($admin_title, $auction_item);
-                            $auction_item->update([
-                                'vip' => 'false',
-                                'more_details' => [
-                                    'status' => 'paid'
-                                ]
-                            ]);
-
-                            $expired_offers=Offer::where('auction_item_id',$auction_item->id)->get();
-                            foreach ($expired_offers as $expired_offer){
-                                $expired_offer->update([
-                                    'status'=>'expired'
-                                ]);
-                            }
-
+                            $this->base_notify($owner_paid_title, $auction_item->item->user_id, $auction_item->item_id);
+                            $this->notify_admin($admin_paid_title, $auction_item);
+                            $this->auction_item_update($auction_item,'paid');
+                            $this->expire_offers(Offer::where('auction_item_id',$auction_item->id)->get());
                         }
                     } else {
-                        $admin_title['ar'] = 'تم انتهاء المزاد على السلعة رقم ' . $auction_item->item_id;
-                        $this->notify_admin($admin_title, $auction_item);
-                        $owner_title['ar'] = 'حظ أوفر المره القادمه ! لم يتم المزايده من قبل أحد على مزادك رقم ' . $auction_item->item_id;
-                        $this->base_notify($owner_title, $auction_item->item->user_id, $auction_item->item_id);
-                        $auction_item->update([
-                            'vip' => 'false',
-                            'more_details' => [
-                                'status' => 'expired'
-                            ]
-                        ]);
-                        $auction_item->item->update([
-                            'status'=>'expired'
-                        ]);
-                        $expired_offers=Offer::where('auction_item_id',$auction_item->id)->get();
-                        foreach ($expired_offers as $expired_offer){
-                            $expired_offer->update([
-                                'status'=>'expired'
-                            ]);
-                        }
+                        $this->notify_admin($admin_expired_title, $auction_item);
+                        $this->base_notify($owner_expired_title, $auction_item->item->user_id, $auction_item->item_id);
+                        $this->auction_item_update($auction_item,'expired');
+                        $this->expire_item($auction_item->item);
+                        $this->expire_offers(Offer::where('auction_item_id',$auction_item->id)->get());
                     }
                 }else {
                     $soon_winner = AuctionUser::where('item_id', $auction_item->item_id)->latest()->first();
                     if ($soon_winner) {
-                        $winner_title['ar'] = 'تهانينا اليك ! لقد فزت فى المزاد الذى قمت بالمشاركة به رقم ' . $auction_item->item_id;
-                        $owner_title['ar'] = 'تهانينا اليك ! لقد تم بيع سلعتك بمزاد رقم ' . $auction_item->item_id;
-                        $admin_title['ar'] = 'تم بيع السلعة رقم ' . $auction_item->item_id;
                         $this->base_notify($winner_title, $soon_winner->user_id, $auction_item->item_id);
-                        $this->base_notify($owner_title, $auction_item->item->user_id, $auction_item->item_id);
-                        $this->notify_admin($admin_title, $auction_item);
-                        $auction_item->update([
-                            'vip' => 'false',
-                            'more_details' => [
-                                'status' => 'paid'
-                            ]
-                        ]);
-                        $expired_offers=Offer::where('auction_item_id',$auction_item->id)->get();
-                        foreach ($expired_offers as $expired_offer){
-                            $expired_offer->update([
-                                'status'=>'expired'
-                            ]);
-                        }
+                        $this->base_notify($owner_paid_title, $auction_item->item->user_id, $auction_item->item_id);
+                        $this->notify_admin($admin_paid_title, $auction_item);
+                        $this->auction_item_update($auction_item,'paid');
+                        $this->expire_offers(Offer::where('auction_item_id',$auction_item->id)->get());
                     } else {
-                        $admin_title['ar'] = 'تم انتهاء المزاد على السلعة رقم ' . $auction_item->item_id;
-                        $this->notify_admin($admin_title, $auction_item);
-                        $owner_title['ar'] = 'حظ أوفر المره القادمه ! لم يتم المزايده من قبل أحد على مزادك رقم ' . $auction_item->item_id;
-                        $this->base_notify($owner_title, $auction_item->item->user_id, $auction_item->item_id);
-                        $auction_item->update([
-                            'vip' => 'false',
-                            'more_details' => [
-                                'status' => 'expired'
-                            ]
-                        ]);
-                        $auction_item->item->update([
-                            'status'=>'expired'
-                        ]);
-                        $expired_offers=Offer::where('auction_item_id',$auction_item->id)->get();
-                        foreach ($expired_offers as $expired_offer){
-                            $expired_offer->update([
-                                'status'=>'expired'
-                            ]);
-                        }
+                        $this->notify_admin($admin_expired_title, $auction_item);
+                        $this->base_notify($owner_expired_title, $auction_item->item->user_id, $auction_item->item_id);
+                        $this->auction_item_update($auction_item,'expired');
+                        $this->expire_item($auction_item->item);
+                        $this->expire_offers(Offer::where('auction_item_id',$auction_item->id)->get());
                     }
                 }
             } else {
-                $auction_item->update([
-                    'more_details' => [
-                        'status' => 'soon'
-                    ]
-                ]);
+                $this->auction_item_update($auction_item,'soon');
             }
         }
     }
 
-    function auction_item_update($auction_item){
-
+    function auction_item_update($auction_item,$status){
+        if ($status=='expired' || $status=='paid'){
+            $data=[
+                'vip' => 'false',
+                'more_details' => [
+                    'status' => $status
+                ]
+            ];
+        }elseif ($status=='negotiation'){
+            $data=[
+                'vip' => 'false',
+                'more_details' => [
+                    'status' => $status,
+                    'start_negotiation'=>Carbon::now()->timestamp
+                ]
+            ];
+        }else{
+            $data=[
+                'more_details' => [
+                    'status' => $status
+                ]
+            ];
+        }
+        $auction_item->update($data);
+    }
+    function expire_offers($expired_offers){
+        foreach ($expired_offers as $expired_offer){
+            $expired_offer->update([
+                'status'=>'expired'
+            ]);
+        }
+    }
+    function expire_item($item){
+        $item->update([
+            'status'=>'expired'
+        ]);
     }
 
     function autoSendOffer($auction_item)
