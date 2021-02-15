@@ -66,7 +66,7 @@ abstract class MasterController extends Controller
             'pre_auction_items' => $pre_auction_items,
             'expire_auction_items' => $expire_auction_items,
             'live_auction_items' => $live_auction_items,
-            'admin_notifications' => Notification::where(['receiver_id' => null, 'read' => 'false'])->latest()->get(),
+            'admin_notifications' => Notification::where(['receiver_id' => null,'receivers' => null, 'read' => 'false'])->latest()->get(),
         ));
     }
 
