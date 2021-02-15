@@ -106,6 +106,12 @@ class Controller extends BaseController
                         $auction_item->item->update([
                             'status'=>'expired'
                         ]);
+                        $expired_offers=Offer::where('auction_item_id',$auction_item->id)->get();
+                        foreach ($expired_offers as $expired_offer){
+                            $expired_offer->update([
+                                'status'=>'expired'
+                            ]);
+                        }
                     }
                 }elseif ($auction_item->item->auction_type_id==3) {
                     $soon_winner = AuctionUser::where('item_id', $auction_item->item_id)->latest()->first();
@@ -155,6 +161,12 @@ class Controller extends BaseController
                         $auction_item->item->update([
                             'status'=>'expired'
                         ]);
+                        $expired_offers=Offer::where('auction_item_id',$auction_item->id)->get();
+                        foreach ($expired_offers as $expired_offer){
+                            $expired_offer->update([
+                                'status'=>'expired'
+                            ]);
+                        }
                     }
                 }else {
                     $soon_winner = AuctionUser::where('item_id', $auction_item->item_id)->latest()->first();
@@ -191,6 +203,12 @@ class Controller extends BaseController
                         $auction_item->item->update([
                             'status'=>'expired'
                         ]);
+                        $expired_offers=Offer::where('auction_item_id',$auction_item->id)->get();
+                        foreach ($expired_offers as $expired_offer){
+                            $expired_offer->update([
+                                'status'=>'expired'
+                            ]);
+                        }
                     }
                 }
             } else {
