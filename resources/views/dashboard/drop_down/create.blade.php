@@ -18,6 +18,7 @@
                             {!! Form::open(['method'=>'post', 'files'=>true, 'enctype' => 'multipart/form-data', 'route'=>[$action], 'class' => 'formValidate']) !!}
                             {!! Form::hidden('add_by', \Illuminate\Support\Facades\Auth::user()->id) !!}
                             {!! Form::hidden('admin_notify_type', $admin_notify_type) !!}
+                            {!! Form::hidden('type', $type) !!}
                             <div class="element-info">
                                 <div class="element-info-with-icon">
                                     <div class="element-info-icon">
@@ -56,6 +57,30 @@
                                                 </div>
                                             @endif
                                         @endforeach
+                                            @if(isset($image))
+                                                <div class="col-sm-12">
+                                                    <div class="white-box">
+                                                        <label for="input-file-now-custom-1">الصورة</label>
+                                                        <input name="image" type="file" id="input-file-now-custom-1 image" class="dropify" data-default-file="{{asset('media/images/logo.png')}}"/>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                            @if(isset($selects))
+                                                @foreach($selects as $select)
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group">
+                                                            <label for=""> {{$select['title']}} </label>
+                                                            <select id="{{$select['input_name']}}" name="{{$select['input_name']}}" class="form-control">
+                                                                @foreach($select['rows'] as $row)
+                                                                    <option value="{{$row->id}}">
+                                                                        {{$row->nameForSelect()}}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            @endif
                                     </div>
                                 </fieldset>
                             @endif

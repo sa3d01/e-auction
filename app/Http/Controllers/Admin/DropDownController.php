@@ -12,9 +12,6 @@ class DropDownController extends MasterController
     {
         $this->model = $model;
         $this->route = 'drop_down';
-//        $this->middleware('permission:view-car-options', ['only' => ['index']]);
-//        $this->middleware('permission:edit-car-options', ['only' => ['update','activate']]);
-//        $this->middleware('permission:create-car-options', ['only' => ['create']]);
         parent::__construct();
     }
 
@@ -58,20 +55,31 @@ class DropDownController extends MasterController
         );
     }
 
-    public function create()
+    public function create($class=null)
     {
-        return View('dashboard.create.create', [
-            'type'=>'model',
-            'action'=>'admin.drop_down.store',
-            'title'=>'أضافة ماركة',
-            'create_fields'=>['الإسم' => 'name'],
-            'languages'=>true,
-            'select'=>[
+        $image=null;
+        $select=null;
+        if ($class=='Partner'){
+            $image=true;
+        }elseif ($class=='Mark'){
+            $image=true;
+        }elseif ($class=='Model'){
+            $select=[
                 'name'=>'الماركة',
                 'class'=>'Mark',
                 'input_name'=>'parent_id',
-                ],
-            ]);
+            ];
+        }
+        return View('dashboard.drop_down.create', [
+            'type'=>$class,
+            'action'=>'admin.drop_down.store',
+            'title'=>'أضافة ',
+            'create_fields'=>['الإسم' => 'name'],
+            'languages'=>true,
+            'image'=>$image,
+            'selects'=>$select,
+            ]
+        );
     }
 
     public function store(Request $request)
