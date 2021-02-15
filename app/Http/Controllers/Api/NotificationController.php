@@ -36,12 +36,12 @@ class NotificationController extends MasterController
     {
         $notifies = new NotificationCollection($this->model->where('receiver_id', request()->user()->id)->latest()->get());
         $unread = $this->model->where('receiver_id', request()->user()->id)->where('read', 'false')->count();
-        return $this->sendResponse(['data' => [], 'unread' => 0]);
+        return $this->sendResponse(['data' => $notifies, 'unread' => $unread]);
     }
 
     public function notifications($admin_notify_type)
     {
-        $rows=$this->model->where('admin_notify_type',$admin_notify_type)->latest()->get();
+        $rows=$this->model->where('admin_notify_type',$admin_notify_type)->where('receivers','!=','null')->latest()->get();
         $collection = collect($rows);
         $rows = $collection->unique('created_at');
         $rows->values()->all();
@@ -52,17 +52,18 @@ class NotificationController extends MasterController
             'type'=>'notification',
             'admin_notify_type'=>$admin_notify_type,
             'title'=>$this->model->nameForShow($admin_notify_type),
-            'index_fields'=>['نص الاشعار'=>'note','تاريخ الارسال'=>'created_at'],
+            'index_fields'=>['نص الاشعار'=>'note->ar','تاريخ الارسال'=>'created_at'],
             'create_fields'=>['نص الاشعار' => 'note'],
-            'create_alert'=>'يمكنك ارسال رسالة لمستخدم واحد من خﻻل صفحته الشخصية',
             'only_show'=>true,
         ]);
     }
 
     public function store(Request $request){
+        $admin_notify_type=$request['admin_notify_type'];
         $receivers=User::all();
+        $receivers_ids=$receivers->pluck('id');
         $title='رسالة إدارية';
-        $note=$request['note'];
+        $note['ar']=$request['note_ar'];
         $token_receivers=[];
         foreach ($receivers as $receiver){
             if ($receiver->device['id'] !='null'){
@@ -82,6 +83,14 @@ class NotificationController extends MasterController
         ])
             ->setDevicesToken($token_receivers)
             ->send();
+
+        Notification::create([
+           'receivers'=>$receivers_ids,
+            'admin_notify_type'=>$admin_notify_type,
+            'title'=>$note,
+            'note'=>$note,
+            'type'=>'admin',
+        ]);
         return redirect()->back()->with('created');
     }
 

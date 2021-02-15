@@ -11,10 +11,11 @@ class Notification extends Model
 
     private $route='notification';
 
-    protected $fillable = ['receiver_id','item_id','title','note','read','type','admin_notify_type','more_details'];
+    protected $fillable = ['receiver_id','item_id','title','note','read','type','admin_notify_type','receivers','more_details'];
     protected $casts = [
         'title' => 'json',
         'note' => 'json',
+        'receivers' => 'array',
         'more_details' => 'json',
     ];
 
