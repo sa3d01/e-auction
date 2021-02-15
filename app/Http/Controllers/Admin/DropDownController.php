@@ -58,16 +58,18 @@ class DropDownController extends MasterController
     public function new($class)
     {
         $image=null;
-        $select=null;
+        $selects=null;
         if ($class=='Partner'){
             $image=true;
         }elseif ($class=='Mark'){
             $image=true;
         }elseif ($class=='Model'){
-            $select=[
-                'title'=>'الماركة',
-                'rows'=>DropDown::whereClass('Mark')->get(),
-                'input_name'=>'parent_id',
+            $selects=[
+                [
+                    'input_name'=>'parent_id',
+                    'rows'=>DropDown::whereClass('Mark')->get(),
+                    'title'=>'الماركة'
+                ]
             ];
         }
         return View('dashboard.drop_down.create', [
@@ -77,7 +79,7 @@ class DropDownController extends MasterController
             'create_fields'=>['الإسم' => 'name'],
             'languages'=>true,
             'image'=>$image,
-            'selects'=>$select,
+            'selects'=>$selects,
             ]
         );
     }
