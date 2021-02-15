@@ -33,7 +33,7 @@ class UserController extends MasterController
         if (!$request->has('email') && !$request->has('phone')) {
             return $this->sendError('يجب ادخال وسيلة ارسال واحدة على الأقل');
         }
-        $activation_code = 2021;//rand(1111, 9999);
+        $activation_code = rand(1111, 9999);
         if ($request->has('email')){
             $user = User::where('email', $request['email'])->first();
         }else{
@@ -47,7 +47,7 @@ class UserController extends MasterController
         } else {
             $user->update($all);
         }
-        //$this->send_code($activation_code, $request['email'], $request['phone']);
+        $this->send_code($activation_code, $request['email'], $request['phone']);
         return $this->sendResponse(['activation_code' => $activation_code]);
     }
 
