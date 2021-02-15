@@ -29,7 +29,7 @@ class NotificationController extends MasterController
             'type'=>'notification',
             'admin_notify_type'=>$admin_notify_type,
             'title'=>$this->model->nameForShow($admin_notify_type),
-            'index_fields'=>['نص الاشعار'=>'note->ar','تاريخ الارسال'=>'created_at'],
+            'index_fields'=>['نص الاشعار'=>'note','تاريخ الارسال'=>'created_at'],
             'create_fields'=>['نص الاشعار' => 'note'],
             'only_show'=>true,
         ]);
