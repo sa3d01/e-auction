@@ -221,7 +221,11 @@ class UserController extends MasterController
         $pre_auction_items = 0;
         $live_auction_items = 0;
         $user_items_ids = $user->items()->pluck('id');
-        $paid_auction_items = AuctionItem::whereIn('item_id', $user_items_ids)->where('more_details->status', 'paid')->get();
+//        $paid_auction_items = AuctionItem::whereIn('item_id', $user_items_ids)->where('more_details->status', 'paid')->get();
+        $paid_auction_items = AuctionItem::whereIn('item_id', $user_items_ids)->where(function($query) {
+            $query->where('more_details->status', 'paid')
+                ->orWhere('more_details->status', 'delivered');
+        })->get();
         $money = 0;
         foreach ($paid_auction_items as $paid_auction_item) {
             $money += $paid_auction_item->price;
