@@ -69,10 +69,6 @@ class TransferController extends MasterController
     }
     public function refund(Request $request){
         $user = auth()->user();
-        $credit=$user->credit;
-        if ($credit<1){
-            return $this->sendError('ﻻ توجد مستحقات بحسابك بالوقت الحالى ');
-        }
         if (Transfer::where(['type'=>'refund','status'=>0,'user_id'=>$user->id])->latest()->first()){
             return $this->sendError('يرجى انتظار رد الإدارة على طلبك السابق');
         }

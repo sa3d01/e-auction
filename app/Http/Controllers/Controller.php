@@ -221,6 +221,10 @@ class Controller extends BaseController
         }
     }
 
+    function auction_item_update($auction_item){
+
+    }
+
     function autoSendOffer($auction_item)
     {
         $auction_user = AuctionUser::where('item_id', $auction_item->item_id)->latest()->first();
