@@ -65,8 +65,8 @@ class DropDownController extends MasterController
             $image=true;
         }elseif ($class=='Model'){
             $select=[
-                'name'=>'الماركة',
-                'class'=>'Mark',
+                'title'=>'الماركة',
+                'rows'=>DropDown::whereClass('Mark')->get(),
                 'input_name'=>'parent_id',
             ];
         }
