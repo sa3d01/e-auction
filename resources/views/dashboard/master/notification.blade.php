@@ -93,7 +93,7 @@
                                     </div>
                                     <div class="message-content">
                                         <h6 class="message-title">
-                                            {{$admin_notification->title}}
+                                            {{$admin_notification->title['ar']}}
                                         </h6>
                                     </div>
                                 </a>

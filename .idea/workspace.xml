@@ -20,10 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="notifications admin">
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/NotificationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/NotificationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Notification.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Notification.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_11_27_041348_create_notifications_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_11_27_041348_create_notifications_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/notification/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/notification/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/NotificationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/NotificationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/master/notification.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/master/notification.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -273,42 +271,7 @@
       <workItem from="1613259932339" duration="22000" />
       <workItem from="1613312390592" duration="18331000" />
       <workItem from="1613350366490" duration="2074000" />
-      <workItem from="1613393440162" duration="10243000" />
-    </task>
-    <task id="LOCAL-00228" summary=".">
-      <created>1613239257047</created>
-      <option name="number" value="00228" />
-      <option name="presentableId" value="LOCAL-00228" />
-      <option name="project" value="LOCAL" />
-      <updated>1613239257047</updated>
-    </task>
-    <task id="LOCAL-00229" summary=".">
-      <created>1613240024566</created>
-      <option name="number" value="00229" />
-      <option name="presentableId" value="LOCAL-00229" />
-      <option name="project" value="LOCAL" />
-      <updated>1613240024566</updated>
-    </task>
-    <task id="LOCAL-00230" summary=".">
-      <created>1613240233125</created>
-      <option name="number" value="00230" />
-      <option name="presentableId" value="LOCAL-00230" />
-      <option name="project" value="LOCAL" />
-      <updated>1613240233125</updated>
-    </task>
-    <task id="LOCAL-00231" summary=".">
-      <created>1613240285009</created>
-      <option name="number" value="00231" />
-      <option name="presentableId" value="LOCAL-00231" />
-      <option name="project" value="LOCAL" />
-      <updated>1613240285009</updated>
-    </task>
-    <task id="LOCAL-00232" summary=".">
-      <created>1613240416197</created>
-      <option name="number" value="00232" />
-      <option name="presentableId" value="LOCAL-00232" />
-      <option name="project" value="LOCAL" />
-      <updated>1613240416197</updated>
+      <workItem from="1613393440162" duration="10811000" />
     </task>
     <task id="LOCAL-00233" summary=".">
       <created>1613240514669</created>
@@ -618,7 +581,42 @@
       <option name="project" value="LOCAL" />
       <updated>1613403411524</updated>
     </task>
-    <option name="localTasksCounter" value="277" />
+    <task id="LOCAL-00277" summary="notifications admin">
+      <created>1613403881803</created>
+      <option name="number" value="00277" />
+      <option name="presentableId" value="LOCAL-00277" />
+      <option name="project" value="LOCAL" />
+      <updated>1613403881803</updated>
+    </task>
+    <task id="LOCAL-00278" summary="notifications admin">
+      <created>1613403931047</created>
+      <option name="number" value="00278" />
+      <option name="presentableId" value="LOCAL-00278" />
+      <option name="project" value="LOCAL" />
+      <updated>1613403931047</updated>
+    </task>
+    <task id="LOCAL-00279" summary="notifications admin">
+      <created>1613404049640</created>
+      <option name="number" value="00279" />
+      <option name="presentableId" value="LOCAL-00279" />
+      <option name="project" value="LOCAL" />
+      <updated>1613404049640</updated>
+    </task>
+    <task id="LOCAL-00280" summary="notifications admin">
+      <created>1613404171717</created>
+      <option name="number" value="00280" />
+      <option name="presentableId" value="LOCAL-00280" />
+      <option name="project" value="LOCAL" />
+      <updated>1613404171717</updated>
+    </task>
+    <task id="LOCAL-00281" summary="notifications admin">
+      <created>1613404280884</created>
+      <option name="number" value="00281" />
+      <option name="presentableId" value="LOCAL-00281" />
+      <option name="project" value="LOCAL" />
+      <updated>1613404280884</updated>
+    </task>
+    <option name="localTasksCounter" value="282" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
