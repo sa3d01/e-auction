@@ -86,6 +86,8 @@
                                         </h6>
                                     </div>
                                 </a>
+                            @elseif($admin_notification->receivers!=null)
+                                @continue
                             @else
                                 <a href="{{route('admin.transfer.index')}}">
                                     <div class="user-avatar-w">
