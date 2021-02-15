@@ -8,7 +8,6 @@
                     <h5 class="form-header">
                         {{$title}}
                     </h5>
-                    @can('add-notifications')
                     <div class="element-box">
                         {!! Form::open(['method'=>'post', 'files'=>true, 'enctype' => 'multipart/form-data', 'route'=>[$action], 'class' => 'formValidate']) !!}
                         {!! Form::hidden('add_by', \Illuminate\Support\Facades\Auth::user()->id) !!}
@@ -59,7 +58,6 @@
                         </div>
                         {!! Form::close() !!}
                     </div>
-                    @endcan
                     <div  class="table-responsive">
                         <table id="datatable" width="100%" class="table table-striped table-lightfont">
                             <thead>
