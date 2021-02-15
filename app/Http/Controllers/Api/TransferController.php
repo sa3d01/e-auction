@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\AuctionItem;
 use App\Http\Resources\UserResource;
 use App\Package;
 use App\Setting;
@@ -31,6 +32,9 @@ class TransferController extends MasterController
         $data = $request->all();
         $data['user_id'] = $user->id;
         if ($request['type']=='buy_item'){
+            if (Transfer::where('more_details->item_id',$request['item_id'])->where('type','buy_item')->where('status',0)->latest()->first()){
+                return $this->sendError('يرجى انتظار رد الإدارة على تحويلك السابق');
+            }
             $data['purchasing_type']='bank';
             $filename = $this->upload_file($request->file('image'));
             $data['more_details']=[
@@ -59,10 +63,31 @@ class TransferController extends MasterController
                 $user->update(['wallet' => $wallet]);
             }
         }
-
         $data = new UserResource($user);
         $token = auth()->login($user);
         return $this->sendResponse($data)->withHeaders(['apiToken' => $token, 'tokenType' => 'bearer']);
+    }
+    public function refund(Request $request){
+        $user = auth()->user();
+        $credit=$user->credit;
+        if ($credit<1){
+            return $this->sendError('ﻻ توجد مستحقات بحسابك بالوقت الحالى ');
+        }
+        if (Transfer::where(['type'=>'refund','status'=>0,'user_id'=>$user->id])->latest()->first()){
+            return $this->sendError('يرجى انتظار رد الإدارة على طلبك السابق');
+        }
+        //name , account_number , bank_name
+        $data['money']=$credit;
+        $data['type']='refund';
+        $data['purchasing_type']='bank';
+        $data['more_details']=[
+            'name'=>$request['name'],
+            'account_number'=>$request['account_number'],
+            'bank_name'=>$request['bank_name'],
+        ];
+        Transfer::create($data);
+        $data = new UserResource($user);
+        return $this->sendResponse($data);
     }
 
 }

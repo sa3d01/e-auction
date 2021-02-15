@@ -14,12 +14,9 @@ use App\Http\Resources\UserResource;
 use App\Item;
 use App\Transfer;
 use App\User;
-use App\Utils\PreparePhone;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class UserController extends MasterController
 {
@@ -221,7 +218,6 @@ class UserController extends MasterController
         $pre_auction_items = 0;
         $live_auction_items = 0;
         $user_items_ids = $user->items()->pluck('id');
-//        $paid_auction_items = AuctionItem::whereIn('item_id', $user_items_ids)->where('more_details->status', 'paid')->get();
         $paid_auction_items = AuctionItem::whereIn('item_id', $user_items_ids)->where(function($query) {
             $query->where('more_details->status', 'paid')
                 ->orWhere('more_details->status', 'delivered');

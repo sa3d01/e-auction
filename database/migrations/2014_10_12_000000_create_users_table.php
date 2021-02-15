@@ -33,6 +33,7 @@ class CreateUsersTable extends Migration
             $table->json('more_details')->nullable();
             $table->softDeletes('deleted_at', 0);
             $table->integer('wallet')->default(0);
+            $table->integer('credit')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -62,7 +62,7 @@ class ItemCollection extends ResourceCollection
 
                 $arr['is_paid']=false;
                 if ($features['status']=='paid'){
-                    if (Transfer::where('more_details->item_id',$obj->id)->where('status',0)->latest()->first()){
+                    if (Transfer::where('more_details->item_id',$obj->id)->where('type','buy_item')->where('status',0)->latest()->first()){
                         $arr['is_paid']=true;
                     }
                 }elseif ($features['status']=='delivered'){

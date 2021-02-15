@@ -27,6 +27,7 @@ class UserResource extends JsonResource
             'package'=> $this->package?new PackageResource($this->package) : new Object_(),
             'purchasing_power'=> (double)$this->purchasing_power ?? 0,
             'wallet'=> (double)$this->wallet ?? 0,
+            'credit'=> (double)$this->credit ?? 0,
         ];
     }
 }

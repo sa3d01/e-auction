@@ -54,9 +54,8 @@ Route::group(['prefix' => 'v1','namespace'=>'Api'], function () {
         Route::get('/{package}', 'PackageController@show');
     });
 
-    Route::group(['prefix' => '/transfer'], function () {
-        Route::post('/', 'TransferController@transfer')->middleware(CheckApiToken::class);
-    });
+    Route::post('/transfer', 'TransferController@transfer')->middleware(CheckApiToken::class);
+    Route::post('/refund', 'TransferController@refund')->middleware(CheckApiToken::class);
 
     Route::group(['prefix' => '/user'], function () {
         // Verification
