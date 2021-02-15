@@ -21,4 +21,14 @@ class Notification extends Model
     public function item(){
         return $this->belongsTo(Item::class);
     }
+    public function receiver(){
+        return $this->belongsTo(User::class,'receiver_id','id');
+    }
+    public function nameForShow($admin_notify_type){
+        if ($admin_notify_type=='all'){
+            return 'اشعارات كل مستخدمى التطبيق' ;
+        }else{
+            return 'اشعارات موجهة' ;
+        }
+    }
 }
