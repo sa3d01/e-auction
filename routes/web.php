@@ -43,6 +43,7 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
     Route::get('user/activate/{id}', 'UserController@activate')->name('user.activate');
 
     Route::post('drop_down/{id}', 'DropDownController@update')->name('drop_down.update');
+    Route::get('drop_down/{class}/class', 'DropDownController@new')->name('drop_down.new');
     Route::get('drop_down/{class}/class', 'DropDownController@list')->name('drop_down.list');
     Route::resource('drop_down', 'DropDownController');
     Route::get('drop_down/activate/{id}', 'DropDownController@activate')->name('drop_down.activate');

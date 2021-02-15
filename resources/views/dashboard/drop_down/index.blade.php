@@ -9,7 +9,7 @@
                         {{$title}}
                     </h5>
                     <div class="form-buttons-w">
-                        <a href="{{route('admin.drop_down.create',['class'=>$type])}}" class="btn btn-primary create-submit" ><label>+</label> إضافة</a>
+                        <a href="{{route('admin.drop_down.new',['class'=>$type])}}" class="btn btn-primary create-submit" ><label>+</label> إضافة</a>
                     </div>
                     <div  class="table-responsive">
                         <table id="datatable" width="100%" class="table table-striped table-lightfont">

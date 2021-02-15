@@ -55,7 +55,7 @@ class DropDownController extends MasterController
         );
     }
 
-    public function create($class=null)
+    public function new($class)
     {
         $image=null;
         $select=null;
