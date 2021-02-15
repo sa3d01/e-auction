@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Notification;
 use App\User;
+use Edujugon\PushNotification\PushNotification;
 use Illuminate\Http\Request;
 
 class NotificationController extends MasterController
@@ -15,10 +16,9 @@ class NotificationController extends MasterController
 
         parent::__construct();
     }
-
     public function notifications($admin_notify_type)
     {
-        $rows=$this->model->where('admin_notify_type',$admin_notify_type)->latest()->get();
+        $rows=$this->model->where('admin_notify_type',$admin_notify_type)->where('receivers','!=',null)->latest()->get();
         $collection = collect($rows);
         $rows = $collection->unique('created_at');
         $rows->values()->all();
@@ -29,9 +29,8 @@ class NotificationController extends MasterController
             'type'=>'notification',
             'admin_notify_type'=>$admin_notify_type,
             'title'=>$this->model->nameForShow($admin_notify_type),
-            'index_fields'=>['نص الاشعار'=>'note','تاريخ الارسال'=>'created_at'],
+            'index_fields'=>['نص الاشعار'=>'note->ar','تاريخ الارسال'=>'created_at'],
             'create_fields'=>['نص الاشعار' => 'note'],
-            'create_alert'=>'يمكنك ارسال رسالة لمستخدم واحد من خﻻل صفحته الشخصية',
             'only_show'=>true,
         ]);
     }
@@ -40,33 +39,36 @@ class NotificationController extends MasterController
         $admin_notify_type=$request['admin_notify_type'];
         $receivers=User::all();
         $receivers_ids=$receivers->pluck('id');
-        $title['ar']='رسالة إدارية';
-        $title['en']='admin message';
-        $note['ar']=$request['note'];
-        $note['en']=$request['note'];
+        $title='رسالة إدارية';
+        $note['ar']=$request['note_ar'];
+        $token_receivers=[];
+        foreach ($receivers as $receiver){
+            if ($receiver->device['id'] !='null'){
+                $token_receivers[]=$receiver->device['id'];
+            }
+        }
         $push = new PushNotification('fcm');
-        $msg = [
-            'notification' => array('title'=>$title['ar'], 'sound' => 'default'),
+        $push->setMessage([
+            'notification' => array('title'=>$title, 'sound' => 'default'),
             'data' => [
-                'title' => $title['ar'],
-                'body' => $note['ar'],
+                'title' => $title,
+                'body' => $note,
                 'status' => 'admin',
                 'type'=>'admin',
             ],
             'priority' => 'high',
-        ];
-        foreach ($receivers as $receiver){
-            $push->setMessage($msg)
-                ->setDevicesToken($receiver->device['id'])
-                ->send();
-        }
-        $notification=new Notification();
-        $notification->type='admin';
-        $notification->receivers=$receivers_ids;
-        $notification->title=$title;
-        $notification->note=$note;
-        $notification->admin_notify_type=$admin_notify_type;
-        $notification->save();
+        ])
+            ->setDevicesToken($token_receivers)
+            ->send();
+
+        Notification::create([
+            'receivers'=>$receivers_ids,
+            'admin_notify_type'=>$admin_notify_type,
+            'title'=>$note,
+            'note'=>$note,
+            'type'=>'admin',
+        ]);
         return redirect()->back()->with('created');
     }
+
 }
