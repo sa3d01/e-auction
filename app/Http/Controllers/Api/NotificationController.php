@@ -41,7 +41,7 @@ class NotificationController extends MasterController
 
     public function notifications($admin_notify_type)
     {
-        $rows=$this->model->where('admin_notify_type',$admin_notify_type)->where('receivers','!=','null')->latest()->get();
+        $rows=$this->model->where('admin_notify_type',$admin_notify_type)->where('receivers','!=',null)->latest()->get();
         $collection = collect($rows);
         $rows = $collection->unique('created_at');
         $rows->values()->all();
