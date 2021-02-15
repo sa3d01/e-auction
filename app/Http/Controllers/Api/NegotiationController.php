@@ -67,6 +67,12 @@ class NegotiationController extends MasterController
         $item = Item::find($item_id);
         $auction_item = AuctionItem::where('item_id', $item_id)->latest()->first();
         $sender = $request->user();
+        $latest_user_offer=Offer::where(['auction_item_id'=>$auction_item->id,'sender_id'=>$sender->id])->latest()->first();
+        if ($latest_user_offer){
+            if ($latest_user_offer->price > $request['price']) {
+                return $this->sendError('لا يمكن تقديم عرض سعر أقل من عرض السعر تم تقديمه !');
+            }
+        }
         if ($request->has('offer_id') && $request['offer_id']!=null){
             $latest_offer=Offer::find($request['offer_id']);
             if ($sender->id == $item->user_id) {
