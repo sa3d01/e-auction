@@ -87,10 +87,11 @@ class DropDownController extends MasterController
         $this->validate($request, $this->validation_func(1),$this->validation_msg());
         $data=$request->all();
         $name['ar']=$request['name_ar'];
+        $name['en']=$request['name_en'];
         $data['name']=$name;
-        $data['class']='Model';
+        $data['class']=$request['type'];
         $this->model->create($data);
-        return redirect()->route('admin.model.index')->with('created');
+        return redirect()->route('admin.drop_down.list',$request['type'])->with('created');
     }
 
     public function update($id,Request $request)
