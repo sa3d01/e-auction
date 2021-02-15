@@ -76,7 +76,7 @@
                                     <div class="col-sm-6">
                                         <a class="element-box el-tablo centered trend-in-corner padded bold-label">
                                             <div class="value">
-                                                {{\App\AuctionItem::where('item_id',$row->id)->value('price')}}
+                                                {{\App\AuctionItem::where('item_id',$row->id)->latest()->value('price')}}
                                             </div>
                                             <div class="label">
                                                 السعر الأخير

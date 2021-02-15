@@ -19,9 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment=".">
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/AuctionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/AuctionController.php" afterDir="false" />
-    </list>
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -268,14 +266,7 @@
       <workItem from="1613175445822" duration="1923000" />
       <workItem from="1613226945445" duration="12674000" />
       <workItem from="1613259932339" duration="22000" />
-      <workItem from="1613312390592" duration="16143000" />
-    </task>
-    <task id="LOCAL-00206" summary=".">
-      <created>1612124553373</created>
-      <option name="number" value="00206" />
-      <option name="presentableId" value="LOCAL-00206" />
-      <option name="project" value="LOCAL" />
-      <updated>1612124553373</updated>
+      <workItem from="1613312390592" duration="16776000" />
     </task>
     <task id="LOCAL-00207" summary=".">
       <created>1612125000113</created>
@@ -613,7 +604,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613347415477</updated>
     </task>
-    <option name="localTasksCounter" value="255" />
+    <task id="LOCAL-00255" summary=".">
+      <created>1613347806188</created>
+      <option name="number" value="00255" />
+      <option name="presentableId" value="LOCAL-00255" />
+      <option name="project" value="LOCAL" />
+      <updated>1613347806188</updated>
+    </task>
+    <option name="localTasksCounter" value="256" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
