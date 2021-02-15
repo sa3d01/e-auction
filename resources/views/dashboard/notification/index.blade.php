@@ -86,7 +86,7 @@
                                     @if($value=='created_at')
                                         <td>{{$row->published_at()}}</td>
                                     @else
-                                        <td>{{$row->$value->ar}}</td>
+                                        <td>{{$row->$value}}</td>
                                     @endif
                                 @endforeach
                                     <td>{{count((array)$row->receivers)}}</td>
