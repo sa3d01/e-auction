@@ -17,7 +17,6 @@
                         <div class="element-box">
                             {!! Form::open(['method'=>'post', 'files'=>true, 'enctype' => 'multipart/form-data', 'route'=>[$action], 'class' => 'formValidate']) !!}
                             {!! Form::hidden('add_by', \Illuminate\Support\Facades\Auth::user()->id) !!}
-                            {!! Form::hidden('admin_notify_type', $admin_notify_type) !!}
                             {!! Form::hidden('type', $type) !!}
                             <div class="element-info">
                                 <div class="element-info-with-icon">
