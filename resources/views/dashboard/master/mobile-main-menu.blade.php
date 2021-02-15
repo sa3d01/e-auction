@@ -37,6 +37,20 @@
     <li class="has-sub-menu">
         <a href="#">
             <div class="icon-w">
+                <div class="os-icon os-icon-alert-triangle"></div>
+            </div>
+            <span>الاشعارات الجماعية </span>
+        </a>
+        <ul class="sub-menu">
+            <li>
+                <a href="{{route('admin.notification.admin_notify_type',['admin_notify_type'=>'all'])}}"> الاشعارات العامة  </a>
+            </li>
+        </ul>
+    </li>
+
+    <li class="has-sub-menu">
+        <a href="#">
+            <div class="icon-w">
                 <div class="os-icon os-icon-package"></div>
             </div>
             <span>الباقات </span>
