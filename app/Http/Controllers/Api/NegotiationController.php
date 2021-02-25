@@ -32,6 +32,10 @@ class NegotiationController extends MasterController
         if ($auction_item->more_details['status'] == 'expired' || $auction_item->more_details['status'] == 'paid') {
             return $this->sendError('هذا السلعة قد انتهى وقت المزايدة عليها :(');
         }
+        //todo : check purchasing_power
+        if ($user->profileAndPurchasingPowerIsFilled()==false){
+            return $this->sendError(' يجب اكمال بيانات ملفك الشخصى أولا وشحن قوتك الشرائية');
+        }
         $latest_auction_user = AuctionUser::where('item_id', $item_id)->latest()->first();
         if ($latest_auction_user) {
             $charge_price = $auction_item->item->price - $auction_item->price;
@@ -64,9 +68,13 @@ class NegotiationController extends MasterController
 
     public function sendOffer($item_id, Request $request):object
     {
+        $sender = $request->user();
+        //todo : check purchasing_power
+        if ($sender->profileAndPurchasingPowerIsFilled()==false){
+            return $this->sendError(' يجب اكمال بيانات ملفك الشخصى أولا وشحن قوتك الشرائية');
+        }
         $item = Item::find($item_id);
         $auction_item = AuctionItem::where('item_id', $item_id)->latest()->first();
-        $sender = $request->user();
         $latest_user_offer=Offer::where(['auction_item_id'=>$auction_item->id,'sender_id'=>$sender->id])->latest()->first();
         if ($latest_user_offer){
             if ($latest_user_offer->price > $request['price']) {
