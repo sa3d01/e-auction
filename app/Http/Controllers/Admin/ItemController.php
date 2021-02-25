@@ -7,6 +7,7 @@ use App\Http\Resources\ItemResource;
 use App\Item;
 use App\Notification;
 use App\Report;
+use App\Setting;
 use Edujugon\PushNotification\PushNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -223,6 +224,12 @@ class ItemController extends MasterController
                 'history'=>$history,
             ],
         ]);
+        $add_item_tax=Setting::first()->value('add_item_tax');
+        if ($add_item_tax < $item->user->wallet){
+            $item->update(['pay_status'=>1]);
+            $wallet=$item->user->wallet-$add_item_tax;
+            $item->user->update(['wallet'=>$wallet]);
+        }
         if ($item->pay_status==1){
             $note['ar']='تم قبول اضافة منتجك من قبل الادارة ..';
             $note['en']='your added item is accepted from admin  ..';
