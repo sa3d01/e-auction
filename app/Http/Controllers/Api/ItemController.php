@@ -42,6 +42,9 @@ class ItemController extends MasterController
     }
     public function store(Request $request):object{
         $user = auth()->user();
+        if ($user->profileIsFilled()==false){
+            return $this->sendError('يجب اكمال بيانات ملفك الشخصى أولا');
+        }
         $data=$request->all();
         $data['user_id']=$user->id;
         $items_images=[];

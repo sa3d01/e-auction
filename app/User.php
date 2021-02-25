@@ -47,4 +47,10 @@ class User extends Authenticatable implements JWTSubject
     public function nameForSelect(){
         return $this->name ;
     }
+    public function profileIsFilled():bool{
+        return $this->attributes['name']!=null && $this->attributes['package_id']!=null ;
+    }
+    public function profileAndPurchasingPowerIsFilled():bool{
+        return $this->profileIsFilled() && $this->attributes['purchasing_power']!=0 ;
+    }
 }

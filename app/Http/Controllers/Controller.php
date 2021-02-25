@@ -102,7 +102,7 @@ class Controller extends BaseController
                             $this->auction_item_update($auction_item,'negotiation');
                             $this->autoSendOffer($auction_item);
                         } else {
-                            $this->base_notify($winner_title, $soon_winner->user_id, $auction_item->item_id);
+                            $this->base_notify($winner_title, $soon_winner->user_id, $auction_item->item_id,'clickable');
                             $this->base_notify($owner_paid_title, $auction_item->item->user_id, $auction_item->item_id);
                             $this->notify_admin($admin_paid_title, $auction_item);
                             $this->auction_item_update($auction_item,'paid');
@@ -118,7 +118,7 @@ class Controller extends BaseController
                 }else {
                     $soon_winner = AuctionUser::where('item_id', $auction_item->item_id)->latest()->first();
                     if ($soon_winner) {
-                        $this->base_notify($winner_title, $soon_winner->user_id, $auction_item->item_id);
+                        $this->base_notify($winner_title, $soon_winner->user_id, $auction_item->item_id,'clickable');
                         $this->base_notify($owner_paid_title, $auction_item->item->user_id, $auction_item->item_id);
                         $this->notify_admin($admin_paid_title, $auction_item);
                         $this->auction_item_update($auction_item,'paid');
@@ -211,7 +211,7 @@ class Controller extends BaseController
             ->send();
     }
 
-    function base_notify($title, $receiver_id, $item_id)
+    function base_notify($title, $receiver_id, $item_id,$win=null)
     {
         $data = [];
         $data['title'] = $title;
@@ -228,6 +228,7 @@ class Controller extends BaseController
                 'status' => 'paid',
                 'type' => 'win',
                 'item' => new ItemResource(Item::find($item_id)),
+                'win'=> $win!=null
             ],
             'priority' => 'high',
         ];
