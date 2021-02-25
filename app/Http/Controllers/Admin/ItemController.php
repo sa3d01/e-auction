@@ -135,7 +135,6 @@ class ItemController extends MasterController
             'الممشى'=>'kms_count',
             'صورة الاستمارة'=>'paper_image',
             'السعر'=>'price',
-            'نوع الشحن'=>'shipping_by',
         ];
         return View('dashboard.item.show', [
             'row' => $row,

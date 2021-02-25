@@ -205,6 +205,13 @@
                                                     </div>
                                                 </div>
                                             @endif
+                                                <div class="col-sm-12">
+                                                    <div class="form-group" id="shipping_by" data-value="{{$row->$value}}">
+                                                        <label for=""> نوع الشحن</label>
+                                                        <input disabled name="shipping_by" class="form-control" value="{{$row->$value}}" type="text">
+                                                        <div class="help-block form-text with-errors form-control-feedback"></div>
+                                                    </div>
+                                                </div>
                                         @endforeach
                                             @if(isset($selects))
                                                 @foreach($selects as $select)
@@ -299,26 +306,50 @@
         });
         $(document).on('click', '.accept', function (e) {
             e.preventDefault();
-            Swal.fire({
-                title: "هل انت متأكد من القبول ؟",
-                text: "تأكد من اجابتك قبل التأكيد!",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonClass: 'btn-info',
-                confirmButtonText: 'نعم , قم بالقبول!',
-                cancelButtonText: 'ﻻ , الغى عملية القبول!',
-                closeOnConfirm: false,
-                closeOnCancel: false,
-                preConfirm: () => {
-                    $.ajax({
-                        url: $(this).data('href'),
-                        type:'GET',
-                    })
-                },
-                allowOutsideClick: () => !Swal.isLoading()
-            }).then(() => {
-                location.href = "/admin/item/status/accepted";
-            })
+            let shipping_by = document.getElementById('shipping_by').getAttribute("data-value");
+            console.log(shipping_by)
+            if (shipping_by==='user'){
+                Swal.fire({
+                    title: "هل انت متأكد من القبول ؟",
+                    text: "تأكد من اجابتك قبل التأكيد!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: 'btn-info',
+                    confirmButtonText: 'نعم , قم بالقبول!',
+                    cancelButtonText: 'ﻻ , الغى عملية القبول!',
+                    closeOnConfirm: false,
+                    closeOnCancel: false,
+                    preConfirm: () => {
+                        $.ajax({
+                            url: $(this).data('href'),
+                            type:'GET',
+                        })
+                    },
+                    allowOutsideClick: () => !Swal.isLoading()
+                }).then(() => {
+                    location.href = "/admin/item/status/accepted";
+                })
+            }else {
+                Swal.fire({
+                    title: "من فضلك اذكر سعر الشحن!",
+                    input: 'text',
+                    showCancelButton: true,
+                    confirmButtonText: 'نعم , قم بالقبول!',
+                    cancelButtonText: 'ﻻ , الغى عملية القبول!',
+                    showLoaderOnConfirm: true,
+                    preConfirm: (shipping_price) => {
+                        $.ajax({
+                            url: $(this).data('href'),
+                            type:'GET',
+                            data: {shipping_price}
+                        })
+                    },
+                    allowOutsideClick: () => !Swal.isLoading()
+                }).then(() => {
+                    location.href = "/admin/item/status/accepted";
+                })
+            }
+
         });
     </script>
 @endsection
