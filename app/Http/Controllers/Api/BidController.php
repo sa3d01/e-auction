@@ -46,6 +46,9 @@ class BidController extends MasterController
         $user=$request->user();
         $auction_item=AuctionItem::where('item_id',$item_id)->latest()->first();
         //todo : check purchasing_power
+        if ($user->profileAndPurchasingPowerIsFilled()==false){
+            return $this->sendError(' يجب اكمال بيانات ملفك الشخصى أولا وشحن قوتك الشرائية');
+        }
         if ($auction_item->more_details!=null){
             if ($auction_item->more_details['status']=='expired'  || $auction_item->more_details['status']=='paid'){
                 return $this->sendError('هذا السلعة قد انتهى وقت المزايدة عليها :(');
