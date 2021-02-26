@@ -218,6 +218,9 @@ class Controller extends BaseController
         $data['note'] = $title;
         $data['receiver_id'] = $receiver_id;
         $data['item_id'] = $item_id;
+        $data['more_details']=[
+            'win'=>$win!=null
+        ];
         Notification::create($data);
         $push = new PushNotification('fcm');
         $msg = [

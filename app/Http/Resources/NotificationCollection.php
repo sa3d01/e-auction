@@ -34,8 +34,14 @@ class NotificationCollection extends ResourceCollection
                 }else{
                     unset($arr['offer_id']);
                 }
+                if (array_key_exists('win',$obj->more_details)){
+                    $arr['win']=(bool)$obj->more_details['win'];
+                }else{
+                    unset($arr['win']);
+                }
             }else{
                 unset($arr['offer_id']);
+                unset($arr['win']);
             }
             $data[]=$arr;
         }
