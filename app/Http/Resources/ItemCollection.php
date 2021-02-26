@@ -42,7 +42,7 @@ class ItemCollection extends ResourceCollection
                     $my_item=true;
                 }
             }
-            $arr['auction_text']='';
+            $arr['status_text']='';
             if ($auction_item){
                 if (\request()->user()){
                     $features=$auction_item->auctionTypeFeatures(auth()->user()->id);
