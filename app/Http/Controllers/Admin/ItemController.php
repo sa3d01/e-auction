@@ -217,17 +217,10 @@ class ItemController extends MasterController
             'time'=>date('H:i:s'),
             'admin_id'=>Auth::user()->id,
         ];
-        $item->update([
-            'status'=>'accepted',
-            'more_details'=>[
-                'history'=>$history,
-            ],
-        ]);
+        $more_details['history']=$history;
         $add_item_tax=Setting::first()->value('add_item_tax');
         if ($add_item_tax < $item->user->wallet){
-            $item->update(['pay_status'=>1]);
-            $wallet=$item->user->wallet-$add_item_tax;
-            $item->user->update(['wallet'=>$wallet]);
+            $this->itemTaxPay($item);
         }
         if ($item->pay_status==1){
             $note['ar']='تم قبول اضافة منتجك من قبل الادارة ..';
@@ -236,11 +229,26 @@ class ItemController extends MasterController
             $note['ar']='تم قبول اضافة منتجك من قبل الادارة ..ويرجى شحن محفظتك قريبا لتحصيل ضريبة الاضافة لمزاد';
             $note['en']='your added item is accepted from admin..please charge your wallet to add to auction';
         }
+        if ($item->shipping_by=='app'){
+            $more_details['shipping_price']=$request['shipping_price'];
+            if ($request['shipping_price'] < $item->user->wallet){
+                $this->walletPay($item->user,$request['shipping_price'],'shipping');
+                $more_details['shipping_price_status']='paid';
+            }else{
+                $more_details['shipping_price_status']='pending';
+                $note['ar']='تم قبول اضافة منتجك من قبل الادارة ..ويرجى شحن محفظتك قريبا لتحصيل مستحقات التطبيق المالية';
+                $note['en']='your added item is accepted from admin..please charge your wallet ..';
+            }
+        }
+        $item->update([
+            'status'=>'accepted',
+            'more_details'=>$more_details,
+        ]);
+
         $this->itemStatusNotify($item,$note);
         $item->refresh();
         return redirect()->back()->with('updated');
     }
-
     function itemStatusNotify($item,$note){
         Notification::create([
             'receiver_id'=>$item->user_id,
@@ -262,5 +270,14 @@ class ItemController extends MasterController
         $push->setMessage($msg)
             ->setDevicesToken($item->user->device['id'])
             ->send();
+    }
+    function itemTaxPay($item){
+        $add_item_tax=Setting::first()->value('add_item_tax');
+        $item->update(['pay_status'=>1]);
+        $this->walletPay($item->user,$add_item_tax,'add_item_tax');
+    }
+    function walletPay($user,$price,$type){
+        $wallet=$user->wallet-$price;
+        $user->update(['wallet'=>$wallet]);
     }
 }
