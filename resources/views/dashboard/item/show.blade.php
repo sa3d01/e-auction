@@ -332,7 +332,7 @@
             }else {
                 Swal.fire({
                     title: "من فضلك اذكر سعر الشحن!",
-                    input: 'text',
+                    input: 'number',
                     showCancelButton: true,
                     confirmButtonText: 'نعم , قم بالقبول!',
                     cancelButtonText: 'ﻻ , الغى عملية القبول!',
