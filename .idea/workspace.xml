@@ -20,16 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="latest_file">
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/6SkFrd9BR8.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/MasterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/MasterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/master/cards.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/master/cards.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/master/custom-buttons.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/master/custom-buttons.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/show/first-box.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/show/first-box.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/show/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/show/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/ItemCollection.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/ItemCollection.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -288,21 +279,7 @@
       <workItem from="1614269522179" duration="22293000" />
       <workItem from="1614378456774" duration="1059000" />
       <workItem from="1614442883231" duration="9409000" />
-      <workItem from="1614527659016" duration="3252000" />
-    </task>
-    <task id="LOCAL-00254" summary=".">
-      <created>1613347415477</created>
-      <option name="number" value="00254" />
-      <option name="presentableId" value="LOCAL-00254" />
-      <option name="project" value="LOCAL" />
-      <updated>1613347415477</updated>
-    </task>
-    <task id="LOCAL-00255" summary=".">
-      <created>1613347806188</created>
-      <option name="number" value="00255" />
-      <option name="presentableId" value="LOCAL-00255" />
-      <option name="project" value="LOCAL" />
-      <updated>1613347806188</updated>
+      <workItem from="1614527659016" duration="3611000" />
     </task>
     <task id="LOCAL-00256" summary=".">
       <created>1613348575431</created>
@@ -633,7 +610,21 @@
       <option name="project" value="LOCAL" />
       <updated>1614527853360</updated>
     </task>
-    <option name="localTasksCounter" value="303" />
+    <task id="LOCAL-00303" summary="latest_file">
+      <created>1614530921992</created>
+      <option name="number" value="00303" />
+      <option name="presentableId" value="LOCAL-00303" />
+      <option name="project" value="LOCAL" />
+      <updated>1614530921992</updated>
+    </task>
+    <task id="LOCAL-00304" summary="latest_file">
+      <created>1614531050010</created>
+      <option name="number" value="00304" />
+      <option name="presentableId" value="LOCAL-00304" />
+      <option name="project" value="LOCAL" />
+      <updated>1614531050010</updated>
+    </task>
+    <option name="localTasksCounter" value="305" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

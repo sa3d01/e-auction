@@ -29,6 +29,9 @@ class ItemCollection extends ResourceCollection
     {
         $data=[];
         foreach ($this as $obj){
+            if ($obj->user->status===0){
+                continue;
+            }
             $auction_item=AuctionItem::where('item_id',$obj->id)->latest()->first();
             $my_item=false;
             $win=false;
