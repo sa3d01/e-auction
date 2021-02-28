@@ -65,9 +65,9 @@
         @else
             <div class="col-sm-6 text-right">
                 @if(!($row->id == Auth::user()->id && $type=='admin'))
-                    @can('edit-'.$type.'s')
+{{--                    @can('edit-'.$type.'s')--}}
                     {!! $row->activate() !!}
-                    @endcan
+{{--                    @endcan--}}
                 @endif
             </div>
         @endif

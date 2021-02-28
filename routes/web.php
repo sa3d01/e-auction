@@ -48,6 +48,10 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
     Route::resource('drop_down', 'DropDownController');
     Route::get('drop_down/activate/{id}', 'DropDownController@activate')->name('drop_down.activate');
 
+    Route::get('pre_live_items', 'ItemController@preLiveItems')->name('pre_live_items');
+    Route::get('live_items', 'ItemController@liveItems')->name('live_items');
+    Route::get('expired_items', 'ItemController@expiredItems')->name('expired_items');
+
     Route::get('item/status/{status}', 'ItemController@items')->name('item.status');
     Route::get('item/{id}/reject', 'ItemController@reject')->name('item.reject');
     Route::get('item/{id}/accept', 'ItemController@accept')->name('item.accept');

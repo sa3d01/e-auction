@@ -77,6 +77,7 @@ class UserController extends MasterController
             'status'=>true,
             'password'=>true,
             'image'=>true,
+            'only_show'=>true,
         ]);
     }
     public function activate($id,Request $request){

@@ -36,15 +36,25 @@ abstract class MasterController extends Controller
         $pre_auction_items = 0;
         $expire_auction_items = 0;
         $live_auction_items = 0;
-        foreach (AuctionItem::all() as $auction_item) {
-            $auction_items = AuctionItem::where('auction_id', $auction_item->auction_id)->count();
-            if (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_items * $auction_item->auction->duration) < Carbon::now()) {
-                $expire_auction_items++;
-            } elseif ((Carbon::createFromTimestamp($auction_item->start_date) <= Carbon::now()) && (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_items * $auction_item->auction->duration) >= Carbon::now())) {
-                $live_auction_items++;
-            } else {
-                $pre_auction_items++;
+        foreach (Item::all() as $item) {
+            $auction_item = AuctionItem::where('item_id', $item->id)->latest()->first();
+//            $auction_items = AuctionItem::where('auction_id', $auction_item->auction_id)->count();
+            if ($auction_item){
+                if ($auction_item->more_details['status']=='soon'){
+                    $pre_auction_items++;
+                }elseif ($auction_item->more_details['status']=='live'){
+                    $live_auction_items++;
+                }else{
+                    $expire_auction_items++;
+                }
             }
+//            if (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_items * $auction_item->auction->duration) < Carbon::now()) {
+//                $expire_auction_items++;
+//            } elseif ((Carbon::createFromTimestamp($auction_item->start_date) <= Carbon::now()) && (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_items * $auction_item->auction->duration) >= Carbon::now())) {
+//                $live_auction_items++;
+//            } else {
+//                $pre_auction_items++;
+//            }
         }
 
         $this->middleware('auth:admin');

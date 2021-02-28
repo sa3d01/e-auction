@@ -8,7 +8,7 @@
                 <div class="row">
 
                     <div class="col-sm-4 col-xxxl-3">
-                        <a class="element-box el-tablo" href="#">
+                        <a class="element-box el-tablo" href="{{route('admin.item.status',['status'=>'pending'])}}">
                             <div class="label">
                                 السلع الجديدة فى انتظار المراجعة
                             </div>
@@ -19,7 +19,7 @@
                     </div>
 
                     <div class="col-sm-4 col-xxxl-3">
-                        <a class="element-box el-tablo" href="#">
+                        <a class="element-box el-tablo" href="{{route('admin.pre_live_items')}}">
                             <div class="label">
                                 السلع فى المزاد قبل المباشر
                             </div>
@@ -30,7 +30,7 @@
                     </div>
 
                     <div class="col-sm-4 col-xxxl-3">
-                        <a class="element-box el-tablo" href="#">
+                        <a class="element-box el-tablo" href="{{route('admin.live_items')}}">
                             <div class="label">
                                 السلع فى المزاد المباشر
                             </div>
@@ -41,7 +41,7 @@
                     </div>
 
                     <div class="col-sm-4 col-xxxl-3">
-                        <a class="element-box el-tablo" href="#">
+                        <a class="element-box el-tablo" href="{{route('admin.expired_items')}}">
                             <div class="label">
                                 السلع المنتهى المزايدة عليها
                             </div>
@@ -52,7 +52,7 @@
                     </div>
 
                     <div class="col-sm-4 col-xxxl-3">
-                        <a class="element-box el-tablo" href="#">
+                        <a class="element-box el-tablo" href="{{route('admin.user.index')}}">
                             <div class="label">
                                 المستخدمين
                             </div>
@@ -63,7 +63,7 @@
                     </div>
 
                     <div class="col-sm-4 col-xxxl-3">
-                        <a class="element-box el-tablo" href="#">
+                        <a class="element-box el-tablo" href="{{route('admin.contact.index')}}">
                             <div class="label">
                                 رسائل الأعضاء الغير مقروءة
                             </div>

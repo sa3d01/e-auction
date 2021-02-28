@@ -8,6 +8,7 @@ use App\Item;
 use App\Notification;
 use App\Report;
 use App\Setting;
+use Carbon\Carbon;
 use Edujugon\PushNotification\PushNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -279,5 +280,102 @@ class ItemController extends MasterController
     function walletPay($user,$price,$type){
         $wallet=$user->wallet-$price;
         $user->update(['wallet'=>$wallet]);
+    }
+
+    public function preLiveItems()
+    {
+        $ids=[];
+        foreach (Item::all() as $item) {
+            $auction_item = AuctionItem::where('item_id', $item->id)->latest()->first();
+            if ($auction_item){
+                if ($auction_item->more_details['status']=='soon'){
+                    $ids[]=$item->id;
+                }
+            }
+        }
+        $rows=$this->model->whereIn('id',$ids)->latest()->get();
+        $title='قائمة السلع فى المزاد قبل المباشر';
+        $index_fields=['الرقم التسلسلى' => 'id','تاريخ الطلب'=>'created_at'];
+        return View('dashboard.item.index', [
+            'rows' => $rows,
+            'status'=>'shown',
+            'type'=>'item',
+            'title'=>$title,
+            'index_fields'=>$index_fields,
+            'selects'=>[
+                [
+                    'name'=>'user',
+                    'title'=>'المستخدم'
+                ],
+                [
+                    'name'=>'auction_type',
+                    'title'=>'نوع المزايدة'
+                ],
+            ],
+        ]);
+    }
+    public function liveItems()
+    {
+        $ids=[];
+        foreach (Item::all() as $item) {
+            $auction_item = AuctionItem::where('item_id', $item->id)->latest()->first();
+            if ($auction_item){
+                if ($auction_item->more_details['status']=='live') {
+                    $ids[]=$item->id;
+                }
+            }
+        }
+        $rows=$this->model->whereIn('id',$ids)->latest()->get();
+        $title='قائمة السلع فى المزاد المباشر';
+        $index_fields=['الرقم التسلسلى' => 'id','تاريخ الطلب'=>'created_at'];
+        return View('dashboard.item.index', [
+            'rows' => $rows,
+            'status'=>'shown',
+            'type'=>'item',
+            'title'=>$title,
+            'index_fields'=>$index_fields,
+            'selects'=>[
+                [
+                    'name'=>'user',
+                    'title'=>'المستخدم'
+                ],
+                [
+                    'name'=>'auction_type',
+                    'title'=>'نوع المزايدة'
+                ],
+            ],
+        ]);
+    }
+    public function expiredItems()
+    {
+        $ids=[];
+        foreach (Item::all() as $item) {
+            $auction_item = AuctionItem::where('item_id', $item->id)->latest()->first();
+            if ($auction_item){
+                if ($auction_item->more_details['status']!='live' && $auction_item->more_details['status']!='soon') {
+                    $ids[]=$item->id;
+                }
+            }
+        }
+        $rows=$this->model->whereIn('id',$ids)->latest()->get();
+        $title='قائمة السلع بعد المزاد المباشر';
+        $index_fields=['الرقم التسلسلى' => 'id','تاريخ الطلب'=>'created_at'];
+        return View('dashboard.item.index', [
+            'rows' => $rows,
+            'status'=>'shown',
+            'type'=>'item',
+            'title'=>$title,
+            'index_fields'=>$index_fields,
+            'selects'=>[
+                [
+                    'name'=>'user',
+                    'title'=>'المستخدم'
+                ],
+                [
+                    'name'=>'auction_type',
+                    'title'=>'نوع المزايدة'
+                ],
+            ],
+        ]);
     }
 }

@@ -64,6 +64,9 @@
                             @include('dashboard.show.card-box')
                         </div>
                     @endif
+                    <div class="element-wrapper">
+                        @include('dashboard.show.activity-box')
+                    </div>
                 </div>
                 @if(isset($only_show) && $only_show==true)
                     @include('dashboard.show.show-box')
