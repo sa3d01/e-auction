@@ -121,6 +121,24 @@
                                         </div>
                                         <div class="col-sm-12">
                                             <div class="form-group">
+                                                <label for="">الاسم</label>
+                                                <span>{{$row->more_details['name']}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="">البنك</label>
+                                                <span>{{$row->more_details['bank_name']}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="">رقم الحساب</label>
+                                                <span>{{$row->more_details['account_number']}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
                                                 <label for="">المبلغ </label><br>
                                                 <span class="fa-sort-amount-asc">{{$row->money}}</span>
                                                 ريال
