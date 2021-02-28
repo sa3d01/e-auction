@@ -42,6 +42,9 @@ class NegotiationController extends MasterController
         } else {
             $charge_price = $auction_item->item->price;
         }
+        if ($this->validate_purchasing_power($user,$auction_item->item->price)!==true){
+            return $this->validate_purchasing_power($user,$auction_item->item->price);
+        }
         AuctionUser::create([
             'user_id' => $user->id,
             'item_id' => $item_id,
@@ -72,6 +75,9 @@ class NegotiationController extends MasterController
         //todo : check purchasing_power
         if ($sender->profileAndPurchasingPowerIsFilled()==false){
             return $this->sendError(' يجب اكمال بيانات ملفك الشخصى أولا وشحن قوتك الشرائية');
+        }
+        if ($this->validate_purchasing_power($sender,$request['price'])!==true){
+            return $this->validate_purchasing_power($sender,$request['price']);
         }
         $item = Item::find($item_id);
         $auction_item = AuctionItem::where('item_id', $item_id)->latest()->first();

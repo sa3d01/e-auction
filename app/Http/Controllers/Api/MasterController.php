@@ -50,4 +50,12 @@ class MasterController extends Controller
         $this->model->create($data);
         return $this->sendResponse('تم الانشاء بنجاح');
     }
+    protected function validate_purchasing_power($user,$price){
+        $user_purchasing_power=$user->purchasing_power;
+        $user_purchasing_power=$user_purchasing_power+$user->package->purchasing_power_increase;
+        if ($user_purchasing_power*$this->purchasing_power_ratio < $price){
+            return $this->sendError(' قوتك الشرائية لا تسمح بهذه الصفقه .');
+        }
+        return true;
+    }
 }

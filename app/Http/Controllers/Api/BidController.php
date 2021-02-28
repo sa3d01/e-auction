@@ -42,7 +42,7 @@ class BidController extends MasterController
         }
         return $this->sendResponse(new Object_());
     }
-    public function bid($item_id,Request $request):object{
+    public function bid($item_id,Request $request){
         $user=$request->user();
         $auction_item=AuctionItem::where('item_id',$item_id)->latest()->first();
         if ($auction_item->more_details!=null){
@@ -53,6 +53,9 @@ class BidController extends MasterController
         //todo : check purchasing_power
         if ($user->profileAndPurchasingPowerIsFilled()==false){
             return $this->sendError(' يجب اكمال بيانات ملفك الشخصى أولا وشحن قوتك الشرائية');
+        }
+        if ($this->validate_purchasing_power($user,$auction_item->price+$request['charge_price'])!==true){
+            return $this->validate_purchasing_power($user,$auction_item->price+$request['charge_price']);
         }
         AuctionUser::create([
            'user_id'=>$user->id,
@@ -103,12 +106,5 @@ class BidController extends MasterController
         }
         $this->notify_admin($title,$auction_item);
     }
-//    protected function validate_purchasing_power($item,$user){
-//        $user_purchasing_power=$user->purchasing_power;
-//        if ($user->package){
-//            $user_purchasing_power=$user_purchasing_power+$user->package->purchasing_power_increase;
-//        }
-//        $purchasing_power_admin_percent=$this->purchasing_power_ratio;
-//        return true;
-//    }
+
 }

@@ -80,7 +80,6 @@ class ItemController extends MasterController
             return $this->sendResponse('تمت الإضافة بنجاح');
         }
     }
-
     public function new_item_notify_admin($title,$item){
         $data['title']=$title;
         $data['item_id']=$item->id;
