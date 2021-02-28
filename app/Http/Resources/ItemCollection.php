@@ -63,11 +63,14 @@ class ItemCollection extends ResourceCollection
 
                 $arr['is_paid']=false;
                 if ($features['status']=='paid'){
+                    $arr['status_text']='فى انتظار الدفع';
                     if (Transfer::where('more_details->item_id',$obj->id)->where('type','buy_item')->where('status',0)->latest()->first()){
                         $arr['is_paid']=true;
+                        $arr['status_text']='فى انتظار التأكيد';
                     }
                 }elseif ($features['status']=='delivered'){
                     $arr['is_paid']=true;
+                    $arr['status_text']='تم التسليم';
                 }
 
                 $arr['auction_type']= $obj->auction_type->name[$this->lang()];

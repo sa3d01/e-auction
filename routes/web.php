@@ -80,6 +80,10 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
     Route::get('transfer/accept/{id}', 'TransferController@accept')->name('transfer.accept');
     Route::resource('transfer', 'TransferController');
 
+    Route::get('refund/reject/{id}', 'RefundController@reject')->name('refund.reject');
+    Route::get('refund/accept/{id}', 'RefundController@accept')->name('refund.accept');
+    Route::resource('refund', 'RefundController');
+
 });
 Auth::routes();
 Route::get('/', function (){

@@ -124,6 +124,15 @@
     </li>
 
     <li class="sub-menu">
+        <a href="{{route('admin.refund.index')}}">
+            <div class="icon-w">
+                <div class="os-icon os-icon-rewind"></div>
+            </div>
+            <span>طلبات استرداد المستحقات </span>
+        </a>
+    </li>
+
+    <li class="sub-menu">
         <a href="{{route('admin.contact.index')}}">
             <div class="icon-w">
                 <div class="os-icon os-icon-email-2-at"></div>

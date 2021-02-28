@@ -28,7 +28,9 @@
                                 @if(isset($status))
                                     <th>الحالة</th>
                                 @endif
+                                @if($type=='transfer')
                                 <th>السلعة</th>
+                                @endif
                                 <th>المزيد</th>
                             </tr>
                             </thead>
@@ -41,7 +43,9 @@
                                 @if(isset($status))
                                     <th>الحالة</th>
                                 @endif
-                                <th>السلعة</th>
+                                @if($type=='transfer')
+                                    <th>السلعة</th>
+                                @endif
                                 <th>المزيد</th>
                             </tr>
                             </tfoot>
@@ -67,9 +71,11 @@
                                     <td>
                                         {!!$row->getStatusIcon()!!}
                                     </td>
-                                    <td>
-                                         <a href="{{route('admin.item.show',$row->more_details['item_id'])}}"> {{$row->more_details['item_id']}}</a>
-                                    </td>
+                                    @if($type=='transfer')
+                                        <td>
+                                            <a href="{{route('admin.item.show',$row->more_details['item_id'])}}"> {{$row->more_details['item_id']}}</a>
+                                        </td>
+                                    @endif
                                     <td>
                                         <div class=" row border-0">
                                             <div class="col-sm-3 mx-auto text-center">

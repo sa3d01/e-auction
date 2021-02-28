@@ -12,7 +12,7 @@ use Edujugon\PushNotification\PushNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class TransferController extends MasterController
+class RefundController extends MasterController
 {
     public function __construct(Transfer $model)
     {
@@ -24,11 +24,11 @@ class TransferController extends MasterController
 
     public function index()
     {
-        $rows = $this->model->where(['purchasing_type'=>'bank','type'=>'buy_item'])->latest()->get();
+        $rows = $this->model->where(['purchasing_type'=>'bank','type'=>'refund_credit'])->latest()->get();
         return View('dashboard.transfer.index', [
             'rows' => $rows,
-            'type'=>'transfer',
-            'title'=>'قائمة الحوالات',
+            'type'=>'refund',
+            'title'=>'قائمة استرداد المستحقات',
             'index_fields'=>['المستخدم' => 'user_id','المبلغ' => 'money','تاريخ الارسال' => 'created_at'],
             'status'=>true,
         ]);
@@ -39,9 +39,9 @@ class TransferController extends MasterController
         $row = Transfer::findOrFail($id);
         return View('dashboard.transfer.show', [
             'row' => $row,
-            'type'=>'transfer',
+            'type'=>'refund',
             'action'=>'admin.transfer.update',
-            'title'=>'حوالة بنكية',
+            'title'=>'طلب استرداد مستحقات',
         ]);
     }
 
@@ -52,17 +52,9 @@ class TransferController extends MasterController
                 'status'=>1,
             ]
         );
-        $auction_item=AuctionItem::where('item_id',$row->more_details['item_id'])->latest()->first();
-        $auction_item->update(
-          [
-              'more_details'=>[
-                  'status'=>'delivered'
-              ]
-          ]
-        );
         $user=User::find($row->user_id);
-        $note['ar'] = 'تم الموافقة على تحويلك البنكى بنجاح :)';
-        $note['en'] = 'your transfer is accepted from admin  ..';
+        $note['ar'] = 'تم الموافقة على طلب استرداد مستحقاتك بنجاح :)';
+        $note['en'] = 'your refund order is accepted from admin  ..';
         $this->notify($user, $note);
         $row->refresh();
         return redirect()->back()->with('updated');
@@ -75,8 +67,8 @@ class TransferController extends MasterController
             ]
         );
         $user=User::find($row->user_id);
-        $note['ar']='تم رفض تحويلك البنكى للسبب التالى : '.$request['reject_reason'];
-        $note['en'] = 'your transfer is rejected from admin  ..'.$request['reject_reason'];
+        $note['ar']='تم رفض طلب استرداد مستحقاتك للسبب التالى : '.$request['reject_reason'];
+        $note['en'] = 'your refund order is rejected from admin  ..'.$request['reject_reason'];
         $this->notify($user, $note);
         $row->refresh();
         return redirect()->back()->with('updated');

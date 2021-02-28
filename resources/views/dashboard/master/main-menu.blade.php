@@ -190,6 +190,18 @@
             <span> الحوالات البنكية</span>
         </a>
     </li>
+{{--    //refund--}}
+    <li class="sub-header">
+        <span>طلبات استرداد المستحقات </span>
+    </li>
+    <li class="sub-menu">
+        <a href="{{route('admin.refund.index')}}">
+            <div class="icon-w">
+                <div class="os-icon os-icon-rewind"></div>
+            </div>
+            <span>طلبات استرداد المستحقات </span>
+        </a>
+    </li>
 {{--contacts--}}
     <li class="sub-header">
         <span>رسائل الأعضاء</span>

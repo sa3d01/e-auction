@@ -6,8 +6,14 @@
             <div class="row">
                 <div class="col-sm-5">
                     <div class="user-profile compact">
+                    @if(array_key_exists('item_id',$row->more_details))
                         @php($item=\App\Item::find($row->more_details['item_id']))
-                        <div class="up-head-w" style="background-image:url({{$item->images[0]}})">
+                    @endif
+                        @if(array_key_exists('item_id',$row->more_details))
+                            <div class="up-head-w" style="background-image:url({{$item->images[0]}}) ">
+                        @else
+                            <div class="up-head-w" style="background-image:url({{$row->user->image}}) ">
+                        @endif
                             <div class="up-main-info">
                                 <h2 class="up-header">
                                    {{$row->user->name}}
@@ -72,37 +78,55 @@
                             </div>
                             <fieldset class="form-group">
                                 <div class="row">
-                                    <div class="col-sm-12">
-                                        <div class="white-box">
-                                            <label for="input-file-now-custom-1">الصورة</label>
-                                            <div>
-                                                <iframe id="iframe" src="{{asset('media/images/transfer/'.$row->more_details['image'])}}" style="width:100%; height:500px;" frameborder="0"></iframe>
+                                    @if($type=='transfer')
+                                        <div class="col-sm-12">
+                                            <div class="white-box">
+                                                <label for="input-file-now-custom-1">الصورة</label>
+                                                <div>
+                                                    <iframe id="iframe" src="{{asset('media/images/transfer/'.$row->more_details['image'])}}" style="width:100%; height:500px;" frameborder="0"></iframe>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label for="">صاحب التحويل</label>
-                                            {{--                                                <a href="{{route('admin.user.show',$row->user_id)}}"><br>--}}
-                                            <span>{{$row->user->name}}</span>
-                                            {{--                                                </a>--}}
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="">صاحب التحويل</label>
+                                                {{--                                                <a href="{{route('admin.user.show',$row->user_id)}}"><br>--}}
+                                                <span>{{$row->user->name}}</span>
+                                                {{--                                                </a>--}}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label for="">السلعة</label>
-                                            <a href="{{route('admin.item.show',$row->more_details['item_id'])}}"><br>
-                                                <span>{{$row->more_details['item_id']}}</span>
-                                            </a>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="">السلعة</label>
+                                                <a href="{{route('admin.item.show',$row->more_details['item_id'])}}"><br>
+                                                    <span>{{$row->more_details['item_id']}}</span>
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                        <div class="form-group">
-                                            <label for="">المبلغ المحول</label><br>
-                                            <span class="fa-sort-amount-asc">{{$row->money}}</span>
-                                            ريال
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="">المبلغ المحول</label><br>
+                                                <span class="fa-sort-amount-asc">{{$row->money}}</span>
+                                                ريال
+                                            </div>
                                         </div>
-                                    </div>
+                                    @else
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="">صاحب الطلب</label>
+                                                {{--                                                <a href="{{route('admin.user.show',$row->user_id)}}"><br>--}}
+                                                <span>{{$row->user->name}}</span>
+                                                {{--                                                </a>--}}
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="">المبلغ </label><br>
+                                                <span class="fa-sort-amount-asc">{{$row->money}}</span>
+                                                ريال
+                                            </div>
+                                        </div>
+                                    @endif
                                 </div>
                             </fieldset>
                         </div>
