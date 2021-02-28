@@ -18,7 +18,14 @@ class CheckApiToken
     public function handle($request, Closure $next)
     {
         try {
-            auth()->userOrFail();
+            $user=auth()->userOrFail();
+            if ($user->status==0){
+                $response = [
+                    'status' => 401,
+                    'message' => 'تم حظرك من قبل إدارة التطبيق ..',
+                ];
+                return response()->json($response, 401);
+            }
         }catch (UserNotDefinedException $e){
             $response = [
                 'status' => 401,
