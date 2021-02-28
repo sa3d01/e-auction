@@ -37,7 +37,9 @@
       <change afterPath="$PROJECT_DIR$/public/media/images/item/wB1JZVQsk8.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/public/media/images/item/wvjFTeBcsE.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/public/media/images/item/zUY72WYyeZ.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/CheckApiToken.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/CheckApiToken.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Package.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Package.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/show/activity-box.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/show/activity-box.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -296,14 +298,7 @@
       <workItem from="1614269522179" duration="22293000" />
       <workItem from="1614378456774" duration="1059000" />
       <workItem from="1614442883231" duration="9409000" />
-      <workItem from="1614527659016" duration="4958000" />
-    </task>
-    <task id="LOCAL-00257" summary=".">
-      <created>1613349374321</created>
-      <option name="number" value="00257" />
-      <option name="presentableId" value="LOCAL-00257" />
-      <option name="project" value="LOCAL" />
-      <updated>1613349374321</updated>
+      <workItem from="1614527659016" duration="6154000" />
     </task>
     <task id="LOCAL-00258" summary=".">
       <created>1613349602220</created>
@@ -641,7 +636,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614531276171</updated>
     </task>
-    <option name="localTasksCounter" value="306" />
+    <task id="LOCAL-00306" summary="latest_file">
+      <created>1614532633837</created>
+      <option name="number" value="00306" />
+      <option name="presentableId" value="LOCAL-00306" />
+      <option name="project" value="LOCAL" />
+      <updated>1614532633837</updated>
+    </task>
+    <option name="localTasksCounter" value="307" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

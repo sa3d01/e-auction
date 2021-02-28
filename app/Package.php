@@ -16,4 +16,7 @@ class Package extends Model
         'name' => 'json',
         'note' => 'json',
     ];
+    public function nameForSelect(){
+        return $this->name['ar'] ;
+    }
 }

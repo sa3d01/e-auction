@@ -73,7 +73,12 @@ class UserController extends MasterController
             'type'=>'user',
             'action'=>'admin.user.update',
             'title'=>'الملف الشخصى',
-            'edit_fields'=>['الاسم' => 'name', 'البريد الإلكترونى' => 'email', 'الجوال' => 'mobile'],
+            'edit_fields'=>['الاسم' => 'name', 'البريد الإلكترونى' => 'email', 'الجوال' => 'mobile', 'المحفظة' => 'wallet', 'القوة الشرائية' => 'purchasing_power'],
+            'selects'=>[[
+                'title'=>'الباقة',
+                'name'=>'package',
+                'input_name'=>'package_id',
+            ]],
             'status'=>true,
             'password'=>true,
             'image'=>true,
