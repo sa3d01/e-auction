@@ -48,6 +48,7 @@
                                 @if($status=='accepted')
                                     <th>السعر المطروح للمزايدة</th>
                                     <th>تقارير الفحص</th>
+                                    <th>صور أخري للسلعة</th>
                                 @elseif($status=='shown')
                                     <th>VIP</th>
                                 @endif
@@ -71,6 +72,7 @@
                                 @if($status=='accepted')
                                     <th>السعر المطروح للمزايدة</th>
                                     <th>تقارير الفحص</th>
+                                    <th>صور أخري للسلعة</th>
                                 @elseif($status=='shown')
                                     <th>VIP</th>
                                 @endif
@@ -116,6 +118,37 @@
                                         <td>
                                             {!! $row->reportLabel() !!}
                                         </td>
+                                        <td>{!! $row->adminImagesLabel() !!}</td>
+                                        <div class="modal fade" id="uploadImagesModal-{{$row->id}}" tabindex="-1" role="dialog" aria-labelledby="uploadImagesModal-{{$row->id}}" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="uploadImagesModal-{{$row->id}}">قم بإضافة صور أخرى للسلعة</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form enctype="multipart/form-data" method="POST" action="{{ route('admin.item.upload-images',$row->id) }}">
+                                                            @csrf
+                                                            <div class="form-group row">
+                                                                <label for="email" class="col-md-4 col-form-label text-md-right">الصور</label>
+                                                                <div class="col-md-6">
+                                                                    <input autofocus required class="upload form-control" id="uploadFile" type="file" accept="image/*" name="images[]" multiple />
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row mb-0">
+                                                                <div class="col-md-8 offset-md-4">
+                                                                    <button type="submit" class="btn btn-primary">
+                                                                        UPLOAD
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     @elseif($status=='shown')
                                         <?php
                                             $vip='انتهى المزاد المباشر';
@@ -214,7 +247,6 @@
     <script>
         $(document).on('click', '.auction_price', function (e) {
             e.preventDefault();
-            var id = $(this).data('id');
             Swal.fire({
                 title: 'من فضلك اذكر سعر المزايدة الابتدائى',
                 input: 'number',
@@ -235,4 +267,5 @@
             })
         });
     </script>
+
 @endsection

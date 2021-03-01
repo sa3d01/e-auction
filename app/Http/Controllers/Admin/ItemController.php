@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Edujugon\PushNotification\PushNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ItemController extends MasterController
 {
@@ -89,6 +90,30 @@ class ItemController extends MasterController
         $auction_price=$request['auction_price'];
         $item->update([
             'auction_price'=>$auction_price
+        ]);
+        return redirect()->back()->with('updated');
+    }
+    public function uploadImages($item_id,Request $request){
+        $item=$this->model->find($item_id);
+        $current_images=json_decode($item->imagesArray());
+        $user_image=$current_images[0];
+        $images=[];
+        if ($request->images){
+            foreach ($request->images as $image){
+                $filename=null;
+                if (is_file($image)) {
+                    $filename = Str::random(10) . '.' . $image->getClientOriginalExtension();
+                    $image->move('media/images/item/', $filename);
+                    $local_name=asset('media/images/item/').'/'.$filename;
+                }else {
+                    $local_name = $image;
+                }
+                $images[] = $local_name;
+            }
+        }
+        $images[]=$user_image;
+        $item->update([
+            'images'=>$images
         ]);
         return redirect()->back()->with('updated');
     }

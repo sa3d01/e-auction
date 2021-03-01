@@ -81,6 +81,16 @@ class Item extends Model
             return"<a data-id='$this->id'  data-href='$route' href='$route' class='auction_price badge badge-info'><span> $auction_price  </span></a>";
         }
     }
+    public function adminImagesLabel()
+    {
+        $images=json_decode($this->imagesArray());
+        $arr_images=[];
+        foreach ($images as $image){
+            $arr_images[]="<img style='pointer-events: none;max-height: 100px;max-width: 100px;border-radius: 10px;' src='$image'>";
+        }
+        $string_images=implode("'\'",$arr_images);
+        return"<a data-id='$this->id' style='cursor: pointer' data-toggle='modal' data-target='#uploadImagesModal-$this->id' class='images nav-link'>$string_images</a>";
+    }
     public function vip()
     {
         $auction_item=AuctionItem::where('item_id',$this->id)->latest()->first();

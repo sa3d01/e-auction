@@ -56,6 +56,7 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
     Route::get('item/{id}/reject', 'ItemController@reject')->name('item.reject');
     Route::get('item/{id}/accept', 'ItemController@accept')->name('item.accept');
     Route::get('item/{id}/reports', 'ItemController@reports')->name('item.reports');
+    Route::post('item/{id}/images', 'ItemController@uploadImages')->name('item.upload-images');
     Route::get('item/{id}/auction_price', 'ItemController@auction_price')->name('item.auction_price');
     Route::resource('item', 'ItemController');
     Route::get('vip_items', 'ItemController@vip_auction_items')->name('items.vip');
