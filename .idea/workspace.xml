@@ -20,25 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="latest_file">
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/5ZGkiddDea.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/9EiVKyjbIw.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/BtKtDaJKct.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/BwVvHy17i0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/Dx4rlCGUUC.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/P69Bt6AG0w.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/ebf3W0HvpD.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/fOdSEGFYDd.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/haWiHouG9h.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/kiOFV3T9aw.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/lD0UhFHQun.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/ny3Jg78KYX.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/p4wBJ0Qvh0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/qhYsP300b9.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/wB1JZVQsk8.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/wvjFTeBcsE.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/zUY72WYyeZ.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Package.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Package.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/dashboard/show/activity-box.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/show/activity-box.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -299,6 +281,7 @@
       <workItem from="1614378456774" duration="1059000" />
       <workItem from="1614442883231" duration="9409000" />
       <workItem from="1614527659016" duration="6154000" />
+      <workItem from="1614594694789" duration="4983000" />
     </task>
     <task id="LOCAL-00258" summary=".">
       <created>1613349602220</created>

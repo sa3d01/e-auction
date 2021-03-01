@@ -1,72 +1,130 @@
-<div class="element-box">
-    <h6 class="element-header">
-        اخر النشاطات
-    </h6>
-    <div class="timed-activities compact" style="overflow:scroll;max-height: 500px">
-
-        @if(isset($sale_users))
-            @foreach($sale_users as $sale_user)
+@if($type=='user')
+    <div class="element-box">
+        <h6 class="element-header">
+            اخر النشاطات الخاصة باضافة السلع
+        </h6>
+        <div class="timed-activities compact" style="overflow:scroll;max-height: 500px">
+            @if(\App\Item::where('user_id', $row->id)->count() > 0)
                 @php
-                    $user_route=route('admin.user.show',$sale_user->user_id);
-                    $user_name=\App\User::whereId($sale_user->user_id)->value('name');
-                    $sale_route=route('admin.sale.show',$sale_user->sale_id);
-                    $sale_name=$sale_user->sale->title['ar'];
-                    $user_href="<a href='".$user_route."'>".$user_name."</a>";
-                    $sale_href="<a href='".$sale_route."'>".$sale_name."</a>";
+                    $user_items=\App\Item::where('user_id', $row->id)->latest()->get();
                 @endphp
-                <div class="timed-activity">
-                    <div class="ta-date">
-                        <span>{{$sale_user->ArabicDate($sale_user->created_at)}}</span>
-                    </div>
-                    <div class="ta-record-w">
-                        <div class="ta-record">
-                            <div class="ta-timestamp">
-                                <strong>{{\Carbon\Carbon::parse($sale_user->created_at)->format('H:i A')}}</strong>
-                            </div>
-                            <div class="ta-activity">
-                                @if($sale_user->charge_price==0)
-                                    {!!$sale_href!!} قام بدفع تأمين مزاد{!!$user_href !!}
-                                @elseif($sale_user->type=='automatic')
-                                    {!! $sale_href. 'قام بمزايدة تلقائية بمبلغ ' .$sale_user->charge_price. ' ريال على مزاد ' . $user_href !!}
-                                @else
-                                    {!! $sale_href. 'قام بمزايدة يدوية بمبلغ ' .$sale_user->charge_price. ' ريال على مزاد ' . $user_href !!}
-                                @endif
+                @foreach($user_items as $user_item)
+                    @php
+                        $item_route=route('admin.item.show',$user_item->id);
+                        $item_href="<a href='".$item_route."'>".$user_item->id."</a>";
+                    @endphp
+                    <div class="timed-activity">
+                        <div class="ta-date">
+                            <span>{{$user_item->ArabicDate($user_item->created_at)}}</span>
+                        </div>
+                        <div class="ta-record-w">
+                            <div class="ta-record">
+                                <div class="ta-timestamp">
+                                    <strong>{{\Carbon\Carbon::parse($user_item->created_at)->format('H:i A')}}</strong>
+                                </div>
+                                <div class="ta-activity">
+                                    {!!$item_href!!} قام بإضافة سلعة
+                                </div>
                             </div>
                         </div>
                     </div>
+                @endforeach
+            @else
+                <div class="ta-activity font-italic">
+                    ﻻ يوجد اى نشاطات بعد
                 </div>
-            @endforeach
-        @elseif(isset($row->more_details['history']))
-            @foreach(array_reverse($row->more_details['history']) as $date=>$obj)
-                <div class="timed-activity">
-                    <div class="ta-date">
-                        <span>{{$date}}</span>
-                    </div>
-                    <div class="ta-record-w">
-                        @foreach($obj as $key=>$value)
+            @endif
+        </div>
+    </div>
+
+    <div class="element-box">
+        <h6 class="element-header">
+            اخر النشاطات الخاصة بالمزايدات
+        </h6>
+        <div class="timed-activities compact" style="overflow:scroll;max-height: 500px">
+            @if(\App\AuctionUser::where('user_id', $row->id)->count() > 0)
+                @php
+                    $user_auctions=\App\AuctionUser::where('user_id', $row->id)->latest()->get();
+                @endphp
+                @foreach($user_auctions as $user_auction)
+                    @php
+                        $auction_route=route('admin.item.show',$user_auction->item_id);
+                        $auction_href="<a href='".$auction_route."'>".$user_auction->item_id."</a>";
+                    @endphp
+                    <div class="timed-activity">
+                        <div class="ta-date">
+                            <span>{{$user_auction->ArabicDate($user_auction->created_at)}}</span>
+                        </div>
+                        <div class="ta-record-w">
                             <div class="ta-record">
                                 <div class="ta-timestamp">
-                                    <strong>{{\Carbon\Carbon::parse($value['time'])->format('H:i A')}}</strong>
+                                    <strong>{{\Carbon\Carbon::parse($user_auction->created_at)->format('H:i A')}}</strong>
                                 </div>
                                 <div class="ta-activity">
-                                    @if($key=='block')
-                                        <a href="{{route('admin.profile',$value['admin_id'])}}">{{\App\Admin::whereId($value['admin_id'])->value('name')}}</a>  تم الحظر بواسطة
-                                    @else
-                                        <a href="{{route('admin.profile',$value['admin_id'])}}">{{\App\Admin::whereId($value['admin_id'])->value('name')}}</a>  تم التفعيل بواسطة
-                                    @endif
+                                    {!!$item_href!!} قام بإضافة مزايدة بقيمة{{$user_auction->charge_price}}  على سلعة
                                 </div>
                             </div>
-                        @endforeach
+                        </div>
                     </div>
+                @endforeach
+            @else
+                <div class="ta-activity font-italic">
+                    ﻻ يوجد اى نشاطات بعد
                 </div>
-            @endforeach
-        @else
-            <div class="ta-activity font-italic">
-                ﻻ يوجد اى نشاطات بعد
-            </div>
-        @endif
+            @endif
+        </div>
     </div>
-</div>
+
+    <div class="element-box">
+        <h6 class="element-header">
+            اخر النشاطات الخاصة بالسلع التى قد فاز بها
+        </h6>
+        <div class="timed-activities compact" style="overflow:scroll;max-height: 500px">
+            @php
+                $paid_auction_items=\App\AuctionItem::where('more_details->status','paid')->orWhere('more_details->status','delivered')->get();
+                $item_ids=[];
+                foreach ($paid_auction_items as $paid_auction_item){
+                    $winner=\App\AuctionUser::where(['auction_id'=>$paid_auction_item->auction_id,'item_id'=>$paid_auction_item->item_id])->latest()->value('user_id');
+                    if ($winner==$row->id){
+                        $item_ids[]=$paid_auction_item->item_id;
+                    }
+                }
+                $paid_items=\App\Item::whereIn('id',$item_ids)->latest()->get();
+            @endphp
+            @if(count($item_ids) > 0)
+                @foreach($paid_items as $paid_item)
+                    @php
+                        $paid_item_route=route('admin.item.show',$paid_item->id);
+                        $paid_item_href="<a href='".$paid_item_route."'>".$paid_item->id."</a>";
+                        $win=\App\AuctionUser::where(['user_id'=>$row->id,'item_id'=>$paid_item->id])->latest()->first();
+                    @endphp
+                    <div class="timed-activity">
+                        <div class="ta-date">
+                            <span>{{$win->ArabicDate($win->created_at)}}</span>
+                        </div>
+                        <div class="ta-record-w">
+                            <div class="ta-record">
+                                <div class="ta-timestamp">
+                                    <strong>{{\Carbon\Carbon::parse($win->created_at)->format('H:i A')}}</strong>
+                                </div>
+                                <div class="ta-activity">
+                                    {!!$paid_item_href!!} فاز بالسلعة
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @else
+                <div class="ta-activity font-italic">
+                    ﻻ يوجد اى نشاطات بعد
+                </div>
+            @endif
+        </div>
+    </div>
+
+@else
+@endif
+
 
 
 
