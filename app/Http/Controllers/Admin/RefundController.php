@@ -29,7 +29,7 @@ class RefundController extends MasterController
             'rows' => $rows,
             'type'=>'refund',
             'title'=>'قائمة استرداد المستحقات',
-            'index_fields'=>['المستخدم' => 'user_id','المبلغ' => 'money','تاريخ الارسال' => 'created_at'],
+            'index_fields'=>['النوع' => 'type','المستخدم' => 'user_id','المبلغ' => 'money','تاريخ الارسال' => 'created_at'],
             'status'=>true,
         ]);
     }
