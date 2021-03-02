@@ -28,29 +28,52 @@
                         </div>
                         <div class="up-controls">
                             <div class="row">
-                                @if($row->status===0)
-                                <div class="col-md-6">
-                                    <form class="POST" name="reject" enctype="multipart/form-data" method="POST" style="width: 125px" data-href="{{route('admin.transfer.reject',$row->id)}}" action="{{route('admin.transfer.reject',$row->id)}}" data-type="{{$type}}" id="reject">
-                                        @csrf
-                                        {{ method_field('PUT') }}
-                                    <button type="button"
-                                            class="btn btn-danger btn-custom waves-effect waves-light">
-                                        <i
-                                            class="fa fa-trash"></i>رفض
-                                    </button>
-                                    </form>
-                                </div>
-                                <div class="col-md-6">
-                                    <form class="POST" name="accept" enctype="multipart/form-data" method="POST" style="width: 125px" data-href="{{route('admin.transfer.accept',$row->id)}}" action="{{route('admin.transfer.accept',$row->id)}}" data-type="{{$type}}" id="accept">
-                                        @csrf
-                                        {{ method_field('PUT') }}
+                                @if($row->status===0 && $type=='transfer')
+                                    <div class="col-md-6">
+                                        <form class="POST" name="reject" enctype="multipart/form-data" method="POST" style="width: 125px" data-href="{{route('admin.transfer.reject',$row->id)}}" action="{{route('admin.transfer.reject',$row->id)}}" data-type="{{$type}}" id="reject">
+                                            @csrf
+                                            {{ method_field('PUT') }}
                                         <button type="button"
-                                                class="btn btn-success btn-custom waves-effect waves-light">
+                                                class="btn btn-danger btn-custom waves-effect waves-light">
                                             <i
-                                                class="fa fa-opencart"></i>قبول
+                                                class="fa fa-trash"></i>رفض
                                         </button>
-                                    </form>
-                                </div>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <form class="POST" name="accept" enctype="multipart/form-data" method="POST" style="width: 125px" data-href="{{route('admin.transfer.accept',$row->id)}}" action="{{route('admin.transfer.accept',$row->id)}}" data-type="{{$type}}" id="accept">
+                                            @csrf
+                                            {{ method_field('PUT') }}
+                                            <button type="button"
+                                                    class="btn btn-success btn-custom waves-effect waves-light">
+                                                <i
+                                                    class="fa fa-opencart"></i>قبول
+                                            </button>
+                                        </form>
+                                    </div>
+                                @elseif($row->status===0 && $type=='refund')
+                                    <div class="col-md-6">
+                                        <form class="POST" name="refund_reject" enctype="multipart/form-data" method="POST" style="width: 125px" data-href="{{route('admin.refund.reject',$row->id)}}" action="{{route('admin.refund.reject',$row->id)}}" data-type="{{$type}}" id="reject">
+                                            @csrf
+                                            {{ method_field('PUT') }}
+                                            <button type="button"
+                                                    class="btn btn-danger btn-custom waves-effect waves-light">
+                                                <i
+                                                    class="fa fa-trash"></i>رفض
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <form class="POST" name="refund_accept" enctype="multipart/form-data" method="POST" style="width: 125px" data-href="{{route('admin.refund.accept',$row->id)}}" action="{{route('admin.refund.accept',$row->id)}}" data-type="{{$type}}" id="accept">
+                                            @csrf
+                                            {{ method_field('PUT') }}
+                                            <button type="button"
+                                                    class="btn btn-success btn-custom waves-effect waves-light">
+                                                <i
+                                                    class="fa fa-opencart"></i>قبول
+                                            </button>
+                                        </form>
+                                    </div>
                                 @endif
                             </div>
                         </div>
@@ -199,6 +222,50 @@
                 allowOutsideClick: () => !Swal.isLoading()
             }).then(() => {
                 window.location.href = '/admin/transfer';
+            })
+        });
+        $(document).on('click', '#refund_reject', function (e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'من فضلك اذكر سبب الرفض',
+                input: 'text',
+                showCancelButton: true,
+                confirmButtonText: 'رفض',
+                cancelButtonText: 'الغاء',
+                showLoaderOnConfirm: true,
+                preConfirm: (reject_reason) => {
+                    $.ajax({
+                        url: $(this).data('href'),
+                        type:'GET',
+                        data: {reject_reason}
+                    })
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then(() => {
+                location.href = '/admin/refund';
+            })
+        });
+        $(document).on('click', '#refund_accept', function (e) {
+            e.preventDefault();
+            Swal.fire({
+                title: "هل انت متأكد من القبول ؟",
+                text: "تأكد من اجابتك قبل التأكيد!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: 'btn-danger',
+                confirmButtonText: 'نعم , قم بتأكيد التحويل!',
+                cancelButtonText: 'ﻻ , الغى العملية !',
+                closeOnConfirm: false,
+                closeOnCancel: false,
+                preConfirm: () => {
+                    $.ajax({
+                        url: $(this).data('href'),
+                        type:'GET',
+                    })
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then(() => {
+                window.location.href = '/admin/refund';
             })
         });
     </script>

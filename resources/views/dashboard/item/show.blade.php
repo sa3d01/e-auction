@@ -349,7 +349,6 @@
                     location.href = "/admin/item/status/accepted";
                 })
             }
-
         });
     </script>
 @endsection

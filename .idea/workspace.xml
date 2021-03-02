@@ -21,7 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="latest_file">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/TransferController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/TransferController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/item/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/item/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/transfer/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/transfer/show.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -284,35 +285,7 @@
       <workItem from="1614594694789" duration="6792000" />
       <workItem from="1614602182459" duration="6752000" />
       <workItem from="1614699974537" duration="1198000" />
-      <workItem from="1614710167339" duration="711000" />
-    </task>
-    <task id="LOCAL-00261" summary=".">
-      <created>1613351600127</created>
-      <option name="number" value="00261" />
-      <option name="presentableId" value="LOCAL-00261" />
-      <option name="project" value="LOCAL" />
-      <updated>1613351600127</updated>
-    </task>
-    <task id="LOCAL-00262" summary=".">
-      <created>1613351792506</created>
-      <option name="number" value="00262" />
-      <option name="presentableId" value="LOCAL-00262" />
-      <option name="project" value="LOCAL" />
-      <updated>1613351792506</updated>
-    </task>
-    <task id="LOCAL-00263" summary=".">
-      <created>1613352019154</created>
-      <option name="number" value="00263" />
-      <option name="presentableId" value="LOCAL-00263" />
-      <option name="project" value="LOCAL" />
-      <updated>1613352019154</updated>
-    </task>
-    <task id="LOCAL-00264" summary=".">
-      <created>1613352100219</created>
-      <option name="number" value="00264" />
-      <option name="presentableId" value="LOCAL-00264" />
-      <option name="project" value="LOCAL" />
-      <updated>1613352100219</updated>
+      <workItem from="1614710167339" duration="2592000" />
     </task>
     <task id="LOCAL-00265" summary=".">
       <created>1613352220725</created>
@@ -629,7 +602,35 @@
       <option name="project" value="LOCAL" />
       <updated>1614700716521</updated>
     </task>
-    <option name="localTasksCounter" value="310" />
+    <task id="LOCAL-00310" summary="latest_file">
+      <created>1614711958515</created>
+      <option name="number" value="00310" />
+      <option name="presentableId" value="LOCAL-00310" />
+      <option name="project" value="LOCAL" />
+      <updated>1614711958515</updated>
+    </task>
+    <task id="LOCAL-00311" summary="latest_file">
+      <created>1614712950335</created>
+      <option name="number" value="00311" />
+      <option name="presentableId" value="LOCAL-00311" />
+      <option name="project" value="LOCAL" />
+      <updated>1614712950335</updated>
+    </task>
+    <task id="LOCAL-00312" summary="latest_file">
+      <created>1614712987162</created>
+      <option name="number" value="00312" />
+      <option name="presentableId" value="LOCAL-00312" />
+      <option name="project" value="LOCAL" />
+      <updated>1614712987162</updated>
+    </task>
+    <task id="LOCAL-00313" summary="latest_file">
+      <created>1614713465910</created>
+      <option name="number" value="00313" />
+      <option name="presentableId" value="LOCAL-00313" />
+      <option name="project" value="LOCAL" />
+      <updated>1614713465910</updated>
+    </task>
+    <option name="localTasksCounter" value="314" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
