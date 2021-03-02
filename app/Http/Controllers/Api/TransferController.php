@@ -49,7 +49,7 @@ class TransferController extends MasterController
                 $user->update(['package_id' => $request['package_id'], 'package_subscribed_at' => Carbon::now()]);
             } elseif ($request['type'] == 'purchasing_power') {
                 Transfer::create($data);
-                $user->update(['purchasing_power' => $request['money']]);
+                $user->update(['purchasing_power' =>$user->purchasing_power+ $request['money']]);
             } elseif ($request['type'] == 'wallet') {
                 Transfer::create($data);
                 $add_item_tax = Setting::first()->value('add_item_tax');
