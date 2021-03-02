@@ -40,7 +40,7 @@ class AuctionController extends MasterController
         $q_items=Item::query();
         $q_items=$q_items->where('pay_status',1);
         $q_items=$q_items->whereHas('reports');
-        $q_items=$q_items->where('auction_price', '!=', 'null');
+//        $q_items=$q_items->where('auction_price', '!=', 'null');
         $q_items = $q_items->where(function($query) {
             $query->where('status','accepted')
                 ->orWhere('status','expired');
@@ -128,11 +128,16 @@ class AuctionController extends MasterController
             $seconds = $key * ($auction->duration);
             $item = Item::find($item_id);
             $item->update(['status' => 'shown']);
+            if ($item->auction_price==null){
+                $item_auction_price=0;
+            }else{
+                $item_auction_price=$item->auction_price;
+            }
             $start_date = Carbon::createFromTimestamp($auction->start_date)->addSeconds($seconds)->timestamp;
             AuctionItem::create([
                 'item_id' => $item_id,
                 'auction_id' => $auction->id,
-                'price' => $item->auction_price,
+                'price' => $item_auction_price,
                 'start_date' => $start_date,
                 'more_details'=>[
                     'status'=>'soon'
