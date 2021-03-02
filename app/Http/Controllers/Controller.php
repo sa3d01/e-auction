@@ -77,8 +77,6 @@ class Controller extends BaseController
             $owner_expired_title['ar'] = 'حظ أوفر المره القادمه ! لم يتم المزايده من قبل أحد على مزادك رقم ' . $auction_item->item_id;
             $owner_paid_title['ar'] = 'تهانينا اليك ! لقد تم بيع سلعتك بمزاد رقم ' . $auction_item->item_id;
             $winner_title['ar'] = 'تهانينا اليك ! لقد فزت فى المزاد الذى قمت بالمشاركة به رقم ' . $auction_item->item_id;
-
-
             if ((Carbon::createFromTimestamp($auction_item->start_date) <= Carbon::now()) && (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration) >= Carbon::now())) {
                 $this->auction_item_update($auction_item,'live');
                 $this->expire_offers(Offer::where('auction_item_id',$auction_item->id)->get());
@@ -136,15 +134,64 @@ class Controller extends BaseController
             }
         }
     }
-
+    function totalAmount($auction_price){
+        $setting=Setting::first();
+        return $auction_price+($setting->owner_tax_ratio)+($setting->tax_ratio)+($auction_price*$setting->app_ratio/100);
+    }
     function auction_item_update($auction_item,$status){
         if ($status=='expired' || $status=='paid'){
-            $data=[
-                'vip' => 'false',
-                'more_details' => [
-                    'status' => $status
-                ]
-            ];
+            if ($status=='paid'){
+                $winner_id=AuctionUser::where(['auction_id'=>$auction_item->auction_id,'item_id'=>$auction_item->item_id])->latest()->value('user_id');
+                $winner=User::find($winner_id);
+                $where_store_amount=AuctionUser::where(['auction_id'=>$auction_item->auction_id,'item_id'=>$auction_item->item_id])->latest()->first();
+                if ($winner->purchasing_power > $this->totalAmount($auction_item->auction_price)){
+                    $where_store_amount->update([
+                        'more_details'=>[
+                            'status'=>'paid',
+                            'total_amount'=>$this->totalAmount($auction_item->auction_price),
+                            'paid'=>$this->totalAmount($auction_item->auction_price),
+                            'remain'=>0
+                        ]
+                    ]);
+                    $winner->update([
+                       'purchasing_power'=> $winner->purchasing_power-$this->totalAmount($auction_item->auction_price)
+                    ]);
+                    $data=[
+                        'vip' => 'false',
+                        'more_details' => [
+                            'status'=>'delivered'
+                        ]
+                    ];
+                    $note['ar'] = 'تم خصم سعر السلعة من قوتك الشرائية :)';
+                    $note['en'] = 'تم خصم سعر السلعة من قوتك الشرائية :)';
+                    $this->base_notify($note,$winner->id,$auction_item->item_id,true);
+                }else{
+                    $where_store_amount->update([
+                        'more_details'=>[
+                            'status'=>'pending_for_transfer',
+                            'total_amount'=>$this->totalAmount($auction_item->auction_price),
+                            'remain'=>$this->totalAmount($auction_item->auction_price)-$winner->purchasing_power,
+                            'paid'=>$winner->purchasing_power
+                       ]
+                    ]);
+                    $winner->update([
+                        'purchasing_power'=> 0
+                    ]);
+                    $data=[
+                        'vip' => 'false',
+                        'more_details' => [
+                            'status'=>'paid'
+                        ]
+                    ];
+                }
+            }else{
+                $data=[
+                    'vip' => 'false',
+                    'more_details' => [
+                        'status' => $status
+                    ]
+                ];
+            }
         }elseif ($status=='negotiation'){
             $data=[
                 'vip' => 'false',
@@ -162,6 +209,7 @@ class Controller extends BaseController
         }
         $auction_item->update($data);
     }
+
     function expire_offers($expired_offers){
         foreach ($expired_offers as $expired_offer){
             $expired_offer->update([
@@ -169,6 +217,7 @@ class Controller extends BaseController
             ]);
         }
     }
+
     function expire_item($item){
         $item->update([
             'status'=>'expired'
