@@ -10,6 +10,7 @@ use App\Http\Requests\Api\Auth\ProfileUpdateRequest;
 use App\Http\Requests\Api\Auth\ResendPhoneVerificationRequest;
 use App\Http\Requests\Api\Auth\VerifyPhoneRequest;
 use App\Http\Resources\ItemCollection;
+use App\Http\Resources\paidItemCollection;
 use App\Http\Resources\UserResource;
 use App\Item;
 use App\Transfer;
@@ -195,7 +196,7 @@ class UserController extends MasterController
                 $item_ids[]=$paid_auction_item->item_id;
             }
         }
-        return $this->sendResponse(new ItemCollection(Item::whereIn('id',$item_ids)->latest()->get()));
+        return $this->sendResponse(new paidItemCollection(Item::whereIn('id',$item_ids)->latest()->get()));
     }
 
     public function auctionReports()
