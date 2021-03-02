@@ -55,6 +55,15 @@ class RefundController extends MasterController
         $user=User::find($row->user_id);
         $note['ar'] = 'تم الموافقة على طلب استرداد مستحقاتك بنجاح :)';
         $note['en'] = 'your refund order is accepted from admin  ..';
+        if ($row->type=='refund_purchasing_power'){
+            $user->update([
+               'purchasing_power'=>0
+            ]);
+        }elseif ($row->type=='refund_wallet'){
+            $user->update([
+                'wallet'=>0
+            ]);
+        }
         $this->notify($user, $note);
         $row->refresh();
         return redirect()->back()->with('updated');
