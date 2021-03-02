@@ -79,8 +79,9 @@ class BidController extends MasterController
         $title['ar'] = 'تم إضافة مزايدة جديدة بقيمة '. $charge_price . 'ريال سعودى عن طريق مستخدم رقم ' .$user->id .' بمزاد رقم '.$auction_item->item->id;
         $title['en'] = 'تم إضافة مزايدة جديدة بقيمة '. $charge_price . 'ريال سعودى عن طريق مستخدم رقم ' .$user->id .'بمزاد رقم '.$auction_item->item->id;
         foreach ($users as $user_notify) {
-            if($user == $user_notify)
+            if($user->id == $user_notify->id){
                 continue;
+            }
             $data=[];
             $data['title']=$title;
             $data['note']=$title;
