@@ -25,6 +25,56 @@ class NegotiationController extends MasterController
         parent::__construct();
     }
 
+    function pay($user,$auction_item,$auction_user,$charge_price,$price,$pay_type){
+        if ($user->purchasing_power > $this->totalAmount($auction_item->item->price)){
+            $auction_user->update([
+                'more_details'=>[
+                    'status'=>'paid',
+                    'total_amount'=>$this->totalAmount($auction_item->auction_price),
+                    'paid'=>$this->totalAmount($auction_item->auction_price),
+                    'remain'=>0
+                ]
+            ]);
+            $user->update([
+                'purchasing_power'=> $user->purchasing_power-$this->totalAmount($auction_item->auction_price)
+            ]);
+            $data=[
+                'vip' => 'false',
+                'price' => $price,
+                'latest_charge' => $charge_price,
+                'more_details' => [
+                    'status'=>'delivered',
+                    'pay_type' => $pay_type
+                ]
+            ];
+            $note['ar'] = 'تم خصم سعر السلعة من قوتك الشرائية :)';
+            $note['en'] = 'تم خصم سعر السلعة من قوتك الشرائية :)';
+            $this->base_notify($note,$user->id,$auction_item->item_id,true);
+        }else{
+            $auction_user->update([
+                'more_details'=>[
+                    'status'=>'pending_for_transfer',
+                    'total_amount'=>$this->totalAmount($auction_item->auction_price),
+                    'remain'=>$this->totalAmount($auction_item->auction_price)-$user->purchasing_power,
+                    'paid'=>$user->purchasing_power,
+                ]
+            ]);
+            $user->update([
+                'purchasing_power'=> 0
+            ]);
+            $data=[
+                'vip' => 'false',
+                'price' => $price,
+                'latest_charge' => $charge_price,
+                'more_details' => [
+                    'status'=>'paid',
+                    'pay_type' => $pay_type
+                ]
+            ];
+        }
+        return $data;
+    }
+
     public function directPay($item_id, Request $request):object
     {
         $user = $request->user();
@@ -45,21 +95,14 @@ class NegotiationController extends MasterController
         if ($this->validate_purchasing_power($user,$auction_item->item->price)!==true){
             return $this->validate_purchasing_power($user,$auction_item->item->price);
         }
-        AuctionUser::create([
+        $auction_user=AuctionUser::create([
             'user_id' => $user->id,
             'item_id' => $item_id,
             'auction_id' => $auction_item->auction_id,
             'charge_price' => $charge_price
         ]);
-        $auction_item->update([
-            'vip'=>'false',
-            'price' => $auction_item->item->price,
-            'latest_charge' => $charge_price,
-            'more_details' => [
-                'status' => 'paid',
-                'pay_type' => 'direct_pay'
-            ]
-        ]);
+        $auction_item_data=$this->pay($user,$auction_item,$auction_user,$charge_price,$auction_item->item->price,'direct_pay');
+        $auction_item->update($auction_item_data);
         $winner_title['ar'] = 'تهانينا اليك ! لقد تمت عملية الشراء بنجاح .. سلعة رقم ' . $auction_item->item_id;
         $owner_title['ar'] = 'تهانينا اليك ! لقد تم بيع سلعتك بمزاد رقم ' . $auction_item->item_id;
         $admin_title['ar'] = 'تم بيع السلعة رقم ' . $auction_item->item_id;
@@ -143,20 +186,14 @@ class NegotiationController extends MasterController
         }else{
             $auction_user_id=$offer->sender_id;
         }
-        AuctionUser::create([
+        $auction_user=AuctionUser::create([
             'user_id' => $auction_user_id,
             'item_id' => $item_id,
             'auction_id' => $auction_item->auction_id,
             'charge_price' => $charge_price
         ]);
-        $auction_item->update([
-            'price' => $offer->price,
-            'latest_charge' => $charge_price,
-            'more_details' => [
-                'status' => 'paid',
-                'pay_type' => 'negotiation'
-            ]
-        ]);
+        $auction_item_data=$this->pay($user,$auction_item,$auction_user,$charge_price,$offer->price,'negotiation');
+        $auction_item->update($auction_item_data);
         $winner_title['ar'] = 'تهانينا اليك ! لقد فزت فى المزاد الذى قمت بالمشاركة به رقم ' . $auction_item->item_id;
         $owner_title['ar'] = 'تهانينا اليك ! لقد تم بيع سلعتك بمزاد رقم ' . $auction_item->item_id;
         $admin_title['ar'] = 'تم بيع السلعة رقم ' . $auction_item->item_id;
