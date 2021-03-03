@@ -40,9 +40,6 @@ class paidItemCollection extends ResourceCollection
                 if ($favourite){
                     $is_favourite=true;
                 }
-                if ($obj->user_id==\request()->user()->id){
-                    $my_item=true;
-                }
             }
             $features=$auction_item->auctionTypeFeatures(auth()->user()->id);
             $arr['auction_status']=$features['status'];

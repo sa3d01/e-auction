@@ -136,7 +136,7 @@ class Controller extends BaseController
     }
     function totalAmount($auction_price){
         $setting=Setting::first();
-        return $auction_price+($setting->owner_tax_ratio)+($setting->tax_ratio)+($auction_price*$setting->app_ratio/100);
+        return $auction_price+($auction_price*$setting->owner_tax_ratio/100)+($setting->tax_ratio)+($auction_price*$setting->app_ratio/100);
     }
     function auction_item_update($auction_item,$status){
         if ($status=='expired' || $status=='paid'){
