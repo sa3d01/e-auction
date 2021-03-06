@@ -92,5 +92,5 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
 Auth::routes();
 Route::get('/', function (){
     return view('index');
-});
+})->name('home');
 

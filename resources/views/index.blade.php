@@ -24,7 +24,7 @@
         <!-- navbar -->
         <nav class="navbar pt-3 navbar-expand-lg ">
             <div class="container ">
-                <a href="index.blade.php">
+                <a href="{{route('home')}}">
                     <img src="images/logo.png" class="logo" alt="logo">
                 </a>
                 <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
