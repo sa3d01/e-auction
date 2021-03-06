@@ -1,0 +1,269 @@
+                            body {
+                                font-family: 'Tajawal', sans-serif;
+                                background-color: #fff;
+                                background-image: url(../images/Polygon.png);
+                                background-repeat: no-repeat;
+                                background-position: center left;
+                            }
+                            
+                            p {
+                                font-family: 'Tajawal', sans-serif;
+                            }
+                            
+                            @font-face {
+                                font-family: Tajawal;
+                                src: url(../fonts/Tajawal-Regular.ttf);
+                                /* font-weight: bold; */
+                            }
+                            
+                            * {
+                                outline: none;
+                            }
+                            
+                            ul li,
+                            a:hover {
+                                list-style-type: none;
+                                text-decoration: none;
+                            }
+                            
+                            .w-700 {
+                                font-weight: 700;
+                            }
+                            
+                            .w-900 {
+                                font-weight: 900;
+                            }
+                            
+                            .rtl {
+                                direction: rtl;
+                            }
+                            
+                            .ltr {
+                                direction: ltr;
+                            }
+                            
+                            button:focus {
+                                outline: none;
+                            }
+                            /* width */
+                            
+                             ::-webkit-scrollbar {
+                                width: 10px;
+                                display: none;
+                            }
+                            /* Track */
+                            
+                             ::-webkit-scrollbar-track {
+                                background: #f1f1f1;
+                                display: none;
+                            }
+                            /* Handle */
+                            
+                             ::-webkit-scrollbar-thumb {
+                                background: #888;
+                                display: none;
+                            }
+                            /* Handle on hover */
+                            
+                             ::-webkit-scrollbar-thumb:hover {
+                                background: #555;
+                                display: none;
+                            }
+                            
+                            .form-control:focus {
+                                border-color: none;
+                                outline: 0;
+                                box-shadow: none;
+                                border-color: transparent;
+                            }
+                            
+                            .p-relative {
+                                position: relative;
+                            }
+                            
+                            .default-btn,
+                            .default-btn:hover {
+                                background-color: #43B3FF;
+                                border: none;
+                                border-radius: 15px;
+                                color: #fff;
+                                line-height: 2;
+                                box-shadow: 0 0px 0px 0 #2c3e5000, 0 6px 20px 0 #369AE873;
+                            }
+                            
+                            .title,
+                            h1,
+                            h2,
+                            h3,
+                            h4,
+                            h5,
+                            h6 {
+                                letter-spacing: -1px;
+                            }
+                            /* =================================
+                    colors
+                    =================================== */
+                            
+                            .default-color {
+                                color: #43B3FF
+                            }
+                            
+                            .second-color {
+                                color: #115B72;
+                            }
+                            /* =================================
+                    header
+                    =================================== */
+                            
+                            nav .nav-item.active a {
+                                color: #43B3FF !important
+                            }
+                            
+                            nav .nav-item.active {
+                                position: relative;
+                            }
+                            
+                            nav .nav-item.active:before {
+                                content: "";
+                                width: 50px;
+                                position: absolute;
+                                background: rgba(54, 154, 232, 1);
+                                height: 3px;
+                                right: 0;
+                                left: 0;
+                                margin: auto;
+                                bottom: -10px;
+                            }
+                            
+                            .logo {
+                                width: 150px;
+                            }
+                            
+                            .navbar-expand-lg .navbar-nav .nav-link {
+                                color: #444444;
+                                font-weight: 700;
+                                position: relative;
+                            }
+                            
+                            header {
+                                background-image: url(../images/headerBg.png);
+                                background-position: center;
+                                background-repeat: no-repeat;
+                                background-size: 100% 100%;
+                            }
+                            
+                            header .header-img {
+                                width: 400px;
+                            }
+                            
+                            .store {
+                                width: 150px;
+                                height: 50px;
+                            }
+                            
+                            #buy {
+                                background-image: url(../images/buyBg.png);
+                                background-position: -200px;
+                                background-repeat: no-repeat;
+                            }
+                            
+                            #how .step {
+                                box-shadow: 0 0px 0px 0 #2c3e5000, 0px 0px 10px 0px #d2d2d273;
+                                border-radius: 30px;
+                                padding: 40px 20px;
+                            }
+                            
+                            #how .step img {
+                                height: 55px;
+                            }
+                            
+                            .title:before {
+                                content: "";
+                                width: 100px;
+                                position: absolute;
+                                background: rgba(54, 154, 232, 1);
+                                height: 3px;
+                                right: 0;
+                                left: 0;
+                                /* margin: auto; */
+                                bottom: -10px;
+                            }
+                            
+                            .title-center:before {
+                                content: "";
+                                width: 150px;
+                                position: absolute;
+                                background: rgba(54, 154, 232, 1);
+                                height: 3px;
+                                right: 0;
+                                left: 0;
+                                margin: auto;
+                                bottom: -10px;
+                            }
+                            
+                            .contactForm .form {
+                                background-color: #fff;
+                                border-radius: 15px;
+                                padding: 30px;
+                                box-shadow: 0 0px 0px 0 #2c3e5000, 0px 0px 10px 0px #d2d2d273;
+                            }
+                            
+                            .contactForm .form input {
+                                border: none;
+                                height: 50px;
+                                border-radius: 15px;
+                                margin-bottom: 20px;
+                                box-shadow: 0 0px 0px 0 #2c3e5000, 0px 0px 10px 0px #d2d2d273;
+                            }
+                            
+                            .contactForm .form textarea {
+                                border: none;
+                                border-radius: 15px;
+                                margin-bottom: 20px;
+                                resize: none;
+                                box-shadow: 0 0px 0px 0 #2c3e5000, 0px 0px 10px 0px #d2d2d273;
+                            }
+                            
+                            .contactForm .form label {
+                                color: #000000CC;
+                                font-weight: 700;
+                            }
+                            
+                            footer {
+                                background-color: #0D243C;
+                            }
+                            
+                            footer .input-group input {
+                                height: 50px;
+                                border-radius: 15px !important;
+                                width: 100% !important;
+                            }
+                            
+                            footer .input-group .input-group-append {
+                                position: absolute;
+                                left: 5px;
+                                top: 5px;
+                                height: 40px;
+                                border-radius: 15px;
+                                overflow: hidden;
+                                z-index: 999;
+                            }
+                            
+                            footer .logo {
+                                width: 180px;
+                            }
+                            
+                            .why-img img {
+                                width: 40px;
+                            }
+                            /* =================================
+                        media
+                     ==================================== */
+                            
+                            @media(min-width: 768px) and (max-width: 1200px) {}
+                            
+                            @media(max-width: 768px) {
+                                nav .nav-item.active:before {
+                                    margin: 0;
+                                }
+                            }

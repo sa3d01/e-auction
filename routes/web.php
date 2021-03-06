@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-//Route::prefix('/admin')->name('admin.')->middleware(['auth', 'permission:access-dashboard'])->namespace('Admin')->group(function(){
 Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
     Route::namespace('Auth')->group(function(){
         Route::get('/login','LoginController@showLoginForm')->name('login');
@@ -92,6 +91,6 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
 });
 Auth::routes();
 Route::get('/', function (){
-    return redirect()->route('admin.home');
+    return view('index');
 });
 
