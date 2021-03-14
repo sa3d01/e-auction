@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ar">
-
 <head>
     <!-- Meta-->
     <meta charset="utf-8">
@@ -36,27 +35,27 @@
                         <li class="nav-item mx-3 active">
                             <a class="nav-link " href="#why">
                                 مميزاتنا
-                        </a>
+                            </a>
                         </li>
                         <li class="nav-item mx-3">
                             <a class="nav-link " href="#buy">
                                 خدماتنا
-                        </a>
+                            </a>
                         </li>
                         <li class="nav-item mx-3 ">
                             <a class="nav-link " href="#how">
                                 كيف ازايد
-                             </a>
+                            </a>
                         </li>
                         <li class="nav-item mx-3 ">
                             <a class="nav-link " href="#download">
                                 حمل التطبيق
-                        </a>
+                            </a>
                         </li>
                         <li class="nav-item mx-3 ">
                             <a class="nav-link " href="#contact">
                                 تواصل معنا
-                        </a>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -90,12 +89,12 @@
                     ليش E-Auction
                 </h1>
                 <p class="w-700 pt-4">
-                    خدماتنا متاحة للجميع سواء كنت فرد أو صاحب منشأة وعندك مركبات و ترغب في البيع؟ تطبيقنا راح يساعدك بيّ
+                    خدماتنا متاحة للجميع سواء كنت فرد او صاحب منشأة و عندك مركبات ترغب بعرضها للبيع، منصة E-Auction راح تساعدك بالتالي
                 </p>
                 <div class=" my-3 d-flex wow fadeIn">
                     <img src="images/icons/car.png" class="img-fluid my-2">
                     <p class="w-700 my-auto mr-3">
-                        بشكل أمن E-Auction حفظ المركبات في مستودعات
+                        حفظ المركبات في مستودعات E-Auction بشكل آمن
                     </p>
                 </div>
                 <div class=" my-3 d-flex wow fadeIn">
@@ -123,7 +122,7 @@
     <div id="buy" class="">
         <div class="container mt-md-5">
             <h1 class="title-center w-700 pb-3 mb-3 p-relative text-center">
-                في حال رغبتك بالشراء، نوفر لك التالي
+                في حال الرغبة بالشراء، راح نوفر لك التالي
             </h1>
             <div class="row">
                 <div class="col-md-6 my-3 d-flex wow zoomIn">
@@ -191,7 +190,7 @@
                             <img src="images/icons/dollar.png" class="img-fluid mb-3">
                         </div>
                         <h3 class="m-0">
-                            دفع عربون بدءاً ٥٠٠ ريال
+                            دفع عربون ابتداءً من ٥٠٠ ريال
                         </h3>
                     </div>
                 </div>
@@ -226,20 +225,20 @@
         <div class="container text-white  py-5 text-center mt-5" id="contact">
             <div>
                 <h3>
-                    عندك أسئلة مالقيت لها جواب؟ شيك على الأسئلة الأكثر شيوعا و في حال مالقيت الجواب الفريق بالكامل بخدمتك
+                    للأسئلة والإستفسارات نرجو مراجعة قسم الاسئلة الاكثر شيوعا، وفي حال وجود مشكلة في إيجاد الجواب، فريقنا بالكامل تحت خدمتكم.
                 </h3>
             </div>
             <div class="py-4">
                 <div class="d-inline-block">
                     <img src="images/icons/phone-call.png" class="img-fluid my-2">
                     <p class="w-700 d-inline-block px-3">
-                        5661254869
+                        0538074804
                     </p>
                 </div>
                 <div class="d-inline-block">
                     <img src="images/icons/email.png" class="img-fluid my-2">
                     <p class="w-700 d-inline-block px-3">
-                        E-Auction@gmail.com
+                        info@e-auction1.com
                     </p>
                 </div>
             </div>
@@ -251,40 +250,40 @@
                     <ul class="m-0 p-0">
                         <li class="d-inline-block mx-2 my-3">
                             <a href="" class="default-color w-700 ">
-                            سياسة الخصوصية
-                         </a>
+                                سياسة الخصوصية
+                            </a>
                         </li>
                         <li class="d-inline-block mx-2 my-3">
                             <a href="" class="default-color w-700 ">
-                            الشروط و الأحكام
-                        </a>
+                                الشروط و الأحكام
+                            </a>
                         </li>
                         <li class="d-inline-block mx-2 my-3">
                             <a href="" class="default-color w-700 ">
-                            الأسئلة الشائعة
-                        </a>
+                                الأسئلة الشائعة
+                            </a>
                         </li>
                     </ul>
                 </div>
                 <div class="col-md-4 my-auto  my-3">
                     <ul class="m-0 p-0">
                         <li class="d-inline-block mx-2">
-                            <a href="">
+                            <a href="eauction.sa">
                                 <img src="images/icons/facebook.png" class="img-fluid ">
                             </a>
                         </li>
                         <li class="d-inline-block mx-2">
-                            <a href="">
+                            <a href="eauction.sa">
                                 <img src="images/icons/snapchat.png" class="img-fluid ">
                             </a>
                         </li>
                         <li class="d-inline-block mx-2">
-                            <a href="">
+                            <a href="eauction.sa">
                                 <img src="images/icons/instagram.png" class="img-fluid ">
                             </a>
                         </li>
                         <li class="d-inline-block mx-2">
-                            <a href="">
+                            <a href="eauction_sa">
                                 <img src="images/icons/twitter.png" class="img-fluid ">
                             </a>
                         </li>
