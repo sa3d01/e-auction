@@ -251,6 +251,16 @@ class UserController extends MasterController
         return $this->sendResponse($data);
     }
 
+    public function canBid($id)
+    {
+        $user = User::find($id);
+        $response['profileCompleted']=$user->profileAndPurchasingPowerIsFilled();
+        $user_purchasing_power=$user->purchasing_power;
+        $user_purchasing_power=$user_purchasing_power+$user->package->purchasing_power_increase;
+        $response['maxBid']=(double)$user_purchasing_power*$this->purchasing_power_ratio;
+        return $this->sendResponse($response);
+    }
+
     public function favourite()
     {
         $item_ids = Favourite::where('user_id', \request()->user()->id)->pluck('item_id');

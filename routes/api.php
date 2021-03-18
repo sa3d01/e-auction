@@ -70,6 +70,8 @@ Route::group(['prefix' => 'v1','namespace'=>'Api'], function () {
         Route::get('/products_reports', 'UserController@productsReports')->middleware(CheckApiToken::class);
         Route::get('/my-paid-items', 'UserController@myPaidItems')->middleware(CheckApiToken::class);
         Route::get('/{id}', 'UserController@show');
+
+        Route::get('/{id}/can-bid', 'UserController@canBid');
     });
 
     Route::get('/negotiation_items', 'NegotiationController@myNegotiationItems')->middleware(CheckApiToken::class);
