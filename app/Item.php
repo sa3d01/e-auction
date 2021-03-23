@@ -14,7 +14,7 @@ class Item extends Model
     private $images_link='media/images/item/';
     protected $fillable = [
         'user_id','category_id','status','pay_status'
-        ,'name','images','mark_id','model_id','item_status_id','sunder_count','fetes_id',
+        ,'name','images','mark_id','model_id','year','item_status_id','sunder_count','fetes_id',
         'color_id','kms_count','scan_status_id','paper_status_id','paper_image'
         ,'auction_type_id','price','auction_price','city_id','shipping_by','tax','location'
         ,'more_details'

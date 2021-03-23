@@ -21,6 +21,7 @@ class CreateItemsTable extends Migration
             $table->foreignId('category_id')->default(1);
             $table->foreignId('mark_id')->nullable();
             $table->foreignId('model_id')->nullable();
+            $table->integer('year')->nullable();
             $table->foreignId('item_status_id')->nullable();
             $table->integer('sunder_count')->nullable();
             $table->foreignId('fetes_id')->nullable();

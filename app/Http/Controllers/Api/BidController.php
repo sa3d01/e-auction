@@ -16,6 +16,9 @@ use Edujugon\PushNotification\PushNotification;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Types\Object_;
 
+use Morrislaptop\Firestore\Factory;
+use Kreait\Firebase\ServiceAccount;
+
 class BidController extends MasterController
 {
     protected $model;
@@ -44,6 +47,25 @@ class BidController extends MasterController
     }
     public function bid($item_id,Request $request){
         $user=$request->user();
+//        $serviceAccount = ServiceAccount::fromJsonFile('/var/www/html/e-auction/mazadat-eb79528aefd3.json');
+//
+//        $firestore = (new Factory)
+//            ->withServiceAccount($serviceAccount)
+//            ->createFirestore();
+//
+//        $collection = $firestore->collection('liveAuctions');
+//        $snapshot = $collection->documents();
+//        $auctions=[];
+//        foreach ($snapshot as $document) {
+//            $auction['id']=$document['id'];
+//            $auction['user_price']=$document['user_price'];
+//            $auctions[]=$auction;
+//        }
+//        return $auctions;
+
+
+
+
         $auction_item=AuctionItem::where('item_id',$item_id)->latest()->first();
         if ($auction_item->more_details!=null){
             if ($auction_item->more_details['status']=='expired'  || $auction_item->more_details['status']=='paid'){
