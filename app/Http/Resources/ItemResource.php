@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\AuctionItem;
+use App\AuctionUser;
 use App\Favourite;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -29,6 +30,7 @@ class ItemResource extends JsonResource
         $auction_item=AuctionItem::where('item_id',$this->id)->latest()->first();
         $is_favourite=false;
         $my_item=false;
+        $win=false;
         if (\request()->user()){
             //favourite
             $favourite=Favourite::where(['user_id'=>\request()->user()->id, 'item_id'=>$this->id])->first();
@@ -37,6 +39,12 @@ class ItemResource extends JsonResource
             }
             if ($this->user_id==\request()->user()->id){
                 $my_item=true;
+            }
+            $soon_winner=AuctionUser::where('item_id',$this->id)->latest()->value('user_id');
+            if ($soon_winner){
+                if ($soon_winner==\request()->user()->id){
+                    $win=true;
+                }
             }
             $features=$auction_item->auctionTypeFeatures(auth()->user()->id);
         }else{
@@ -72,6 +80,7 @@ class ItemResource extends JsonResource
             'user_price'=>$user_price,
             'my_item'=>$my_item,
             'tax'=> $this->tax=='true'?true:false,
+            'win'=>$win
         ];
     }
 }
