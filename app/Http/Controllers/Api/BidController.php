@@ -62,17 +62,12 @@ class BidController extends MasterController
 //            $auctions[]=$auction;
 //        }
 //        return $auctions;
-
-
-
-
         $auction_item=AuctionItem::where('item_id',$item_id)->latest()->first();
         if ($auction_item->more_details!=null){
             if ($auction_item->more_details['status']=='expired'  || $auction_item->more_details['status']=='paid'){
                 return $this->sendError('هذا السلعة قد انتهى وقت المزايدة عليها :(');
             }
         }
-        //todo : check purchasing_power
         if ($user->profileAndPurchasingPowerIsFilled()==false){
             return $this->sendError(' يجب اكمال بيانات ملفك الشخصى أولا وشحن قوتك الشرائية');
         }
@@ -89,7 +84,9 @@ class BidController extends MasterController
             'price'=>$auction_item->price+$request['charge_price'],
             'latest_charge'=>$request['charge_price']
         ]);
-        $this->charge_notify($auction_item,$user,$request['charge_price']);
+        if (!(Carbon::createFromTimestamp($auction_item->auction->more_details['end_date']) >= Carbon::now()) && ((Carbon::createFromTimestamp($auction_item->auction->start_date)) <= Carbon::now()) ) {
+            $this->charge_notify($auction_item,$user,$request['charge_price']);
+        }
         //todo : add key of soon winner
         //todo : increase duration of auction
         return $this->sendResponse('تمت المزايدة بنجاح');
