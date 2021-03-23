@@ -279,5 +279,7 @@ class UserController extends MasterController
                 ]
             ],
         ]);
+        $data = new UserResource($user);
+        return $this->sendResponse($data);
     }
 }
