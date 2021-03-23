@@ -267,4 +267,17 @@ class UserController extends MasterController
         $items = new ItemCollection(Item::whereIn('id', $item_ids)->latest()->get());
         return $this->sendResponse($items);
     }
+
+    public function addBankAccount(Request $request){
+        $user=\request()->user();
+        $user->update([
+            'more_details'=>[
+                'bank'=>[
+                    'bank_name'=>$request['bank_name'],
+                    'iban_number'=>$request['iban_number'],
+                    'account_number'=>$request['account_number'],
+                ]
+            ],
+        ]);
+    }
 }

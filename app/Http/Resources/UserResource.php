@@ -28,6 +28,7 @@ class UserResource extends JsonResource
             'purchasing_power'=> (double)$this->purchasing_power ?? 0,
             'wallet'=> (double)$this->wallet ?? 0,
             'credit'=> (double)$this->credit ?? 0,
+            'bank'=>$this->more_details?$this->more_details['bank']:new Object_()
         ];
     }
 }

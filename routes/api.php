@@ -46,9 +46,11 @@ Route::group(['prefix' => 'v1','namespace'=>'Api'], function () {
         Route::get('/', 'FeedBackController@index');
         Route::post('/', 'FeedBackController@store')->middleware(CheckApiToken::class);
     });
+
     Route::group(['prefix' => '/contact'], function () {
         Route::post('/', 'ContactController@store')->middleware(CheckApiToken::class);
     });
+
     Route::group(['prefix' => '/package'], function () {
         Route::get('/', 'PackageController@index');
         Route::get('/{package}', 'PackageController@show');
@@ -72,6 +74,7 @@ Route::group(['prefix' => 'v1','namespace'=>'Api'], function () {
         Route::get('/{id}', 'UserController@show');
 
         Route::get('/{id}/can-bid', 'UserController@canBid');
+        Route::post('/add-bank', 'UserController@addBankAccount');
     });
 
     Route::get('/negotiation_items', 'NegotiationController@myNegotiationItems')->middleware(CheckApiToken::class);
