@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Transfer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Exceptions\UserNotDefinedException;
@@ -55,6 +56,9 @@ class MasterController extends Controller
         $user_purchasing_power=$user_purchasing_power+$user->package->purchasing_power_increase;
         if ($user_purchasing_power*$this->purchasing_power_ratio < $price){
             return $this->sendError(' قوتك الشرائية لا تسمح بهذه الصفقه .');
+        }
+        if (Transfer::where(['user_id'=>$user->id,'type'=>'refund_purchasing_power','status'=>0])->first()){
+            return $this->sendError(' قوتك الشرائية معلقة حاليا لحين رد الإدارة .');
         }
         return true;
     }

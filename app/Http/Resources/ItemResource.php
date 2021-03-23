@@ -59,7 +59,7 @@ class ItemResource extends JsonResource
             'city'=> $this->city->name[$this->lang()],
             'mark'=> $this->mark->name[$this->lang()],
             'model'=> $this->model->name[$this->lang()],
-            'year'=> $this->year,
+            'year'=> $this->year??0,
             'fetes'=> $this->fetes->name[$this->lang()],
             'kms_count'=> $this->kms_count,
             'color'=> $this->color->name[$this->lang()],
