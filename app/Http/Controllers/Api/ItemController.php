@@ -6,6 +6,7 @@ use App\Favourite;
 use App\Item;
 use App\Notification;
 use App\Setting;
+use App\Transfer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -44,6 +45,9 @@ class ItemController extends MasterController
         $user = auth()->user();
         if ($user->profileIsFilled()==false){
             return $this->sendError('يجب اكمال بيانات ملفك الشخصى أولا');
+        }
+        if (Transfer::where(['user_id'=>$user->id,'type'=>'refund_wallet','status'=>0])->first()){
+            return $this->sendError(' محفظتك معلقة حاليا لحين رد الإدارة .');
         }
         $data=$request->all();
         $data['user_id']=$user->id;
