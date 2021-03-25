@@ -19,9 +19,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="delete transfers of deleted user">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Observers/UserObserver.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Observers/UserObserver.php" afterDir="false" />
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="dashboard">
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/AuctionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/AuctionController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -314,21 +313,7 @@
       <workItem from="1616453025799" duration="6881000" />
       <workItem from="1616511820760" duration="356000" />
       <workItem from="1616630480270" duration="17000" />
-      <workItem from="1616713231950" duration="1068000" />
-    </task>
-    <task id="LOCAL-00281" summary="notifications admin">
-      <created>1613404280884</created>
-      <option name="number" value="00281" />
-      <option name="presentableId" value="LOCAL-00281" />
-      <option name="project" value="LOCAL" />
-      <updated>1613404280884</updated>
-    </task>
-    <task id="LOCAL-00282" summary="notifications admin">
-      <created>1613404448510</created>
-      <option name="number" value="00282" />
-      <option name="presentableId" value="LOCAL-00282" />
-      <option name="project" value="LOCAL" />
-      <updated>1613404448510</updated>
+      <workItem from="1616713231950" duration="1421000" />
     </task>
     <task id="LOCAL-00283" summary="notifications admin">
       <created>1613404527098</created>
@@ -659,7 +644,21 @@
       <option name="project" value="LOCAL" />
       <updated>1616714389630</updated>
     </task>
-    <option name="localTasksCounter" value="330" />
+    <task id="LOCAL-00330" summary="dashboard">
+      <created>1616714529728</created>
+      <option name="number" value="00330" />
+      <option name="presentableId" value="LOCAL-00330" />
+      <option name="project" value="LOCAL" />
+      <updated>1616714529728</updated>
+    </task>
+    <task id="LOCAL-00331" summary="dashboard">
+      <created>1616714742868</created>
+      <option name="number" value="00331" />
+      <option name="presentableId" value="LOCAL-00331" />
+      <option name="project" value="LOCAL" />
+      <updated>1616714742869</updated>
+    </task>
+    <option name="localTasksCounter" value="332" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -691,6 +690,7 @@
     <MESSAGE value="can-bid" />
     <MESSAGE value="year-bid" />
     <MESSAGE value="delete transfers of deleted user" />
-    <option name="LAST_COMMIT_MESSAGE" value="delete transfers of deleted user" />
+    <MESSAGE value="dashboard" />
+    <option name="LAST_COMMIT_MESSAGE" value="dashboard" />
   </component>
 </project>
