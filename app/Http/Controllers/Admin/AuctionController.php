@@ -89,7 +89,7 @@ class AuctionController extends MasterController
 
     public function index()
     {
-        $rows = $this->model->orderBy('start_date','desc')->get();
+        $rows = $this->model->orderBy('start_date','asc')->get();
         return View('dashboard.auction.index', [
             'rows' => $rows,
             'type' => 'auction',
