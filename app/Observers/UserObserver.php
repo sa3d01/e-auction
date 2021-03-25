@@ -9,6 +9,7 @@ use App\FeedBack;
 use App\Item;
 use App\Notification;
 use App\Offer;
+use App\Transfer;
 use App\User;
 
 class UserObserver
@@ -26,6 +27,10 @@ class UserObserver
         $notifications = Notification::where('receiver_id', $user->id)->get();
         foreach ($notifications as $notification) {
             $notification->delete();
+        }
+        $transfers = Transfer::where('user_id', $user->id)->get();
+        foreach ($transfers as $transfer) {
+            $transfer->delete();
         }
         $items=Item::where('user_id',$user->id)->get();
         foreach ($items as $item) {
