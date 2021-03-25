@@ -44,7 +44,7 @@
                             <tbody>
                             @foreach($rows as $row)
                                 <tr>
-                                    <td hidden>{{$row->id}}</td>
+                                    <td hidden>{{$row->start_date}}</td>
                                     @foreach($index_fields as $key=>$value)
                                         @if($value=='start_date')
                                             <td>{{$row->showTimeStampDate($row->$value)}}</td>
@@ -85,7 +85,7 @@
     <script>
         $(function() {
             var Table = $('#datatable').DataTable({
-                "order": [[ 1, "asc" ]],
+                "order": [[ 1, "desc" ]],
                 "oLanguage": {
                     "sEmptyTable":     "ليست هناك بيانات متاحة في الجدول",
                     "sLoadingRecords": "جارٍ التحميل...",
