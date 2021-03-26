@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\AuctionItem;
+use App\DropDown;
 use App\Http\Resources\ItemResource;
 use App\Item;
 use App\Notification;
@@ -22,7 +23,17 @@ class ItemController extends MasterController
         $this->route = 'item';
         parent::__construct();
     }
-
+    public function create()
+    {
+        return View('dashboard.item.create', [
+            'type' => 'item',
+            'action' => 'admin.item.store',
+            'title' => 'أضافة سلعة',
+            'create_fields'=>['صور المركبة'=>'images','عدد السلندرات'=>'sunder_count','الممشى'=>'kms_count'],
+            'images'=>true,
+            'paper_image'=>true,
+        ]);
+    }
     public function items($status)
     {
         $rows=$this->model->where('status',$status)->latest()->get();
