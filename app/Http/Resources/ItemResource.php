@@ -46,15 +46,28 @@ class ItemResource extends JsonResource
                     $win=true;
                 }
             }
-            $features=$auction_item->auctionTypeFeatures(auth()->user()->id);
+            if ($auction_item){
+                $features=$auction_item->auctionTypeFeatures(auth()->user()->id);
+            }
         }else{
-            $features=$auction_item->auctionTypeFeatures();
+            if ($auction_item){
+                $features=$auction_item->auctionTypeFeatures();
+            }
         }
         //status
-        $auction_status=$features['status'];
-        $negotiation=$features['negotiation'];
-        $direct_pay=$features['direct_pay'];
-        $user_price=$features['user_price'];
+        if (!$auction_item){
+            $auction_status=$this->status;
+            $negotiation=false;
+            $direct_pay=false;
+            $user_price=$this->price??'';
+        }else{
+            $auction_status=$features['status'];
+            $negotiation=$features['negotiation'];
+            $direct_pay=$features['direct_pay'];
+            $user_price=$features['user_price'];
+        }
+
+
         return [
             'id'=> (int) $this->id,
             'images'=> $this->images,

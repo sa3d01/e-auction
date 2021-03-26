@@ -42,9 +42,6 @@
                                         <th>{{$select['title']}}</th>
                                     @endforeach
                                 @endif
-                                @if(isset($image))
-                                    <th>الصورة</th>
-                                @endif
                                 @if($status=='accepted')
                                     <th>السعر المطروح للمزايدة</th>
                                     <th>تقارير الفحص</th>
@@ -65,9 +62,6 @@
                                     @foreach($selects as $select)
                                         <th>{{$select['title']}}</th>
                                     @endforeach
-                                @endif
-                                @if(isset($image))
-                                    <th>الصورة</th>
                                 @endif
                                 @if($status=='accepted')
                                     <th>السعر المطروح للمزايدة</th>
@@ -95,23 +89,6 @@
                                             @php($related_model=$select['name'])
                                             <td>{{$row->$related_model->nameForSelect()}}</td>
                                         @endforeach
-                                    @endif
-                                    @if(isset($image))
-                                        <td data-toggle="modal" data-target="#imgModal{{$row->id}}">
-                                            <img width="50px" height="50px" class="img_preview" src="{{ $row->image}}">
-                                        </td>
-                                        <div id="imgModal{{$row->id}}" class="modal fade" role="img">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-body">
-                                                        <img data-toggle="modal" data-target="#imgModal{{$row->id}}" class="img-preview" src="{{ $row->image}}" style="max-height: 500px">
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal">إغلاق</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     @endif
                                     @if($status=='accepted')
                                         <td>{!! $row->auctionPriceLabel() !!}</td>
