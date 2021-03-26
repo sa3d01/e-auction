@@ -165,4 +165,15 @@ class DropDownController extends MasterController
         $row->refresh();
         return redirect()->back()->with('updated');
     }
+
+    public function get_models($mark_id){
+        $models=DropDown::where(['parent_id'=>$mark_id,'status'=>1])->get();
+        $data=[];
+        foreach ($models as $model){
+            $arr['id']=$model->id;
+            $arr['name']=$model->name['ar'];
+            $data[]=$arr;
+        }
+        return response()->json($data);
+    }
 }

@@ -62,7 +62,7 @@
                                                 </div>
                                             @endif
                                         @endforeach
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-12">
                                             <div class="white-box">
                                                 <label for="input-file-now-custom-1">صورة الاستمارة</label>
                                                 <span style="color: red">*</span>

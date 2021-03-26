@@ -27,6 +27,7 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
 
     Route::get('/setting', 'HomeController@setting')->name('setting');
     Route::post('/setting', 'HomeController@update_setting')->name('setting.update');
+    Route::get('get_models/{mark_id}', 'DropDownController@get_models')->name('mark.get_models');
 
     Route::get('admin/profile', 'AdminController@profile')->name('profile');
     Route::post('admin/update_profile/{id}', 'AdminController@update_profile')->name('update_profile');
