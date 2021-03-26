@@ -122,6 +122,9 @@
             <div class="sub-menu-i">
                 <ul class="sub-menu">
                     <li>
+                        <a href="{{route('admin.item.create')}}"> إضافة سلعة </a>
+                    </li>
+                    <li>
                         <a href="{{route('admin.item.status',['status'=>'pending'])}}"> السلع الجديدة </a>
                     </li>
                     <li>

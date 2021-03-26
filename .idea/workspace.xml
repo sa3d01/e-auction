@@ -19,9 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="dashboard">
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/show/show-box.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/show/show-box.blade.php" afterDir="false" />
-    </list>
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="dashboard" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -313,21 +311,7 @@
       <workItem from="1616453025799" duration="6881000" />
       <workItem from="1616511820760" duration="356000" />
       <workItem from="1616630480270" duration="17000" />
-      <workItem from="1616713231950" duration="4886000" />
-    </task>
-    <task id="LOCAL-00288" summary="latest_file">
-      <created>1614216397797</created>
-      <option name="number" value="00288" />
-      <option name="presentableId" value="LOCAL-00288" />
-      <option name="project" value="LOCAL" />
-      <updated>1614216397797</updated>
-    </task>
-    <task id="LOCAL-00289" summary="latest_file">
-      <created>1614216690739</created>
-      <option name="number" value="00289" />
-      <option name="presentableId" value="LOCAL-00289" />
-      <option name="project" value="LOCAL" />
-      <updated>1614216690739</updated>
+      <workItem from="1616713231950" duration="5654000" />
     </task>
     <task id="LOCAL-00290" summary="latest_file">
       <created>1614216918851</created>
@@ -658,7 +642,21 @@
       <option name="project" value="LOCAL" />
       <updated>1616719870061</updated>
     </task>
-    <option name="localTasksCounter" value="337" />
+    <task id="LOCAL-00337" summary="dashboard">
+      <created>1616720394232</created>
+      <option name="number" value="00337" />
+      <option name="presentableId" value="LOCAL-00337" />
+      <option name="project" value="LOCAL" />
+      <updated>1616720394232</updated>
+    </task>
+    <task id="LOCAL-00338" summary="dashboard">
+      <created>1616720454961</created>
+      <option name="number" value="00338" />
+      <option name="presentableId" value="LOCAL-00338" />
+      <option name="project" value="LOCAL" />
+      <updated>1616720454961</updated>
+    </task>
+    <option name="localTasksCounter" value="339" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
