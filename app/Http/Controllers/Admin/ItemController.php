@@ -7,8 +7,10 @@ use App\DropDown;
 use App\Http\Resources\ItemResource;
 use App\Item;
 use App\Notification;
+use App\Package;
 use App\Report;
 use App\Setting;
+use App\User;
 use Carbon\Carbon;
 use Edujugon\PushNotification\PushNotification;
 use Illuminate\Http\Request;
@@ -34,6 +36,43 @@ class ItemController extends MasterController
             'paper_image'=>true,
         ]);
     }
+    public function store(Request $request)
+    {
+        $user = User::where('email','admin@admin.com')->first();
+        if (!$user){
+            $package=Package::where('price','!=',0)->latest()->first();
+            $user=User::create([
+                'name'=>'admin',
+                'email'=>'admin@admin.com',
+                'email_verified_at'=>Carbon::now(),
+                'package_id'=>$package->id,
+                'purchasing_power'=>100000,
+                'status'=>1,
+            ]);
+        }
+        $data=$request->all();
+        $data['user_id']=$user->id;
+        $data['status']='accepted';
+        $data['pay_status']=1;
+        $items_images=[];
+        if ($request->images){
+            foreach ($request->images as $image){
+                $filename=null;
+                if (is_file($image)) {
+                    $filename = Str::random(10) . '.' . $image->getClientOriginalExtension();
+                    $image->move('media/images/item/', $filename);
+                    $local_name=asset('media/images/item/').'/'.$filename;
+                }else {
+                    $local_name = $image;
+                }
+                $items_images[]=$local_name;
+            }
+            $data['images'] = $items_images;
+        }
+        $item=$this->model->create($data);
+        return redirect()->route('admin.item.status',['status'=>'accepted'])->with('created', 'تمت الاضافة بنجاح');
+    }
+
     public function items($status)
     {
         $rows=$this->model->where('status',$status)->latest()->get();
@@ -104,6 +143,7 @@ class ItemController extends MasterController
         ]);
         return redirect()->back()->with('updated');
     }
+
     public function uploadImages($item_id,Request $request){
         $item=$this->model->find($item_id);
         $current_images=json_decode($item->imagesArray());
@@ -128,6 +168,7 @@ class ItemController extends MasterController
         ]);
         return redirect()->back()->with('updated');
     }
+
     public function update_vip($item_id){
         $auction_item=AuctionItem::where('item_id',$item_id)->latest()->first();
         if ($auction_item->vip === "true"){
@@ -286,6 +327,7 @@ class ItemController extends MasterController
         $item->refresh();
         return redirect()->back()->with('updated');
     }
+
     function itemStatusNotify($item,$note){
         Notification::create([
             'receiver_id'=>$item->user_id,
@@ -308,11 +350,13 @@ class ItemController extends MasterController
             ->setDevicesToken($item->user->device['id'])
             ->send();
     }
+
     function itemTaxPay($item){
         $add_item_tax=Setting::first()->value('add_item_tax');
         $item->update(['pay_status'=>1]);
         $this->walletPay($item->user,$add_item_tax,'add_item_tax');
     }
+
     function walletPay($user,$price,$type){
         $wallet=$user->wallet-$price;
         $user->update(['wallet'=>$wallet]);
@@ -350,6 +394,7 @@ class ItemController extends MasterController
             ],
         ]);
     }
+
     public function liveItems()
     {
         $ids=[];
@@ -382,6 +427,7 @@ class ItemController extends MasterController
             ],
         ]);
     }
+
     public function expiredItems()
     {
         $ids=[];
