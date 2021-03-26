@@ -59,7 +59,7 @@ class ItemResource extends JsonResource
             $auction_status=$this->status;
             $negotiation=false;
             $direct_pay=false;
-            $user_price=$this->price??'';
+            $user_price=$this->price??0;
         }else{
             $auction_status=$features['status'];
             $negotiation=$features['negotiation'];
@@ -75,7 +75,7 @@ class ItemResource extends JsonResource
             'start_date_text'=> Carbon::createFromTimestamp($auction_item?$auction_item->start_date:123),
             'auction_duration'=>$auction_item?$auction_item->auction->duration:0,
             'item_status'=> $this->item_status->name[$this->lang()],
-            'auction_price'=> $auction_item?$auction_item->price:0,
+            'auction_price'=> $auction_item?$auction_item->price:($this->price??0),
             'name'=> $this->mark->name[$this->lang()].' '.$this->model->name[$this->lang()],
             'city'=> $this->city->name[$this->lang()],
             'mark'=> $this->mark->name[$this->lang()],
