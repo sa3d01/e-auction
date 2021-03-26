@@ -43,7 +43,6 @@ class UserController extends MasterController
             'index_fields'=>['الاسم' => 'name', 'البريد الإلكترونى' => 'email', ' الجوال' => 'phone','تاريخ الانضمام'=>'created_at'],
             'status'=>true,
             'image'=>true,
-            'licence_image'=>true,
         ]);
     }
     public function create()
@@ -83,6 +82,7 @@ class UserController extends MasterController
             'status'=>true,
             'password'=>true,
             'image'=>true,
+            'licence_image'=>true,
             'only_show'=>true,
         ]);
     }
