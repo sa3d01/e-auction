@@ -151,6 +151,14 @@
                                         </div>
                                     </div>
                                 @endif
+                                @if(isset($licence_image))
+                                    <div class="col-sm-12">
+                                        <div class="white-box">
+                                            <label for="input-file-now-custom-1">صورة الهوية</label>
+                                            <input disabled name="licence_image" type="file" id="input-file-now-custom-1" class="dropify" data-default-file="{{$row->licence_image}}"/>
+                                        </div>
+                                    </div>
+                                @endif
                                 @if(isset($pdf) && $row->pdf!=null)
                                     <div class="col-sm-12">
                                         <label for="pdf">تقرير الفحص</label>
