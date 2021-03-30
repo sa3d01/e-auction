@@ -71,6 +71,7 @@ class ItemController extends MasterController
                 }
                 $items_images[]=$local_name;
             }
+            return 'دخل وملفش';
             $data['images'] = $items_images;
         }
         return 'مدخلش';
