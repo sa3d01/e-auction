@@ -58,13 +58,13 @@ class ItemController extends MasterController
         $data['shipping_by']='user';
         $data['pay_status']=1;
         $items_images=[];
-        if ($request->input('images')){
-            foreach ($request->input('images') as $image){
+        if ($request->images){
+            foreach ($request->images as $image){
                 $filename=null;
                 if (is_file($image)) {
-//                    if ($image->getSize() > 1000000){
-//                        return redirect()->back()->withErrors(['msg', 'حجم الصورة كبير جدا..']);
-//                    }
+                    if ($image->getSize() > 1000000){
+                        return redirect()->back()->withErrors(['msg', 'حجم الصورة كبير جدا..']);
+                    }
                     $filename = Str::random(10) . '.' . $image->getClientOriginalExtension();
                     $image->move('media/images/item/', $filename);
                     $local_name=asset('media/images/item/').'/'.$filename;
@@ -154,8 +154,8 @@ class ItemController extends MasterController
         $item=$this->model->find($item_id);
         $current_images=json_decode($item->imagesArray());
         $images=[];
-        if ($request->input('images')){
-            foreach ($request->input('images') as $image){
+        if ($request->images){
+            foreach ($request->images as $image){
                 $filename=null;
                 if (is_file($image)) {
                     if ($image->getSize()  > 1000000){
