@@ -21,7 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="dashboard">
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/item/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/item/create.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -317,14 +316,7 @@
       <workItem from="1616713231950" duration="13129000" />
       <workItem from="1616799661267" duration="2231000" />
       <workItem from="1616808032361" duration="3564000" />
-      <workItem from="1617134119995" duration="3849000" />
-    </task>
-    <task id="LOCAL-00300" summary="latest_file">
-      <created>1614474816529</created>
-      <option name="number" value="00300" />
-      <option name="presentableId" value="LOCAL-00300" />
-      <option name="project" value="LOCAL" />
-      <updated>1614474816529</updated>
+      <workItem from="1617134119995" duration="4939000" />
     </task>
     <task id="LOCAL-00301" summary="latest_file">
       <created>1614481405814</created>
@@ -662,7 +654,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617137659401</updated>
     </task>
-    <option name="localTasksCounter" value="349" />
+    <task id="LOCAL-00349" summary="dashboard">
+      <created>1617138042142</created>
+      <option name="number" value="00349" />
+      <option name="presentableId" value="LOCAL-00349" />
+      <option name="project" value="LOCAL" />
+      <updated>1617138042142</updated>
+    </task>
+    <option name="localTasksCounter" value="350" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
