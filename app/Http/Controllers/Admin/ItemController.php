@@ -62,7 +62,7 @@ class ItemController extends MasterController
             foreach ($request->input('images') as $image){
                 $filename=null;
                 if (is_file($image)) {
-                    if ($image->getClientSize()){
+                    if ($image->getClientSize() > 1000){
                         return redirect()->back()->withErrors('حجم الصورة المرفقة كبير ..');
                     }
                     $filename = Str::random(10) . '.' . $image->getClientOriginalExtension();
@@ -158,7 +158,7 @@ class ItemController extends MasterController
             foreach ($request->input('images') as $image){
                 $filename=null;
                 if (is_file($image)) {
-                    if ($image->getClientSize()){
+                    if ($image->getClientSize()  > 1000){
                         return redirect()->back()->withErrors('حجم الصورة المرفقة كبير ..');
                     }
                     $filename = Str::random(10) . '.' . $image->getClientOriginalExtension();
