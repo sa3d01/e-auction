@@ -54,7 +54,7 @@ class ItemController extends MasterController
 
         if ($request->images){
             foreach ($request->images as $image){
-                return $image->isValid();
+                return $image->getContent();
 
                 $filename=null;
                 if (is_file($image)) {
