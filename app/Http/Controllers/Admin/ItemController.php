@@ -37,7 +37,7 @@ class ItemController extends MasterController
             'paper_image'=>true,
         ]);
     }
-    function getSize($size, $precision = 2):int
+    function size($size, $precision = 2):int
     {
         if ($size > 0) {
             $size = (int) $size;
@@ -51,19 +51,20 @@ class ItemController extends MasterController
     }
     public function store(Request $request)
     {
-        return $request->all();
+        $data=$request->all();
+
         if ($request->images){
             foreach ($request->images as $image){
                 $filename=null;
                 if (is_file($image)) {
-                    return $this->getSize($image->getSize());
+                    return $this->size($image->getSize());
 
                     if ($image->getSize() > 100000){
                         return $this->getSize($image->getSize());
                         return redirect()->back()->withErrors(['msg', 'حجم الصورة كبير جدا..']);
                     }
                     $filename = Str::random(10) . '.' . $image->getClientOriginalExtension();
-                    $image->move('media/images/item/', $filename);
+//                    $image->move('media/images/item/', $filename);
                     $local_name=asset('media/images/item/').'/'.$filename;
                 }else {
                     $local_name = $image;
@@ -72,6 +73,7 @@ class ItemController extends MasterController
             }
             $data['images'] = $items_images;
         }
+        return 'مدخلش';
         $user = User::where('email','admin@admin.com')->first();
         if (!$user){
             $package=Package::where('price','!=',0)->latest()->first();
@@ -84,14 +86,13 @@ class ItemController extends MasterController
                 'status'=>1,
             ]);
         }
-        $data=$request->all();
         $data['user_id']=$user->id;
         $data['status']='accepted';
         $data['shipping_by']='user';
         $data['pay_status']=1;
         $items_images=[];
 
-        $item=$this->model->create($data);
+//        $item=$this->model->create($data);
         return redirect()->route('admin.item.status',['status'=>'accepted'])->with('created', 'تمت الاضافة بنجاح');
     }
 
