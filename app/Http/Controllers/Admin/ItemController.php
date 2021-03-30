@@ -55,9 +55,10 @@ class ItemController extends MasterController
 
         if ($request->images){
             foreach ($request->images as $image){
+                return $this->size($image->getSize());
+
                 $filename=null;
                 if (is_file($image)) {
-                    return $this->size($image->getSize());
 
                     if ($image->getSize() > 100000){
                         return $this->getSize($image->getSize());
