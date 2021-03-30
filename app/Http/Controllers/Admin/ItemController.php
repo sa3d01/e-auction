@@ -43,7 +43,6 @@ class ItemController extends MasterController
             $size = (int) $size;
             $base = log($size) / log(1024);
             $suffixes = array(' bytes', ' KB', ' MB', ' GB', ' TB');
-
             return round(pow(1024, $base - floor($base)), $precision) . $suffixes[floor($base)];
         } else {
             return $size;
@@ -55,7 +54,7 @@ class ItemController extends MasterController
 
         if ($request->images){
             foreach ($request->images as $image){
-                return $this->size($image->getSize());
+                return $image->getSize();
 
                 $filename=null;
                 if (is_file($image)) {
