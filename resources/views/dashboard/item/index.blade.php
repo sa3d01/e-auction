@@ -17,7 +17,7 @@
                     <h5 class="form-header">
                         {{$title}}
                     </h5>
-                    @if($errors->any())
+                    @if(\Illuminate\Support\Facades\Session::has('errors'))
                         <div class="alert alert-danger alert-dismissible fade in" role="alert">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
                             @foreach ($errors->all() as $error)
