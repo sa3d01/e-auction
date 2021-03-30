@@ -61,6 +61,11 @@ class ItemController extends MasterController
             foreach ($request->images as $image){
                 $filename=null;
                 if (is_file($image)) {
+                    ini_set('memory_limit', '-1');
+                    ini_set('set_time_limit', '6000');
+                    ini_set('max_execution_time', '6000');
+                    ini_set('upload_max_filesize', '20M');
+                    ini_set('post_max_size', '20M');
                     $filename = Str::random(10) . '.' . $image->getClientOriginalExtension();
                     $image->move('media/images/item/', $filename);
                     $local_name=asset('media/images/item/').'/'.$filename;
@@ -154,6 +159,11 @@ class ItemController extends MasterController
             foreach ($request->images as $image){
                 $filename=null;
                 if (is_file($image)) {
+                    ini_set('memory_limit', '-1');
+                    ini_set('set_time_limit', '6000');
+                    ini_set('max_execution_time', '6000');
+                    ini_set('upload_max_filesize', '20M');
+                    ini_set('post_max_size', '20M');
                     $filename = Str::random(10) . '.' . $image->getClientOriginalExtension();
                     $image->move('media/images/item/', $filename);
                     $local_name=asset('media/images/item/').'/'.$filename;
