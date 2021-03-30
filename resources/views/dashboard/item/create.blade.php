@@ -115,7 +115,7 @@
                                                 <div class="form-group">
                                                     <label for="">اللون</label>
                                                     <span style="color: red">*</span>
-                                                    <select id="color" name="color" class="form-control">
+                                                    <select id="color" name="color_id" class="form-control">
                                                         @foreach(\App\DropDown::active()->where('class','Color')->get() as $color)
                                                             <option value="{{$color->id}}">
                                                                 {{$color->name['ar']}}

@@ -55,6 +55,7 @@ class ItemController extends MasterController
         $data=$request->all();
         $data['user_id']=$user->id;
         $data['status']='accepted';
+        $data['shipping_by']='user';
         $data['pay_status']=1;
         $items_images=[];
         if ($request->images){
