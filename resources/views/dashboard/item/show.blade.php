@@ -221,10 +221,10 @@
                                                             <label for=""> {{$select['title']}} </label>
                                                             @if(array_key_exists("route",$select))
                                                                 <a href="{{$select['route']}}">
-                                                                    <input disabled value="{!!$row->$related_model->nameForSelect()!!}" class="form-control" type="text">
+                                                                    <input disabled value="{!!$row->$related_model?$row->$related_model->nameForSelect():""!!}" class="form-control" type="text">
                                                                 </a>
                                                             @else
-                                                                <input disabled value="{!!$row->$related_model->nameForSelect()!!}" class="form-control" type="text">
+                                                                <input disabled value="{!!$row->$related_model?$row->$related_model->nameForSelect():""!!}" class="form-control" type="text">
                                                             @endif
                                                         </div>
                                                     </div>
