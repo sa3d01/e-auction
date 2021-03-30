@@ -51,6 +51,7 @@ class ItemController extends MasterController
     }
     public function store(Request $request)
     {
+        return $request->all();
         if ($request->images){
             foreach ($request->images as $image){
                 $filename=null;
