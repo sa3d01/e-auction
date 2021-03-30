@@ -1,46 +1,4 @@
 <div class="menu-actions">
-{{--    @can('view-contacts')--}}
-    <!--------------------
-    START - Contacts Link in secondary top menu
-    -------------------->
-{{--        <div class="messages-notifications os-dropdown-trigger os-dropdown-position-right">--}}
-{{--            <i class="os-icon os-icon-message-circle"></i>--}}
-{{--            <div class="new-messages-count">--}}
-{{--                {{$new_contacts_count}}--}}
-{{--            </div>--}}
-{{--            @if($new_contacts_count > 0)--}}
-{{--                <div class="os-dropdown light message-list">--}}
-{{--                    <ul>--}}
-{{--                        @foreach($new_contacts as $new_contact)--}}
-{{--                            <li>--}}
-{{--                                <a href="{{route('admin.contact.index')}}">--}}
-{{--                                    <div class="user-avatar-w">--}}
-{{--                                        <img alt="" src="{{$new_contact->user->image}}">--}}
-{{--                                    </div>--}}
-{{--                                    <div class="message-content">--}}
-{{--                                        <h6 class="message-from">--}}
-{{--                                            {{$new_contact->user->name}}--}}
-{{--                                        </h6>--}}
-{{--                                        <h6 class="message-title">--}}
-{{--                                            {{$new_contact->message}}--}}
-{{--                                        </h6>--}}
-{{--                                    </div>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-{{--                        @endforeach--}}
-{{--                    </ul>--}}
-{{--                </div>--}}
-{{--            @endif--}}
-{{--        </div>--}}
-        <!--------------------
-        END - Contacts Link in secondary top menu
-        -------------------->
-{{--    @endcan--}}
-<!--------------------
-
-            START - Settings Link in secondary top menu
-            -------------------->
-
     <div class="messages-notifications os-dropdown-trigger os-dropdown-position-left">
         <i class="os-icon os-icon-zap"></i>
         <div class="new-messages-count">
@@ -82,7 +40,7 @@
                                     </div>
                                     <div class="message-content">
                                         <h6 class="message-title">
-                                            {{$admin_notification->title}}
+                                            {{$admin_notification->title['ar']}}
                                         </h6>
                                     </div>
                                 </a>

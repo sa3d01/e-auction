@@ -20,20 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="dashboard">
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/HaF22lsERJ.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/Hfv2PbMuuc.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/IgvAyWnLBk.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/KPsQIeXDkx.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/R36fZmig3c.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/TlCYVzgkG0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/UL5pm66ll7.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/XtzSHAQ3wA.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/h9KmgVJOnt.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/kDPinS6AFY.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/rNj45wqlvA.jpeg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/tw6NoCdsV7.jpeg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/item/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/item/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/master/notification.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/master/notification.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -326,14 +314,10 @@
       <workItem from="1616453025799" duration="6881000" />
       <workItem from="1616511820760" duration="356000" />
       <workItem from="1616630480270" duration="17000" />
-      <workItem from="1616713231950" duration="12516000" />
-    </task>
-    <task id="LOCAL-00293" summary="latest_file">
-      <created>1614297662764</created>
-      <option name="number" value="00293" />
-      <option name="presentableId" value="LOCAL-00293" />
-      <option name="project" value="LOCAL" />
-      <updated>1614297662764</updated>
+      <workItem from="1616713231950" duration="13129000" />
+      <workItem from="1616799661267" duration="2231000" />
+      <workItem from="1616808032361" duration="3564000" />
+      <workItem from="1617134119995" duration="311000" />
     </task>
     <task id="LOCAL-00294" summary="latest_file">
       <created>1614297711379</created>
@@ -671,7 +655,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616726630868</updated>
     </task>
-    <option name="localTasksCounter" value="342" />
+    <task id="LOCAL-00342" summary="dashboard">
+      <created>1616728959610</created>
+      <option name="number" value="00342" />
+      <option name="presentableId" value="LOCAL-00342" />
+      <option name="project" value="LOCAL" />
+      <updated>1616728959610</updated>
+    </task>
+    <option name="localTasksCounter" value="343" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
