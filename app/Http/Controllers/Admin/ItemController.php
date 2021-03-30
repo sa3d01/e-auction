@@ -62,9 +62,9 @@ class ItemController extends MasterController
             foreach ($request->input('images') as $image){
                 $filename=null;
                 if (is_file($image)) {
-                    if ($image->getSize() > 1000000){
-                        return redirect()->back()->withErrors(['msg', 'حجم الصورة كبير جدا..']);
-                    }
+//                    if ($image->getSize() > 1000000){
+//                        return redirect()->back()->withErrors(['msg', 'حجم الصورة كبير جدا..']);
+//                    }
                     $filename = Str::random(10) . '.' . $image->getClientOriginalExtension();
                     $image->move('media/images/item/', $filename);
                     $local_name=asset('media/images/item/').'/'.$filename;
