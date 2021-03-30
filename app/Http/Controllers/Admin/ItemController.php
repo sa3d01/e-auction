@@ -25,6 +25,7 @@ class ItemController extends MasterController
         $this->route = 'item';
         parent::__construct();
     }
+
     public function create()
     {
         return View('dashboard.item.create', [
@@ -36,6 +37,7 @@ class ItemController extends MasterController
             'paper_image'=>true,
         ]);
     }
+
     public function store(Request $request)
     {
         $user = User::where('email','admin@admin.com')->first();
@@ -162,7 +164,7 @@ class ItemController extends MasterController
                 $images[] = $local_name;
             }
         }
-        $images[]=$user_image;
+        $images[]=$current_images;
         $item->update([
             'images'=>$images
         ]);
