@@ -62,8 +62,6 @@ class ItemController extends MasterController
             foreach ($request->images as $image){
                 $filename=null;
                 if (is_file($image)) {
-                    $this->validate($image, ['image'=>'max:1000']);
-
                     ini_set('memory_limit', '-1');
                     ini_set('set_time_limit', '6000');
                     ini_set('max_execution_time', '6000');
@@ -162,8 +160,7 @@ class ItemController extends MasterController
             foreach ($request->images as $image){
                 $filename=null;
                 if (is_file($image)) {
-                    $this->validate($image, ['image'=>'max:1000']);
-
+                    return $image->getClientSize();
                     ini_set('memory_limit', '-1');
                     ini_set('set_time_limit', '6000');
                     ini_set('max_execution_time', '6000');
