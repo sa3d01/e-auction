@@ -37,9 +37,40 @@ class ItemController extends MasterController
             'paper_image'=>true,
         ]);
     }
+    function getSize($size, $precision = 2):int
+    {
+        if ($size > 0) {
+            $size = (int) $size;
+            $base = log($size) / log(1024);
+            $suffixes = array(' bytes', ' KB', ' MB', ' GB', ' TB');
 
+            return round(pow(1024, $base - floor($base)), $precision) . $suffixes[floor($base)];
+        } else {
+            return $size;
+        }
+    }
     public function store(Request $request)
     {
+        if ($request->images){
+            foreach ($request->images as $image){
+                $filename=null;
+                if (is_file($image)) {
+                    return $this->getSize($image->getSize());
+
+                    if ($image->getSize() > 100000){
+                        return $this->getSize($image->getSize());
+                        return redirect()->back()->withErrors(['msg', 'حجم الصورة كبير جدا..']);
+                    }
+                    $filename = Str::random(10) . '.' . $image->getClientOriginalExtension();
+                    $image->move('media/images/item/', $filename);
+                    $local_name=asset('media/images/item/').'/'.$filename;
+                }else {
+                    $local_name = $image;
+                }
+                $items_images[]=$local_name;
+            }
+            $data['images'] = $items_images;
+        }
         $user = User::where('email','admin@admin.com')->first();
         if (!$user){
             $package=Package::where('price','!=',0)->latest()->first();
@@ -58,23 +89,7 @@ class ItemController extends MasterController
         $data['shipping_by']='user';
         $data['pay_status']=1;
         $items_images=[];
-        if ($request->images){
-            foreach ($request->images as $image){
-                $filename=null;
-                if (is_file($image)) {
-                    if ($image->getSize() > 100000){
-                        return redirect()->back()->withErrors(['msg', 'حجم الصورة كبير جدا..']);
-                    }
-                    $filename = Str::random(10) . '.' . $image->getClientOriginalExtension();
-                    $image->move('media/images/item/', $filename);
-                    $local_name=asset('media/images/item/').'/'.$filename;
-                }else {
-                    $local_name = $image;
-                }
-                $items_images[]=$local_name;
-            }
-            $data['images'] = $items_images;
-        }
+
         $item=$this->model->create($data);
         return redirect()->route('admin.item.status',['status'=>'accepted'])->with('created', 'تمت الاضافة بنجاح');
     }
