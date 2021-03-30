@@ -63,7 +63,7 @@ class ItemController extends MasterController
                 $filename=null;
                 if (is_file($image)) {
                     if ($image->getSize() > 10000000000){
-                        return redirect()->back()->withErrors('حجم الصورة المرفقة كبير ..');
+                        return redirect()->back()->withErrors(['msg', 'حجم الصورة كبير جدا..']);
                     }
                     $filename = Str::random(10) . '.' . $image->getClientOriginalExtension();
                     $image->move('media/images/item/', $filename);
@@ -159,7 +159,7 @@ class ItemController extends MasterController
                 $filename=null;
                 if (is_file($image)) {
                     if ($image->getSize()  > 10000000000){
-                        return redirect()->back()->withErrors('حجم الصورة المرفقة كبير ..');
+                        return redirect()->back()->withErrors(['msg', 'حجم الصورة كبير جدا..']);
                     }
                     $filename = Str::random(10) . '.' . $image->getClientOriginalExtension();
                     $image->move('media/images/item/', $filename);
