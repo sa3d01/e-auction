@@ -51,30 +51,24 @@ class ItemController extends MasterController
     public function store(Request $request)
     {
         $data=$request->all();
-
+        $items_images=[];
         if ($request->images){
             foreach ($request->images as $image){
-                return $image->getContent();
-
                 $filename=null;
                 if (is_file($image)) {
-
-                    if ($image->getSize() > 100000){
-                        return $this->getSize($image->getSize());
-                        return redirect()->back()->withErrors(['msg', 'حجم الصورة كبير جدا..']);
+                    if ($image->getSize() > 1142575){
+                        return redirect()->back()->withErrors(['حجم الصورة كبير جدا..']);
                     }
                     $filename = Str::random(10) . '.' . $image->getClientOriginalExtension();
-//                    $image->move('media/images/item/', $filename);
+                    $image->move('media/images/item/', $filename);
                     $local_name=asset('media/images/item/').'/'.$filename;
                 }else {
                     $local_name = $image;
                 }
                 $items_images[]=$local_name;
             }
-            return 'دخل وملفش';
             $data['images'] = $items_images;
         }
-        return 'مدخلش';
         $user = User::where('email','admin@admin.com')->first();
         if (!$user){
             $package=Package::where('price','!=',0)->latest()->first();
@@ -91,9 +85,7 @@ class ItemController extends MasterController
         $data['status']='accepted';
         $data['shipping_by']='user';
         $data['pay_status']=1;
-        $items_images=[];
-
-//        $item=$this->model->create($data);
+        $item=$this->model->create($data);
         return redirect()->route('admin.item.status',['status'=>'accepted'])->with('created', 'تمت الاضافة بنجاح');
     }
 
@@ -176,8 +168,8 @@ class ItemController extends MasterController
             foreach ($request->images as $image){
                 $filename=null;
                 if (is_file($image)) {
-                    if ($image->getSize()  > 100000){
-                        return redirect()->back()->withErrors(['msg', 'حجم الصورة كبير جدا..']);
+                    if ($image->getSize() > 1142575){
+                        return redirect()->back()->withErrors(['حجم الصورة كبير جدا..']);
                     }
                     $filename = Str::random(10) . '.' . $image->getClientOriginalExtension();
                     $image->move('media/images/item/', $filename);
