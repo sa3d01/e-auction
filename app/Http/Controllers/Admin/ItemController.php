@@ -13,6 +13,7 @@ use App\Setting;
 use App\User;
 use Carbon\Carbon;
 use Edujugon\PushNotification\PushNotification;
+use Illuminate\Http\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -54,7 +55,7 @@ class ItemController extends MasterController
 
         if ($request->images){
             foreach ($request->images as $image){
-                return $image->getSize();
+                return File::getContent($image);
 
                 $filename=null;
                 if (is_file($image)) {
