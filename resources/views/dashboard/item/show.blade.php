@@ -205,14 +205,14 @@
                                                     </div>
                                                 </div>
                                             @endif
-                                                <div class="col-sm-12">
-                                                    <div class="form-group" id="shipping_by" data-value="{{$row->shipping_by}}">
-                                                        <label for=""> نوع الشحن</label>
-                                                        <input disabled name="shipping_by" class="form-control" value="{{$row->shipping_by}}" type="text">
-                                                        <div class="help-block form-text with-errors form-control-feedback"></div>
-                                                    </div>
-                                                </div>
                                         @endforeach
+                                            <div class="col-sm-12">
+                                                <div class="form-group" id="shipping_by" data-value="{{$row->shipping_by}}">
+                                                    <label for=""> نوع الشحن</label>
+                                                    <input disabled name="shipping_by" class="form-control" value="{{$row->shipping_by}}" type="text">
+                                                    <div class="help-block form-text with-errors form-control-feedback"></div>
+                                                </div>
+                                            </div>
                                             @if(isset($selects))
                                                 @foreach($selects as $select)
                                                     @php($related_model=$select['name'])
