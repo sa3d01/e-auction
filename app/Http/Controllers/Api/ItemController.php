@@ -56,6 +56,9 @@ class ItemController extends MasterController
             $file=$request->images[0];
             $filename=null;
             if (is_file($file)) {
+                if ($file->getSize() > 1142575){
+                    return redirect()->back()->withErrors(['حجم الصورة كبير جدا..']);
+                }
                 $filename = Str::random(10) . '.' . $file->getClientOriginalExtension();
                 $file->move('media/images/item/', $filename);
                 $local_name=asset('media/images/item/').'/'.$filename;
