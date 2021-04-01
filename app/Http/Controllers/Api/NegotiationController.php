@@ -115,14 +115,16 @@ class NegotiationController extends MasterController
     public function sendOffer($item_id, Request $request):object
     {
         $sender = $request->user();
-        //todo : check purchasing_power
-        if ($sender->profileAndPurchasingPowerIsFilled()==false){
-            return $this->sendError(' يجب اكمال بيانات ملفك الشخصى أولا وشحن قوتك الشرائية');
-        }
-        if ($this->validate_purchasing_power($sender,$request['price'])!==true){
-            return $this->validate_purchasing_power($sender,$request['price']);
-        }
         $item = Item::find($item_id);
+        //todo : check purchasing_power
+        if($request->user() != $item->user_id){
+            if ($sender->profileAndPurchasingPowerIsFilled()==false){
+                return $this->sendError(' يجب اكمال بيانات ملفك الشخصى أولا وشحن قوتك الشرائية');
+            }
+            if ($this->validate_purchasing_power($sender,$request['price'])!==true){
+                return $this->validate_purchasing_power($sender,$request['price']);
+            }
+        }
         $auction_item = AuctionItem::where('item_id', $item_id)->latest()->first();
         $latest_user_offer=Offer::where(['auction_item_id'=>$auction_item->id,'sender_id'=>$sender->id])->latest()->first();
         if ($latest_user_offer){
