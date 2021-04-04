@@ -68,9 +68,8 @@ class Controller extends BaseController
 
     function addToCredit($auction_user){
         $auction_item=AuctionItem::where(['item_id'=>$auction_user->item_id,'auction_id'=>$auction_user->auction_id])->latest()->first();
-        $total_amount=$this->totalAmount($auction_item);
         $auction_user->item->user->update([
-            'credit'=>$auction_user->item->user->credit+$total_amount
+            'credit'=>$auction_user->item->user->credit+$auction_item->auction_price
         ]);
     }
 
