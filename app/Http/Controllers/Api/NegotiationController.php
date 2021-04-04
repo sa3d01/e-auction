@@ -26,17 +26,17 @@ class NegotiationController extends MasterController
     }
 
     function pay($user,$auction_item,$auction_user,$charge_price,$price,$pay_type){
-        if ($user->purchasing_power > $this->totalAmount($auction_item->item->price)){
+        if ($user->purchasing_power > $this->totalAmount($auction_item)){
             $auction_user->update([
                 'more_details'=>[
                     'status'=>'paid',
-                    'total_amount'=>$this->totalAmount($auction_item->auction_price),
-                    'paid'=>$this->totalAmount($auction_item->auction_price),
+                    'total_amount'=>$this->totalAmount($auction_item),
+                    'paid'=>$this->totalAmount($auction_item),
                     'remain'=>0
                 ]
             ]);
             $user->update([
-                'purchasing_power'=> $user->purchasing_power-$this->totalAmount($auction_item->auction_price)
+                'purchasing_power'=> $user->purchasing_power-$this->totalAmount($auction_item)
             ]);
             $data=[
                 'vip' => 'false',
@@ -54,14 +54,14 @@ class NegotiationController extends MasterController
             $auction_user->update([
                 'more_details'=>[
                     'status'=>'pending_for_transfer',
-                    'total_amount'=>$this->totalAmount($auction_item->auction_price),
-                    'remain'=>$this->totalAmount($auction_item->auction_price)-$user->purchasing_power,
+                    'total_amount'=>$this->totalAmount($auction_item),
+                    'remain'=>$this->totalAmount($auction_item)-$user->purchasing_power,
                     'paid'=>$user->purchasing_power,
                 ]
             ]);
             $user->update([
                 'purchasing_power'=> 0,
-//                'credit'=>$user->credit+($this->totalAmount($auction_item->auction_price)-$user->purchasing_power)
+//                'credit'=>$user->credit+($this->totalAmount($auction_item)-$user->purchasing_power)
             ]);
             $data=[
                 'vip' => 'false',

@@ -68,7 +68,7 @@ class Controller extends BaseController
 
     function addToCredit($auction_user){
         $auction_item=AuctionItem::where(['item_id'=>$auction_user->item_id,'auction_id'=>$auction_user->auction_id])->latest()->first();
-        $total_amount=$this->totalAmount($auction_item->auction_price);
+        $total_amount=$this->totalAmount($auction_item);
         $auction_user->item->user->update([
             'credit'=>$auction_user->item->user->credit+$total_amount
         ]);
@@ -144,9 +144,13 @@ class Controller extends BaseController
             }
         }
     }
-    function totalAmount($auction_price){
+    function totalAmount($auction_item){
         $setting=Setting::first();
-        return $auction_price+($auction_price*$setting->owner_tax_ratio/100)+($setting->tax_ratio)+($auction_price*$setting->app_ratio/100);
+        $auction_price=$auction_item->auction_price;
+        $auction_user=AuctionUser::where(['auction_id'=>$auction_item->auction_id,'item_id'=>$auction_item->item_id])->latest()->first();
+        $winner_finish_paper=$auction_user->finish_papers==1?$setting->finish_papers:0;
+        $owner_tax=$auction_item->item->tax=='true'?($auction_price*$setting->owner_tax_ratio/100):0;
+        return $auction_price+$owner_tax+($setting->tax_ratio)+($auction_price*$setting->app_ratio/100)+$winner_finish_paper;
     }
     function auction_item_update($auction_item,$status){
         if ($status=='expired' || $status=='paid'){
@@ -154,17 +158,17 @@ class Controller extends BaseController
                 $winner_id=AuctionUser::where(['auction_id'=>$auction_item->auction_id,'item_id'=>$auction_item->item_id])->latest()->value('user_id');
                 $winner=User::find($winner_id);
                 $where_store_amount=AuctionUser::where(['auction_id'=>$auction_item->auction_id,'item_id'=>$auction_item->item_id])->latest()->first();
-                if ($winner->purchasing_power > $this->totalAmount($auction_item->auction_price)){
+                if ($winner->purchasing_power > $this->totalAmount($auction_item)){
                     $where_store_amount->update([
                         'more_details'=>[
                             'status'=>'paid',
-                            'total_amount'=>$this->totalAmount($auction_item->auction_price),
-                            'paid'=>$this->totalAmount($auction_item->auction_price),
+                            'total_amount'=>$this->totalAmount($auction_item),
+                            'paid'=>$this->totalAmount($auction_item),
                             'remain'=>0
                         ]
                     ]);
                     $winner->update([
-                       'purchasing_power'=> $winner->purchasing_power-$this->totalAmount($auction_item->auction_price),
+                       'purchasing_power'=> $winner->purchasing_power-$this->totalAmount($auction_item),
                     ]);
                     $data=[
                         'vip' => 'false',
@@ -179,14 +183,14 @@ class Controller extends BaseController
                     $where_store_amount->update([
                         'more_details'=>[
                             'status'=>'pending_for_transfer',
-                            'total_amount'=>$this->totalAmount($auction_item->auction_price),
-                            'remain'=>$this->totalAmount($auction_item->auction_price)-$winner->purchasing_power,
+                            'total_amount'=>$this->totalAmount($auction_item),
+                            'remain'=>$this->totalAmount($auction_item)-$winner->purchasing_power,
                             'paid'=>$winner->purchasing_power
                        ]
                     ]);
                     $winner->update([
                         'purchasing_power'=> 0,
-//                        'credit'=>$winner->credit+($this->totalAmount($auction_item->auction_price)-$winner->purchasing_power)
+//                        'credit'=>$winner->credit+($this->totalAmount($auction_item)-$winner->purchasing_power)
                     ]);
                     $data=[
                         'vip' => 'false',

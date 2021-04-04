@@ -19,6 +19,7 @@ class CreateAuctionUsersTable extends Migration
             $table->foreignId('auction_id')->nullable();
             $table->integer('charge_price')->default(0);
             $table->foreignId('user_id')->nullable();
+            $table->boolean('finish_papers')->default(false);
             $table->json('more_details')->nullable();
             $table->timestamps();
         });
