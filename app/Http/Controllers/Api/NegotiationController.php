@@ -117,7 +117,7 @@ class NegotiationController extends MasterController
         $sender = $request->user();
         $item = Item::find($item_id);
         //todo : check purchasing_power
-        if($request->user() != $item->user_id){
+        if($request->user()->id != $item->user_id){
             if ($sender->profileAndPurchasingPowerIsFilled()==false){
                 return $this->sendError(' يجب اكمال بيانات ملفك الشخصى أولا وشحن قوتك الشرائية');
             }
