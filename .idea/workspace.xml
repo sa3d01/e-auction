@@ -19,8 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="dashboard">
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/NegotiationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/NegotiationController.php" afterDir="false" />
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="api">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/PackageSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/PackageSeeder.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -319,14 +321,8 @@
       <workItem from="1617134119995" duration="13454000" />
       <workItem from="1617228771847" duration="642000" />
       <workItem from="1617242719902" duration="1997000" />
-      <workItem from="1617267101772" duration="4612000" />
-    </task>
-    <task id="LOCAL-00330" summary="dashboard">
-      <created>1616714529728</created>
-      <option name="number" value="00330" />
-      <option name="presentableId" value="LOCAL-00330" />
-      <option name="project" value="LOCAL" />
-      <updated>1616714529728</updated>
+      <workItem from="1617267101772" duration="5249000" />
+      <workItem from="1617541088916" duration="1155000" />
     </task>
     <task id="LOCAL-00331" summary="dashboard">
       <created>1616714742868</created>
@@ -664,7 +660,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617274773630</updated>
     </task>
-    <option name="localTasksCounter" value="379" />
+    <task id="LOCAL-00379" summary="api">
+      <created>1617284321212</created>
+      <option name="number" value="00379" />
+      <option name="presentableId" value="LOCAL-00379" />
+      <option name="project" value="LOCAL" />
+      <updated>1617284321212</updated>
+    </task>
+    <option name="localTasksCounter" value="380" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -697,6 +700,7 @@
     <MESSAGE value="year-bid" />
     <MESSAGE value="delete transfers of deleted user" />
     <MESSAGE value="dashboard" />
-    <option name="LAST_COMMIT_MESSAGE" value="dashboard" />
+    <MESSAGE value="api" />
+    <option name="LAST_COMMIT_MESSAGE" value="api" />
   </component>
 </project>

@@ -44,6 +44,7 @@ class UserController extends MasterController
         $all['activation_code'] = $activation_code;
         if (!$user) {
             $all['wallet']=10000;
+            $all['package_id']=5;
             User::create($all);
         } else {
             $user->update($all);
@@ -92,7 +93,7 @@ class UserController extends MasterController
                 'username' => "966595073103",
                 'password' => "H123m456",
                 'numbers' => $normalizedPhone,
-                'sender' => "Active-code",
+                'sender' => "E-Auction",
                 'message' => $activation_code,
                 'send_sms' => true,
             ]

@@ -39,7 +39,7 @@ class AuctionController extends MasterController
     {
         $q_items=Item::query();
         $q_items=$q_items->where('pay_status',1);
-        $q_items=$q_items->whereHas('reports');
+//        $q_items=$q_items->whereHas('reports');
 //        $q_items=$q_items->where('auction_price', '!=', 'null');
         $q_items = $q_items->where(function($query) {
             $query->where('status','accepted')

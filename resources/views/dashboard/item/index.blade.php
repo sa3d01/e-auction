@@ -52,7 +52,7 @@
                                 @endif
                                 @if($status=='accepted')
                                     <th>السعر المطروح للمزايدة</th>
-                                    <th>تقارير الفحص</th>
+{{--                                    <th>تقارير الفحص</th>--}}
                                     <th>صور أخري للسلعة</th>
                                 @elseif($status=='shown')
                                     <th>VIP</th>
@@ -73,7 +73,7 @@
                                 @endif
                                 @if($status=='accepted')
                                     <th>السعر المطروح للمزايدة</th>
-                                    <th>تقارير الفحص</th>
+{{--                                    <th>تقارير الفحص</th>--}}
                                     <th>صور أخري للسلعة</th>
                                 @elseif($status=='shown')
                                     <th>VIP</th>
@@ -100,9 +100,9 @@
                                     @endif
                                     @if($status=='accepted')
                                         <td>{!! $row->auctionPriceLabel() !!}</td>
-                                        <td>
-                                            {!! $row->reportLabel() !!}
-                                        </td>
+{{--                                        <td>--}}
+{{--                                            {!! $row->reportLabel() !!}--}}
+{{--                                        </td>--}}
                                         <td>{!! $row->adminImagesLabel() !!}</td>
                                         <div class="modal fade" id="uploadImagesModal-{{$row->id}}" tabindex="-1" role="dialog" aria-labelledby="uploadImagesModal-{{$row->id}}" aria-hidden="true">
                                             <div class="modal-dialog" role="document">

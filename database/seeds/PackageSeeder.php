@@ -39,5 +39,20 @@ class PackageSeeder extends Seeder
             'purchasing_power_increase'=>1000,
             'paid_files_count'=>3,
         ]);
+        \App\Package::create([
+            'name->ar'=>'E-Auction',
+            'name->en'=>'E-Auction',
+            'note->ar'=>[
+                'السماح بالمزايدة ',
+                'السماح بالحصول على ملفات فحص '
+            ],
+            'note->en'=>[
+                'السماح بالمزايدة ',
+                'السماح بالحصول على ملفات فحص '
+            ],
+            'price'=>0,
+            'purchasing_power_increase'=>0,
+            'paid_files_count'=>0,
+        ]);
     }
 }
