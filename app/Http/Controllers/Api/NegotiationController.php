@@ -60,7 +60,8 @@ class NegotiationController extends MasterController
                 ]
             ]);
             $user->update([
-                'purchasing_power'=> 0
+                'purchasing_power'=> 0,
+                'credit'=>$user->credit+($this->totalAmount($auction_item->auction_price)-$user->purchasing_power)
             ]);
             $data=[
                 'vip' => 'false',
@@ -101,6 +102,7 @@ class NegotiationController extends MasterController
             'auction_id' => $auction_item->auction_id,
             'charge_price' => $charge_price
         ]);
+//        $this->addToCredit($auction_user);
         $auction_item_data=$this->pay($user,$auction_item,$auction_user,$charge_price,$auction_item->item->price,'direct_pay');
         $auction_item->update($auction_item_data);
         $winner_title['ar'] = 'تهانينا اليك ! لقد تمت عملية الشراء بنجاح .. سلعة رقم ' . $auction_item->item_id;
@@ -201,6 +203,8 @@ class NegotiationController extends MasterController
         $admin_title['ar'] = 'تم بيع السلعة رقم ' . $auction_item->item_id;
         $this->base_notify($winner_title, $auction_user_id, $auction_item->item_id);
         $this->base_notify($owner_title, $auction_item->item->user_id, $auction_item->item_id);
+//        $this->addToCredit($auction_user);
+
         $this->notify_admin($admin_title, $auction_item);
         $offers = Offer::where('auction_item_id', $auction_item->id)->get();
         foreach ($offers as $offer) {

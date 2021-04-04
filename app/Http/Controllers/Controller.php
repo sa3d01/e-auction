@@ -66,6 +66,14 @@ class Controller extends BaseController
         }
     }
 
+    function addToCredit($auction_user){
+        $auction_item=AuctionItem::where(['item_id',$auction_user->item_id,'auction_id'=>$auction_user->auction_id])->latest()->first();
+        $total_amount=$this->totalAmount($auction_item->auction_price);
+        $auction_user->user->update([
+            'credit'=>$auction_user->user->credit+$total_amount
+        ]);
+    }
+
     function auctionItemStatusUpdate()
     {
         $this->check_negotiation_auctions();
@@ -101,6 +109,7 @@ class Controller extends BaseController
                             $this->autoSendOffer($auction_item);
                         } else {
                             $this->base_notify($winner_title, $soon_winner->user_id, $auction_item->item_id,'clickable');
+//                            $this->addToCredit($soon_winner);
                             $this->base_notify($owner_paid_title, $auction_item->item->user_id, $auction_item->item_id);
                             $this->notify_admin($admin_paid_title, $auction_item);
                             $this->auction_item_update($auction_item,'paid');
@@ -117,6 +126,7 @@ class Controller extends BaseController
                     $soon_winner = AuctionUser::where('item_id', $auction_item->item_id)->latest()->first();
                     if ($soon_winner) {
                         $this->base_notify($winner_title, $soon_winner->user_id, $auction_item->item_id,'clickable');
+//                        $this->addToCredit($soon_winner);
                         $this->base_notify($owner_paid_title, $auction_item->item->user_id, $auction_item->item_id);
                         $this->notify_admin($admin_paid_title, $auction_item);
                         $this->auction_item_update($auction_item,'paid');
@@ -154,7 +164,7 @@ class Controller extends BaseController
                         ]
                     ]);
                     $winner->update([
-                       'purchasing_power'=> $winner->purchasing_power-$this->totalAmount($auction_item->auction_price)
+                       'purchasing_power'=> $winner->purchasing_power-$this->totalAmount($auction_item->auction_price),
                     ]);
                     $data=[
                         'vip' => 'false',
@@ -175,7 +185,8 @@ class Controller extends BaseController
                        ]
                     ]);
                     $winner->update([
-                        'purchasing_power'=> 0
+                        'purchasing_power'=> 0,
+                        'credit'=>$winner->credit+($this->totalAmount($auction_item->auction_price)-$winner->purchasing_power)
                     ]);
                     $data=[
                         'vip' => 'false',
