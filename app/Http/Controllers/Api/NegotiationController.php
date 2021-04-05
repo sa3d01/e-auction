@@ -294,7 +294,7 @@ class NegotiationController extends MasterController
         foreach ($offers as $offer) {
             $q_pre_offer=Offer::query();
             $q_pre_offer=$q_pre_offer->where('auction_item_id',$offer->auction_item_id);
-            $q_pre_offer=$q_pre_offer->where('status','!=','pending');
+//            $q_pre_offer=$q_pre_offer->where('status','!=','pending');
             if (\request()->user()->id != $auction_item->item->user_id) {
                 $q_pre_offer = $q_pre_offer->where(function($query) {
                     $query->where('receiver_id',\request()->user()->id)
