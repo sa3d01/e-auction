@@ -293,16 +293,18 @@ class NegotiationController extends MasterController
         $data = [];
         foreach ($offers as $offer) {
             $q_pre_offer=Offer::query();
-//            $q_pre_offer=$q_pre_offer->where('auction_item_id',$offer->auction_item_id);
-//            $q_pre_offer=$q_pre_offer->where('status','!=','pending');
+            $q_pre_offer=$q_pre_offer->where('auction_item_id',$offer->auction_item_id);
+            $q_pre_offer=$q_pre_offer->where('status','!=','pending');
             if (\request()->user()->id != $auction_item->item->user_id) {
-                $q_pre_offer = $q_pre_offer->where(function($query,$offer) {
-                    $query->where(['receiver_id'=>\request()->user()->id,'sender_id'=>$offer->sender_id,'auction_item_id'=>$offer->auction_item_id,'status'=>['!=','pending']])
-                        ->orWhere(['sender_id'=>\request()->user()->id,'receiver_id'=>$offer->receiver_id,'auction_item_id'=>$offer->auction_item_id,'status'=>['!=','pending']]);
+                $q_pre_offer = $q_pre_offer->where(function($query) {
+                    $query->where('receiver_id',\request()->user()->id)
+                        ->orWhere('sender_id',\request()->user()->id);
                 });
             }else{
-                $q_pre_offer=$q_pre_offer->where('auction_item_id',$offer->auction_item_id);
-                $q_pre_offer=$q_pre_offer->where('status','!=','pending');
+                $q_pre_offer = $q_pre_offer->where(function($query,$offer) {
+                    $query->where(['receiver_id'=>\request()->user()->id,'sender_id'=>$offer->sender_id])
+                        ->orWhere(['sender_id'=>\request()->user()->id,'receiver_id'=>$offer->receiver_id]);
+                });
             }
             $pre_offer=$q_pre_offer->latest()->first();
             if ($pre_offer){
