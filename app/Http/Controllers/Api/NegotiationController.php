@@ -98,7 +98,7 @@ class NegotiationController extends MasterController
             return $this->validate_purchasing_power($user,$auction_item->item->price);
         }
         $auction_user=AuctionUser::create([
-            'finish_papers'=>$request['finish_papers'],
+            'finish_papers'=>$request->input('finish_papers',0),
             'user_id' => $user->id,
             'item_id' => $item_id,
             'auction_id' => $auction_item->auction_id,
@@ -193,7 +193,7 @@ class NegotiationController extends MasterController
             $auction_user_id=$offer->sender_id;
         }
         $auction_user=AuctionUser::create([
-            'finish_papers'=>$request['finish_papers'],
+            'finish_papers'=>$request->input('finish_papers',0),
             'user_id' => $auction_user_id,
             'item_id' => $item_id,
             'auction_id' => $auction_item->auction_id,

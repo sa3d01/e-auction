@@ -73,7 +73,7 @@ class BidController extends MasterController
             return $this->validate_purchasing_power($user,$auction_item->price+$request['charge_price']);
         }
         AuctionUser::create([
-           'finish_papers'=>$request['finish_papers'],
+            'finish_papers'=>$request->input('finish_papers',0),
            'user_id'=>$user->id,
            'item_id'=>$item_id,
            'auction_id'=>$auction_item->auction_id,

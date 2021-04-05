@@ -20,9 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="total_amount">
+      <change afterPath="$PROJECT_DIR$/public/media/images/item/zqldlZGRby.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/user/UX0HlLb2Pi.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/user/WAp3QSQf8b.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/user/eHmI1ZdJLY.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/user/fT482qfAlA.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/user/wImJzUewzG.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/media/images/user/wZOfcaM9xl.jpeg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/BidController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/BidController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/NegotiationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/NegotiationController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -323,21 +328,7 @@
       <workItem from="1617242719902" duration="1997000" />
       <workItem from="1617267101772" duration="5249000" />
       <workItem from="1617541088916" duration="12457000" />
-      <workItem from="1617629063854" duration="544000" />
-    </task>
-    <task id="LOCAL-00340" summary="dashboard">
-      <created>1616726397483</created>
-      <option name="number" value="00340" />
-      <option name="presentableId" value="LOCAL-00340" />
-      <option name="project" value="LOCAL" />
-      <updated>1616726397483</updated>
-    </task>
-    <task id="LOCAL-00341" summary="dashboard">
-      <created>1616726630868</created>
-      <option name="number" value="00341" />
-      <option name="presentableId" value="LOCAL-00341" />
-      <option name="project" value="LOCAL" />
-      <updated>1616726630868</updated>
+      <workItem from="1617629063854" duration="3764000" />
     </task>
     <task id="LOCAL-00342" summary="dashboard">
       <created>1616728959610</created>
@@ -668,7 +659,21 @@
       <option name="project" value="LOCAL" />
       <updated>1617555030162</updated>
     </task>
-    <option name="localTasksCounter" value="389" />
+    <task id="LOCAL-00389" summary="total_amount">
+      <created>1617629618599</created>
+      <option name="number" value="00389" />
+      <option name="presentableId" value="LOCAL-00389" />
+      <option name="project" value="LOCAL" />
+      <updated>1617629618599</updated>
+    </task>
+    <task id="LOCAL-00390" summary="total_amount">
+      <created>1617629885995</created>
+      <option name="number" value="00390" />
+      <option name="presentableId" value="LOCAL-00390" />
+      <option name="project" value="LOCAL" />
+      <updated>1617629885995</updated>
+    </task>
+    <option name="localTasksCounter" value="391" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
