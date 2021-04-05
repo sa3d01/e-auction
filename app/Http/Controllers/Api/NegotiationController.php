@@ -311,9 +311,14 @@ class NegotiationController extends MasterController
             }
             $arr['id'] = $offer->id;
             $arr['price'] = $offer->price;
-            $arr['user_id'] = $offer->sender_id;
-            $arr['user_name'] = $offer->sender->name;
-            $arr['user_image'] = $offer->sender->image;
+            if ($offer->sender_id==\request()->user()->id){
+                $user_offer=User::find($offer->receiver_id);
+            }else{
+                $user_offer=User::find($offer->sender_id);
+            }
+            $arr['user_id'] = $user_offer->id;
+            $arr['user_name'] = $user_offer->name;
+            $arr['user_image'] = $user_offer->image;
             $arr['item'] = new ItemResource(Item::find($item_id));
             if ($offer->sender_id==\request()->user()->id && $offer->status=='pending'){
                 $arr['replied']=false;
