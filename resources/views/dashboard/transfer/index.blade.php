@@ -71,7 +71,7 @@
                                     <td>
                                         {!!$row->getStatusIcon()!!}
                                     </td>
-                                    @if($type=='transfer')
+                                    @if($type=='transfer' && $row->more_details['item_id']!=null)
                                         <td>
                                             <a href="{{route('admin.item.show',$row->more_details['item_id'])}}"> {{$row->more_details['item_id']}}</a>
                                         </td>

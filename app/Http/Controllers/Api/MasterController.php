@@ -25,7 +25,7 @@ class MasterController extends Controller
             'status' => 200,
             'data' => $result,
         ];
-        return response()->json($response, 200);
+        return response()->json($response);
     }
 
     public function sendError($error, $code = 400)
@@ -34,7 +34,7 @@ class MasterController extends Controller
             'status' => $code,
             'message' => $error,
         ];
-        return response()->json($response, 200);
+        return response()->json($response);
     }
 
     public function store(Request $request){
