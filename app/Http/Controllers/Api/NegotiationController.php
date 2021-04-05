@@ -220,24 +220,35 @@ class NegotiationController extends MasterController
         $user = $request->user();
         $auction_item = AuctionItem::where('item_id', $item_id)->latest()->first();
         $item = Item::find($item_id);
-        if (($user->id == $item->user_id) && ($auction_item->more_details['status'] == 'negotiation')) {
+//        $senario=[
+//            'soon'=>[
+//                'owner'=>'المفاوضه تختفى من عند الاتنين بس',
+//                'user'=>'رجع للسعر اللى قبله',
+//            ],
+//            'negotioation'=>[
+//                'owner'=>'اعادة تهيئة',
+//                'user'=>'السعر اللى قبله',
+//            ]
+//        ];
+////
+       if (($user->id == $item->user_id) && ($auction_item->more_details['status'] == 'negotiation')) {
             $item->update([
                 'status' => 'accepted',
                 'reason' => 'resale'
             ]);
-            $auction_item->delete();
-            $notifications = Notification::where('item_id', $item_id)->get();
-            foreach ($notifications as $notification) {
-                $notification->delete();
-            }
-        } else {
-            $opposite_offer = Offer::where(['auction_item_id'=> $auction_item->id,'sender_id'=>$user->id,'receiver_id'=>$refused_offer->sender_id])->where('status', 'opposite')->latest()->first();
-            if ($opposite_offer) {
-                $opposite_offer->update([
-                    'status' => 'pending'
-                ]);
-            }
-        }
+//            $auction_item->delete();
+//            $notifications = Notification::where('item_id', $item_id)->get();
+//            foreach ($notifications as $notification) {
+//                $notification->delete();
+//            }
+       }elseif($user->id != $item->user_id) {
+           $opposite_offer = Offer::where(['auction_item_id'=> $auction_item->id,'sender_id'=>$user->id,'receiver_id'=>$refused_offer->sender_id])->where('status', 'opposite')->latest()->first();
+           if ($opposite_offer) {
+               $opposite_offer->update([
+                   'status' => 'pending'
+               ]);
+           }
+       }
         $refused_offer->update([
             'status' => 'rejected'
         ]);
@@ -295,27 +306,7 @@ class NegotiationController extends MasterController
             $q_pre_offer=Offer::query();
             $q_pre_offer=$q_pre_offer->where('auction_item_id',$offer->auction_item_id);
             $q_pre_offer=$q_pre_offer->where('status','!=','pending');
-//            if (\request()->user()->id != $auction_item->item->user_id) {
-//                $q_pre_offer = $q_pre_offer->where(function($query) {
-//                    $query->where('receiver_id',\request()->user()->id)
-//                        ->orWhere('sender_id',\request()->user()->id);
-//                });
-//            }else{
-//                $q_pre_offer = $q_pre_offer->where(function($query) use ($offer) {
-//                    $query->where(['receiver_id'=>\request()->user()->id,'sender_id'=>$offer->receiver_id])
-//                        ->orWhere(['sender_id'=>\request()->user()->id,'receiver_id'=>$offer->sender_id]);
-//                });
-//            }
-//                $q_pre_offer = $q_pre_offer->where(function($query) use ($offer) {
-//                    $query->where(['receiver_id'=>\request()->user()->id,'sender_id'=>$offer->receiver_id])
-//                        ->orWhere(['sender_id'=>\request()->user()->id,'receiver_id'=>$offer->sender_id]);
-//                });
-
-
             $q_pre_offer=$q_pre_offer->where(['sender_id'=>$offer->receiver_id,'receiver_id'=>$offer->sender_id]);
-
-
-
             $pre_offer=$q_pre_offer->latest()->first();
             if ($pre_offer){
                 $arr['pre_price'] = $pre_offer->price;
