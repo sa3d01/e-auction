@@ -44,4 +44,7 @@ class DropDown extends Model
     public function parent(){
         return $this->belongsTo(DropDown::class,'parent_id','id');
     }
+    public function childs(){
+        return $this->hasMany(DropDown::class,'parent_id','id');
+    }
 }

@@ -20,7 +20,7 @@ class DropDownController extends MasterController
     }
 
     public function marks(){
-        return $this->sendResponse(new DropDownCollection($this->model->whereClass('Mark')->get()));
+        return $this->sendResponse(new DropDownCollection($this->model->whereClass('Mark')->whereHas('childs')->get()));
     }
 
     public function models($parent_id){
