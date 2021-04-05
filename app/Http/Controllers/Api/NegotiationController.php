@@ -306,10 +306,19 @@ class NegotiationController extends MasterController
 //                        ->orWhere(['sender_id'=>\request()->user()->id,'receiver_id'=>$offer->sender_id]);
 //                });
 //            }
-                $q_pre_offer = $q_pre_offer->where(function($query) use ($offer) {
-                    $query->where(['receiver_id'=>\request()->user()->id,'sender_id'=>$offer->receiver_id])
-                        ->orWhere(['sender_id'=>\request()->user()->id,'receiver_id'=>$offer->sender_id]);
-                });
+//                $q_pre_offer = $q_pre_offer->where(function($query) use ($offer) {
+//                    $query->where(['receiver_id'=>\request()->user()->id,'sender_id'=>$offer->receiver_id])
+//                        ->orWhere(['sender_id'=>\request()->user()->id,'receiver_id'=>$offer->sender_id]);
+//                });
+
+
+            if ($offer->sender_id==\request()->user()->id && $offer->status=='pending'){
+                $q_pre_offer=$q_pre_offer->where(['sender_id'=>\request()->user()->id,'receiver_id'=>$offer->receiver_id]);
+            }else{
+                $q_pre_offer=$q_pre_offer->where(['sender_id'=>$offer->sender_id,'receiver_id'=>\request()->user()->id]);
+            }
+
+
             $pre_offer=$q_pre_offer->latest()->first();
             if ($pre_offer){
                 $arr['pre_price'] = $pre_offer->price;
