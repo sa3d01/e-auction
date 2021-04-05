@@ -313,9 +313,9 @@ class NegotiationController extends MasterController
 
 
             if ($offer->sender_id==\request()->user()->id && $offer->status=='pending'){
-                $q_pre_offer=$q_pre_offer->where(['sender_id'=>\request()->user()->id,'receiver_id'=>$offer->receiver_id]);
+                $q_pre_offer=$q_pre_offer->where(['sender_id'=>\request()->user()->id,'receiver_id'=>$offer->sender_id]);
             }else{
-                $q_pre_offer=$q_pre_offer->where(['sender_id'=>$offer->sender_id,'receiver_id'=>\request()->user()->id]);
+                $q_pre_offer=$q_pre_offer->where(['sender_id'=>$offer->receiver_id,'receiver_id'=>\request()->user()->id]);
             }
 
 
