@@ -297,8 +297,8 @@ class NegotiationController extends MasterController
             $q_pre_offer=$q_pre_offer->where('status','!=','pending');
             if (\request()->user()->id != $auction_item->item->user_id) {
                 $q_pre_offer = $q_pre_offer->where(function($query,$offer) {
-                    $query->where(['receiver_id'=>\request()->user()->id,'sender_id'=>$offer->receiver_id])
-                        ->orWhere(['sender_id'=>\request()->user()->id,'receiver_id'=>$offer->sender_id]);
+                    $query->where(['receiver_id'=>\request()->user()->id,'sender_id'=>$offer->sender_id])
+                        ->orWhere(['sender_id'=>\request()->user()->id,'receiver_id'=>$offer->receiver_id]);
                 });
             }
             $pre_offer=$q_pre_offer->latest()->first();
