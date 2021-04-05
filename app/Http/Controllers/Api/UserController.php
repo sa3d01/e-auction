@@ -43,7 +43,7 @@ class UserController extends MasterController
             $user = User::where('phone', $request['phone'])->first();
         }
         if (!$user)
-            return $this->sendError('تأكد من صحة البيانات');
+            return $this->sendError('البريد الالكترونى أو رقم الهاتف مسجل من قبل');
         $all = $request->all();
         $all['activation_code'] = $activation_code;
         if (!$user) {
