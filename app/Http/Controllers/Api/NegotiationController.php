@@ -367,7 +367,10 @@ class NegotiationController extends MasterController
                 ->orWhere('sender_id',\request()->user()->id);
         });
         $my_negotiations_auction_items = $q_offers->pluck('auction_item_id');
-        $item_ids=AuctionItem::whereIn('id',$my_negotiations_auction_items)->where('more_details->status','negotiation')->pluck('item_id');
+        $item_ids_q=AuctionItem::whereIn('id',$my_negotiations_auction_items);
+        $item_ids_q=$item_ids_q->where('more_details->status','negotiation');
+        $item_ids_q=$item_ids_q->where('more_details->status','soon');
+        $item_ids=$item_ids_q->pluck('item_id');
         return $this->sendResponse(new ItemCollection(Item::whereIn('id',$item_ids)->latest()->get()));
     }
 
