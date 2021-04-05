@@ -16,9 +16,6 @@ use Edujugon\PushNotification\PushNotification;
 use Illuminate\Http\Request;
 use phpDocumentor\Reflection\Types\Object_;
 
-use Morrislaptop\Firestore\Factory;
-use Kreait\Firebase\ServiceAccount;
-
 class BidController extends MasterController
 {
     protected $model;
@@ -76,6 +73,7 @@ class BidController extends MasterController
             return $this->validate_purchasing_power($user,$auction_item->price+$request['charge_price']);
         }
         AuctionUser::create([
+           'finish_papers'=>$request['finish_papers'],
            'user_id'=>$user->id,
            'item_id'=>$item_id,
            'auction_id'=>$auction_item->auction_id,
