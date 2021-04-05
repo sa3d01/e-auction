@@ -37,7 +37,7 @@ class NegotiationController extends MasterController
                 ]
             ]);
             $winner->update([
-                'purchasing_power'=> $winner->purchasing_power-$this->totalAmount($auction_item)
+                'purchasing_power'=> ((integer)$winner->purchasing_power)-$this->totalAmount($auction_item)
             ]);
             $data=[
                 'vip' => 'false',
@@ -56,13 +56,12 @@ class NegotiationController extends MasterController
                 'more_details'=>[
                     'status'=>'pending_for_transfer',
                     'total_amount'=>$this->totalAmount($auction_item),
-                    'remain'=>$this->totalAmount($auction_item)-$user->purchasing_power,
+                    'remain'=>$this->totalAmount($auction_item)-((integer)$user->purchasing_power),
                     'paid'=>$winner->purchasing_power,
                 ]
             ]);
             $user->update([
                 'purchasing_power'=> 0,
-//                'credit'=>$user->credit+($this->totalAmount($auction_item)-$user->purchasing_power)
             ]);
             $data=[
                 'vip' => 'false',

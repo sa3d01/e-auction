@@ -68,8 +68,9 @@ class Controller extends BaseController
 
     function addToCredit($auction_user){
         $auction_item=AuctionItem::where(['item_id'=>$auction_user->item_id,'auction_id'=>$auction_user->auction_id])->latest()->first();
+        $latest_credit=$auction_user->item->user->credit;
         $auction_user->item->user->update([
-            'credit'=>$auction_user->item->user->credit+$auction_item->auction_price
+            'credit'=>(integer)($latest_credit+$auction_item->auction_price)
         ]);
     }
 
@@ -149,7 +150,7 @@ class Controller extends BaseController
         $auction_user=AuctionUser::where(['auction_id'=>$auction_item->auction_id,'item_id'=>$auction_item->item_id])->latest()->first();
         $winner_finish_paper=$auction_user->finish_papers==1?$setting->finish_papers:0;
         $owner_tax=$auction_item->item->tax=='true'?($auction_price*$setting->owner_tax_ratio/100):0;
-        return $auction_price+$owner_tax+($setting->tax_ratio)+($auction_price*$setting->app_ratio/100)+$winner_finish_paper;
+        return (integer)$auction_price+$owner_tax+($setting->tax_ratio)+($auction_price*$setting->app_ratio/100)+$winner_finish_paper;
     }
     function auction_item_update($auction_item,$status){
         if ($status=='expired' || $status=='paid'){
