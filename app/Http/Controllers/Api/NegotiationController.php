@@ -120,7 +120,6 @@ class NegotiationController extends MasterController
     {
         $sender = $request->user();
         $item = Item::find($item_id);
-        //todo : check purchasing_power
         if($request->user()->id != $item->user_id){
             if ($sender->profileAndPurchasingPowerIsFilled()==false){
                 return $this->sendError(' يجب اكمال بيانات ملفك الشخصى أولا وشحن قوتك الشرائية');
@@ -369,7 +368,7 @@ class NegotiationController extends MasterController
                 ->orWhere('sender_id',\request()->user()->id);
         });
         $my_negotiations_auction_items = $q_offers->pluck('auction_item_id');
-        $item_ids=AuctionItem::whereIn('id',$my_negotiations_auction_items)->pluck('item_id');
+        $item_ids=AuctionItem::whereIn('id',$my_negotiations_auction_items)->where('more_details->status','negotiation')->pluck('item_id');
         return $this->sendResponse(new ItemCollection(Item::whereIn('id',$item_ids)->latest()->get()));
     }
 
