@@ -301,10 +301,7 @@ class NegotiationController extends MasterController
                         ->orWhere('sender_id',\request()->user()->id);
                 });
             }else{
-                $q_pre_offer = $q_pre_offer->where(function($offer,$query) {
-                    $query->where(['receiver_id'=>\request()->user()->id,'sender_id'=>$offer->sender_id])
-                        ->orWhere(['sender_id'=>\request()->user()->id,'receiver_id'=>$offer->receiver_id]);
-                });
+                $q_pre_offer=$q_pre_offer->where(['receiver_id'=>\request()->user()->id,'sender_id'=>$offer->sender_id])->orWhere(['sender_id'=>\request()->user()->id,'receiver_id'=>$offer->receiver_id]);
             }
             $pre_offer=$q_pre_offer->latest()->first();
             if ($pre_offer){
