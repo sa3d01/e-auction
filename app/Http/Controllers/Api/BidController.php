@@ -74,10 +74,10 @@ class BidController extends MasterController
         }
         AuctionUser::create([
             'finish_papers'=>$request->input('finish_papers',0),
-           'user_id'=>$user->id,
-           'item_id'=>$item_id,
-           'auction_id'=>$auction_item->auction_id,
-           'charge_price'=>$request['charge_price']
+            'user_id'=>$user->id,
+            'item_id'=>$item_id,
+            'auction_id'=>$auction_item->auction_id,
+            'charge_price'=>$request['charge_price']
         ]);
         $auction_item->update([
             'price'=>$auction_item->price+$request['charge_price'],

@@ -54,11 +54,11 @@ class TransferController extends MasterController
         );
         $auction_item=AuctionItem::where('item_id',$row->more_details['item_id'])->latest()->first();
         $auction_item->update(
-          [
-              'more_details'=>[
-                  'status'=>'delivered'
-              ]
-          ]
+            [
+                'more_details'=>[
+                    'status'=>'delivered'
+                ]
+            ]
         );
         $user=User::find($row->user_id);
         $note['ar'] = 'تم الموافقة على تحويلك البنكى بنجاح :)';

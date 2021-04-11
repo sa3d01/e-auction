@@ -231,7 +231,7 @@ class NegotiationController extends MasterController
 //            ]
 //        ];
 ////
-       if (($user->id == $item->user_id) && ($auction_item->more_details['status'] == 'negotiation')) {
+        if (($user->id == $item->user_id) && ($auction_item->more_details['status'] == 'negotiation')) {
             $item->update([
                 'status' => 'accepted',
                 'reason' => 'resale'
@@ -241,14 +241,14 @@ class NegotiationController extends MasterController
 //            foreach ($notifications as $notification) {
 //                $notification->delete();
 //            }
-       }elseif($user->id != $item->user_id) {
-           $opposite_offer = Offer::where(['auction_item_id'=> $auction_item->id,'sender_id'=>$user->id,'receiver_id'=>$refused_offer->sender_id])->where('status', 'opposite')->latest()->first();
-           if ($opposite_offer) {
-               $opposite_offer->update([
-                   'status' => 'pending'
-               ]);
-           }
-       }
+        }elseif($user->id != $item->user_id) {
+            $opposite_offer = Offer::where(['auction_item_id'=> $auction_item->id,'sender_id'=>$user->id,'receiver_id'=>$refused_offer->sender_id])->where('status', 'opposite')->latest()->first();
+            if ($opposite_offer) {
+                $opposite_offer->update([
+                    'status' => 'pending'
+                ]);
+            }
+        }
         $refused_offer->update([
             'status' => 'rejected'
         ]);

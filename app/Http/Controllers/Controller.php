@@ -168,7 +168,7 @@ class Controller extends BaseController
                         ]
                     ]);
                     $winner->update([
-                       'purchasing_power'=> $winner->purchasing_power-$this->totalAmount($auction_item),
+                        'purchasing_power'=> $winner->purchasing_power-$this->totalAmount($auction_item),
                     ]);
                     $data=[
                         'vip' => 'false',
@@ -186,7 +186,7 @@ class Controller extends BaseController
                             'total_amount'=>$this->totalAmount($auction_item),
                             'remain'=>$this->totalAmount($auction_item)-$winner->purchasing_power,
                             'paid'=>$winner->purchasing_power
-                       ]
+                        ]
                     ]);
                     $winner->update([
                         'purchasing_power'=> 0,

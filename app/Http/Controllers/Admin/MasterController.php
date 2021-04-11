@@ -114,7 +114,8 @@ abstract class MasterController extends Controller
 
     public function destroy($id)
     {
-        $this->model->find($id)->delete();
+        $model=$this->model->findOrFail($id);
+        $model->delete();
         return redirect()->back()->with('deleted', 'تم الحذف بنجاح');
     }
 

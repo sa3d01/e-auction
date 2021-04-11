@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Favourite;
 use App\Item;
 use App\Notification;
-use App\Setting;
 use App\Transfer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -25,7 +24,7 @@ class ItemController extends MasterController
         $validate = Validator::make($request->all(),
             [
                 'images' => 'required',
-                 'images.*' => 'image|mimes:jpeg,jpg,png,jpg,gif,svg'
+                'images.*' => 'image|mimes:jpeg,jpg,png,jpg,gif,svg'
             ]
         );
         if ($validate->fails()) {

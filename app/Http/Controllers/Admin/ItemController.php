@@ -51,6 +51,9 @@ class ItemController extends MasterController
     public function store(Request $request)
     {
         $data=$request->all();
+        if($request['model_id']==null){
+            return redirect()->back()->withErrors(['تأكد من اختيار موديل المركبة..']);
+        }
         $items_images=[];
         if ($request->images){
             foreach ($request->images as $image){
