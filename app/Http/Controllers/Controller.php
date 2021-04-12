@@ -286,23 +286,28 @@ class Controller extends BaseController
             'win'=>$win!=null
         ];
         Notification::create($data);
-        $push = new PushNotification('fcm');
-        $msg = [
-            'notification' => array('title' => $title['ar'], 'sound' => 'default'),
-            'data' => [
-                'title' => $title['ar'],
-                'body' => $title['ar'],
-                'status' => 'paid',
-                'type' => 'win',
-                'item' => new ItemResource(Item::find($item_id)),
-                'win'=> $win!=null
-            ],
-            'priority' => 'high',
-        ];
-        $receiver = User::find($receiver_id);
-        $push->setMessage($msg)
-            ->setDevicesToken($receiver->device['id'])
-            ->send();
+        try {
+            $push = new PushNotification('fcm');
+            $msg = [
+                'notification' => array('title' => $title['ar'], 'sound' => 'default'),
+                'data' => [
+                    'title' => $title['ar'],
+                    'body' => $title['ar'],
+                    'status' => 'paid',
+                    'type' => 'win',
+                    'item' => new ItemResource(Item::find($item_id)),
+                    'win'=> $win!=null
+                ],
+                'priority' => 'high',
+            ];
+            $receiver = User::find($receiver_id);
+            $push->setMessage($msg)
+                ->setDevicesToken($receiver->device['id'])
+                ->send();
+        }catch (\Exception $e){
+
+        }
+
     }
 
     function notify_admin($title, $auction_item)
