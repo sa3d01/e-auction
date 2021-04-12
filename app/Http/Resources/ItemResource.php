@@ -71,8 +71,8 @@ class ItemResource extends JsonResource
         return [
             'id'=> (int) $this->id,
             'images'=> $this->images,
-            'start_date'=> $auction_item?$auction_item->start_date:123,
-            'start_date_text'=> Carbon::createFromTimestamp($auction_item?$auction_item->start_date:123),
+            'start_date'=> $auction_item?$auction_item->auction->start_date:123,
+            'start_date_text'=> Carbon::createFromTimestamp($auction_item?$auction_item->auction->start_date:123),
             'auction_duration'=>$auction_item?$auction_item->auction->duration:0,
             'item_status'=> $this->item_status->name[$this->lang()],
             'auction_price'=> $auction_item?$auction_item->price:($this->price??0),
