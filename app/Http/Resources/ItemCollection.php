@@ -32,7 +32,14 @@ class ItemCollection extends ResourceCollection
             if ($obj->user->status===0){
                 continue;
             }
-            $auction_item=AuctionItem::where('item_id',$obj->id)->latest()->first();
+            $auction_item=AuctionItem::where('item_id',$obj->id);
+            $auction=Auction::whereJsonContains('items',$obj->id)->where('more_details->end_date','<',Carbon::now()->timestamp)->latest()->first();
+            if ($auction){
+                $auction_item=$auction_item->where('auction_id',$auction->id)->latest()->first();
+            }else{
+                $auction_item=$auction_item->latest()->first();
+            }
+
             $my_item=false;
             $win=false;
             $is_favourite=false;

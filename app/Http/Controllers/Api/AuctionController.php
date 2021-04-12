@@ -27,7 +27,7 @@ class AuctionController extends MasterController
     public function index(){
         $vip_items=AuctionItem::where('vip','true')->pluck('item_id');
         $data['vip']=new ItemCollection(Item::whereIn('id',$vip_items)->latest()->get());
-        $data['data']=new ItemCollection(Item::where('status','shown')->orWhere('status','sold')->latest()->get()->unique('item_id'));
+        $data['data']=new ItemCollection(Item::where('status','shown')->orWhere('status','sold')->latest()->get());
         return $this->sendResponse($data);
     }
     public function auctions(){

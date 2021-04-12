@@ -28,7 +28,6 @@ class BidController extends MasterController
     }
 
     public function liveItem():object{
-//        $auction_items=AuctionItem::where('more_details->status','live')->latest()->get();
         $auction_items=AuctionItem::where('more_details->status','!=','paid')->where('more_details->status','!=','expired')->where('more_details->status','!=','negotiation')->where('more_details->status','!=','delivered')->latest()->get();
         foreach ($auction_items as $soon_item){
             $end_auction=Carbon::createFromTimestamp($soon_item->start_date)->addSeconds($soon_item->auction->duration);
