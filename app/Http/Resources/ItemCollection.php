@@ -46,6 +46,7 @@ class ItemCollection extends ResourceCollection
                 }
             }
             $arr['status_text']='';
+            $arr['bid_count']=0;
             if ($auction_item){
                 if (\request()->user()){
                     $features=$auction_item->auctionTypeFeatures(auth()->user()->id);
@@ -83,6 +84,7 @@ class ItemCollection extends ResourceCollection
                 $arr['start_string_date']=Carbon::createFromTimestamp($auction_item->auction->start_date)->format('Y-m-d h:i:s A');
                 $arr['auction_duration']=$auction_item->auction->duration;
                 $arr['auction_price']=$auction_item->price;
+                $arr['bid_count']=(int)AuctionUser::where('auction_item_id',$auction_item->id)->count();
             }else{
                 if($obj->status=='pending'){
                     $arr['auction_status']='فى انتظار موافقة الادارة';
