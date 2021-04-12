@@ -27,7 +27,7 @@ class ItemResource extends JsonResource
 
     public function toArray($request)
     {
-        $auction_item=AuctionItem::where('item_id',$this->id)->latest()->first();
+        $auction_item=AuctionItem::where('item_id',$this->id)->orderBy('created_at','desc')->first();
         $is_favourite=false;
         $my_item=false;
         $win=false;
