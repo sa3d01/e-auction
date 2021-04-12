@@ -84,7 +84,7 @@ class ItemCollection extends ResourceCollection
                 $arr['start_string_date']=Carbon::createFromTimestamp($auction_item->auction->start_date)->format('Y-m-d h:i:s A');
                 $arr['auction_duration']=$auction_item->auction->duration;
                 $arr['auction_price']=$auction_item->price;
-                $arr['bid_count']=(int)AuctionUser::where('auction_item_id',$auction_item->id)->count();
+                $arr['bid_count']=(int)AuctionUser::where(['auction_id'=>$auction_item->auction_id,'item_id'=>$auction_item->item_id])->count();
             }else{
                 if($obj->status=='pending'){
                     $arr['auction_status']='فى انتظار موافقة الادارة';
