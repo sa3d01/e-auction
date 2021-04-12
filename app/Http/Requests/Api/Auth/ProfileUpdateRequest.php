@@ -43,6 +43,9 @@ class ProfileUpdateRequest extends ApiMasterRequest
             'phone' => 'required|string|max:90|unique:users,phone,' . \request()->user()->id,
             'device.id' => 'required',
             'device.type' => 'required|in:android,ios',
+            'bank_name' => 'nullable',
+            'iban_number' => 'nullable',
+            'account_number' => 'nullable',
         ];
     }
     public function messages()

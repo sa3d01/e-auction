@@ -142,10 +142,18 @@ class UserController extends MasterController
     public function update(ProfileUpdateRequest $request)
     {
         $user = auth()->user();
-        $user->update($request->except(['package_id', 'wallet','purchasing_power']));
-        $data = new UserResource($user);
+        $data=$request->except(['package_id', 'wallet','purchasing_power']);
+        $data['more_details']=[
+            'bank'=>[
+                'bank_name'=>$request['bank_name'],
+                'iban_number'=>$request['iban_number'],
+                'account_number'=>$request['account_number'],
+            ]
+        ];
+        $user->update($data);
+        $user_model = new UserResource($user);
         $token = auth()->login($user);
-        return $this->sendResponse($data)->withHeaders(['apiToken' => $token, 'tokenType' => 'bearer']);
+        return $this->sendResponse($user_model)->withHeaders(['apiToken' => $token, 'tokenType' => 'bearer']);
     }
 
     public function resendCode(ResendPhoneVerificationRequest $request)
