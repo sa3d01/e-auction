@@ -29,6 +29,7 @@ class CreateUsersTable extends Migration
             $table->integer('status')->default(1);
             $table->char('image',20)->nullable();
             $table->char('licence_image',20)->nullable();
+            $table->string('licence_number')->nullable();
             $table->string('password')->nullable();
             $table->json('more_details')->nullable();
             $table->softDeletes('deleted_at', 0);

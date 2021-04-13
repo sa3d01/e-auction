@@ -23,6 +23,7 @@ class UserResource extends JsonResource
             'email'=> $this->email??"",
             'image'=> $this->image ??"",
             'licence_image'=> $this->licence_image ?? '',
+            'licence_number'=> $this->licence_number ?? '',
             'activation_code'=> $this->activation_code ? (int)$this->activation_code : '',
             'package'=> $this->package?new PackageResource($this->package) : new Object_(),
             'purchasing_power'=> (double)$this->purchasing_power ?? 0,

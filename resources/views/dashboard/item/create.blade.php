@@ -87,8 +87,8 @@
                                                 <div class="form-group">
                                                     <label for=""> الموديل </label>
                                                     <span style="color: red">*</span>
-                                                    <select id="model_id" name="model_id" class="form-control">
-                                                        @foreach(\App\DropDown::active()->where('class','Model')->get() as $model)
+                                                    <select required id="model_id" name="model_id" class="form-control">
+                                                        @foreach(\App\DropDown::active()->where('class','Mark')->whereHas('childs')->first()->childs() as $model)
                                                             <option value="{{$model->id}}">
                                                                 {{$model->name['ar']}}
                                                             </option>

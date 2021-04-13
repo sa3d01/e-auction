@@ -17,7 +17,7 @@ class User extends Authenticatable implements JWTSubject
     private $images_link='media/images/user/';
 
     protected $fillable = [
-        'name','package_id','purchasing_power','phone','phone_details','email','licence_image','more_details'
+        'name','package_id','purchasing_power','phone','phone_details','email','licence_image','licence_number','more_details'
         ,'device','activation_code','status','image','phone_verified_at','email_verified_at','password','wallet','credit'
     ];
     protected $hidden = ['password', 'remember_token'];
