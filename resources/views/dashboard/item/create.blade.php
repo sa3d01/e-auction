@@ -268,7 +268,7 @@
             $('#auction_type_id').change(function (){
                 var auction_type_id = $('#auction_type_id').val();
                 console.log(auction_type_id)
-                if(auction_type_id==2 || auction_type_id==4){
+                if(auction_type_id==3 || auction_type_id==4){
                     $('#user_price').removeAttr('hidden');
                 }else {
                     $('#user_price').attr('hidden','hidden');
