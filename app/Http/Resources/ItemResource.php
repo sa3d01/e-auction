@@ -76,7 +76,7 @@ class ItemResource extends JsonResource
             'auction_duration'=>$auction_item?$auction_item->auction->duration:0,
             'item_status'=> $this->item_status->name[$this->lang()],
             'auction_price'=> $auction_item?$auction_item->price:($this->price??0),
-            'name'=> $this->mark->name[$this->lang()].' '.$this->model->name[$this->lang()],
+            'name'=> $this->mark->name[$this->lang()].' '.$this->model->name[$this->lang()].' '.$this->year,
             'city'=> $this->city->name[$this->lang()],
             'mark'=> $this->mark->name[$this->lang()],
             'model'=> $this->model->name[$this->lang()],
