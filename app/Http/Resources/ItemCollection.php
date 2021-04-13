@@ -99,6 +99,9 @@ class ItemCollection extends ResourceCollection
                 }elseif ($obj->status=='rejected'){
                     $arr['auction_status']='تم رفض السلعة من قبل الادارة';
                     $arr['status_text']='تم رفض السلعة من قبل الادارة';
+                }elseif ($obj->status=='soon'){
+                    $arr['auction_status']='تم جدولتها للمزاد';
+                    $arr['status_text']='تم جدولتها للمزاد';
                 }else{
                     $arr['auction_status']='بانتظار تسليم المركبة لساحة الحفظ';
                     $arr['status_text']='بانتظار تسليم المركبة لساحة الحفظ';
