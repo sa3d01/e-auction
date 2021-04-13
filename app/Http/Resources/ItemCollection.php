@@ -94,14 +94,14 @@ class ItemCollection extends ResourceCollection
                 $arr['bid_count']=(int)AuctionUser::where(['auction_id'=>$auction_item->auction_id,'item_id'=>$auction_item->item_id])->count();
             }else{
                 if($obj->status=='pending'){
-                    $arr['auction_status']='فى انتظار موافقة الادارة';
-                    $arr['status_text']='فى انتظار موافقة الادارة';
+                    $arr['auction_status']='تم طلب الاضافة';
+                    $arr['status_text']='تم طلب الاضافة';
                 }elseif ($obj->status=='rejected'){
                     $arr['auction_status']='تم رفض السلعة من قبل الادارة';
                     $arr['status_text']='تم رفض السلعة من قبل الادارة';
                 }else{
-                    $arr['auction_status']='فى انتظار شحن السلعة';
-                    $arr['status_text']='فى انتظار شحن السلعة';
+                    $arr['auction_status']='بانتظار تسليم المركبة لساحة الحفظ';
+                    $arr['status_text']='بانتظار تسليم المركبة لساحة الحفظ';
                 }
                 $arr['negotiation']=false;
                 $arr['direct_pay']=false;
