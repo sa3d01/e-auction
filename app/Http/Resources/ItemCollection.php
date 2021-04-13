@@ -82,6 +82,10 @@ class ItemCollection extends ResourceCollection
                 }elseif ($features['status']=='delivered'){
                     $arr['is_paid']=true;
                     $arr['status_text']='تم التسليم';
+                }elseif ($features['status']=='soon'){
+                    $arr['status_text']='تم جدولتها للمزاد';
+                }elseif ($features['status']=='expired'){
+                    $arr['status_text']='تم انتهاء المزاد المباشر ولم يتم البيع';
                 }
 
                 $arr['auction_type']= $obj->auction_type->name[$this->lang()];
