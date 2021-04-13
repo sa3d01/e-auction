@@ -95,10 +95,13 @@ class ItemCollection extends ResourceCollection
             }else{
                 if($obj->status=='pending'){
                     $arr['auction_status']='فى انتظار موافقة الادارة';
+                    $arr['status_text']='فى انتظار موافقة الادارة';
                 }elseif ($obj->status=='rejected'){
                     $arr['auction_status']='تم رفض السلعة من قبل الادارة';
+                    $arr['status_text']='تم رفض السلعة من قبل الادارة';
                 }else{
                     $arr['auction_status']='فى انتظار شحن السلعة';
+                    $arr['status_text']='فى انتظار شحن السلعة';
                 }
                 $arr['negotiation']=false;
                 $arr['direct_pay']=false;
