@@ -27,13 +27,7 @@
                     @endif
                     @if($status=='accepted')
                         <div class="element-inner-desc centered-header" style="color: red">
-                            السلع التى يمكن اضافتها لمزاد هى السلع التى تم تحديد
-                            سعر ابتدائى
-                            لها للمزايدة واضافة
-                            تقرير فحص واحد
-                            على الأقل .. بجانب
-                            تسديد رسوم الإضافة
-                            من قبل صاحب السلعة
+                            السلع التى يمكن اضافتها لمزاد هى السلع التى تم تأكيد استلامها فى ساحة الحفظ
                         </div>
                         <br>
                     @endif
@@ -50,10 +44,11 @@
                                         <th>{{$select['title']}}</th>
                                     @endforeach
                                 @endif
-                                @if($status=='accepted')
+                                @if($status=='accepted' || $status=='delivered')
                                     <th>السعر المطروح للمزايدة</th>
 {{--                                    <th>تقارير الفحص</th>--}}
                                     <th>صور أخري للسلعة</th>
+                                    <th>الحالة</th>
                                 @elseif($status=='shown')
                                     <th>VIP</th>
                                 @endif
@@ -71,10 +66,11 @@
                                         <th>{{$select['title']}}</th>
                                     @endforeach
                                 @endif
-                                @if($status=='accepted')
+                                @if($status=='accepted' || $status=='delivered')
                                     <th>السعر المطروح للمزايدة</th>
-{{--                                    <th>تقارير الفحص</th>--}}
+                                    {{--                                    <th>تقارير الفحص</th>--}}
                                     <th>صور أخري للسلعة</th>
+                                    <th>الحالة</th>
                                 @elseif($status=='shown')
                                     <th>VIP</th>
                                 @endif
@@ -134,6 +130,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <td>{!! $row->deliveredToGarage() !!}</td>
                                     @elseif($status=='shown')
                                         <?php
                                             $vip='انتهى المزاد المباشر';

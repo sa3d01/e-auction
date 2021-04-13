@@ -85,7 +85,7 @@ class ItemController extends MasterController
             ]);
         }
         $data['user_id']=$user->id;
-        $data['status']='accepted';
+        $data['status']='delivered';
         $data['shipping_by']='user';
         $data['pay_status']=1;
         $item=$this->model->create($data);
@@ -96,6 +96,7 @@ class ItemController extends MasterController
     {
         $rows=$this->model->where('status',$status)->latest()->get();
         if ($status=='accepted'){
+            $rows=$this->model->whereIn('status',['accepted','delivered'])->latest()->get();
             $title='قائمة السلع المطلوب اعدادها';
             $index_fields=['الرقم التسلسلى' => 'id'];
         }else{
@@ -218,6 +219,17 @@ class ItemController extends MasterController
         $push->setMessage($msg)
             ->sendByTopic('new_auction')
             ->send();
+        return redirect()->back()->with('updated');
+    }
+    public function item_delivered_to_garage($item_id){
+        $item=Item::find($item_id);
+        $item->update([
+            'status'=>'delivered'
+        ]);
+        $note['ar']='تم تأكيد استلام مركبتك الى ساحة الحفظ من قبل الادارة ..';
+        $note['en']='your added item is delivered to admin garage..';
+        $this->itemStatusNotify($item,$note);
+        $item->refresh();
         return redirect()->back()->with('updated');
     }
 

@@ -104,6 +104,15 @@ class Item extends Model
             return "<a class='block btn btn-info btn-sm' data-href='$action' href='$action'><i class='os-icon os-icon-activity'></i><span>تمميز السلعة !</span></a>";
         }
     }
+    public function deliveredToGarage()
+    {
+        $action = route('admin.item_delivered_to_garage.update', [$this->attributes['id']]);
+        if ($this->status === "accepted"){
+            return "<a class='block btn btn-warning btn-sm' data-href='$action' href='$action'><i class='os-icon os-icon-check-circle'></i><span>تأكيد الاستلام ! </span></a>";
+        }else{
+            return "<a class='block btn btn-success btn-sm' data-href='#' href='#'><i class='os-icon os-icon-activity'></i><span>تم الاستلام فى ساحة الحفظ !</span></a>";
+        }
+    }
     public function nameForSelect(){
         return $this->id.'-'.$this->model->name['ar'].'-'.$this->auction_type->name['ar'];
     }

@@ -42,7 +42,7 @@ class AuctionController extends MasterController
 //        $q_items=$q_items->whereHas('reports');
 //        $q_items=$q_items->where('auction_price', '!=', 'null');
         $q_items = $q_items->where(function($query) {
-            $query->where('status','accepted')
+            $query->where('status','delivered')
                 ->orWhere('status','expired');
         });
         return View('dashboard.auction.create', [
