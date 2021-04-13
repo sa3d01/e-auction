@@ -85,6 +85,19 @@ class BidController extends MasterController
         if (!(Carbon::createFromTimestamp($auction_item->auction->more_details['end_date']) >= Carbon::now()) && ((Carbon::createFromTimestamp($auction_item->auction->start_date)) <= Carbon::now()) ) {
             $this->charge_notify($auction_item,$user,$request['charge_price']);
         }
+        $push = new PushNotification('fcm');
+        $msg = [
+            'notification' => null,
+            'data' => [
+                'title' => '',
+                'body' => '',
+                'type'=>'new_auction',
+            ],
+            'priority' => 'high',
+        ];
+        $push->setMessage($msg)
+            ->sendByTopic('new_auction')
+            ->send();
         //todo : add key of soon winner
         //todo : increase duration of auction
         return $this->sendResponse('تمت المزايدة بنجاح');

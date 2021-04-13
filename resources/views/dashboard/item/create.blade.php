@@ -75,7 +75,7 @@
                                                     <label for=""> الماركة </label>
                                                     <span style="color: red">*</span>
                                                     <select id="mark_id" name="mark_id" class="form-control">
-                                                        @foreach(\App\DropDown::active()->where('class','Mark')->get() as $mark)
+                                                        @foreach(\App\DropDown::active()->where('class','Mark')->whereHas('childs')->get() as $mark)
                                                             <option value="{{$mark->id}}">
                                                                 {{$mark->name['ar']}}
                                                             </option>
