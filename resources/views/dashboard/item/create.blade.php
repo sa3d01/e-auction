@@ -83,6 +83,7 @@
                                                     </select>
                                                 </div>
                                             </div>
+
                                             <div class="col-sm-12" id="models" hidden>
                                                 <div class="form-group">
                                                     <label for=""> الموديل </label>
@@ -195,7 +196,7 @@
                                                 </div>
                                             </div>
 
-                                            <div id="auction_type_id" class="col-sm-12">
+                                            <div id="auction_type" class="col-sm-12">
                                                 <div class="form-group">
                                                     <label for="">نوع المزاد</label>
                                                     <span style="color: red">*</span>
@@ -206,6 +207,15 @@
                                                             </option>
                                                         @endforeach
                                                     </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12" id="user_price" hidden>
+                                                <div class="form-group">
+                                                    <label for="">سعر المركبة</label>
+                                                    <span style="color: red">*</span>
+                                                    <input name="price" class="form-control" type="number" min="1">
+                                                    <div class="help-block form-text with-errors form-control-feedback"></div>
                                                 </div>
                                             </div>
 
@@ -254,6 +264,15 @@
                         $('#models').removeAttr('hidden');
                     }
                 });
+            });
+            $('#auction_type_id').change(function (){
+                var auction_type_id = $('#auction_type_id').val();
+                console.log(auction_type_id)
+                if(auction_type_id==2 || auction_type_id==4){
+                    $('#user_price').removeAttr('hidden');
+                }else {
+                    $('#user_price').attr('hidden','hidden');
+                }
             });
         };
 
