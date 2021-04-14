@@ -100,7 +100,7 @@ class BidController extends MasterController
             if (($start_auction <= Carbon::now() )  &&  ($end_auction >= Carbon::now())){
                 $item=Item::find($soon_item->item_id);
                 $next_items=AuctionItem::where('start_date','>',Carbon::now()->timestamp)->where('auction_id',$soon_item->auction_id)->pluck('item_id');
-                $data['live']=new ItemResource($item);
+                $data['live']=$this->liveResponse($item);
                 $data['next']=new ItemCollection(Item::whereIn('id',$next_items)->latest()->get());
                 return $this->sendResponse($data);
             }
