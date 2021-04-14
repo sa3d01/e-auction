@@ -85,6 +85,7 @@ class BidController extends MasterController
             'negotiation'=>$negotiation,
             'direct_pay'=>$direct_pay,
             'user_price'=>$user_price,
+            'bid_count'=>(int)AuctionUser::where(['auction_id'=>$auction_item->auction_id,'item_id'=>$item->id])->count(),
             'my_item'=>$my_item,
             'tax'=> $item->tax==='true',
             'win'=>$win

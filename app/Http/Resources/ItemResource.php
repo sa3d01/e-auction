@@ -60,11 +60,14 @@ class ItemResource extends JsonResource
             $negotiation=false;
             $direct_pay=false;
             $user_price=$this->price??0;
+            $bid_count=0;
         }else{
             $auction_status=$features['status'];
             $negotiation=$features['negotiation'];
             $direct_pay=$features['direct_pay'];
             $user_price=$features['user_price'];
+            $bid_count=(int)AuctionUser::where(['auction_id'=>$auction_item->auction_id,'item_id'=>$auction_item->item_id])->count();
+
         }
 
 
@@ -76,6 +79,7 @@ class ItemResource extends JsonResource
             'auction_duration'=>$auction_item?$auction_item->auction->duration:0,
             'item_status'=> $this->item_status->name[$this->lang()],
             'auction_price'=> $auction_item?$auction_item->price:($this->price??0),
+            'bid_count'=>(int)$bid_count,
             'name'=> $this->mark->name[$this->lang()].' '.$this->model->name[$this->lang()].' '.$this->year,
             'city'=> $this->city->name[$this->lang()],
             'mark'=> $this->mark->name[$this->lang()],
