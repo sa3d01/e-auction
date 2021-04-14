@@ -26,6 +26,70 @@ class BidController extends MasterController
         $this->purchasing_power_ratio=Setting::first()->value('purchasing_power_ratio');
         parent::__construct();
     }
+    function lang(){
+        if (\request()->header('lang')){
+            return \request()->header('lang');
+        }else{
+            return 'ar';
+        }
+    }
+    function liveResponse($item)
+    {
+        $auction_item=AuctionItem::where('item_id',$item->id)->orderBy('created_at','desc')->first();
+        $is_favourite=false;
+        $my_item=false;
+        $win=false;
+        if (\request()->user()){
+            //favourite
+            $favourite=Favourite::where(['user_id'=>\request()->user()->id, 'item_id'=>$item->id])->first();
+            if ($favourite){
+                $is_favourite=true;
+            }
+            if ($item->user_id==\request()->user()->id){
+                $my_item=true;
+            }
+            $soon_winner=AuctionUser::where('item_id',$item->id)->latest()->value('user_id');
+            if ($soon_winner){
+                if ($soon_winner==\request()->user()->id){
+                    $win=true;
+                }
+            }
+            $features=$auction_item->auctionTypeFeatures(auth()->user()->id);
+        }else{
+            $features=$auction_item->auctionTypeFeatures();
+        }
+        //status
+        $auction_status=$features['status'];
+        $negotiation=$features['negotiation'];
+        $direct_pay=$features['direct_pay'];
+        $user_price=$features['user_price'];
+        return [
+            'id'=> (int) $item->id,
+            'images'=> $item->images,
+            'start_date'=> $auction_item->start_date,
+            'auction_duration'=>$auction_item->auction->duration,
+            'item_status'=> $item->item_status->name[$item->lang()],
+            'auction_price'=> $auction_item->price,
+            'name'=> $item->mark->name[$item->lang()].' '.$item->model->name[$item->lang()].' '.$item->year,
+            'city'=> $item->city->name[$item->lang()],
+            'mark'=> $item->mark->name[$item->lang()],
+            'model'=> $item->model->name[$item->lang()],
+            'year'=> $item->year??0,
+            'fetes'=> $item->fetes->name[$item->lang()],
+            'kms_count'=> $item->kms_count,
+            'color'=> $item->color?$item->color->name[$item->lang()]:"",
+            'sunder_count'=> $item->sunder_count,
+            'auction_type'=> $item->auction_type->name[$item->lang()],
+            'is_favourite'=> $is_favourite,
+            'auction_status'=>$auction_status,
+            'negotiation'=>$negotiation,
+            'direct_pay'=>$direct_pay,
+            'user_price'=>$user_price,
+            'my_item'=>$my_item,
+            'tax'=> $item->tax==='true',
+            'win'=>$win
+        ];
+    }
 
     public function liveItem():object{
         $auction_items=AuctionItem::where('more_details->status','!=','paid')->where('more_details->status','!=','expired')->where('more_details->status','!=','negotiation')->where('more_details->status','!=','delivered')->latest()->get();
@@ -35,7 +99,7 @@ class BidController extends MasterController
             if (($start_auction <= Carbon::now() )  &&  ($end_auction >= Carbon::now())){
                 $item=Item::find($soon_item->item_id);
                 $next_items=AuctionItem::where('start_date','>',Carbon::now()->timestamp)->where('auction_id',$soon_item->auction_id)->pluck('item_id');
-                $data['live']=new ItemResource($item);
+                $data['live']=$this->liveResponse($item);
                 $data['next']=new ItemCollection(Item::whereIn('id',$next_items)->latest()->get());
                 return $this->sendResponse($data);
             }
