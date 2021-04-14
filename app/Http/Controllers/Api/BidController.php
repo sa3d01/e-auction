@@ -67,6 +67,7 @@ class BidController extends MasterController
             'id'=> (int) $item->id,
             'images'=> $item->images,
             'start_date'=> $auction_item->start_date,
+            'start_date_text'=> Carbon::createFromTimestamp($auction_item->start_date),
             'auction_duration'=>$auction_item->auction->duration,
             'item_status'=> $item->item_status->name[$this->lang()],
             'auction_price'=> $auction_item->price,
