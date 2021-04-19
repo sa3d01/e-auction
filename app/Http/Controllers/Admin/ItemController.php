@@ -166,11 +166,10 @@ class ItemController extends MasterController
 
     public function uploadImages($item_id,Request $request){
         $item=$this->model->find($item_id);
-        $current_images=json_decode($item->imagesArray());
+//        $current_images=json_decode($item->imagesArray());
         $images=[];
         if ($request->images){
             foreach ($request->images as $image){
-                $filename=null;
                 if (is_file($image)) {
                     if ($image->getSize() > 5142575){
                         return redirect()->back()->withErrors(['حجم الصورة كبير جدا..']);
@@ -184,9 +183,9 @@ class ItemController extends MasterController
                 $images[] = $local_name;
             }
         }
-        foreach ($current_images as $old_image){
-            $images[]=$old_image;
-        }
+//        foreach ($current_images as $old_image){
+//            $images[]=$old_image;
+//        }
         $item->update([
             'images'=>$images
         ]);
