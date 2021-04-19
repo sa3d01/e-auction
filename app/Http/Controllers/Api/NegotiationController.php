@@ -121,8 +121,10 @@ class NegotiationController extends MasterController
         $item = Item::find($item_id);
         $auction_item = AuctionItem::where('item_id', $item_id)->latest()->first();
         $latest_user_offer=Offer::where(['auction_item_id'=>$auction_item->id,'sender_id'=>$sender->id])->latest()->first();
+        $owner_offer=Offer::where(['auction_item_id'=>$auction_item->id,'sender_id'=>$item->user_id])->latest()->first();
 
         if($request->user()->id != $item->user_id){
+//            الشاري
             if ($sender->profileAndPurchasingPowerIsFilled()==false){
                 return $this->sendError(' يجب اكمال بيانات ملفك الشخصى أولا وشحن قوتك الشرائية');
             }
@@ -134,7 +136,13 @@ class NegotiationController extends MasterController
                     return $this->sendError('لا يمكن تقديم عرض سعر أقل من عرض السعر الذى تم تقديمه من قبل!');
                 }
             }
+            if ($owner_offer){
+                if ($owner_offer->price < $request['price']){
+                    return $this->sendError('لا يمكن تقديم عرض سعر أعلى من عرض السعر الذى تم تقديمه من قبل البائع!');
+                }
+            }
         }else{
+//            البائع
             if ($latest_user_offer){
                 if ($latest_user_offer->price < $request['price']) {
                     return $this->sendError('لا يمكن تقديم عرض سعر أعلى من عرضك الأخير!');
