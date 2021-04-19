@@ -98,9 +98,10 @@ class BidController extends MasterController
         foreach ($auction_items as $soon_item){
             $end_auction=Carbon::createFromTimestamp($soon_item->start_date)->addSeconds($soon_item->auction->duration);
             $start_auction=Carbon::createFromTimestamp($soon_item->start_date);
-            if (($start_auction <= Carbon::now() )  &&  ($end_auction >= Carbon::now())){
+            $now=Carbon::now();
+            if ($now->between($start_auction, $end_auction)){
                 $item=Item::find($soon_item->item_id);
-                $next_items=AuctionItem::where('start_date','>',Carbon::now()->timestamp)->where('auction_id',$soon_item->auction_id)->pluck('item_id');
+                $next_items=AuctionItem::where('start_date','>',$now->timestamp)->where('auction_id',$soon_item->auction_id)->pluck('item_id');
                 $data['live']=$this->liveResponse($item);
                 $data['next']=new ItemCollection(Item::whereIn('id',$next_items)->latest()->get());
                 return $this->sendResponse($data);
@@ -110,6 +111,8 @@ class BidController extends MasterController
     }
     public function bid($item_id,Request $request){
         $user=$request->user();
+        $now=Carbon::now();
+
 //        $serviceAccount = ServiceAccount::fromJsonFile('/var/www/html/e-auction/mazadat-eb79528aefd3.json');
 //
 //        $firestore = (new Factory)
@@ -148,7 +151,7 @@ class BidController extends MasterController
             'price'=>$auction_item->price+$request['charge_price'],
             'latest_charge'=>$request['charge_price']
         ]);
-        if (!(Carbon::createFromTimestamp($auction_item->auction->more_details['end_date']) >= Carbon::now()) && ((Carbon::createFromTimestamp($auction_item->auction->start_date)) <= Carbon::now()) ) {
+        if (!(Carbon::createFromTimestamp($auction_item->auction->more_details['end_date']) >= $now) && ((Carbon::createFromTimestamp($auction_item->auction->start_date)) <= $now) ) {
             $this->charge_notify($auction_item,$user,$request['charge_price']);
         }
         $push = new PushNotification('fcm');

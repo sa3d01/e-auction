@@ -37,9 +37,10 @@ class Controller extends BaseController
     }
 
     function check_negotiation_auctions(){
+        $now=Carbon::now();
         $negotiation_auction_items=AuctionItem::where('more_details->status', 'negotiation')->get();
         foreach ($negotiation_auction_items as $negotiation_auction_item){
-            if ( Carbon::createFromTimestamp($negotiation_auction_item->more_details['start_negotiation'])->addSeconds(Setting::value('negotiation_period'))->timestamp < Carbon::now()->timestamp ) {
+            if ( Carbon::createFromTimestamp($negotiation_auction_item->more_details['start_negotiation'])->addSeconds(Setting::value('negotiation_period'))->timestamp < $now->timestamp ) {
                 $admin_title['ar'] = 'تم انتهاء مدة المفاوضة على السلعة رقم ' . $negotiation_auction_item->item_id;
                 $this->notify_admin($admin_title, $negotiation_auction_item);
                 $owner_title['ar'] = 'حظ أوفر المره القادمه ! تم انتهاء مدة المفاوضة على سلعتك رقم ' . $negotiation_auction_item->item_id;
@@ -48,7 +49,7 @@ class Controller extends BaseController
                     'vip' => 'false',
                     'more_details' => [
                         'start_negotiation'=>$negotiation_auction_item->more_details['start_negotiation'],
-                        'end_negotiation'=>Carbon::now()->timestamp,
+                        'end_negotiation'=>$now->timestamp,
                         'true_end'=>Carbon::createFromTimestamp($negotiation_auction_item->more_details['start_negotiation'])->addSeconds(Setting::value('negotiation_period'))->timestamp,
                         'status' => 'expired',
                     ]
@@ -77,6 +78,7 @@ class Controller extends BaseController
     function auctionItemStatusUpdate()
     {
         $this->check_negotiation_auctions();
+        $now=Carbon::now();
         $auction_items = AuctionItem::where('more_details->status', '!=', 'paid')->where('more_details->status', '!=', 'delivered')->where('more_details->status', '!=', 'expired')->where('more_details->status', '!=', 'negotiation')->get();
         foreach ($auction_items as $auction_item) {
             //notifies
@@ -85,10 +87,10 @@ class Controller extends BaseController
             $owner_expired_title['ar'] = 'حظ أوفر المره القادمه ! لم يتم المزايده من قبل أحد على مزادك رقم ' . $auction_item->item_id;
             $owner_paid_title['ar'] = 'تهانينا اليك ! لقد تم بيع سلعتك بمزاد رقم ' . $auction_item->item_id;
             $winner_title['ar'] = 'تهانينا اليك ! لقد فزت فى المزاد الذى قمت بالمشاركة به رقم ' . $auction_item->item_id;
-            if ((Carbon::createFromTimestamp($auction_item->start_date) <= Carbon::now()) && (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration) >= Carbon::now())) {
+            if ((Carbon::createFromTimestamp($auction_item->start_date) <= $now) && (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration) >= $now)) {
                 $this->auction_item_update($auction_item,'live');
                 $this->expire_offers(Offer::where('auction_item_id',$auction_item->id)->get());
-            } elseif (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration) < Carbon::now()) {
+            } elseif (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration) < $now) {
                 if ($auction_item->item->auction_type_id==4 || $auction_item->item->auction_type_id==2) {
                     $soon_winner = AuctionUser::where('item_id', $auction_item->item_id)->latest()->first();
                     if ($soon_winner) {

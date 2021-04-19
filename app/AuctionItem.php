@@ -38,8 +38,9 @@ class AuctionItem extends Model
         }
         if ($this->more_details['status']!='paid' && $this->more_details['status']!='expired' && $this->more_details['status']!='negotiation' && $this->more_details['status']!='delivered') {
             $end_date=Carbon::createFromTimestamp($this->start_date)->addSeconds($this->auction->duration);
+            $now=Carbon::now();
 //            if ( (Carbon::createFromTimestamp($this->auction->more_details['end_date']) >= Carbon::now()) && ($start_auction <= Carbon::now()) ) {
-            if ( ($end_date >= Carbon::now()) && ($start_auction <= Carbon::now()) ) {
+            if ($now->between($start_auction, $end_date)) {
                 $arr['live'] = true;
                 $arr['status'] = 'live';
             }

@@ -242,7 +242,8 @@ class UserController extends MasterController
         }
         foreach ($user->items() as $item) {
             $auction_item = AuctionItem::where('item_id', $item->id)->latest()->first();
-            if ((Carbon::createFromTimestamp($auction_item->auction->more_details['end_date']) >= Carbon::now()) && (Carbon::createFromTimestamp($auction_item->auction->start_date) <= Carbon::now())) {
+            $now=Carbon::now();
+            if ((Carbon::createFromTimestamp($auction_item->auction->more_details['end_date']) >= $now) && (Carbon::createFromTimestamp($auction_item->auction->start_date) <= $now)) {
                 $live_auction_items++;
             } else {
                 $pre_auction_items++;
