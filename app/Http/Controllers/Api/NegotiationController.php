@@ -134,6 +134,12 @@ class NegotiationController extends MasterController
                     return $this->sendError('لا يمكن تقديم عرض سعر أقل من عرض السعر الذى تم تقديمه من قبل!');
                 }
             }
+        }else{
+            if ($latest_user_offer){
+                if ($latest_user_offer->price < $request['price']) {
+                    return $this->sendError('لا يمكن تقديم عرض سعر أعلى من عرضك الأخير!');
+                }
+            }
         }
 
         if ($request->has('offer_id') && $request['offer_id']!=null){
