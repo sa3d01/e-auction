@@ -77,6 +77,7 @@ class ItemController extends MasterController
             $package=Package::where('price','!=',0)->latest()->first();
             $user=User::create([
                 'name'=>'admin',
+                'phone'=>'+966538074804',
                 'email'=>'admin@admin.com',
                 'email_verified_at'=>Carbon::now(),
                 'package_id'=>$package->id,
