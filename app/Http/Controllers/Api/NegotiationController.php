@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Auction;
 use App\AuctionItem;
 use App\AuctionUser;
 use App\Http\Resources\ItemCollection;
@@ -11,6 +12,7 @@ use App\Notification;
 use App\Offer;
 use App\Setting;
 use App\User;
+use Carbon\Carbon;
 use Edujugon\PushNotification\PushNotification;
 use Illuminate\Http\Request;
 
@@ -25,6 +27,24 @@ class NegotiationController extends MasterController
         parent::__construct();
     }
 
+    function reOrderAuctionItems($auction_item)
+    {
+        $auction=$auction_item->auction;
+        $after_auction_items=AuctionItem::where('auction_id',$auction->id)->where('id','>',$auction_item->id)->get();
+        foreach ($after_auction_items as $after_auction_item){
+            $new_date=Carbon::createFromTimestamp($after_auction_item->start_date)->subSeconds($auction->duration)->timestamp;
+            $after_auction_item->update([
+               'start_date'=> $new_date
+            ]);
+        }
+        $new_end_date=Carbon::createFromTimestamp($auction->more_details['end_date'])->subSeconds($auction->duration)->timestamp;
+        $auction->update([
+           'more_details'=>[
+               'end_date'=>$new_end_date
+           ]
+        ]);
+
+    }
     function pay($user,$auction_item,$auction_user,$charge_price,$price,$pay_type){
         $winner=User::find($auction_user->user_id);
         if ($winner->purchasing_power > $this->totalAmount($auction_item)){
@@ -73,6 +93,7 @@ class NegotiationController extends MasterController
                 ]
             ];
         }
+        $this->reOrderAuctionItems($auction_item);
         return $data;
     }
 
@@ -83,7 +104,6 @@ class NegotiationController extends MasterController
         if ($auction_item->more_details['status'] == 'expired' || $auction_item->more_details['status'] == 'paid') {
             return $this->sendError('هذا السلعة قد انتهى وقت المزايدة عليها :(');
         }
-        //todo : check purchasing_power
         if ($user->profileAndPurchasingPowerIsFilled()==false){
             return $this->sendError(' يجب اكمال بيانات ملفك الشخصى أولا وشحن قوتك الشرائية');
         }
@@ -396,5 +416,4 @@ class NegotiationController extends MasterController
         $item_ids=$item_ids_q->pluck('item_id');
         return $this->sendResponse(new ItemCollection(Item::whereIn('id',$item_ids)->latest()->get()));
     }
-
 }
