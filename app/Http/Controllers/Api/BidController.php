@@ -33,6 +33,77 @@ class BidController extends MasterController
             return 'ar';
         }
     }
+
+    function reOrderAuctionItems($auction_item)
+    {
+        $auction=$auction_item->auction;
+        $after_auction_items=AuctionItem::where('auction_id',$auction->id)->where('id','>',$auction_item->id)->get();
+        foreach ($after_auction_items as $after_auction_item){
+            $new_date=Carbon::createFromTimestamp($after_auction_item->start_date)->subSeconds($auction->duration)->timestamp;
+            $after_auction_item->update([
+                'start_date'=> $new_date
+            ]);
+        }
+        $new_end_date=Carbon::createFromTimestamp($auction->more_details['end_date'])->subSeconds($auction->duration)->timestamp;
+        $auction->update([
+            'more_details'=>[
+                'end_date'=>$new_end_date
+            ]
+        ]);
+
+    }
+    function pay($user,$auction_item,$auction_user,$charge_price,$price,$pay_type){
+        $winner=User::find($auction_user->user_id);
+        if ($winner->purchasing_power > $this->totalAmount($auction_item)){
+            $auction_user->update([
+                'more_details'=>[
+                    'status'=>'paid',
+                    'total_amount'=>$this->totalAmount($auction_item),
+                    'paid'=>$this->totalAmount($auction_item),
+                    'remain'=>0
+                ]
+            ]);
+            $winner->update([
+                'purchasing_power'=> ((integer)$winner->purchasing_power)-$this->totalAmount($auction_item)
+            ]);
+            $data=[
+                'vip' => 'false',
+                'price' => $price,
+                'latest_charge' => $charge_price,
+                'more_details' => [
+                    'status'=>'delivered',
+                    'pay_type' => $pay_type
+                ]
+            ];
+            $note['ar'] = 'تم خصم سعر السلعة من قوتك الشرائية :)';
+            $note['en'] = 'تم خصم سعر السلعة من قوتك الشرائية :)';
+            $this->base_notify($note,$winner->id,$auction_item->item_id,true);
+        }else{
+            $auction_user->update([
+                'more_details'=>[
+                    'status'=>'pending_for_transfer',
+                    'total_amount'=>$this->totalAmount($auction_item),
+                    'remain'=>$this->totalAmount($auction_item)-((integer)$user->purchasing_power),
+                    'paid'=>$winner->purchasing_power,
+                ]
+            ]);
+            $user->update([
+                'purchasing_power'=> 0,
+            ]);
+            $data=[
+                'vip' => 'false',
+                'price' => $price,
+                'latest_charge' => $charge_price,
+                'more_details' => [
+                    'status'=>'paid',
+                    'pay_type' => $pay_type
+                ]
+            ];
+        }
+        $this->reOrderAuctionItems($auction_item);
+        return $data;
+    }
+
     function liveResponse($item)
     {
         $auction_item=AuctionItem::where('item_id',$item->id)->orderBy('created_at','desc')->first();
@@ -111,63 +182,61 @@ class BidController extends MasterController
     }
     public function bid($item_id,Request $request){
         $user=$request->user();
-        $now=Carbon::now();
-
-//        $serviceAccount = ServiceAccount::fromJsonFile('/var/www/html/e-auction/mazadat-eb79528aefd3.json');
-//
-//        $firestore = (new Factory)
-//            ->withServiceAccount($serviceAccount)
-//            ->createFirestore();
-//
-//        $collection = $firestore->collection('liveAuctions');
-//        $snapshot = $collection->documents();
-//        $auctions=[];
-//        foreach ($snapshot as $document) {
-//            $auction['id']=$document['id'];
-//            $auction['user_price']=$document['user_price'];
-//            $auctions[]=$auction;
-//        }
-//        return $auctions;
-        $auction_item=AuctionItem::where('item_id',$item_id)->latest()->first();
-        if ($auction_item->more_details!=null){
-            if ($auction_item->more_details['status']=='expired'  || $auction_item->more_details['status']=='paid'){
+        $now = Carbon::now();
+        $auction_item = AuctionItem::where('item_id', $item_id)->latest()->first();
+        if ($auction_item->more_details != null) {
+            if ($auction_item->more_details['status'] == 'expired' || $auction_item->more_details['status'] == 'paid') {
                 return $this->sendError('هذا السلعة قد انتهى وقت المزايدة عليها :(');
             }
         }
-        if ($user->profileAndPurchasingPowerIsFilled()==false){
+        if ($user->profileAndPurchasingPowerIsFilled() == false) {
             return $this->sendError(' يجب اكمال بيانات ملفك الشخصى أولا وشحن قوتك الشرائية');
         }
-        if ($this->validate_purchasing_power($user,$auction_item->price+$request['charge_price'])!==true){
-            return $this->validate_purchasing_power($user,$auction_item->price+$request['charge_price']);
+        if ($this->validate_purchasing_power($user, $auction_item->price + $request['charge_price']) !== true) {
+            return $this->validate_purchasing_power($user, $auction_item->price + $request['charge_price']);
         }
-        AuctionUser::create([
-            'finish_papers'=>$request->input('finish_papers',0),
-            'user_id'=>$user->id,
-            'item_id'=>$item_id,
-            'auction_id'=>$auction_item->auction_id,
-            'charge_price'=>$request['charge_price']
+        $auction_user = AuctionUser::create([
+            'finish_papers' => $request->input('finish_papers', 0),
+            'user_id' => $user->id,
+            'item_id' => $item_id,
+            'auction_id' => $auction_item->auction_id,
+            'charge_price' => $request['charge_price']
         ]);
-        $auction_item->update([
-            'price'=>$auction_item->price+$request['charge_price'],
-            'latest_charge'=>$request['charge_price']
-        ]);
-        if (!(Carbon::createFromTimestamp($auction_item->auction->more_details['end_date']) >= $now) && ((Carbon::createFromTimestamp($auction_item->auction->start_date)) <= $now) ) {
-            $this->charge_notify($auction_item,$user,$request['charge_price']);
+        if ($auction_item->item->price != null) {
+            if ($auction_item->item->price <= $request['charge_price']) {
+                $this->addToCredit($auction_user);
+                $auction_item_data = $this->pay($user, $auction_item, $auction_user, $request['charge_price'], $auction_item->item->price, 'over_bid_pay');
+                $auction_item->update($auction_item_data);
+                $winner_title['ar'] = 'تهانينا اليك ! لقد تمت عملية الشراء بنجاح .. سلعة رقم ' . $auction_item->item_id;
+                $owner_title['ar'] = 'تهانينا اليك ! لقد تم بيع سلعتك بمزاد رقم ' . $auction_item->item_id;
+                $admin_title['ar'] = 'تم بيع السلعة رقم ' . $auction_item->item_id;
+                $this->base_notify($winner_title, $user->id, $auction_item->item_id);
+                $this->base_notify($owner_title, $auction_item->item->user_id, $auction_item->item_id);
+                $this->notify_admin($admin_title, $auction_item);
+            }
+        }else{
+            $auction_item->update([
+                'price' => $auction_item->price + $request['charge_price'],
+                'latest_charge' => $request['charge_price']
+            ]);
+            if (!(Carbon::createFromTimestamp($auction_item->auction->more_details['end_date']) >= $now) && ((Carbon::createFromTimestamp($auction_item->auction->start_date)) <= $now)) {
+                $this->charge_notify($auction_item, $user, $request['charge_price']);
+            }
         }
+
         $push = new PushNotification('fcm');
         $msg = [
             'notification' => null,
             'data' => [
                 'title' => '',
                 'body' => '',
-                'type'=>'new_auction',
+                'type' => 'new_auction',
             ],
             'priority' => 'high',
         ];
         $push->setMessage($msg)
             ->sendByTopic('new_auction')
             ->send();
-        //todo : add key of soon winner
         //todo : increase duration of auction
         return $this->sendResponse('تمت المزايدة بنجاح');
     }
