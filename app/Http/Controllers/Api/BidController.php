@@ -100,7 +100,7 @@ class BidController extends MasterController
             $now=Carbon::now();
             if ($now->between($start_auction, $end_auction)){
                 $item=Item::find($soon_item->item_id);
-                $next_items=AuctionItem::where('start_date','>',$now->timestamp)->where('auction_id',$soon_item->auction_id)->pluck('item_id');
+                $next_items=AuctionItem::where('start_date','>',$now->timestamp)->where('more_details->status','soon')->where('auction_id',$soon_item->auction_id)->pluck('item_id');
                 $data['live']=$this->liveResponse($item);
                 $data['next']=new ItemCollection(Item::whereIn('id',$next_items)->latest()->get());
                 return $this->sendResponse($data);
