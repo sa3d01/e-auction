@@ -39,14 +39,14 @@
                                             <div class="form-group" id="note_ar">
                                                 <label> الوصف باللغة العربية </label>
                                                 <span style="color: red">*</span>
-                                                <textarea name="note_ar" class="form-control" cols="80" rows="10"></textarea>
+                                                <textarea name="note_ar" class="form-control" cols="80" rows="10">{{$row->note['ar']}}</textarea>
                                             </div>
                                         </div>
                                         <div class="col-sm-12">
                                             <div class="form-group" id="note_en">
                                                 <label> الوصف باللغة الانجليزية </label>
                                                 <span style="color: red">*</span>
-                                                <textarea name="note_en" class="form-control" cols="80" rows="10" ></textarea>
+                                                <textarea name="note_en" class="form-control" cols="80" rows="10" >{{$row->note['en']}}</textarea>
                                             </div>
                                         </div>
                                         {{--                                        <div class="col-sm-12">--}}
@@ -64,7 +64,11 @@
                                             </div>
                                         </div>
                                         <br/>
-                                        <div class="form-group" id="image_preview"></div>
+                                        <div class="form-group" id="image_preview">
+                                            @foreach($row->images as $image)
+                                                <img alt="report" style='pointer-events: none;max-height: 100px;max-width: 100px;height: 100px;border-radius: 10px;margin: 5px;' src='{{asset('media/images/report/'.$image)}}'>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </fieldset>
                                 <div class="form-buttons-w">
