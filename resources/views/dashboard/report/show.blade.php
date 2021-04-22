@@ -15,7 +15,7 @@
                             </div>
                         @endif
                         <div class="element-box">
-                            <form class="formValidate" method="POST" action="{{ route($action) }}"
+                            <form class="formValidate" method="POST" action="{{ route($action,$row->id) }}"
                                   enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
