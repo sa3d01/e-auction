@@ -36,8 +36,7 @@
                                     </div>
                                 </div>
                             </div>
-                            @if(isset($create_fields))
-                                <fieldset class="form-group">
+                            <fieldset class="form-group">
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="form-group" id="title_ar">
@@ -67,13 +66,13 @@
                                                 <textarea name="note_en" class="form-control" cols="80" rows="10" ></textarea>
                                             </div>
                                         </div>
-                                        <div class="col-sm-12">
-                                            <div class="form-group" id="price">
-                                                <label for=""> السعر </label>
-                                                <input name="price" class="form-control" value="0" type="number" min="0">
-                                                <div class="help-block form-text with-errors form-control-feedback"></div>
-                                            </div>
-                                        </div>
+{{--                                        <div class="col-sm-12">--}}
+{{--                                            <div class="form-group" id="price">--}}
+{{--                                                <label for=""> السعر </label>--}}
+{{--                                                <input name="price" class="form-control" value="0" type="number" min="0">--}}
+{{--                                                <div class="help-block form-text with-errors form-control-feedback"></div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
                                         <div class="col-sm-12" id="images">
                                             <div class="form-group row">
                                                 <label for="images" class="col-form-label">الصور</label>
@@ -85,9 +84,8 @@
                                         <div class="form-group" id="image_preview"></div>
                                     </div>
                                 </fieldset>
-                            @endif
                             <div class="form-buttons-w">
-                                <button class="btn btn-primary create-submit" type="submit"> إرسال</button>
+                                <button class="btn btn-primary create-submit" type="submit"> إضافة</button>
                             </div>
                             </form>
                         </div>
