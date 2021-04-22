@@ -21,7 +21,7 @@ class ReportController extends MasterController
         $this->route = 'report';
         parent::__construct();
     }
-    public function validation_func($method, $id = null)
+    public function validation_func()
     {
         return [
             'title_ar' => 'required',
@@ -52,7 +52,7 @@ class ReportController extends MasterController
 
     public function store(Request $request)
     {
-        $this->validate($request, $this->validation_func(1),$this->validation_msg());
+        $this->validate($request, $this->validation_func(),$this->validation_msg());
         $data=$request->all();
         $title['ar']=$request['title_ar'];
         $title['en']=$request['title_en'];
@@ -70,6 +70,29 @@ class ReportController extends MasterController
         }
         $this->model->create($data);
         return redirect()->route('admin.item.status',['accepted'])->with('created');
+    }
+
+    public function update($id, Request $request)
+    {
+        $this->validate($request, $this->validation_func(),$this->validation_msg());
+        $data=$request->all();
+        $title['ar']=$request['title_ar'];
+        $title['en']=$request['title_en'];
+        $data['title']=$title;
+        $note['ar']=$request['note_ar'];
+        $note['en']=$request['note_en'];
+        $data['note']=$note;
+        if($request->images){
+            foreach ($request->images as $file) {
+                $filename = Str::random(10) . '.' . $file->getClientOriginalExtension();
+                $file->move('media/images/report', $filename);
+                $images[]=$filename;
+            }
+            $data['images']=$images;
+        }
+        $report=$this->model->find($id);
+        $report->update($data);
+        return redirect()->route('admin.item.status',['accepted'])->with('updated');
     }
 
 }
