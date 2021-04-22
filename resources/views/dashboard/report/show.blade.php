@@ -19,7 +19,6 @@
                                   enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
-                                <input type="hidden" value="{{$item_id}}" name="item_id">
                                 <fieldset class="form-group">
                                     <div class="row">
                                         <div class="col-sm-12">
