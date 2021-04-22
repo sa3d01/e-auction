@@ -52,7 +52,7 @@ class BidController extends MasterController
         ]);
 
     }
-    function pay($user,$auction_item,$auction_user,$charge_price,$price,$pay_type){
+    function pay($user,$auction_item,$auction_user,$charge_price,$pay_type){
         $winner=User::find($auction_user->user_id);
         if ($winner->purchasing_power > $this->totalAmount($auction_item)){
             $auction_user->update([
@@ -68,7 +68,7 @@ class BidController extends MasterController
             ]);
             $data=[
                 'vip' => 'false',
-                'price' => $price,
+                'price' => $charge_price,
                 'latest_charge' => $charge_price,
                 'more_details' => [
                     'status'=>'delivered',
@@ -92,7 +92,7 @@ class BidController extends MasterController
             ]);
             $data=[
                 'vip' => 'false',
-                'price' => $price,
+                'price' => $charge_price,
                 'latest_charge' => $charge_price,
                 'more_details' => [
                     'status'=>'paid',
@@ -205,7 +205,7 @@ class BidController extends MasterController
         if ($auction_item->item->price != null) {
             if ($auction_item->item->price <= $request['charge_price']) {
                 $this->addToCredit($auction_user);
-                $auction_item_data = $this->pay($user, $auction_item, $auction_user, $request['charge_price'], $auction_item->item->price, 'over_bid_pay');
+                $auction_item_data = $this->pay($user, $auction_item, $auction_user, $request['charge_price'],'over_bid_pay');
                 $auction_item->update($auction_item_data);
                 $winner_title['ar'] = 'تهانينا اليك ! لقد تمت عملية الشراء بنجاح .. سلعة رقم ' . $auction_item->item_id;
                 $owner_title['ar'] = 'تهانينا اليك ! لقد تم بيع سلعتك بمزاد رقم ' . $auction_item->item_id;
@@ -213,30 +213,14 @@ class BidController extends MasterController
                 $this->base_notify($winner_title, $user->id, $auction_item->item_id);
                 $this->base_notify($owner_title, $auction_item->item->user_id, $auction_item->item_id);
                 $this->notify_admin($admin_title, $auction_item);
+            }else{
+                $this->simpleBid($auction_item,$request['charge_price'],$user);
             }
         }else{
-            $auction_item->update([
-                'price' => $auction_item->price + $request['charge_price'],
-                'latest_charge' => $request['charge_price']
-            ]);
-            if (!(Carbon::createFromTimestamp($auction_item->auction->more_details['end_date']) >= $now) && ((Carbon::createFromTimestamp($auction_item->auction->start_date)) <= $now)) {
-                $this->charge_notify($auction_item, $user, $request['charge_price']);
-            }
+            $this->simpleBid($auction_item,$request['charge_price'],$user);
         }
 
-        $push = new PushNotification('fcm');
-        $msg = [
-            'notification' => null,
-            'data' => [
-                'title' => '',
-                'body' => '',
-                'type' => 'new_auction',
-            ],
-            'priority' => 'high',
-        ];
-        $push->setMessage($msg)
-            ->sendByTopic('new_auction')
-            ->send();
+        $this->topicNotify();
         //todo : increase duration of auction
         return $this->sendResponse('تمت المزايدة بنجاح');
     }
@@ -275,5 +259,31 @@ class BidController extends MasterController
         }
         $this->notify_admin($title,$auction_item);
     }
-
+    function topicNotify()
+    {
+        $push = new PushNotification('fcm');
+        $msg = [
+            'notification' => null,
+            'data' => [
+                'title' => '',
+                'body' => '',
+                'type' => 'new_auction',
+            ],
+            'priority' => 'high',
+        ];
+        $push->setMessage($msg)
+            ->sendByTopic('new_auction')
+            ->send();
+    }
+    function simpleBid($auction_item,$charge_price,$user)
+    {
+        $now=Carbon::now();
+        $auction_item->update([
+            'price' => $auction_item->price + $charge_price,
+            'latest_charge' => $charge_price
+        ]);
+        if (!(Carbon::createFromTimestamp($auction_item->auction->more_details['end_date']) >= $now) && ((Carbon::createFromTimestamp($auction_item->auction->start_date)) <= $now)) {
+            $this->charge_notify($auction_item, $user, $charge_price);
+        }
+    }
 }
