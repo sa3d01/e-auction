@@ -33,77 +33,6 @@ class BidController extends MasterController
             return 'ar';
         }
     }
-
-    function reOrderAuctionItems($auction_item)
-    {
-        $auction=$auction_item->auction;
-        $after_auction_items=AuctionItem::where('auction_id',$auction->id)->where('id','>',$auction_item->id)->get();
-        foreach ($after_auction_items as $after_auction_item){
-            $new_date=Carbon::createFromTimestamp($after_auction_item->start_date)->subSeconds($auction->duration)->timestamp;
-            $after_auction_item->update([
-                'start_date'=> $new_date
-            ]);
-        }
-        $new_end_date=Carbon::createFromTimestamp($auction->more_details['end_date'])->subSeconds($auction->duration)->timestamp;
-        $auction->update([
-            'more_details'=>[
-                'end_date'=>$new_end_date
-            ]
-        ]);
-
-    }
-    function pay($user,$auction_item,$auction_user,$charge_price,$pay_type){
-        $winner=User::find($auction_user->user_id);
-        if ($winner->purchasing_power > $this->totalAmount($auction_item)){
-            $auction_user->update([
-                'more_details'=>[
-                    'status'=>'paid',
-                    'total_amount'=>$this->totalAmount($auction_item),
-                    'paid'=>$this->totalAmount($auction_item),
-                    'remain'=>0
-                ]
-            ]);
-            $winner->update([
-                'purchasing_power'=> ((integer)$winner->purchasing_power)-$this->totalAmount($auction_item)
-            ]);
-            $data=[
-                'vip' => 'false',
-                'price' => $charge_price,
-                'latest_charge' => $charge_price,
-                'more_details' => [
-                    'status'=>'delivered',
-                    'pay_type' => $pay_type
-                ]
-            ];
-            $note['ar'] = 'تم خصم سعر السلعة من قوتك الشرائية :)';
-            $note['en'] = 'تم خصم سعر السلعة من قوتك الشرائية :)';
-            $this->base_notify($note,$winner->id,$auction_item->item_id,true);
-        }else{
-            $auction_user->update([
-                'more_details'=>[
-                    'status'=>'pending_for_transfer',
-                    'total_amount'=>$this->totalAmount($auction_item),
-                    'remain'=>$this->totalAmount($auction_item)-((integer)$user->purchasing_power),
-                    'paid'=>$winner->purchasing_power,
-                ]
-            ]);
-            $user->update([
-                'purchasing_power'=> 0,
-            ]);
-            $data=[
-                'vip' => 'false',
-                'price' => $charge_price,
-                'latest_charge' => $charge_price,
-                'more_details' => [
-                    'status'=>'paid',
-                    'pay_type' => $pay_type
-                ]
-            ];
-        }
-        $this->reOrderAuctionItems($auction_item);
-        return $data;
-    }
-
     function liveResponse($item)
     {
         $auction_item=AuctionItem::where('item_id',$item->id)->orderBy('created_at','desc')->first();
@@ -163,7 +92,6 @@ class BidController extends MasterController
             'win'=>$win
         ];
     }
-
     public function liveItem():object{
         $auction_items=AuctionItem::where('more_details->status','!=','paid')->where('more_details->status','!=','expired')->where('more_details->status','!=','negotiation')->where('more_details->status','!=','delivered')->latest()->get();
         foreach ($auction_items as $soon_item){
@@ -182,7 +110,6 @@ class BidController extends MasterController
     }
     public function bid($item_id,Request $request){
         $user=$request->user();
-        $now = Carbon::now();
         $auction_item = AuctionItem::where('item_id', $item_id)->latest()->first();
         if ($auction_item->more_details != null) {
             if ($auction_item->more_details['status'] == 'expired' || $auction_item->more_details['status'] == 'paid') {
@@ -195,31 +122,14 @@ class BidController extends MasterController
         if ($this->validate_purchasing_power($user, $auction_item->price + $request['charge_price']) !== true) {
             return $this->validate_purchasing_power($user, $auction_item->price + $request['charge_price']);
         }
-        $auction_user = AuctionUser::create([
+        AuctionUser::create([
             'finish_papers' => $request->input('finish_papers', 0),
             'user_id' => $user->id,
             'item_id' => $item_id,
             'auction_id' => $auction_item->auction_id,
             'charge_price' => $request['charge_price']
         ]);
-        if ($auction_item->item->price != null) {
-            if ($auction_item->item->price <= $request['charge_price']) {
-                $this->addToCredit($auction_user);
-                $auction_item_data = $this->pay($user, $auction_item, $auction_user, $request['charge_price'],'over_bid_pay');
-                $auction_item->update($auction_item_data);
-                $winner_title['ar'] = 'تهانينا اليك ! لقد تمت عملية الشراء بنجاح .. سلعة رقم ' . $auction_item->item_id;
-                $owner_title['ar'] = 'تهانينا اليك ! لقد تم بيع سلعتك بمزاد رقم ' . $auction_item->item_id;
-                $admin_title['ar'] = 'تم بيع السلعة رقم ' . $auction_item->item_id;
-                $this->base_notify($winner_title, $user->id, $auction_item->item_id);
-                $this->base_notify($owner_title, $auction_item->item->user_id, $auction_item->item_id);
-                $this->notify_admin($admin_title, $auction_item);
-            }else{
-                $this->simpleBid($auction_item,$request['charge_price'],$user);
-            }
-        }else{
-            $this->simpleBid($auction_item,$request['charge_price'],$user);
-        }
-
+        $this->simpleBid($auction_item,$request['charge_price'],$user);
         $this->topicNotify();
         //todo : increase duration of auction
         return $this->sendResponse('تمت المزايدة بنجاح');

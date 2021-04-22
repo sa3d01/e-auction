@@ -91,8 +91,27 @@ class Controller extends BaseController
                 $this->auction_item_update($auction_item,'live');
                 $this->expire_offers(Offer::where('auction_item_id',$auction_item->id)->get());
             } elseif (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration) < $now) {
-                if ($auction_item->item->auction_type_id==4 || $auction_item->item->auction_type_id==2) {
-                    $soon_winner = AuctionUser::where('item_id', $auction_item->item_id)->latest()->first();
+                $soon_winner = AuctionUser::where('item_id', $auction_item->item_id)->latest()->first();
+                if ($auction_item->item->auction_type_id==4) {
+                    if ($auction_item->item->price <= $auction_item->price)
+                    {
+                        $this->base_notify($winner_title, $soon_winner->user_id, $auction_item->item_id,'clickable');
+                        $this->addToCredit($soon_winner);
+                        $this->base_notify($owner_paid_title, $auction_item->item->user_id, $auction_item->item_id);
+                        $this->notify_admin($admin_paid_title, $auction_item);
+                        $this->auction_item_update($auction_item,'paid');
+                        $this->expire_offers(Offer::where('auction_item_id',$auction_item->id)->get());
+                    }elseif ($soon_winner) {
+                        $this->auction_item_update($auction_item,'negotiation');
+                        $this->autoSendOffer($auction_item);
+                    } else {
+                        $this->notify_admin($admin_expired_title, $auction_item);
+                        $this->base_notify($owner_expired_title, $auction_item->item->user_id, $auction_item->item_id);
+                        $this->auction_item_update($auction_item,'expired');
+                        $this->expire_item($auction_item->item);
+                        $this->expire_offers(Offer::where('auction_item_id',$auction_item->id)->get());
+                    }
+                }elseif ($auction_item->item->auction_type_id==2) {
                     if ($soon_winner) {
                         $this->auction_item_update($auction_item,'negotiation');
                         $this->autoSendOffer($auction_item);
@@ -104,8 +123,14 @@ class Controller extends BaseController
                         $this->expire_offers(Offer::where('auction_item_id',$auction_item->id)->get());
                     }
                 }elseif ($auction_item->item->auction_type_id==3) {
-                    $soon_winner = AuctionUser::where('item_id', $auction_item->item_id)->latest()->first();
-                    if ($soon_winner) {
+                    if ($auction_item->item->price <= $auction_item->price) {
+                        $this->base_notify($winner_title, $soon_winner->user_id, $auction_item->item_id,'clickable');
+                        $this->addToCredit($soon_winner);
+                        $this->base_notify($owner_paid_title, $auction_item->item->user_id, $auction_item->item_id);
+                        $this->notify_admin($admin_paid_title, $auction_item);
+                        $this->auction_item_update($auction_item,'paid');
+                        $this->expire_offers(Offer::where('auction_item_id',$auction_item->id)->get());
+                    }elseif ($soon_winner) {
                         if ($auction_item->price < $auction_item->item->price) {
                             $this->auction_item_update($auction_item,'negotiation');
                             $this->autoSendOffer($auction_item);
@@ -125,7 +150,6 @@ class Controller extends BaseController
                         $this->expire_offers(Offer::where('auction_item_id',$auction_item->id)->get());
                     }
                 }else {
-                    $soon_winner = AuctionUser::where('item_id', $auction_item->item_id)->latest()->first();
                     if ($soon_winner) {
                         $this->base_notify($winner_title, $soon_winner->user_id, $auction_item->item_id,'clickable');
                         $this->addToCredit($soon_winner);
@@ -154,6 +178,7 @@ class Controller extends BaseController
         $owner_tax=$auction_item->item->tax=='true'?($auction_price*$setting->owner_tax_ratio/100):0;
         return (integer)$auction_price+$owner_tax+($setting->tax_ratio)+($auction_price*$setting->app_ratio/100)+$winner_finish_paper;
     }
+
     function auction_item_update($auction_item,$status){
         if ($status=='expired' || $status=='paid'){
             if ($status=='paid'){
