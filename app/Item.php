@@ -66,7 +66,7 @@ class Item extends Model
     public function reportLabel()
     {
         $count=$this->reports()->count();
-        $route=route('admin.item.reports',$this->id);
+        $route=route('admin.item.report',$this->id);
         return"<a  href='$route' class='badge badge-success-inverted'>
                 $count
                 </a>";
