@@ -160,16 +160,11 @@ class NegotiationController extends MasterController
                     return $this->sendError('لا يمكن تقديم عرض سعر أعلى من عرض السعر الذى تم تقديمه من قبل البائع!');
                 }
             }
-        }else{
-//            البائع
-            $owner_offer=Offer::where(['auction_item_id'=>$auction_item->id,'sender_id'=>$item->user_id,'receiver_id'=>$request->user()->id])->latest()->first();
-
-            if ($owner_offer){
-                if ($owner_offer->price < $request['price']) {
-                    return $this->sendError('لا يمكن تقديم عرض سعر أعلى من عرضك الأخير!');
-                }
-            }
         }
+//        else{
+////            البائع
+//
+//        }
 
         if ($request->has('offer_id') && $request['offer_id']!=null){
             $latest_offer=Offer::find($request['offer_id']);
@@ -188,6 +183,15 @@ class NegotiationController extends MasterController
         }else{
             $receiver = User::find($item->user_id);
         }
+
+        $owner_offer=Offer::where(['auction_item_id'=>$auction_item->id,'sender_id'=>$item->user_id,'receiver_id'=>$receiver->id])->latest()->first();
+
+        if ($owner_offer){
+            if ($owner_offer->price < $request['price']) {
+                return $this->sendError('لا يمكن تقديم عرض سعر أعلى من عرضك الأخير!');
+            }
+        }
+
         $pending_offer = Offer::where(['sender_id' => $sender->id, 'receiver_id' => $receiver->id, 'auction_item_id' => $auction_item->id, 'status' => 'pending'])->latest()->first();
         if ($pending_offer) {
             return $this->sendError('لم يتم الرد على عرضك الأخير');
