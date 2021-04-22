@@ -156,6 +156,28 @@ class ItemController extends MasterController
         );
     }
 
+    public function report($item_id){
+        $report=Report::where('item_id',$item_id)->latest()->first();
+        if (!$report){
+            return View('dashboard.report.create', [
+                'item_id'=>$item_id,
+                'action'=>'admin.report.store',
+                'title'=>'أضافة تقرير فحص',
+                'create_fields'=>['العنوان' => 'title','الوصف' => 'note'],
+                'languages'=>true,
+                'images'=>true,
+            ]);
+        }
+        return View('dashboard.report.show', [
+            'row' => $report,
+            'action'=>'admin.report.update',
+            'title'=>' تقرير فحص',
+            'edit_fields'=>['العنوان' => 'title','الوصف' => 'note'],
+            'languages'=>true,
+            'images'=>true,
+        ]);
+    }
+
     public function auction_price($item_id,Request $request){
         $item=$this->model->find($item_id);
         $auction_price=$request['auction_price'];

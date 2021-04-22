@@ -69,7 +69,7 @@ class ReportController extends MasterController
             $data['images']=$images;
         }
         $this->model->create($data);
-        return redirect()->route('admin.item.reports',$request['item_id'])->with('created');
+        return redirect()->route('admin.item.status',['accepted'])->with('created');
     }
 
 }
