@@ -110,10 +110,14 @@ class BidController extends MasterController
     }
     public function bid($item_id,Request $request){
         $user=$request->user();
+        $now=Carbon::now();
+        $bid_pause_period=Setting::value('bid_pause_period');
         $auction_item = AuctionItem::where('item_id', $item_id)->latest()->first();
         if ($auction_item->more_details != null) {
             if ($auction_item->more_details['status'] == 'expired' || $auction_item->more_details['status'] == 'paid') {
                 return $this->sendError('هذا السلعة قد انتهى وقت المزايدة عليها :(');
+            }elseif ($auction_item->more_details['status'] == 'soon' && ($now->diffInSeconds(Carbon::createFromTimestamp($auction_item->auction->start_date))) < $bid_pause_period){
+                return $this->sendError('يرجى الانتظار لبداية المزاد المباشر');
             }
         }
         if ($user->profileAndPurchasingPowerIsFilled() == false) {

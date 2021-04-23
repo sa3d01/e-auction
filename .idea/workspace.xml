@@ -20,8 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="report item">
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/report/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/report/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/report/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/report/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/BidController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/BidController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Setting.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Setting.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_04_11_121918_create_settings_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_04_11_121918_create_settings_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/settings.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/settings.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -338,42 +341,8 @@
       <workItem from="1618787146043" duration="1284000" />
       <workItem from="1618800935770" duration="1977000" />
       <workItem from="1618858798441" duration="12487000" />
-      <workItem from="1618972724225" duration="15529000" />
-    </task>
-    <task id="LOCAL-00420" summary="from dashboard">
-      <created>1618171147796</created>
-      <option name="number" value="00420" />
-      <option name="presentableId" value="LOCAL-00420" />
-      <option name="project" value="LOCAL" />
-      <updated>1618171147796</updated>
-    </task>
-    <task id="LOCAL-00421" summary="from dashboard">
-      <created>1618233557725</created>
-      <option name="number" value="00421" />
-      <option name="presentableId" value="LOCAL-00421" />
-      <option name="project" value="LOCAL" />
-      <updated>1618233557725</updated>
-    </task>
-    <task id="LOCAL-00422" summary="api">
-      <created>1618236017823</created>
-      <option name="number" value="00422" />
-      <option name="presentableId" value="LOCAL-00422" />
-      <option name="project" value="LOCAL" />
-      <updated>1618236017823</updated>
-    </task>
-    <task id="LOCAL-00423" summary="api">
-      <created>1618236806318</created>
-      <option name="number" value="00423" />
-      <option name="presentableId" value="LOCAL-00423" />
-      <option name="project" value="LOCAL" />
-      <updated>1618236806318</updated>
-    </task>
-    <task id="LOCAL-00424" summary="api">
-      <created>1618239393068</created>
-      <option name="number" value="00424" />
-      <option name="presentableId" value="LOCAL-00424" />
-      <option name="project" value="LOCAL" />
-      <updated>1618239393068</updated>
+      <workItem from="1618972724225" duration="16910000" />
+      <workItem from="1619200200045" duration="2417000" />
     </task>
     <task id="LOCAL-00425" summary="api">
       <created>1618241462141</created>
@@ -683,7 +652,42 @@
       <option name="project" value="LOCAL" />
       <updated>1619069610454</updated>
     </task>
-    <option name="localTasksCounter" value="469" />
+    <task id="LOCAL-00469" summary="report item">
+      <created>1619070290673</created>
+      <option name="number" value="00469" />
+      <option name="presentableId" value="LOCAL-00469" />
+      <option name="project" value="LOCAL" />
+      <updated>1619070290674</updated>
+    </task>
+    <task id="LOCAL-00470" summary="report item">
+      <created>1619070345124</created>
+      <option name="number" value="00470" />
+      <option name="presentableId" value="LOCAL-00470" />
+      <option name="project" value="LOCAL" />
+      <updated>1619070345124</updated>
+    </task>
+    <task id="LOCAL-00471" summary="report item">
+      <created>1619070374261</created>
+      <option name="number" value="00471" />
+      <option name="presentableId" value="LOCAL-00471" />
+      <option name="project" value="LOCAL" />
+      <updated>1619070374261</updated>
+    </task>
+    <task id="LOCAL-00472" summary="report item">
+      <created>1619070670456</created>
+      <option name="number" value="00472" />
+      <option name="presentableId" value="LOCAL-00472" />
+      <option name="project" value="LOCAL" />
+      <updated>1619070670456</updated>
+    </task>
+    <task id="LOCAL-00473" summary="report item">
+      <created>1619070854460</created>
+      <option name="number" value="00473" />
+      <option name="presentableId" value="LOCAL-00473" />
+      <option name="project" value="LOCAL" />
+      <updated>1619070854460</updated>
+    </task>
+    <option name="localTasksCounter" value="474" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

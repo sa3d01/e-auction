@@ -106,6 +106,14 @@
 
                                         <div class="form-group">
                                             <label>
+                                                <i class="os-icon os-icon-calendar-time"></i>مدة توقف المزايدات قبل المزاد المباشر
+                                            </label>
+                                            <input name="bid_pause_period" value="{{$row->bid_pause_period}}" class="form-control" type="number" min="0">
+                                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>
                                                 <i class="os-icon os-icon-percent"></i>نسبة القوة الشرائية
                                             </label>
                                             <input name="purchasing_power_ratio" value="{{$row->purchasing_power_ratio}}" class="form-control" type="number" min="0">
