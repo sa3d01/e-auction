@@ -102,7 +102,7 @@ class BidController extends MasterController
                 $item=Item::find($soon_item->item_id);
                 $next_items=AuctionItem::where('start_date','>',$now->timestamp)->where('more_details->status','soon')->where('auction_id',$soon_item->auction_id)->pluck('item_id');
                 $data['live']=$this->liveResponse($item);
-                $data['next']=new ItemCollection(Item::whereIn('id',$next_items)->latest()->get());
+                $data['next']=new ItemCollection(Item::whereIn('id',$next_items)->get());
                 return $this->sendResponse($data);
             }
         }
@@ -112,13 +112,18 @@ class BidController extends MasterController
         $user=$request->user();
         $now=Carbon::now();
         $bid_pause_period=Setting::value('bid_pause_period');
+//        $auction_increasing_period=Setting::value('auction_increasing_period');
         $auction_item = AuctionItem::where('item_id', $item_id)->latest()->first();
+//        $auction_item_end=Carbon::createFromTimestamp($auction_item->start->date)->addSeconds($auction_item->auction->duration)
         if ($auction_item->more_details != null) {
             if ($auction_item->more_details['status'] == 'expired' || $auction_item->more_details['status'] == 'paid') {
                 return $this->sendError('هذا السلعة قد انتهى وقت المزايدة عليها :(');
             }elseif ($auction_item->more_details['status'] == 'soon' && ($now->diffInSeconds(Carbon::createFromTimestamp($auction_item->auction->start_date))) < $bid_pause_period){
                 return $this->sendError('يرجى الانتظار لبداية المزاد المباشر');
             }
+//            elseif ($auction_item->more_details['status']=='live'){
+//
+//            }
         }
         if ($user->profileAndPurchasingPowerIsFilled() == false) {
             return $this->sendError(' يجب اكمال بيانات ملفك الشخصى أولا وشحن قوتك الشرائية');
@@ -135,7 +140,6 @@ class BidController extends MasterController
         ]);
         $this->simpleBid($auction_item,$request['charge_price'],$user);
         $this->topicNotify();
-        //todo : increase duration of auction
         return $this->sendResponse('تمت المزايدة بنجاح');
     }
     public function charge_notify($auction_item,$user,$charge_price){

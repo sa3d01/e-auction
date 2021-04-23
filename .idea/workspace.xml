@@ -19,12 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="report item">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="periods">
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/BidController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/BidController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Setting.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Setting.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_04_11_121918_create_settings_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_04_11_121918_create_settings_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/settings.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/settings.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/SettingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/SettingController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -342,14 +339,7 @@
       <workItem from="1618800935770" duration="1977000" />
       <workItem from="1618858798441" duration="12487000" />
       <workItem from="1618972724225" duration="16910000" />
-      <workItem from="1619200200045" duration="2417000" />
-    </task>
-    <task id="LOCAL-00425" summary="api">
-      <created>1618241462141</created>
-      <option name="number" value="00425" />
-      <option name="presentableId" value="LOCAL-00425" />
-      <option name="project" value="LOCAL" />
-      <updated>1618241462141</updated>
+      <workItem from="1619200200045" duration="7617000" />
     </task>
     <task id="LOCAL-00426" summary="api">
       <created>1618243565581</created>
@@ -687,7 +677,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619070854460</updated>
     </task>
-    <option name="localTasksCounter" value="474" />
+    <task id="LOCAL-00474" summary="periods">
+      <created>1619202732175</created>
+      <option name="number" value="00474" />
+      <option name="presentableId" value="LOCAL-00474" />
+      <option name="project" value="LOCAL" />
+      <updated>1619202732175</updated>
+    </task>
+    <option name="localTasksCounter" value="475" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -729,6 +726,7 @@
     <MESSAGE value="bid" />
     <MESSAGE value="next live" />
     <MESSAGE value="report item" />
-    <option name="LAST_COMMIT_MESSAGE" value="report item" />
+    <MESSAGE value="periods" />
+    <option name="LAST_COMMIT_MESSAGE" value="periods" />
   </component>
 </project>
