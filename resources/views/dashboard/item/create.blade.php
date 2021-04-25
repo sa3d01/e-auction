@@ -18,7 +18,7 @@
                             </div>
                         @endif
                         <div class="element-box">
-                            {!! Form::open(['method'=>'post', 'files'=>true, 'enctype' => 'multipart/form-data', 'route'=>[$action], 'class' => 'formValidate','onsubmit'=>'return checkSize(4194304)']) !!}
+                            {!! Form::open(['method'=>'post', 'files'=>true, 'enctype' => 'multipart/form-data', 'route'=>[$action], 'class' => 'formValidate','onsubmit'=>'return checkSize(2194304)']) !!}
                             {!! Form::hidden('add_by', \Illuminate\Support\Facades\Auth::user()->id) !!}
                             <div class="element-info">
                                 <div class="element-info-with-icon">
@@ -267,7 +267,6 @@
             });
             $('#auction_type_id').change(function (){
                 var auction_type_id = $('#auction_type_id').val();
-                console.log(auction_type_id)
                 if(auction_type_id==3 || auction_type_id==4){
                     $('#user_price').removeAttr('hidden');
                 }else {
@@ -318,11 +317,9 @@
         function checkSize(max_img_size)
         {
             var input = document.getElementById("uploadFile");
-            console.log('checkSize')
             // check for browser support (may need to be modified)
             if(input.files)
             {
-                console.log(input.files)
                 for (var i=0;i<input.files.length;i++){
                     if (input.files[i].size > max_img_size)
                     {
