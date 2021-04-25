@@ -19,11 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="order next live">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="images errors">
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/ItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/ItemController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/master/notification.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/master/notification.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/item/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/item/create.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -342,21 +340,7 @@
       <workItem from="1618858798441" duration="12487000" />
       <workItem from="1618972724225" duration="16910000" />
       <workItem from="1619200200045" duration="8281000" />
-      <workItem from="1619385423497" duration="1582000" />
-    </task>
-    <task id="LOCAL-00427" summary="api">
-      <created>1618243685670</created>
-      <option name="number" value="00427" />
-      <option name="presentableId" value="LOCAL-00427" />
-      <option name="project" value="LOCAL" />
-      <updated>1618243685670</updated>
-    </task>
-    <task id="LOCAL-00428" summary="api">
-      <created>1618243722430</created>
-      <option name="number" value="00428" />
-      <option name="presentableId" value="LOCAL-00428" />
-      <option name="project" value="LOCAL" />
-      <updated>1618243722430</updated>
+      <workItem from="1619385423497" duration="2961000" />
     </task>
     <task id="LOCAL-00429" summary="api">
       <created>1618243780161</created>
@@ -687,7 +671,21 @@
       <option name="project" value="LOCAL" />
       <updated>1619212205179</updated>
     </task>
-    <option name="localTasksCounter" value="476" />
+    <task id="LOCAL-00476" summary="images errors">
+      <created>1619387038283</created>
+      <option name="number" value="00476" />
+      <option name="presentableId" value="LOCAL-00476" />
+      <option name="project" value="LOCAL" />
+      <updated>1619387038283</updated>
+    </task>
+    <task id="LOCAL-00477" summary="images errors">
+      <created>1619387462835</created>
+      <option name="number" value="00477" />
+      <option name="presentableId" value="LOCAL-00477" />
+      <option name="project" value="LOCAL" />
+      <updated>1619387462835</updated>
+    </task>
+    <option name="localTasksCounter" value="478" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -731,6 +729,7 @@
     <MESSAGE value="report item" />
     <MESSAGE value="periods" />
     <MESSAGE value="order next live" />
-    <option name="LAST_COMMIT_MESSAGE" value="order next live" />
+    <MESSAGE value="images errors" />
+    <option name="LAST_COMMIT_MESSAGE" value="images errors" />
   </component>
 </project>

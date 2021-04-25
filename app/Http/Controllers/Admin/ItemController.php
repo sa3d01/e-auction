@@ -58,8 +58,7 @@ class ItemController extends MasterController
         if ($request->images){
             foreach ($request->images as $image){
                 if (is_file($image)) {
-                    $this->validate($image,['image'=>'max:3000']);
-                    if ($image->getSize() > 5142575){
+                    if ($image->getSize() > 4194304){
                         return redirect()->back()->withErrors(['حجم الصورة كبير جدا..']);
                     }
                     $filename = Str::random(10) . '.' . $image->getClientOriginalExtension();

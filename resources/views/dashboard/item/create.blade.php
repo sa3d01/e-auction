@@ -18,7 +18,7 @@
                             </div>
                         @endif
                         <div class="element-box">
-                            {!! Form::open(['method'=>'post', 'files'=>true, 'enctype' => 'multipart/form-data', 'route'=>[$action], 'class' => 'formValidate']) !!}
+                            {!! Form::open(['method'=>'post', 'files'=>true, 'enctype' => 'multipart/form-data', 'route'=>[$action], 'class' => 'formValidate','onsubmit'=>'return checkSize(4194304)']) !!}
                             {!! Form::hidden('add_by', \Illuminate\Support\Facades\Auth::user()->id) !!}
                             <div class="element-info">
                                 <div class="element-info-with-icon">
@@ -313,6 +313,25 @@
                 }
             })
         });
+    </script>
+    <script type="text/javascript">
+        function checkSize(max_img_size)
+        {
+            var input = document.getElementById("uploadFile");
+            // check for browser support (may need to be modified)
+            if(input.files)
+            {
+                for (var i=0;i<input.files.length;i++){
+                    if (input.files[i].size > max_img_size)
+                    {
+                        alert("The file must be less than " + (max_img_size/1024/1024) + "MB");
+                        return false;
+                    }
+                }
+                return true;
+            }
+            return true;
+        }
     </script>
     @if($errors->any())
         <div style="visibility: hidden" id="errors" data-content="{{$errors}}"></div>
