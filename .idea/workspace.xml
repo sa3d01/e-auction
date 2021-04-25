@@ -20,8 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="images errors">
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/item/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/item/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/item/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/item/index.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -340,35 +339,7 @@
       <workItem from="1618858798441" duration="12487000" />
       <workItem from="1618972724225" duration="16910000" />
       <workItem from="1619200200045" duration="8281000" />
-      <workItem from="1619385423497" duration="2961000" />
-    </task>
-    <task id="LOCAL-00429" summary="api">
-      <created>1618243780161</created>
-      <option name="number" value="00429" />
-      <option name="presentableId" value="LOCAL-00429" />
-      <option name="project" value="LOCAL" />
-      <updated>1618243780161</updated>
-    </task>
-    <task id="LOCAL-00430" summary="api">
-      <created>1618244945952</created>
-      <option name="number" value="00430" />
-      <option name="presentableId" value="LOCAL-00430" />
-      <option name="project" value="LOCAL" />
-      <updated>1618244945952</updated>
-    </task>
-    <task id="LOCAL-00431" summary="api">
-      <created>1618245476537</created>
-      <option name="number" value="00431" />
-      <option name="presentableId" value="LOCAL-00431" />
-      <option name="project" value="LOCAL" />
-      <updated>1618245476537</updated>
-    </task>
-    <task id="LOCAL-00432" summary="api">
-      <created>1618245821196</created>
-      <option name="number" value="00432" />
-      <option name="presentableId" value="LOCAL-00432" />
-      <option name="project" value="LOCAL" />
-      <updated>1618245821196</updated>
+      <workItem from="1619385423497" duration="3599000" />
     </task>
     <task id="LOCAL-00433" summary="api">
       <created>1618339842358</created>
@@ -685,7 +656,35 @@
       <option name="project" value="LOCAL" />
       <updated>1619387462835</updated>
     </task>
-    <option name="localTasksCounter" value="478" />
+    <task id="LOCAL-00478" summary="images errors">
+      <created>1619388390116</created>
+      <option name="number" value="00478" />
+      <option name="presentableId" value="LOCAL-00478" />
+      <option name="project" value="LOCAL" />
+      <updated>1619388390117</updated>
+    </task>
+    <task id="LOCAL-00479" summary="images errors">
+      <created>1619388546995</created>
+      <option name="number" value="00479" />
+      <option name="presentableId" value="LOCAL-00479" />
+      <option name="project" value="LOCAL" />
+      <updated>1619388546996</updated>
+    </task>
+    <task id="LOCAL-00480" summary="images errors">
+      <created>1619388700410</created>
+      <option name="number" value="00480" />
+      <option name="presentableId" value="LOCAL-00480" />
+      <option name="project" value="LOCAL" />
+      <updated>1619388700410</updated>
+    </task>
+    <task id="LOCAL-00481" summary="images errors">
+      <created>1619388847471</created>
+      <option name="number" value="00481" />
+      <option name="presentableId" value="LOCAL-00481" />
+      <option name="project" value="LOCAL" />
+      <updated>1619388847471</updated>
+    </task>
+    <option name="localTasksCounter" value="482" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

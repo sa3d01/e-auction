@@ -110,7 +110,7 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form enctype="multipart/form-data" method="POST" action="{{ route('admin.item.upload-images',$row->id) }}">
+                                                        <form enctype="multipart/form-data" method="POST" action="{{ route('admin.item.upload-images',$row->id) }}" onsubmit="return checkSize(2097152)">
                                                             @csrf
                                                             <div class="form-group row">
                                                                 <label for="email" class="col-md-4 col-form-label text-md-right">الصور</label>
@@ -249,5 +249,23 @@
             })
         });
     </script>
-
+    <script type="text/javascript">
+        function checkSize(max_img_size)
+        {
+            var input = document.getElementById("uploadFile");
+            // check for browser support (may need to be modified)
+            if(input.files)
+            {
+                for (var i=0;i<input.files.length;i++){
+                    if (input.files[i].size > max_img_size)
+                    {
+                        alert("The file must be less than " + (max_img_size/1024/1024) + "MB");
+                        return false;
+                    }
+                }
+                return true;
+            }
+            return true;
+        }
+    </script>
 @endsection
