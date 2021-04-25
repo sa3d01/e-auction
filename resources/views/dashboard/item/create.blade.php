@@ -322,6 +322,7 @@
             // check for browser support (may need to be modified)
             if(input.files)
             {
+                console.log(input.files)
                 for (var i=0;i<input.files.length;i++){
                     if (input.files[i].size > max_img_size)
                     {
