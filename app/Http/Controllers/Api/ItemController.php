@@ -53,7 +53,6 @@ class ItemController extends MasterController
         $items_images=[];
         if ($request->images){
             $file=$request->images[0];
-            $filename=null;
             if (is_file($file)) {
                 if ($file->getSize() > 5142575){
                     return redirect()->back()->withErrors(['حجم الصورة كبير جدا..']);

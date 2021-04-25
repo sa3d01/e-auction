@@ -15,7 +15,14 @@
                             @if($admin_notification->item_id!=null)
                                 <a href="{{route('admin.item.show',[$admin_notification->item_id])}}">
                                     <div class="user-avatar-w">
-                                        <img alt="" src="{{$admin_notification->item->images[0]}}">
+                                        @php
+                                            try {
+                                                $src=$admin_notification->item->images[0];
+                                             }catch (Exception $exception){
+                                                $src='';
+                                             }
+                                        @endphp
+                                        <img alt="" src="{{$src}}">
                                     </div>
                                     <div class="message-content">
                                         <h6 class="message-from">
