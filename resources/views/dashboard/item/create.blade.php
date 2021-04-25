@@ -318,6 +318,7 @@
         function checkSize(max_img_size)
         {
             var input = document.getElementById("uploadFile");
+            console.log('checkSize')
             // check for browser support (may need to be modified)
             if(input.files)
             {
