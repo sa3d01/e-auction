@@ -37,8 +37,8 @@ class UserController extends MasterController
         $activation_code = 1111;//rand(1111, 9999);
         if ($request->has('email') && $request->has('phone')){
             $user = User::where(['email'=> $request['email'],'phone'=> $request['phone']])->first();
-//            if (!$user)
-//                return $this->sendError('البريد الالكترونى أو رقم الهاتف مسجل من قبل');
+            if (!$user)
+                return $this->sendError('البريد الالكترونى أو رقم الهاتف مسجل من قبل');
         }elseif ($request->has('email')){
             $user = User::where('email', $request['email'])->first();
         }else{
