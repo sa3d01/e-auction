@@ -19,20 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="images errors">
-      <change afterPath="$PROJECT_DIR$/public/media/images/item/aAkEtAEzG9.png" afterDir="false" />
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="wallet">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/AuctionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/AuctionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/TransferController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/TransferController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/ItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/ItemController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/NegotiationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/NegotiationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/TransferController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/TransferController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/transfer/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/transfer/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/transfer/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/transfer/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/BidController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/BidController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/ItemCollection.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/ItemCollection.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/ItemResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/ItemResource.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -359,14 +350,7 @@
       <workItem from="1621333934104" duration="5069000" />
       <workItem from="1621339785660" duration="2219000" />
       <workItem from="1621349805226" duration="6000" />
-      <workItem from="1621409550974" duration="11679000" />
-    </task>
-    <task id="LOCAL-00434" summary="api">
-      <created>1618340810807</created>
-      <option name="number" value="00434" />
-      <option name="presentableId" value="LOCAL-00434" />
-      <option name="project" value="LOCAL" />
-      <updated>1618340810807</updated>
+      <workItem from="1621409550974" duration="13207000" />
     </task>
     <task id="LOCAL-00435" summary="api">
       <created>1618340979788</created>
@@ -704,7 +688,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619389027368</updated>
     </task>
-    <option name="localTasksCounter" value="483" />
+    <task id="LOCAL-00483" summary="wallet">
+      <created>1621421445524</created>
+      <option name="number" value="00483" />
+      <option name="presentableId" value="LOCAL-00483" />
+      <option name="project" value="LOCAL" />
+      <updated>1621421445525</updated>
+    </task>
+    <option name="localTasksCounter" value="484" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -724,7 +715,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="auth" />
     <MESSAGE value="critical" />
     <MESSAGE value=".." />
     <MESSAGE value="." />
@@ -749,7 +739,8 @@
     <MESSAGE value="periods" />
     <MESSAGE value="order next live" />
     <MESSAGE value="images errors" />
-    <option name="LAST_COMMIT_MESSAGE" value="images errors" />
+    <MESSAGE value="wallet" />
+    <option name="LAST_COMMIT_MESSAGE" value="wallet" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

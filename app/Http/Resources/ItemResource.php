@@ -80,7 +80,7 @@ class ItemResource extends JsonResource
             'item_status'=> $this->item_status->name[$this->lang()],
             'auction_price'=> $auction_item?$auction_item->price:($this->price??0),
             'bid_count'=>(int)$bid_count,
-            'name'=> $this->mark->name[$this->lang()].' '.$this->model->name[$this->lang()].' '.$this->year,
+            'name'=>$this->year.' '. $this->mark->name[$this->lang()].' '.$this->model->name[$this->lang()],
             'city'=> $this->city->name[$this->lang()],
             'mark'=> $this->mark->name[$this->lang()],
             'model'=> $this->model->name[$this->lang()],

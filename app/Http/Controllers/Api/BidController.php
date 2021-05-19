@@ -71,7 +71,7 @@ class BidController extends MasterController
             'auction_duration'=>$auction_item->auction->duration,
             'item_status'=> $item->item_status->name[$this->lang()],
             'auction_price'=> $auction_item->price,
-            'name'=> $item->mark->name[$this->lang()].' '.$item->model->name[$this->lang()].' '.$item->year,
+            'name'=> $item->year.' '.$item->mark->name[$this->lang()].' '.$item->model->name[$this->lang()],
             'city'=> $item->city->name[$this->lang()],
             'mark'=> $item->mark->name[$this->lang()],
             'model'=> $item->model->name[$this->lang()],
