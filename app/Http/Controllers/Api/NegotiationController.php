@@ -27,75 +27,8 @@ class NegotiationController extends MasterController
         parent::__construct();
     }
 
-    function reOrderAuctionItems($auction_item)
-    {
-        $auction=$auction_item->auction;
-        $after_auction_items=AuctionItem::where('auction_id',$auction->id)->where('id','>',$auction_item->id)->get();
-        foreach ($after_auction_items as $after_auction_item){
-            $new_date=Carbon::createFromTimestamp($after_auction_item->start_date)->subSeconds($auction->duration)->timestamp;
-            $after_auction_item->update([
-               'start_date'=> $new_date
-            ]);
-        }
-        $new_end_date=Carbon::createFromTimestamp($auction->more_details['end_date'])->subSeconds($auction->duration)->timestamp;
-        $auction->update([
-           'more_details'=>[
-               'end_date'=>$new_end_date
-           ]
-        ]);
 
-    }
-    function pay($user,$auction_item,$auction_user,$charge_price,$price,$pay_type){
-        $winner=User::find($auction_user->user_id);
-        if ($winner->purchasing_power > $this->totalAmount($auction_item)){
-            $auction_user->update([
-                'more_details'=>[
-                    'status'=>'paid',
-                    'total_amount'=>$this->totalAmount($auction_item),
-                    'paid'=>$this->totalAmount($auction_item),
-                    'remain'=>0
-                ]
-            ]);
-            $winner->update([
-                'purchasing_power'=> ((integer)$winner->purchasing_power)-$this->totalAmount($auction_item)
-            ]);
-            $data=[
-                'vip' => 'false',
-                'price' => $price,
-                'latest_charge' => $charge_price,
-                'more_details' => [
-                    'status'=>'delivered',
-                    'pay_type' => $pay_type
-                ]
-            ];
-            $note['ar'] = 'تم خصم سعر السلعة من قوتك الشرائية :)';
-            $note['en'] = 'تم خصم سعر السلعة من قوتك الشرائية :)';
-            $this->base_notify($note,$winner->id,$auction_item->item_id,true);
-        }else{
-            $auction_user->update([
-                'more_details'=>[
-                    'status'=>'pending_for_transfer',
-                    'total_amount'=>$this->totalAmount($auction_item),
-                    'remain'=>$this->totalAmount($auction_item)-((integer)$user->purchasing_power),
-                    'paid'=>$winner->purchasing_power,
-                ]
-            ]);
-            $user->update([
-                'purchasing_power'=> 0,
-            ]);
-            $data=[
-                'vip' => 'false',
-                'price' => $price,
-                'latest_charge' => $charge_price,
-                'more_details' => [
-                    'status'=>'paid',
-                    'pay_type' => $pay_type
-                ]
-            ];
-        }
-        $this->reOrderAuctionItems($auction_item);
-        return $data;
-    }
+
 
     public function directPay($item_id, Request $request):object
     {
@@ -123,9 +56,12 @@ class NegotiationController extends MasterController
             'auction_id' => $auction_item->auction_id,
             'charge_price' => $charge_price
         ]);
-        $this->addToCredit($auction_user);
+//        $this->addToCredit($auction_user);
+        //winner
         $auction_item_data=$this->pay($user,$auction_item,$auction_user,$charge_price,$auction_item->item->price,'direct_pay');
         $auction_item->update($auction_item_data);
+        //owner
+        $this->editWallet($auction_user->item->user,$auction_item->price);
         $winner_title['ar'] = 'تهانينا اليك ! لقد تمت عملية الشراء بنجاح .. سلعة رقم ' . $auction_item->item_id;
         $owner_title['ar'] = 'تهانينا اليك ! لقد تم بيع سلعتك بمزاد رقم ' . $auction_item->item_id;
         $admin_title['ar'] = 'تم بيع السلعة رقم ' . $auction_item->item_id;
@@ -239,9 +175,12 @@ class NegotiationController extends MasterController
             'charge_price' => $charge_price
         ]);
         $auction_user->refresh();
+        //winner
         $auction_item_data=$this->pay($user,$auction_item,$auction_user,$charge_price,$offer->price,'negotiation');
         $auction_item->update($auction_item_data);
-        $this->addToCredit($auction_user);
+        //owner
+        $this->editWallet($auction_user->item->user,$auction_item->price);
+//        $this->addToCredit($auction_user);
         $winner_title['ar'] = 'تهانينا اليك ! لقد فزت فى المزاد الذى قمت بالمشاركة به رقم ' . $auction_item->item_id;
         $owner_title['ar'] = 'تهانينا اليك ! لقد تم بيع سلعتك بمزاد رقم ' . $auction_item->item_id;
         $admin_title['ar'] = 'تم بيع السلعة رقم ' . $auction_item->item_id;

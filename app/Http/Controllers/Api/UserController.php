@@ -47,7 +47,7 @@ class UserController extends MasterController
         $all = $request->all();
         $all['activation_code'] = $activation_code;
         if (!$user) {
-            $all['wallet']=10000;
+//            $all['wallet']=10000;
             $all['package_id']=5;
             User::create($all);
         } else {

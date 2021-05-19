@@ -105,37 +105,4 @@ class UserController extends MasterController
         $user->refresh();
         return redirect()->back()->with('updated');
     }
-    public function wallet_decrement($id,Request $request){
-        $user=$this->model->find($id);
-        $wallet_decrement_value=$request['wallet_decrement_value'];
-        if ($user->wallet >= $wallet_decrement_value){
-            $user->update(
-                [
-                    'item'=>$user->wallet-$wallet_decrement_value,
-                ]
-            );
-            $push = new PushNotification('fcm');
-            $msg = [
-                'notification' => array('title' => 'رسالة ادارية', 'sound' => 'default'),
-                'data' => [
-                    'title' => 'رسالة ادارية',
-                    'body' => 'اليك من محفظتك' . $wallet_decrement_value . 'تم سداد مبلغ ',
-                    'status' => 'admin',
-                    'type' => 'admin',
-                ],
-                'priority' => 'high',
-            ];
-            $push->setMessage($msg)
-                ->setDevicesToken($user->device['id'])
-                ->send();
-            $notification=new Notification();
-            $notification->type='app';
-            $notification->receiver_id=$user->id;
-            $notification->title='رسالة ادارية';
-            $notification->note='اليك من محفظتك'.$wallet_decrement_value.'تم سداد مبلغ ';
-            $notification->save();
-        }
-        $user->refresh();
-        return redirect()->back()->with('updated');
-    }
 }

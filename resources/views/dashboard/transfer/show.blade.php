@@ -6,15 +6,8 @@
             <div class="row">
                 <div class="col-sm-5">
                     <div class="user-profile compact">
-                    @if(array_key_exists('item_id',$row->more_details))
-                        @php($item=\App\Item::find($row->more_details['item_id']))
-                    @endif
-                        @if(array_key_exists('item_id',$row->more_details))
-                            <div class="up-head-w" style="background-image:url({{$item->images[0]}}) ">
-                        @else
-                            <div class="up-head-w" style="background-image:url({{$row->user->image}}) ">
-                        @endif
-                            <div class="up-main-info">
+                        <div class="up-head-w" style="background-image:url({{$row->user->image}}) ">
+                        <div class="up-main-info">
                                 <h2 class="up-header">
                                    {{$row->user->name}}
                                 </h2>
@@ -116,14 +109,6 @@
                                                 {{--                                                <a href="{{route('admin.user.show',$row->user_id)}}"><br>--}}
                                                 <span>{{$row->user->name}}</span>
                                                 {{--                                                </a>--}}
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12">
-                                            <div class="form-group">
-                                                <label for="">السلعة</label>
-                                                <a href="{{route('admin.item.show',$row->more_details['item_id'])}}"><br>
-                                                    <span>{{$row->more_details['item_id']}}</span>
-                                                </a>
                                             </div>
                                         </div>
                                         <div class="col-sm-12">

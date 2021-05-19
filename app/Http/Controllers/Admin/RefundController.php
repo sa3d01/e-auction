@@ -24,7 +24,7 @@ class RefundController extends MasterController
 
     public function index()
     {
-        $rows = $this->model->where('type','refund_credit')->orWhere('type','refund_wallet')->orWhere('type','refund_purchasing_power')->latest()->get();
+        $rows = $this->model->where('type','refund_wallet')->orWhere('type','refund_purchasing_power')->latest()->get();
         return View('dashboard.transfer.index', [
             'rows' => $rows,
             'type'=>'refund',

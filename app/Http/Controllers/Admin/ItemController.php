@@ -352,17 +352,20 @@ class ItemController extends MasterController
             'admin_id'=>Auth::user()->id,
         ];
         $more_details['history']=$history;
-        $add_item_tax=Setting::first()->value('add_item_tax');
-        if ($add_item_tax < $item->user->wallet){
-            $this->itemTaxPay($item);
-        }
-        if ($item->pay_status==1){
-            $note['ar']='تم قبول اضافة منتجك من قبل الادارة ..';
-            $note['en']='your added item is accepted from admin  ..';
-        }else{
-            $note['ar']='تم قبول اضافة منتجك من قبل الادارة ..ويرجى شحن محفظتك قريبا لتحصيل ضريبة الاضافة لمزاد';
-            $note['en']='your added item is accepted from admin..please charge your wallet to add to auction';
-        }
+//        $add_item_tax=Setting::first()->value('add_item_tax');
+//        if ($add_item_tax < $item->user->wallet){
+//            $this->itemTaxPay($item);
+//        }
+//        if ($item->pay_status==1){
+//            $note['ar']='تم قبول اضافة منتجك من قبل الادارة ..';
+//            $note['en']='your added item is accepted from admin  ..';
+//        }else{
+//            $note['ar']='تم قبول اضافة منتجك من قبل الادارة ..ويرجى شحن محفظتك قريبا لتحصيل ضريبة الاضافة لمزاد';
+//            $note['en']='your added item is accepted from admin..please charge your wallet to add to auction';
+//        }
+        $note['ar']='تم قبول اضافة منتجك من قبل الادارة ..';
+        $note['en']='your added item is accepted from admin  ..';
+
         if ($item->shipping_by=='app'){
             $more_details['shipping_price']=$request['shipping_price'];
             if ($request['shipping_price'] < $item->user->wallet){

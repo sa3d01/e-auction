@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Favourite;
 use App\Item;
 use App\Notification;
+use App\Setting;
 use App\Transfer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -45,9 +46,9 @@ class ItemController extends MasterController
         if ($user->profileIsFilled()==false){
             return $this->sendError('يجب اكمال بيانات ملفك الشخصى أولا');
         }
-        if (Transfer::where(['user_id'=>$user->id,'type'=>'refund_wallet','status'=>0])->first()){
-            return $this->sendError(' محفظتك معلقة حاليا لحين رد الإدارة .');
-        }
+//        if (Transfer::where(['user_id'=>$user->id,'type'=>'refund_wallet','status'=>0])->first()){
+//            return $this->sendError(' محفظتك معلقة حاليا لحين رد الإدارة .');
+//        }
         $data=$request->all();
         $data['user_id']=$user->id;
         $items_images=[];
@@ -67,6 +68,8 @@ class ItemController extends MasterController
             $data['images'] = $items_images;
         }
         $item=$this->model->create($data);
+        $add_item_tax=Setting::first()->value('add_item_tax');
+        $this->editWallet($user,-$add_item_tax);
         $title['ar'] = 'تم إضافة سلعة جديدة عن طريق مستخدم رقم '. $user->id;
         $this->new_item_notify_admin($title,$item);
         return $this->sendResponse('تم ارسال طلب إضافة المنتج بنجاح');
