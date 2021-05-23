@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use App\AuctionItem;
 use App\AuctionUser;
 use App\Favourite;
+use App\Setting;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -31,6 +32,9 @@ class ItemResource extends JsonResource
         $is_favourite=false;
         $my_item=false;
         $win=false;
+        $can_bid=true;
+
+
         if (\request()->user()){
             //favourite
             $favourite=Favourite::where(['user_id'=>\request()->user()->id, 'item_id'=>$this->id])->first();
@@ -67,7 +71,11 @@ class ItemResource extends JsonResource
             $direct_pay=$features['direct_pay'];
             $user_price=$features['user_price'];
             $bid_count=(int)AuctionUser::where(['auction_id'=>$auction_item->auction_id,'item_id'=>$auction_item->item_id])->count();
-
+            $now=Carbon::now();
+            $bid_pause_period=Setting::value('bid_pause_period');
+            if ($auction_item->more_details['status'] == 'soon' && ($now->diffInSeconds(Carbon::createFromTimestamp($auction_item->auction->start_date))) < $bid_pause_period){
+                $can_bid=false;
+            }
         }
 
 
@@ -97,7 +105,8 @@ class ItemResource extends JsonResource
             'user_price'=>$user_price,
             'my_item'=>$my_item,
             'tax'=> $this->tax=='true'?true:false,
-            'win'=>$win
+            'win'=>$win,
+            'can_bid'=>$can_bid
         ];
     }
 }

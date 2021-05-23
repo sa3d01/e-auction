@@ -6,6 +6,7 @@ use App\Auction;
 use App\AuctionItem;
 use App\AuctionUser;
 use App\Favourite;
+use App\Setting;
 use App\Transfer;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\ResourceCollection;
@@ -54,6 +55,7 @@ class ItemCollection extends ResourceCollection
             }
             $arr['status_text']='';
             $arr['bid_count']=0;
+            $arr['can_bid']=true;
             if ($auction_item){
                 if (\request()->user()){
                     $features=$auction_item->auctionTypeFeatures(auth()->user()->id);
@@ -89,7 +91,11 @@ class ItemCollection extends ResourceCollection
                 }elseif ($features['status']=='live'){
                     $arr['status_text']='مباشر';
                 }
-
+                $now=Carbon::now();
+                $bid_pause_period=Setting::value('bid_pause_period');
+                if ($auction_item->more_details['status'] == 'soon' && ($now->diffInSeconds(Carbon::createFromTimestamp($auction_item->auction->start_date))) < $bid_pause_period){
+                    $arr['can_bid']=false;
+                }
                 $arr['auction_type']= $obj->auction_type->name[$this->lang()];
                 $arr['start_date']= $auction_item->auction->start_date;
                 $arr['now_date']= Carbon::now()->format('Y-m-d h:i:s A');
