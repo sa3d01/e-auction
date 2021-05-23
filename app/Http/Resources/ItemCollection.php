@@ -74,18 +74,20 @@ class ItemCollection extends ResourceCollection
 
                 $arr['is_paid']=false;
                 if ($features['status']=='paid'){
-                    $arr['status_text']='فى انتظار الدفع';
+                    $arr['status_text']='مغلق';
                     if (Transfer::where('more_details->item_id',$obj->id)->where('type','buy_item')->where('status',0)->latest()->first()){
                         $arr['is_paid']=true;
-                        $arr['status_text']='فى انتظار التأكيد';
+                        $arr['status_text']='مغلق';
                     }
                 }elseif ($features['status']=='delivered'){
                     $arr['is_paid']=true;
-                    $arr['status_text']='تم التسليم';
+                    $arr['status_text']='مغلق';
                 }elseif ($features['status']=='soon'){
-                    $arr['status_text']='تم جدولتها للمزاد';
+                    $arr['status_text']='';
                 }elseif ($features['status']=='expired'){
-                    $arr['status_text']='تم انتهاء المزاد المباشر ولم يتم البيع';
+                    $arr['status_text']='مغلق';
+                }elseif ($features['status']=='live'){
+                    $arr['status_text']='مباشر';
                 }
 
                 $arr['auction_type']= $obj->auction_type->name[$this->lang()];
