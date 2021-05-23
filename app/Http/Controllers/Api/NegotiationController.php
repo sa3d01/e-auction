@@ -27,15 +27,12 @@ class NegotiationController extends MasterController
         parent::__construct();
     }
 
-
-
-
     public function directPay($item_id, Request $request):object
     {
         $user = $request->user();
         $auction_item = AuctionItem::where('item_id', $item_id)->latest()->first();
         if ($auction_item->more_details['status'] == 'expired' || $auction_item->more_details['status'] == 'paid') {
-            return $this->sendError('هذا السلعة قد انتهى وقت المزايدة عليها :(');
+            return $this->sendError('هذه المركبة قد انتهى وقت المزايدة عليها :(');
         }
         if ($user->profileAndPurchasingPowerIsFilled()==false){
             return $this->sendError(' يجب اكمال بيانات ملفك الشخصى أولا وشحن قوتك الشرائية');
@@ -62,9 +59,9 @@ class NegotiationController extends MasterController
         $auction_item->update($auction_item_data);
         //owner
         $this->editWallet($auction_user->item->user,$auction_item->price);
-        $winner_title['ar'] = 'تهانينا اليك ! لقد تمت عملية الشراء بنجاح .. سلعة رقم ' . $auction_item->item_id;
+        $winner_title['ar'] = 'تهانينا اليك ! لقد تمت عملية الشراء بنجاح .. مركبة رقم ' . $auction_item->item_id;
         $owner_title['ar'] = 'تهانينا اليك ! لقد تم بيع سلعتك بمزاد رقم ' . $auction_item->item_id;
-        $admin_title['ar'] = 'تم بيع السلعة رقم ' . $auction_item->item_id;
+        $admin_title['ar'] = 'تم بيع المركبة رقم ' . $auction_item->item_id;
         $this->base_notify($winner_title, $user->id, $auction_item->item_id);
         $this->base_notify($owner_title, $auction_item->item->user_id, $auction_item->item_id);
         $this->notify_admin($admin_title, $auction_item);
@@ -158,7 +155,7 @@ class NegotiationController extends MasterController
         $user = $request->user();
         $auction_item = AuctionItem::where('item_id', $item_id)->latest()->first();
         if ($auction_item->more_details['status'] == 'expired' || $auction_item->more_details['status'] == 'paid') {
-            return $this->sendError('هذا السلعة قد انتهى وقت المزايدة عليها :(');
+            return $this->sendError('هذا المركبة قد انتهى وقت المزايدة عليها :(');
         }
         $offer = Offer::find($offer_id);
         $charge_price = $offer->price;
@@ -183,7 +180,7 @@ class NegotiationController extends MasterController
 //        $this->addToCredit($auction_user);
         $winner_title['ar'] = 'تهانينا اليك ! لقد فزت فى المزاد الذى قمت بالمشاركة به رقم ' . $auction_item->item_id;
         $owner_title['ar'] = 'تهانينا اليك ! لقد تم بيع سلعتك بمزاد رقم ' . $auction_item->item_id;
-        $admin_title['ar'] = 'تم بيع السلعة رقم ' . $auction_item->item_id;
+        $admin_title['ar'] = 'تم بيع المركبة رقم ' . $auction_item->item_id;
         $this->base_notify($winner_title, $auction_user_id, $auction_item->item_id);
         $this->base_notify($owner_title, $auction_item->item->user_id, $auction_item->item_id);
         $this->notify_admin($admin_title, $auction_item);

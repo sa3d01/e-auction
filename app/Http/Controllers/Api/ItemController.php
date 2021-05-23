@@ -70,7 +70,7 @@ class ItemController extends MasterController
         $item=$this->model->create($data);
         $add_item_tax=Setting::first()->value('add_item_tax');
         $this->editWallet($user,-$add_item_tax);
-        $title['ar'] = 'تم إضافة سلعة جديدة عن طريق مستخدم رقم '. $user->id;
+        $title['ar'] = 'تم إضافة مركبة جديدة عن طريق مستخدم رقم '. $user->id;
         $this->new_item_notify_admin($title,$item);
         return $this->sendResponse('تم ارسال طلب إضافة المنتج بنجاح');
     }

@@ -117,7 +117,7 @@ class BidController extends MasterController
 //        $auction_item_end=Carbon::createFromTimestamp($auction_item->start->date)->addSeconds($auction_item->auction->duration)
         if ($auction_item->more_details != null) {
             if ($auction_item->more_details['status'] == 'expired' || $auction_item->more_details['status'] == 'paid') {
-                return $this->sendError('هذا السلعة قد انتهى وقت المزايدة عليها :(');
+                return $this->sendError('هذه المركبة قد انتهى وقت المزايدة عليها :(');
             }elseif ($auction_item->more_details['status'] == 'soon' && ($now->diffInSeconds(Carbon::createFromTimestamp($auction_item->auction->start_date))) < $bid_pause_period){
                 return $this->sendError('يرجى الانتظار لبداية المزاد المباشر');
             }
