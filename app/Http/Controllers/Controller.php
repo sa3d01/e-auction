@@ -104,15 +104,14 @@ class Controller extends BaseController
                     if ($auction_item->item->price <= $auction_item->price)
                     {
                         $this->base_notify($winner_title, $soon_winner->user_id, $auction_item->item_id,'clickable');
-
                         $latest_auction_user = AuctionUser::where('item_id', $auction_item->item_id)->latest()->first();
-                        if ($latest_auction_user) {
+                        if ($latest_auction_user && $auction_item->item->price>0) {
                             $charge_price = $auction_item->item->price - $auction_item->price;
                         } else {
                             $charge_price = $auction_item->item->price;
                         }
                         //winner
-                        $auction_item_data=$this->pay('$user',$auction_item,$latest_auction_user,$charge_price,$auction_item->item->price,'direct_pay');
+                        $auction_item_data=$this->pay('$user',$auction_item,$latest_auction_user,$charge_price,$auction_item->item->price??0,'direct_pay');
                         $auction_item->update($auction_item_data);
                         //owner
                         $this->editWallet($latest_auction_user->item->user,$auction_item->price);
@@ -148,13 +147,13 @@ class Controller extends BaseController
                         $this->base_notify($winner_title, $soon_winner->user_id, $auction_item->item_id,'clickable');
 //                        $this->addToCredit($soon_winner);
                         $latest_auction_user = AuctionUser::where('item_id', $auction_item->item_id)->latest()->first();
-                        if ($latest_auction_user) {
+                        if ($latest_auction_user && $auction_item->item->price>0) {
                             $charge_price = $auction_item->item->price - $auction_item->price;
                         } else {
                             $charge_price = $auction_item->item->price;
                         }
                         //winner
-                        $auction_item_data=$this->pay('$user',$auction_item,$latest_auction_user,$charge_price,$auction_item->item->price,'direct_pay');
+                        $auction_item_data=$this->pay('$user',$auction_item,$latest_auction_user,$charge_price,$auction_item->item->price??0,'direct_pay');
                         $auction_item->update($auction_item_data);
                         //owner
                         $this->editWallet($latest_auction_user->item->user,$auction_item->price);
@@ -171,13 +170,13 @@ class Controller extends BaseController
                             $this->base_notify($winner_title, $soon_winner->user_id, $auction_item->item_id,'clickable');
 //                            $this->addToCredit($soon_winner);
                             $latest_auction_user = AuctionUser::where('item_id', $auction_item->item_id)->latest()->first();
-                            if ($latest_auction_user) {
+                            if ($latest_auction_user && $auction_item->item->price>0) {
                                 $charge_price = $auction_item->item->price - $auction_item->price;
                             } else {
                                 $charge_price = $auction_item->item->price;
                             }
                             //winner
-                            $auction_item_data=$this->pay('$user',$auction_item,$latest_auction_user,$charge_price,$auction_item->item->price,'direct_pay');
+                            $auction_item_data=$this->pay('$user',$auction_item,$latest_auction_user,$charge_price,$auction_item->item->price??0,'direct_pay');
                             $auction_item->update($auction_item_data);
                             //owner
                             $this->editWallet($latest_auction_user->item->user,$auction_item->price);
@@ -200,13 +199,13 @@ class Controller extends BaseController
                         $this->base_notify($winner_title, $soon_winner->user_id, $auction_item->item_id,'clickable');
 //                        $this->addToCredit($soon_winner);
                         $latest_auction_user = AuctionUser::where('item_id', $auction_item->item_id)->latest()->first();
-                        if ($latest_auction_user) {
+                        if ($latest_auction_user && $auction_item->item->price>0) {
                             $charge_price = $auction_item->item->price - $auction_item->price;
                         } else {
                             $charge_price = $auction_item->item->price;
                         }
                         //winner
-                        $auction_item_data=$this->pay('$user',$auction_item,$latest_auction_user,$charge_price,$auction_item->item->price,'direct_pay');
+                        $auction_item_data=$this->pay('$user',$auction_item,$latest_auction_user,$charge_price,$auction_item->item->price??0,'direct_pay');
                         $auction_item->update($auction_item_data);
                         //owner
                         $this->editWallet($latest_auction_user->item->user,$auction_item->price);
