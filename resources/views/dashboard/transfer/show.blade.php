@@ -135,14 +135,14 @@
                                         </div>
                                         <div class="col-sm-12">
                                             <div class="form-group">
-                                                <label for="">البنك</label>
+                                                <label for="">البنك:</label>
                                                 <span>{{$row->user->more_details['bank']?$row->user->more_details['bank']['bank_name']:""}}</span>
                                             </div>
                                         </div>
                                         <div class="col-sm-12">
                                             <div class="form-group">
-                                                <label for="">رقم الحساب</label>
-                                                <span>{{$row->user->more_details['bank']?$row->user->more_details['bank']['account_number']:""}}</span>
+                                                <label for="">:رقم الحساب</label>
+                                                <span>{{$row->user->more_details['bank']?$row->user->more_details['bank']['iban_number']:""}}</span>
                                             </div>
                                         </div>
                                         <div class="col-sm-12">
