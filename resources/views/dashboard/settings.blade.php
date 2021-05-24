@@ -32,6 +32,28 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label>
+                                                <i class="os-icon os-icon-email-2-at"></i>البريد الإلكترونى
+                                            </label>
+                                            <input name="email" value="{{$row->contacts['email']}}" class="form-control" type="email">
+                                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>
+                                                <i class="os-icon os-icon-phone"></i>رقم الجوال
+                                            </label>
+                                            <input name="mobile" value="{{$row->contacts['mobile']}}" class="form-control" type="text">
+                                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>
+                                                <i class="os-icon os-icon-map-pin"></i>العنوان
+                                            </label>
+                                            <input name="address" value="{{$row->contacts['address']}}" class="form-control" type="text">
+                                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>
                                                 <i class="os-icon os-icon-dollar-sign"></i>مقدار المزايدة على السلع الأقل سعرها من عشرة الاف
                                             </label>
                                             <input name="less_tenThousand" value="{{$row->more_details['less_tenThousand']}}" class="form-control" type="number" min="0">
@@ -88,13 +110,13 @@
                                             <div class="help-block form-text with-errors form-control-feedback"></div>
                                         </div>
 
-                                        <div class="form-group">
-                                            <label>
-                                                <i class="os-icon os-icon-calendar-time"></i>مدة الزيادة على المزاد الموشك على الانتهاء
-                                            </label>
-                                            <input name="auction_increasing_period" value="{{$row->auction_increasing_period}}" class="form-control" type="number" min="0">
-                                            <div class="help-block form-text with-errors form-control-feedback"></div>
-                                        </div>
+{{--                                        <div class="form-group">--}}
+{{--                                            <label>--}}
+{{--                                                <i class="os-icon os-icon-calendar-time"></i>مدة الزيادة على المزاد الموشك على الانتهاء--}}
+{{--                                            </label>--}}
+{{--                                            <input name="auction_increasing_period" value="{{$row->auction_increasing_period}}" class="form-control" type="number" min="0">--}}
+{{--                                            <div class="help-block form-text with-errors form-control-feedback"></div>--}}
+{{--                                        </div>--}}
 
                                         <div class="form-group">
                                             <label>
