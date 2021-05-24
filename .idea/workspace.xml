@@ -19,10 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="transfer">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" afterDir="false" />
-    </list>
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="wallet" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -355,14 +352,7 @@
       <workItem from="1621769905105" duration="1732000" />
       <workItem from="1621788632445" duration="45000" />
       <workItem from="1621852397349" duration="2288000" />
-      <workItem from="1621859690361" duration="9783000" />
-    </task>
-    <task id="LOCAL-00463" summary="negotiations">
-      <created>1619063122015</created>
-      <option name="number" value="00463" />
-      <option name="presentableId" value="LOCAL-00463" />
-      <option name="project" value="LOCAL" />
-      <updated>1619063122015</updated>
+      <workItem from="1621859690361" duration="10410000" />
     </task>
     <task id="LOCAL-00464" summary="bid">
       <created>1619065411265</created>
@@ -700,7 +690,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621869155669</updated>
     </task>
-    <option name="localTasksCounter" value="512" />
+    <task id="LOCAL-00512" summary="wallet">
+      <created>1621870021172</created>
+      <option name="number" value="00512" />
+      <option name="presentableId" value="LOCAL-00512" />
+      <option name="project" value="LOCAL" />
+      <updated>1621870021172</updated>
+    </task>
+    <option name="localTasksCounter" value="513" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -738,14 +735,14 @@
     <MESSAGE value="periods" />
     <MESSAGE value="order next live" />
     <MESSAGE value="images errors" />
-    <MESSAGE value="wallet" />
     <MESSAGE value="year" />
     <MESSAGE value="text" />
     <MESSAGE value="can_bid" />
     <MESSAGE value="settings" />
     <MESSAGE value="api" />
     <MESSAGE value="transfer" />
-    <option name="LAST_COMMIT_MESSAGE" value="transfer" />
+    <MESSAGE value="wallet" />
+    <option name="LAST_COMMIT_MESSAGE" value="wallet" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

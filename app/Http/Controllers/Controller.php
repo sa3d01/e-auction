@@ -231,6 +231,7 @@ class Controller extends BaseController
     function totalAmount($auction_item){
         $setting=Setting::first();
         $auction_price=$auction_item->price;
+        return (integer)$auction_price;
         $auction_user=AuctionUser::where(['auction_id'=>$auction_item->auction_id,'item_id'=>$auction_item->item_id])->latest()->first();
         $winner_finish_paper=$auction_user->finish_papers==1?$setting->finish_papers:0;
         $owner_tax=$auction_item->item->tax=='true'?($auction_price*$setting->owner_tax_ratio/100):0;
