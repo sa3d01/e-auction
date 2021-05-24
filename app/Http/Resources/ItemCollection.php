@@ -131,7 +131,12 @@ class ItemCollection extends ResourceCollection
                 $arr['auction_price']=0;
             }
             $arr['id']=(int)$obj->id;
-            $name = sprintf(' %s  ,  %s ,   %s ',$obj->mark->name[$this->lang()],$obj->model->name[$this->lang()],$obj->year);
+            $year = $obj->year;
+            $mark = $obj->mark->name[$this->lang()];
+            $model= $obj->model->name[$this->lang()];
+
+            $format = '%d - %s - %s';
+            $name= sprintf($format, $year, $mark , $model);
             $arr['name']=$name;
             $arr['item_status']= $obj->item_status->name[$this->lang()];
             $arr['city']= $obj->city->name[$this->lang()];
