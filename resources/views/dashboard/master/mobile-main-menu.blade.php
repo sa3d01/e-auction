@@ -48,22 +48,22 @@
         </ul>
     </li>
 
-    <li class="has-sub-menu">
-        <a href="#">
-            <div class="icon-w">
-                <div class="os-icon os-icon-package"></div>
-            </div>
-            <span>الباقات </span>
-        </a>
-        <ul class="sub-menu">
-            <li>
-                <a href="{{route('admin.package.index')}}"> قائمة البيانات </a>
-            </li>
-            <li>
-                <a href="{{route('admin.package.create')}}"> إضافة </a>
-            </li>
-        </ul>
-    </li>
+{{--    <li class="has-sub-menu">--}}
+{{--        <a href="#">--}}
+{{--            <div class="icon-w">--}}
+{{--                <div class="os-icon os-icon-package"></div>--}}
+{{--            </div>--}}
+{{--            <span>الباقات </span>--}}
+{{--        </a>--}}
+{{--        <ul class="sub-menu">--}}
+{{--            <li>--}}
+{{--                <a href="{{route('admin.package.index')}}"> قائمة البيانات </a>--}}
+{{--            </li>--}}
+{{--            <li>--}}
+{{--                <a href="{{route('admin.package.create')}}"> إضافة </a>--}}
+{{--            </li>--}}
+{{--        </ul>--}}
+{{--    </li>--}}
 
     <li class="has-sub-menu">
         <a href="#">
