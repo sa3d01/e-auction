@@ -45,6 +45,11 @@ class HomeController extends MasterController
         $more_details['more_hundredThousand']=$request['more_hundredThousand'];
         $data['more_details']=$more_details;
 
+        $contacts['email']=$request['email'];
+        $contacts['mobile']=$request['mobile'];
+        $contacts['address']=$request['address'];
+        $data['contacts']=$contacts;
+
         Setting::updateOrCreate(['id'=>1],$data);
         return redirect()->back()->with('updated', 'تم التعديل بنجاح');
     }

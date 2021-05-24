@@ -42,6 +42,10 @@ class SettingController extends MasterController
         $data['more_hundredThousand'] = (integer)$setting->more_details['more_hundredThousand'];
         $data['bid_pause_period']=(integer)$setting->bid_pause_period;
 
+        $data['email'] = $setting->contacts['email'];
+        $data['mobile'] = $setting->contacts['mobile'];
+        $data['address'] = $setting->contacts['address'];
+
         return $this->sendResponse($data);
     }
 
