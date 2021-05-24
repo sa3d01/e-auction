@@ -23,7 +23,9 @@ class TransferController extends MasterController
 
     public function index()
     {
-        $rows = $this->model->where(['purchasing_type'=>'bank','type'=>'wallet'])->orWhere(['purchasing_type'=>'bank','type'=>'purchasing_power'])->latest()->get();
+        $rows_q=$this->model->where('purchasing_type','bank');
+        $rows_q=$rows_q->where('type','wallet')->orWhere('type','purchasing_power');
+        $rows = $rows_q->latest()->get();
         return View('dashboard.transfer.index', [
             'rows' => $rows,
             'type'=>'transfer',
