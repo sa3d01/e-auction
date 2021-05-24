@@ -30,7 +30,7 @@ class TransferController extends MasterController
         if (Transfer::where(['status'=>0,'purchasing_type'=>'bank'])->latest()->first()){
             return $this->sendError('يرجى انتظار رد الإدارة على تحويلك السابق');
         }
-        if ($request['type'] == 'purchasing_power') {
+        if ($request['type'] == 'purchasing_power' && $request['purchasing_type'] == 'online') {
             $data['purchasing_type']='online';
             Transfer::create($data);
             $user->update(['purchasing_power' =>$user->purchasing_power+ $request['money']]);
