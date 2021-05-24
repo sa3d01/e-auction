@@ -106,6 +106,7 @@
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label for="">الغرض من الحوالة</label>
+                                                <br>
                                                 {{--                                                <a href="{{route('admin.user.show',$row->user_id)}}"><br>--}}
                                                 <span>{{$row->type=='wallet'?'دفع مستحقات':'دفع عربون'}}</span>
                                                 {{--                                                </a>--}}
@@ -114,6 +115,7 @@
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label for="">صاحب التحويل</label>
+                                                <br>
                                                 {{--                                                <a href="{{route('admin.user.show',$row->user_id)}}"><br>--}}
                                                 <span>{{$row->user->name}}</span>
                                                 {{--                                                </a>--}}
@@ -122,6 +124,7 @@
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label for="">المبلغ المحول</label><br>
+                                                <br>
                                                 <span class="fa-sort-amount-asc">{{$row->money}}</span>
                                                 ريال
                                             </div>
@@ -130,6 +133,7 @@
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label for="">صاحب الطلب</label>
+                                                <br>
                                                 {{--                                                <a href="{{route('admin.user.show',$row->user_id)}}"><br>--}}
                                                 <span>{{$row->user->name}}</span>
                                                 {{--                                                </a>--}}
@@ -138,24 +142,28 @@
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label for="">الاسم</label>
+                                                <br>
                                                 <span>{{$row->more_details['name']}}</span>
                                             </div>
                                         </div>
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label for="">البنك:</label>
+                                                <br>
                                                 <span>{{$row->user->more_details['bank']?$row->user->more_details['bank']['bank_name']:""}}</span>
                                             </div>
                                         </div>
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label for="">رقم الحساب:</label>
+                                                <br>
                                                 <span>{{$row->user->more_details['bank']?$row->user->more_details['bank']['iban_number']:""}}</span>
                                             </div>
                                         </div>
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label for="">المبلغ </label><br>
+                                                <br>
                                                 <span class="fa-sort-amount-asc">{{$row->money}}</span>
                                                 ريال
                                             </div>

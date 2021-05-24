@@ -19,8 +19,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="api">
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/TransferController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/TransferController.php" afterDir="false" />
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="transfer">
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/transfer/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/transfer/show.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -354,21 +354,7 @@
       <workItem from="1621769905105" duration="1732000" />
       <workItem from="1621788632445" duration="45000" />
       <workItem from="1621852397349" duration="2288000" />
-      <workItem from="1621859690361" duration="7258000" />
-    </task>
-    <task id="LOCAL-00457" summary="api">
-      <created>1618866623548</created>
-      <option name="number" value="00457" />
-      <option name="presentableId" value="LOCAL-00457" />
-      <option name="project" value="LOCAL" />
-      <updated>1618866623548</updated>
-    </task>
-    <task id="LOCAL-00458" summary="api">
-      <created>1618868778889</created>
-      <option name="number" value="00458" />
-      <option name="presentableId" value="LOCAL-00458" />
-      <option name="project" value="LOCAL" />
-      <updated>1618868778889</updated>
+      <workItem from="1621859690361" duration="7578000" />
     </task>
     <task id="LOCAL-00459" summary="api">
       <created>1618869551093</created>
@@ -699,7 +685,21 @@
       <option name="project" value="LOCAL" />
       <updated>1621867249578</updated>
     </task>
-    <option name="localTasksCounter" value="506" />
+    <task id="LOCAL-00506" summary="transfer">
+      <created>1621867489511</created>
+      <option name="number" value="00506" />
+      <option name="presentableId" value="LOCAL-00506" />
+      <option name="project" value="LOCAL" />
+      <updated>1621867489511</updated>
+    </task>
+    <task id="LOCAL-00507" summary="transfer">
+      <created>1621867721350</created>
+      <option name="number" value="00507" />
+      <option name="presentableId" value="LOCAL-00507" />
+      <option name="project" value="LOCAL" />
+      <updated>1621867721350</updated>
+    </task>
+    <option name="localTasksCounter" value="508" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -719,7 +719,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="auctionItemStatusUpdate" />
     <MESSAGE value="sms" />
     <MESSAGE value="notifications admin" />
     <MESSAGE value="latest_file" />
@@ -744,7 +743,8 @@
     <MESSAGE value="can_bid" />
     <MESSAGE value="settings" />
     <MESSAGE value="api" />
-    <option name="LAST_COMMIT_MESSAGE" value="api" />
+    <MESSAGE value="transfer" />
+    <option name="LAST_COMMIT_MESSAGE" value="transfer" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
