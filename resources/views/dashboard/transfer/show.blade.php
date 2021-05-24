@@ -136,13 +136,13 @@
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label for="">البنك</label>
-                                                <span>{{$row->more_details['bank_name']}}</span>
+                                                <span>{{$row->user->more_details['bank_name']}}</span>
                                             </div>
                                         </div>
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label for="">رقم الحساب</label>
-                                                <span>{{$row->more_details['account_number']}}</span>
+                                                <span>{{$row->user->more_details['account_number']}}</span>
                                             </div>
                                         </div>
                                         <div class="col-sm-12">
