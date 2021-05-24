@@ -21,6 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="wallet">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -354,21 +355,7 @@
       <workItem from="1621769905105" duration="1732000" />
       <workItem from="1621788632445" duration="45000" />
       <workItem from="1621852397349" duration="2288000" />
-      <workItem from="1621859690361" duration="11479000" />
-    </task>
-    <task id="LOCAL-00465" summary="bid">
-      <created>1619067214886</created>
-      <option name="number" value="00465" />
-      <option name="presentableId" value="LOCAL-00465" />
-      <option name="project" value="LOCAL" />
-      <updated>1619067214886</updated>
-    </task>
-    <task id="LOCAL-00466" summary="next live">
-      <created>1619068003925</created>
-      <option name="number" value="00466" />
-      <option name="presentableId" value="LOCAL-00466" />
-      <option name="project" value="LOCAL" />
-      <updated>1619068003925</updated>
+      <workItem from="1621859690361" duration="13240000" />
     </task>
     <task id="LOCAL-00467" summary="report item">
       <created>1619069133963</created>
@@ -699,7 +686,21 @@
       <option name="project" value="LOCAL" />
       <updated>1621870981269</updated>
     </task>
-    <option name="localTasksCounter" value="514" />
+    <task id="LOCAL-00514" summary="wallet">
+      <created>1621871934098</created>
+      <option name="number" value="00514" />
+      <option name="presentableId" value="LOCAL-00514" />
+      <option name="project" value="LOCAL" />
+      <updated>1621871934098</updated>
+    </task>
+    <task id="LOCAL-00515" summary="wallet">
+      <created>1621872497481</created>
+      <option name="number" value="00515" />
+      <option name="presentableId" value="LOCAL-00515" />
+      <option name="project" value="LOCAL" />
+      <updated>1621872497481</updated>
+    </task>
+    <option name="localTasksCounter" value="516" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -763,6 +764,15 @@
           <url>file://$PROJECT_DIR$/routes/web.php</url>
           <line>56</line>
           <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/app/Http/Controllers/Controller.php</url>
+          <line>231</line>
+          <properties>
+            <option name="className" value="\App\Http\Controllers\Controller" />
+            <option name="methodName" value="totalAmount" />
+          </properties>
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

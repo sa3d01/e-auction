@@ -206,10 +206,10 @@ class Controller extends BaseController
                             $charge_price = $auction_item->item->price;
                         }
                         //winner
-                        $auction_item_data=$this->pay('$user',$auction_item,$latest_auction_user,$charge_price,$auction_item->item->price,'direct_pay');
+                        $auction_item_data=$this->pay('$user',$auction_item,$latest_auction_user,$latest_auction_user->charge_price,$latest_auction_user->price,'direct_pay');
                         $auction_item->update($auction_item_data);
                         //owner
-                        $this->editWallet($latest_auction_user->item->user,$auction_item->price);
+                        $this->editWallet($latest_auction_user->item->user,$latest_auction_user->price);
 
 
                         $this->base_notify($owner_paid_title, $auction_item->item->user_id, $auction_item->item_id);
