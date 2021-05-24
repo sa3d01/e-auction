@@ -107,9 +107,14 @@
                                             <div class="form-group">
                                                 <label for="">الغرض من الحوالة</label>
                                                 <br>
-                                                {{--                                                <a href="{{route('admin.user.show',$row->user_id)}}"><br>--}}
                                                 <span>{{$row->type=='wallet'?'دفع مستحقات':'دفع عربون'}}</span>
-                                                {{--                                                </a>--}}
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="">تاريخ الحوالة</label>
+                                                <br>
+                                                <span>{{\Carbon\Carbon::parse($row->created_at)->format('Y-m-d H:i')}}</span>
                                             </div>
                                         </div>
                                         <div class="col-sm-12">
@@ -137,6 +142,13 @@
                                                 {{--                                                <a href="{{route('admin.user.show',$row->user_id)}}"><br>--}}
                                                 <span>{{$row->user->name}}</span>
                                                 {{--                                                </a>--}}
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="">تاريخ الطلب</label>
+                                                <br>
+                                                <span>{{\Carbon\Carbon::parse($row->created_at)->format('Y-m-d H:i')}}</span>
                                             </div>
                                         </div>
                                         <div class="col-sm-12">
