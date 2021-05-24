@@ -16,6 +16,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use phpDocumentor\Reflection\Types\Integer;
 use Tymon\JWTAuth\Exceptions\UserNotDefinedException;
 
 class Controller extends BaseController
@@ -228,14 +229,15 @@ class Controller extends BaseController
             }
         }
     }
-    function totalAmount($auction_item){
-        $setting=Setting::first();
+    function totalAmount($auction_item):Integer
+    {
+//        $setting=Setting::first();
         $auction_price=$auction_item->price;
         return (integer)$auction_price;
-        $auction_user=AuctionUser::where(['auction_id'=>$auction_item->auction_id,'item_id'=>$auction_item->item_id])->latest()->first();
-        $winner_finish_paper=$auction_user->finish_papers==1?$setting->finish_papers:0;
-        $owner_tax=$auction_item->item->tax=='true'?($auction_price*$setting->owner_tax_ratio/100):0;
-        return (integer)$auction_price+$owner_tax+($setting->tax_ratio)+($auction_price*$setting->app_ratio/100)+$winner_finish_paper;
+//        $auction_user=AuctionUser::where(['auction_id'=>$auction_item->auction_id,'item_id'=>$auction_item->item_id])->latest()->first();
+//        $winner_finish_paper=$auction_user->finish_papers==1?$setting->finish_papers:0;
+//        $owner_tax=$auction_item->item->tax=='true'?($auction_price*$setting->owner_tax_ratio/100):0;
+//        return (integer)$auction_price+$owner_tax+($setting->tax_ratio)+($auction_price*$setting->app_ratio/100)+$winner_finish_paper;
     }
 
     function auction_item_update($auction_item,$status){
@@ -409,12 +411,12 @@ class Controller extends BaseController
 //                ]
 //            ];
 //        }
-        $take=(10*($this->totalAmount($auction_item)))/100;
-        $remain=$this->totalAmount($auction_item)-$take;
+        $take=(10*($price))/100;
+        $remain=$price-$take;
         $auction_user->update([
             'more_details'=>[
                 'status'=>'pending_for_transfer',
-                'total_amount'=>$this->totalAmount($auction_item),
+                'total_amount'=>$price,
                 'remain'=>$remain,
                 'paid'=>$take,
             ]
