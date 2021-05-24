@@ -134,11 +134,10 @@ class ItemCollection extends ResourceCollection
             $year = $obj->year;
             $mark = $obj->mark->name[$this->lang()];
             $model= $obj->model->name[$this->lang()];
-            $format = ' %s - %s - %s ';
             if ($this->lang()=='ar'){
-                $name= sprintf($format ,$year, $mark , $model );
+                $name= sprintf(' %d - %s - %s ' ,$year, $mark , $model );
             }else{
-                $name= sprintf($format,   $mark , $model, $year);
+                $name= sprintf(' %s - %s - %s ', $year,  $mark , $model );
             }
             $arr['name']=$name;
             $arr['item_status']= $obj->item_status->name[$this->lang()];
