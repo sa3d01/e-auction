@@ -28,6 +28,7 @@
                                 @if(isset($status))
                                     <th>الحالة</th>
                                 @endif
+                                <th>الغرض من الحوالة</th>
                                 <th>المزيد</th>
                             </tr>
                             </thead>
@@ -40,6 +41,7 @@
                                 @if(isset($status))
                                     <th>الحالة</th>
                                 @endif
+                                <th>الغرض من الحوالة</th>
                                 <th>المزيد</th>
                             </tr>
                             </tfoot>
@@ -64,6 +66,9 @@
                                     @endforeach
                                     <td>
                                         {!!$row->getStatusIcon()!!}
+                                    </td>
+                                    <td>
+                                        {{$row->type=='wallet'?'دفع مستحقات':'دفع عربون'}}
                                     </td>
                                     <td>
                                         <div class=" row border-0">

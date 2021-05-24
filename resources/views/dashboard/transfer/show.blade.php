@@ -105,6 +105,14 @@
                                         </div>
                                         <div class="col-sm-12">
                                             <div class="form-group">
+                                                <label for="">الغرض من الحوالة</label>
+                                                {{--                                                <a href="{{route('admin.user.show',$row->user_id)}}"><br>--}}
+                                                <span>{{$row->type=='wallet'?'دفع مستحقات':'دفع عربون'}}</span>
+                                                {{--                                                </a>--}}
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
                                                 <label for="">صاحب التحويل</label>
                                                 {{--                                                <a href="{{route('admin.user.show',$row->user_id)}}"><br>--}}
                                                 <span>{{$row->user->name}}</span>
