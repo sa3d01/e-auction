@@ -23,7 +23,7 @@ class TransferController extends MasterController
 
     public function index()
     {
-        $rows = $this->model->where(['purchasing_type'=>'bank','type'=>'wallet'])->latest()->get();
+        $rows = $this->model->where(['purchasing_type'=>'bank'])->latest()->get();
         return View('dashboard.transfer.index', [
             'rows' => $rows,
             'type'=>'transfer',
@@ -51,34 +51,38 @@ class TransferController extends MasterController
                 'status'=>1,
             ]
         );
-        $paid_auction_items=AuctionItem::where('more_details->status','paid')->get();
-        $item_ids=[];
-        foreach ($paid_auction_items as $paid_auction_item){
-            $winner=AuctionUser::where(['auction_id'=>$paid_auction_item->auction_id,'item_id'=>$paid_auction_item->item_id])->latest()->value('user_id');
-            if ($winner==$row->user_id){
-                $item_ids[]=$paid_auction_item->item_id;
+        if ($row->type=='wallet'){
+            $paid_auction_items=AuctionItem::where('more_details->status','paid')->get();
+            $item_ids=[];
+            foreach ($paid_auction_items as $paid_auction_item){
+                $winner=AuctionUser::where(['auction_id'=>$paid_auction_item->auction_id,'item_id'=>$paid_auction_item->item_id])->latest()->value('user_id');
+                if ($winner==$row->user_id){
+                    $item_ids[]=$paid_auction_item->item_id;
+                }
             }
+            $paid_items=Item::whereIn('id',$item_ids)->latest()->get();
+            foreach ($paid_items as $item){
+                $auction_user=AuctionUser::where(['item_id'=>$item->id,'user_id'=>$row->user_id])->latest()->first();
+                $auction_item=AuctionItem::where('item_id',$item->id)->where('more_details->status','paid')->latest()->first();
+                $auction_user->update([
+                    'more_details'=>[
+                        'status'=>'paid',
+                        'total_amount'=>$this->totalAmount($auction_item),
+                        'paid'=>$this->totalAmount($auction_item),
+                        'remain'=>0
+                    ]
+                ]);
+                $auction_item->update([
+                    'more_details' => [
+                        'status'=>'delivered',
+                        'pay_type' => $auction_item->more_details['pay_type']
+                    ]
+                ]);
+            }
+            $this->editWallet($row->user,$row->money);
+        }else{
+            $row->user->update(['purchasing_power' =>$row->user->purchasing_power+ $row->money]);
         }
-        $paid_items=Item::whereIn('id',$item_ids)->latest()->get();
-        foreach ($paid_items as $item){
-            $auction_user=AuctionUser::where(['item_id'=>$item->id,'user_id'=>$row->user_id])->latest()->first();
-            $auction_item=AuctionItem::where('item_id',$item->id)->where('more_details->status','paid')->latest()->first();
-            $auction_user->update([
-                'more_details'=>[
-                    'status'=>'paid',
-                    'total_amount'=>$this->totalAmount($auction_item),
-                    'paid'=>$this->totalAmount($auction_item),
-                    'remain'=>0
-                ]
-            ]);
-            $auction_item->update([
-                'more_details' => [
-                    'status'=>'delivered',
-                    'pay_type' => $auction_item->more_details['pay_type']
-                ]
-            ]);
-        }
-        $this->editWallet($row->user,$row->money);
         $note['ar'] = 'تم الموافقة على تحويلك البنكى بنجاح :)';
         $note['en'] = 'your transfer is accepted from admin  ..';
         $this->notify($row->user, $note);
