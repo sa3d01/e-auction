@@ -136,7 +136,7 @@ class ItemCollection extends ResourceCollection
             $model= $obj->model->name[$this->lang()];
 
             $format = '%d - %s - %s';
-            $name= sprintf($format, $year, $mark , $model);
+            $name= sprintf($format,  $mark , $model , $year);
             $arr['name']=$name;
             $arr['item_status']= $obj->item_status->name[$this->lang()];
             $arr['city']= $obj->city->name[$this->lang()];
