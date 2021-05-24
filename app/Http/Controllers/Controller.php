@@ -427,8 +427,8 @@ class Controller extends BaseController
         $this->editWallet($winner,-$remain);
         $data=[
             'vip' => 'false',
-            'price' => $price,
-            'latest_charge' => $charge_price,
+            'price' => $price??0,
+            'latest_charge' => $charge_price??0,
             'more_details' => [
                 'status'=>'paid',
                 'pay_type' => $pay_type
