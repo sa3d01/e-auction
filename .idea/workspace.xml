@@ -19,9 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="transfer">
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/transfer/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/transfer/show.blade.php" afterDir="false" />
-    </list>
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="transfer" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -354,21 +352,7 @@
       <workItem from="1621769905105" duration="1732000" />
       <workItem from="1621788632445" duration="45000" />
       <workItem from="1621852397349" duration="2288000" />
-      <workItem from="1621859690361" duration="7578000" />
-    </task>
-    <task id="LOCAL-00459" summary="api">
-      <created>1618869551093</created>
-      <option name="number" value="00459" />
-      <option name="presentableId" value="LOCAL-00459" />
-      <option name="project" value="LOCAL" />
-      <updated>1618869551093</updated>
-    </task>
-    <task id="LOCAL-00460" summary="reorder">
-      <created>1618983494076</created>
-      <option name="number" value="00460" />
-      <option name="presentableId" value="LOCAL-00460" />
-      <option name="project" value="LOCAL" />
-      <updated>1618983494076</updated>
+      <workItem from="1621859690361" duration="7906000" />
     </task>
     <task id="LOCAL-00461" summary="over_bid_pay">
       <created>1618984676033</created>
@@ -699,7 +683,21 @@
       <option name="project" value="LOCAL" />
       <updated>1621867721350</updated>
     </task>
-    <option name="localTasksCounter" value="508" />
+    <task id="LOCAL-00508" summary="transfer">
+      <created>1621867926800</created>
+      <option name="number" value="00508" />
+      <option name="presentableId" value="LOCAL-00508" />
+      <option name="project" value="LOCAL" />
+      <updated>1621867926800</updated>
+    </task>
+    <task id="LOCAL-00509" summary="transfer">
+      <created>1621868096927</created>
+      <option name="number" value="00509" />
+      <option name="presentableId" value="LOCAL-00509" />
+      <option name="project" value="LOCAL" />
+      <updated>1621868096927</updated>
+    </task>
+    <option name="localTasksCounter" value="510" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
