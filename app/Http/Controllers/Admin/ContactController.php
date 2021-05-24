@@ -144,6 +144,7 @@ class ContactController extends MasterController
                 'body' => $note,
                 'status' => 'admin',
                 'type'=>'admin',
+                'db'=>true,
             ],
             'priority' => 'high',
         ];

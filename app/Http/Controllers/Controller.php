@@ -304,6 +304,7 @@ class Controller extends BaseController
                 'body' => $title['ar'],
                 'status' => $offer->status,
                 'type' => 'offer',
+                'db'=>true,
                 'item' => new ItemResource(Item::find($offer->auction_item->item_id)),
                 'offer_id' => $offer->id
             ],
@@ -334,6 +335,7 @@ class Controller extends BaseController
                     'body' => $title['ar'],
                     'status' => 'paid',
                     'type' => 'win',
+                    'db'=>true,
                     'item' => new ItemResource(Item::find($item_id)),
                     'win'=> $win!=null
                 ],

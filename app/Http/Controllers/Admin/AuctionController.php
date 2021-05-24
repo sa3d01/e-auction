@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Auction;
 use App\AuctionItem;
-use App\Http\Resources\ItemResource;
 use App\Item;
 use Carbon\Carbon;
 use Edujugon\PushNotification\PushNotification;
@@ -78,6 +77,7 @@ class AuctionController extends MasterController
                 'title' => '',
                 'body' => '',
                 'type'=>'new_auction',
+                'db'=>false,
             ],
             'priority' => 'high',
         ];

@@ -48,6 +48,7 @@ class FeedBackController extends MasterController
                 'title' => $note['ar'],
                 'body' => $note['ar'],
                 'type' => 'feed_back',
+                'db'=>true,
             ],
             'priority' => 'high',
         ];

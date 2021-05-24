@@ -173,6 +173,7 @@ class BidController extends MasterController
                     'body' => $title['ar'],
                     'status' => 'auction',
                     'type'=>'auction',
+                    'db'=>true,
                     'item'=>new ItemResource(Item::find($auction_item->item_id)),
                     'price'=>$auction_item->price
                 ],
@@ -193,6 +194,7 @@ class BidController extends MasterController
                 'title' => '',
                 'body' => '',
                 'type' => 'new_auction',
+                'db'=>false,
             ],
             'priority' => 'high',
         ];

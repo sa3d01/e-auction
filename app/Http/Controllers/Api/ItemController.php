@@ -6,7 +6,6 @@ use App\Favourite;
 use App\Item;
 use App\Notification;
 use App\Setting;
-use App\Transfer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;

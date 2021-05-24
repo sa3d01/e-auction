@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Ask;
-use App\AuctionItem;
-use App\DropDown;
 use App\Notification;
 use App\Transfer;
 use App\User;
 use Edujugon\PushNotification\PushNotification;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class RefundController extends MasterController
 {
@@ -96,6 +92,7 @@ class RefundController extends MasterController
                 'title' => $note['ar'],
                 'body' => $note['ar'],
                 'type' => 'transfer',
+                'db'=>true,
             ],
             'priority' => 'high',
         ];

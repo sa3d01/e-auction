@@ -55,6 +55,7 @@ class NotificationController extends MasterController
                 'body' => $note['ar'],
                 'status' => 'admin',
                 'type'=>'admin',
+                'db'=>true,
             ],
             'priority' => 'high',
         ])

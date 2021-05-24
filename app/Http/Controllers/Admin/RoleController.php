@@ -2,15 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Notification;
-use App\User;
-use App\UserSale;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\Sale;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 use Spatie\Permission\Models\Role;
 
 class RoleController extends MasterController

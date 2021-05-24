@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Auction;
 use App\AuctionItem;
 use App\AuctionUser;
 use App\Http\Resources\ItemCollection;
@@ -12,7 +11,6 @@ use App\Notification;
 use App\Offer;
 use App\Setting;
 use App\User;
-use Carbon\Carbon;
 use Edujugon\PushNotification\PushNotification;
 use Illuminate\Http\Request;
 
@@ -252,6 +250,7 @@ class NegotiationController extends MasterController
                 'body' => $title['ar'],
                 'status' => 'refuse_offer',
                 'type' => 'refuse_offer',
+                'db'=>true,
                 'offer_id' => $refused_offer->id,
             ],
             'priority' => 'high',
@@ -332,6 +331,7 @@ class NegotiationController extends MasterController
                 'body' => $title['ar'],
                 'status' => $offer->status,
                 'type' => 'offer',
+                'db'=>true,
                 'item' => new ItemResource(Item::find($offer->auction_item->item_id)),
                 'offer_id' => $offer->id
             ],

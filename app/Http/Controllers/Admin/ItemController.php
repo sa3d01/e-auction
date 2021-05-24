@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\AuctionItem;
-use App\DropDown;
 use App\Http\Resources\ItemResource;
 use App\Item;
 use App\Notification;
@@ -234,6 +233,7 @@ class ItemController extends MasterController
                 'title' => '',
                 'body' => '',
                 'type'=>'new_auction',
+                'db'=>false,
             ],
             'priority' => 'high',
         ];
@@ -402,6 +402,7 @@ class ItemController extends MasterController
                 'body' => $note['ar'],
                 'type' => 'item',
                 'item' => new ItemResource($item),
+                'db'=>true,
             ],
             'priority' => 'high',
         ];

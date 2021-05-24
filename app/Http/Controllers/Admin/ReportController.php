@@ -2,15 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Resources\ItemResource;
-use App\Http\Resources\OrderResource;
-use App\Item;
-use App\Notification;
 use App\Report;
-use App\Setting;
-use Edujugon\PushNotification\PushNotification;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class ReportController extends MasterController

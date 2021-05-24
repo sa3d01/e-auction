@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Notification;
 use App\User;
-use Edujugon\PushNotification\PushNotification;
 use Illuminate\Http\Request;
 
 class UserController extends MasterController

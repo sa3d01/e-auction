@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Ask;
 use App\AuctionItem;
 use App\AuctionUser;
-use App\DropDown;
 use App\Item;
 use App\Notification;
 use App\Transfer;
 use App\User;
 use Edujugon\PushNotification\PushNotification;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class TransferController extends MasterController
 {
@@ -116,6 +113,7 @@ class TransferController extends MasterController
                 'title' => $note['ar'],
                 'body' => $note['ar'],
                 'type' => 'transfer',
+                'db'=>true,
             ],
             'priority' => 'high',
         ];
