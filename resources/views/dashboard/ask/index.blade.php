@@ -43,7 +43,7 @@
                                         @endif
                                     @endforeach
                                     <td>
-                                        <form class="delete" data-id="{{$row->id}}" method="POST" action="{{ route('admin.'.$type.'.destroy',[$row->id]) }}">
+                                        <form class="delete" data-id="{{$row->id}}" method="POST" action="{{ route('admin.ask.destroy',[$row->id]) }}">
                                             @csrf
                                             {{ method_field('DELETE') }}
                                             <input type="hidden" value="{{$row->id}}">
