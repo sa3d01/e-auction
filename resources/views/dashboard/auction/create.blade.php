@@ -81,7 +81,7 @@
                                                 <div class="col-sm-12">
                                                     <div class="form-group">
                                                         <label for=""> {{$multi_select['title']}} </label>
-                                                        <select class="form-control select2" multiple="true">
+                                                        <select name="items[]" class="form-control select2" multiple="true">
                                                             @foreach($multi_select['rows'] as $multi_select_row)
                                                                 <option value="" selected="true">
                                                                     {{$multi_select_row->nameForSelect()}}
