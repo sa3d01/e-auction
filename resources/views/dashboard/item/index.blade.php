@@ -145,13 +145,15 @@
                                     @endif
                                     <td>
                                         <div class="row">
+                                            <p id="shipping_by" data-value="{{$row->shipping_by}}" hidden></p>
+
                                             <div class="col-md-6">
                                                 <a class='reject btn btn-danger btn-sm' data-id="{{$row->id}}"  data-href='{{route('admin.item.reject',$row->id)}}' href=''><i class='os-icon os-icon-cancel-circle'></i><span>رفض المركبة</span></a>
                                             </div>
                                             <div class="col-md-6 text-right">
                                                 <a class='accept btn btn-success btn-sm' data-id="{{$row->id}}" data-href='{{route('admin.item.accept',$row->id)}}' href=''><i class='os-icon os-icon-shopping-cart'></i><span>قبول المركبة</span></a>
                                             </div>
-                                        </div>
+                                        </>
                                         <form class="delete" data-id="{{$row->id}}" method="POST" action="{{ route('admin.'.$type.'.destroy',[$row->id]) }}">
                                             @csrf
                                             {{ method_field('DELETE') }}
@@ -301,7 +303,6 @@
         $(document).on('click', '.accept', function (e) {
             e.preventDefault();
             let shipping_by = document.getElementById('shipping_by').getAttribute("data-value");
-            console.log(shipping_by)
             if (shipping_by==='user'){
                 Swal.fire({
                     title: "هل انت متأكد من القبول ؟",
