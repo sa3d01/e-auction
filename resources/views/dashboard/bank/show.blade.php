@@ -10,7 +10,7 @@
 {{--                first box--}}
                 <div class="col-sm-5">
                     <div class="user-profile compact">
-                        <div class="up-head-w" style="background-image:url({{asset('media/images/logo.png')}})">
+                        <div class="up-head-w" style="background-image:url({{asset('media/images/logo.jpeg')}})">
                         <div class="up-main-info">
                                 <h2 class="up-header">
                                     {{$row->name['ar']}}
@@ -61,7 +61,6 @@
                                     </div>
                                     <fieldset class="form-group">
                                         <div class="row">
-                                            @foreach($edit_fields as $key=>$value)
                                                 <div class="col-sm-12">
                                                     <div class="form-group" id="name_ar">
                                                         <label for=""> الاسم باللغة العربية</label><input name="name_ar" class="form-control" value="{{$row->name['ar']}}" type="text">
@@ -80,7 +79,6 @@
                                                         <div class="help-block form-text with-errors form-control-feedback"></div>
                                                     </div>
                                                 </div>
-                                            @endforeach
                                         </div>
                                     </fieldset>
                                     {{--                @can('edit-'.$type.'s')--}}
