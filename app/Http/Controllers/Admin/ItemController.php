@@ -36,6 +36,7 @@ class ItemController extends MasterController
             'paper_image'=>true,
         ]);
     }
+
     function size($size, $precision = 2):int
     {
         if ($size > 0) {
@@ -47,6 +48,7 @@ class ItemController extends MasterController
             return $size;
         }
     }
+
     public function store(Request $request)
     {
         $data=$request->all();
@@ -96,28 +98,137 @@ class ItemController extends MasterController
         $rows=$this->model->where('status',$status)->latest()->get();
         if ($status=='accepted'){
             $rows=$this->model->whereIn('status',['accepted','delivered'])->latest()->get();
-            $title='قائمة السلع المطلوب اعدادها';
-            $index_fields=['الرقم التسلسلى' => 'id'];
+            $title='قائمة المركبات المطلوب اعدادها';
         }else{
-            $title='قائمة السلع';
-            $index_fields=['الرقم التسلسلى' => 'id','تاريخ الطلب'=>'created_at'];
+            $title='قائمة المركبات';
         }
+        $fields=[
+            'الرقم التسلسلى' => 'id',
+            'تاريخ الطلب'=>'created_at',
+            'صور المركباتة'=>'images',
+            'عدد السندرات'=>'sunder_count',
+            'الممشى'=>'kms_count',
+            'صورة الاستمارة'=>'paper_image',
+            'السعر'=>'price',
+        ];
         return View('dashboard.item.index', [
             'rows' => $rows,
             'status'=>$status,
             'type'=>'item',
             'title'=>$title,
-            'index_fields'=>$index_fields,
+            'index_fields'=>$fields,
             'selects'=>[
                 [
                     'name'=>'user',
-                    'title'=>'المستخدم'
+                    'title'=>'المستخدم',
                 ],
                 [
                     'name'=>'auction_type',
-                    'title'=>'نوع المزايدة'
+                    'title'=>'نوع المزايدة',
+                ],
+                [
+                    'name'=>'mark',
+                    'title'=>'نوع المركبة',
+                ],
+                [
+                    'name'=>'model',
+                    'title'=>'موديل المركبة',
+                ],
+                [
+                    'name'=>'color',
+                    'title'=>'لون المركبة',
+                ],
+                [
+                    'name'=>'item_status',
+                    'title'=>'حالة المركبة',
+                ],
+                [
+                    'name'=>'fetes',
+                    'title'=>'نوع ناقل الحركة',
+                ],
+                [
+                    'name'=>'scan_status',
+                    'title'=>'حالة الفحص',
+                ],
+                [
+                    'name'=>'paper_status',
+                    'title'=>'حالة الاستمارة',
+                ],
+                [
+                    'name'=>'city',
+                    'title'=>'المدينة',
                 ],
             ],
+        ]);
+    }
+
+    public function show($id)
+    {
+        $unread_notifications=Notification::where(['receiver_id'=>null,'item_id'=>$id,'read'=>'false'])->get();
+        foreach ($unread_notifications as $unread_notification){
+            $unread_notification->update(['read'=>'true']);
+        }
+        $row=$this->model->findOrFail($id);
+        $fields=[
+            'الرقم التسلسلى' => 'id',
+            'تاريخ الطلب'=>'created_at',
+            'صور المركباتة'=>'images',
+            'عدد السندرات'=>'sunder_count',
+            'الممشى'=>'kms_count',
+            'صورة الاستمارة'=>'paper_image',
+            'السعر'=>'price',
+        ];
+        return View('dashboard.item.show', [
+            'row' => $row,
+            'type'=>'item',
+            'action'=>'admin.item.update',
+            'title'=>'بيانات المركباتة',
+            'show_fields'=>$fields,
+            'selects'=>[
+                [
+                    'name'=>'user',
+                    'title'=>'المستخدم',
+                    'route'=>route('admin.user.show',[$row->user_id])
+                ],
+                [
+                    'name'=>'auction_type',
+                    'title'=>'نوع المزايدة',
+                ],
+                [
+                    'name'=>'mark',
+                    'title'=>'نوع المركبة',
+                ],
+                [
+                    'name'=>'model',
+                    'title'=>'موديل المركبة',
+                ],
+                [
+                    'name'=>'color',
+                    'title'=>'لون المركبة',
+                ],
+                [
+                    'name'=>'item_status',
+                    'title'=>'حالة المركبة',
+                ],
+                [
+                    'name'=>'fetes',
+                    'title'=>'نوع ناقل الحركة',
+                ],
+                [
+                    'name'=>'scan_status',
+                    'title'=>'حالة الفحص',
+                ],
+                [
+                    'name'=>'paper_status',
+                    'title'=>'حالة الاستمارة',
+                ],
+                [
+                    'name'=>'city',
+                    'title'=>'المدينة',
+                ],
+            ],
+            'location'=>true,
+            'only_show'=>true,
         ]);
     }
 
@@ -128,7 +239,7 @@ class ItemController extends MasterController
             'rows' => $rows,
             'status'=>'shown',
             'type'=>'item',
-            'title'=>'قائمة السلع المميزة',
+            'title'=>'قائمة المركبات المميزة',
             'index_fields'=>['الرقم التسلسلى' => 'id'],
             'selects'=>[
                 [
@@ -242,6 +353,7 @@ class ItemController extends MasterController
             ->send();
         return redirect()->back()->with('updated');
     }
+
     public function item_delivered_to_garage($item_id){
         $item=Item::find($item_id);
         $item->update([
@@ -252,76 +364,6 @@ class ItemController extends MasterController
         $this->itemStatusNotify($item,$note);
         $item->refresh();
         return redirect()->back()->with('updated');
-    }
-
-    public function show($id)
-    {
-        $unread_notifications=Notification::where(['receiver_id'=>null,'item_id'=>$id,'read'=>'false'])->get();
-        foreach ($unread_notifications as $unread_notification){
-            $unread_notification->update(['read'=>'true']);
-        }
-        $row=$this->model->findOrFail($id);
-        $fields=[
-            'الرقم التسلسلى' => 'id',
-            'تاريخ الطلب'=>'created_at',
-            'صور السلعة'=>'images',
-            'عدد السندرات'=>'sunder_count',
-            'الممشى'=>'kms_count',
-            'صورة الاستمارة'=>'paper_image',
-            'السعر'=>'price',
-        ];
-        return View('dashboard.item.show', [
-            'row' => $row,
-            'type'=>'item',
-            'action'=>'admin.item.update',
-            'title'=>'بيانات السلعة',
-            'show_fields'=>$fields,
-            'selects'=>[
-                [
-                    'name'=>'user',
-                    'title'=>'المستخدم',
-                    'route'=>route('admin.user.show',[$row->user_id])
-                ],
-                [
-                    'name'=>'auction_type',
-                    'title'=>'نوع المزايدة',
-                ],
-                [
-                    'name'=>'mark',
-                    'title'=>'نوع المركبة',
-                ],
-                [
-                    'name'=>'model',
-                    'title'=>'موديل المركبة',
-                ],
-                [
-                    'name'=>'color',
-                    'title'=>'لون المركبة',
-                ],
-                [
-                    'name'=>'item_status',
-                    'title'=>'حالة المركبة',
-                ],
-                [
-                    'name'=>'fetes',
-                    'title'=>'نوع ناقل الحركة',
-                ],
-                [
-                    'name'=>'scan_status',
-                    'title'=>'حالة الفحص',
-                ],
-                [
-                    'name'=>'paper_status',
-                    'title'=>'حالة الاستمارة',
-                ],
-                [
-                    'name'=>'city',
-                    'title'=>'المدينة',
-                ],
-            ],
-            'location'=>true,
-            'only_show'=>true,
-        ]);
     }
 
     public function reject($id,Request $request){
@@ -434,7 +476,7 @@ class ItemController extends MasterController
             }
         }
         $rows=$this->model->whereIn('id',$ids)->latest()->get();
-        $title='قائمة السلع فى المزاد قبل المباشر';
+        $title='قائمة المركبات فى المزاد قبل المباشر';
         $index_fields=['الرقم التسلسلى' => 'id','تاريخ الطلب'=>'created_at'];
         return View('dashboard.item.index', [
             'rows' => $rows,
@@ -467,7 +509,7 @@ class ItemController extends MasterController
             }
         }
         $rows=$this->model->whereIn('id',$ids)->latest()->get();
-        $title='قائمة السلع فى المزاد المباشر';
+        $title='قائمة المركبات فى المزاد المباشر';
         $index_fields=['الرقم التسلسلى' => 'id','تاريخ الطلب'=>'created_at'];
         return View('dashboard.item.index', [
             'rows' => $rows,
@@ -500,7 +542,7 @@ class ItemController extends MasterController
             }
         }
         $rows=$this->model->whereIn('id',$ids)->latest()->get();
-        $title='قائمة السلع بعد المزاد المباشر';
+        $title='قائمة المركبات بعد المزاد المباشر';
         $index_fields=['الرقم التسلسلى' => 'id','تاريخ الطلب'=>'created_at'];
         return View('dashboard.item.index', [
             'rows' => $rows,
