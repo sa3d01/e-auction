@@ -19,7 +19,7 @@
                                 @foreach($index_fields as $key=>$value)
                                     <th>{{$key}}</th>
                                 @endforeach
-                                <th>الحالة</th>
+{{--                                <th>الحالة</th>--}}
                                 <th>المزيد</th>
                             </tr>
                             </thead>
@@ -29,7 +29,7 @@
                                 @foreach($index_fields as $key=>$value)
                                     <th>{{$key}}</th>
                                 @endforeach
-                                <th>الحالة</th>
+{{--                                <th>الحالة</th>--}}
                                 <th>المزيد</th>
                             </tr>
                             </tfoot>
@@ -44,9 +44,9 @@
                                             <td>{{$row->$value}}</td>
                                         @endif
                                     @endforeach
-                                    <td>
-                                        {!!$row->getStatusIcon()!!}
-                                    </td>
+{{--                                    <td>--}}
+{{--                                        {!!$row->getStatusIcon()!!}--}}
+{{--                                    </td>--}}
                                     <td>
 {{--                                        <form class="delete" data-id="{{$row->id}}" method="POST" action="{{ route('admin.'.$type.'.destroy',[$row->id]) }}">--}}
 {{--                                            @csrf--}}
