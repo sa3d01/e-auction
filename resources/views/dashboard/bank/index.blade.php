@@ -56,7 +56,7 @@
 {{--                                                <i class="fa fa-trash text-danger"></i>--}}
 {{--                                            </button>--}}
 {{--                                        </form>--}}
-                                        <a href="{{route('admin.drop_down.show',$row->id)}}"><i class="os-icon os-icon-eye"></i></a>
+                                        <a href="{{route('admin.bank.show',$row->id)}}"><i class="os-icon os-icon-eye"></i></a>
                                     </td>
                                 </tr>
                             @endforeach
