@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Ask;
-use App\Bank;
 use Illuminate\Http\Request;
 
 class AskController extends MasterController
@@ -87,7 +86,7 @@ class AskController extends MasterController
 
     public function show($id)
     {
-        $row = Bank::findOrFail($id);
+        $row = Ask::findOrFail($id);
         $edit_fields = [];
         return View('dashboard.ask.show', [
             'row' => $row,
