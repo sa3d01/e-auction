@@ -48,8 +48,8 @@ class AskController extends MasterController
 
     public function create()
     {
-        return View('dashboard.bank.create', [
-            'type' => 'bank',
+        return View('dashboard.ask.create', [
+            'type' => 'ask',
             'action' => 'admin.ask.store',
             'title' => 'أضافة سؤال',
             'create_fields' => [],
