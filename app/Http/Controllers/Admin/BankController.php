@@ -45,7 +45,15 @@ class BankController extends MasterController
             ]
         );
     }
-
+    public function create(){
+        return View('dashboard.bank.create', [
+            'type'=>'bank',
+            'action'=>'admin.bank.store',
+            'title'=>'أضافة حساب بنكى',
+            'create_fields'=>['الاسم'=>'name','iban'=>'iban_number'],
+            'languages'=>true,
+        ]);
+    }
     public function store(Request $request)
     {
         $this->validate($request, $this->validation_func(1),$this->validation_msg());

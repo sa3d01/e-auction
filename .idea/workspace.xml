@@ -19,17 +19,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="wallet">
-      <change afterPath="$PROJECT_DIR$/app/Bank.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/BankController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2021_05_25_140358_create_banks_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/dashboard/bank/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/dashboard/bank/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/dashboard/bank/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/master/main-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/master/main-menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/master/mobile-main-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/master/mobile-main-menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="banks">
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/BankController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/BankController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -365,21 +356,7 @@
       <workItem from="1621852397349" duration="2288000" />
       <workItem from="1621859690361" duration="14529000" />
       <workItem from="1621905321663" duration="103000" />
-      <workItem from="1621940590892" duration="2311000" />
-    </task>
-    <task id="LOCAL-00470" summary="report item">
-      <created>1619070345124</created>
-      <option name="number" value="00470" />
-      <option name="presentableId" value="LOCAL-00470" />
-      <option name="project" value="LOCAL" />
-      <updated>1619070345124</updated>
-    </task>
-    <task id="LOCAL-00471" summary="report item">
-      <created>1619070374261</created>
-      <option name="number" value="00471" />
-      <option name="presentableId" value="LOCAL-00471" />
-      <option name="project" value="LOCAL" />
-      <updated>1619070374261</updated>
+      <workItem from="1621940590892" duration="2616000" />
     </task>
     <task id="LOCAL-00472" summary="report item">
       <created>1619070670456</created>
@@ -710,7 +687,21 @@
       <option name="project" value="LOCAL" />
       <updated>1621874284930</updated>
     </task>
-    <option name="localTasksCounter" value="519" />
+    <task id="LOCAL-00519" summary="banks">
+      <created>1621942925252</created>
+      <option name="number" value="00519" />
+      <option name="presentableId" value="LOCAL-00519" />
+      <option name="project" value="LOCAL" />
+      <updated>1621942925253</updated>
+    </task>
+    <task id="LOCAL-00520" summary="banks">
+      <created>1621943037909</created>
+      <option name="number" value="00520" />
+      <option name="presentableId" value="LOCAL-00520" />
+      <option name="project" value="LOCAL" />
+      <updated>1621943037909</updated>
+    </task>
+    <option name="localTasksCounter" value="521" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -730,7 +721,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="sms" />
     <MESSAGE value="notifications admin" />
     <MESSAGE value="latest_file" />
     <MESSAGE value="can-bid" />
@@ -755,7 +745,8 @@
     <MESSAGE value="api" />
     <MESSAGE value="transfer" />
     <MESSAGE value="wallet" />
-    <option name="LAST_COMMIT_MESSAGE" value="wallet" />
+    <MESSAGE value="banks" />
+    <option name="LAST_COMMIT_MESSAGE" value="banks" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
