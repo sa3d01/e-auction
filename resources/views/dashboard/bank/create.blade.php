@@ -35,10 +35,8 @@
                                     </div>
                                 </div>
                             </div>
-                            @if(isset($create_fields))
                                 <fieldset class="form-group">
                                     <div class="row">
-                                        @foreach($create_fields as $key=>$value)
                                             <div class="col-sm-12">
                                                 <div class="form-group" id="name_ar">
                                                     <label for=""> الاسم باللغة العربية</label>
@@ -60,10 +58,8 @@
                                                     <div class="help-block form-text with-errors form-control-feedback"></div>
                                                 </div>
                                             </div>
-                                        @endforeach
                                     </div>
                                 </fieldset>
-                            @endif
                             <div class="form-buttons-w">
                                 <button class="btn btn-primary create-submit" type="submit"> إضافة</button>
                             </div>
