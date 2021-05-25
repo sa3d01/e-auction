@@ -84,6 +84,9 @@ class ItemCollection extends ResourceCollection
                 }elseif ($features['status']=='delivered'){
                     $arr['is_paid']=true;
                     $arr['status_text']='مغلق';
+                }elseif ($features['status']=='negotiation'){
+                    $arr['is_paid']=true;
+                    $arr['status_text']='مغلق';
                 }elseif ($features['status']=='soon'){
                     $arr['status_text']='';
                 }elseif ($features['status']=='expired'){
