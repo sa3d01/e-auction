@@ -7,15 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- title -->
     <title>E-auction</title>
-    <link rel="shortcut icon" type="image/ico" href="images/favIco.ico" />
+    <link rel="shortcut icon" type="image/ico" href="{{asset('images/favIco.ico')}}" />
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-rtl.min.css">
-    <link rel="stylesheet" href="fonts/fontawesome/css/all.css">
-    <link rel="stylesheet" href='css/animate.css'>
-    <link rel="stylesheet" href='css/owl.theme.default.min.css'>
-    <link rel="stylesheet" href='css/owl.carousel.min.css'>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/bootstrap-rtl.min.css')}}">
+    <link rel="stylesheet" href="{{asset('fonts/fontawesome/css/all.css')}}">
+    <link rel="stylesheet" href='{{asset('css/animate.css')}}'>
+    <link rel="stylesheet" href='{{asset('css/owl.theme.default.min.css')}}'>
+    <link rel="stylesheet" href='{{asset('css/owl.carousel.min.css')}}'>
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
 </head>
 
 <body>
@@ -24,7 +24,7 @@
         <nav class="navbar pt-3 navbar-expand-lg ">
             <div class="container ">
                 <a href="{{route('home')}}">
-                    <img src="images/logo.png" class="logo" alt="logo">
+                    <img src="{{asset('images/logo.png')}}" class="logo" alt="logo">
                 </a>
                 <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                     <i class="fas fa-bars"></i>
@@ -65,7 +65,7 @@
         <div class="container ltr py-5">
             <div class="row">
                 <div class="col-md-6 text-center">
-                    <img src="images/header.png" class="img-fluid header-img wow fadeInDown">
+                    <img src="{{asset('images/header.png')}}" class="img-fluid header-img wow fadeInDown">
                 </div>
                 <div class="col-md-6 rtl m-auto pl-md-5">
                     <h1 class="w-700 pt-md-0 pt-4 title p-relative">
@@ -82,7 +82,7 @@
     <div class="container py-5" id="why">
         <div class="row">
             <div class="col-md-6 mx-auto text-center">
-                <img src="images/why.png" class="img-fluid p-5 wow zoomIn">
+                <img src="{{asset('images/why.png')}}" class="img-fluid p-5 wow zoomIn">
             </div>
             <div class="col-md-6 mx-auto my-auto why-img">
                 <h1 class="title w-700 py-3 my-3 p-relative">
@@ -92,25 +92,25 @@
                     خدماتنا متاحة للجميع سواء كنت فرد او صاحب منشأة و عندك مركبات ترغب بعرضها للبيع، منصة E-Auction راح تساعدك بالتالي
                 </p>
                 <div class=" my-3 d-flex wow fadeIn">
-                    <img src="images/icons/car.png" class="img-fluid my-2">
+                    <img src="{{asset('images/icons/car.png')}}" class="img-fluid my-2">
                     <p class="w-700 my-auto mr-3">
                         حفظ المركبات في مستودعات E-Auction بشكل آمن
                     </p>
                 </div>
                 <div class=" my-3 d-flex wow fadeIn">
-                    <img src="images/icons/camera.png" class="img-fluid my-2">
+                    <img src="{{asset('images/icons/camera.png')}}" class="img-fluid my-2">
                     <p class="w-700 my-auto mr-3">
                         تجهيز و تصوير المركبات بشكل احترافي
                     </p>
                 </div>
                 <div class=" my-3 d-flex wow fadeIn">
-                    <img src="images/icons/dollar.png" class="img-fluid my-2">
+                    <img src="{{asset('images/icons/dollar.png')}}" class="img-fluid my-2">
                     <p class="w-700 my-auto mr-3">
                         تخليص إجراءات المبايعة وتحصيل المبالغ بسهولة
                     </p>
                 </div>
                 <div class=" my-3 d-flex wow fadeIn">
-                    <img src="images/icons/growth.png" class="img-fluid my-2">
+                    <img src="{{asset('images/icons/growth.png')}}" class="img-fluid my-2">
                     <p class="w-700 my-auto mr-3">
                         المزايدة ومتابعة السوم من خلال التطبيق
                     </p>
@@ -126,37 +126,37 @@
             </h1>
             <div class="row">
                 <div class="col-md-6 my-3 d-flex wow zoomIn">
-                    <img src="images/icons/stopwatch.png" class="img-fluid my-2">
+                    <img src="{{asset('images/icons/stopwatch.png')}}" class="img-fluid my-2">
                     <p class="w-700 my-auto d-inline-block px-3 m-0">
                         أوقات محددة لمعاينة المركبات
                     </p>
                 </div>
                 <div class="col-md-6 my-3 d-flex wow zoomIn">
-                    <img src="images/icons/clipboard.png" class="img-fluid my-2">
+                    <img src="{{asset('images/icons/clipboard.png')}}" class="img-fluid my-2">
                     <p class="w-700 my-auto d-inline-block px-3 m-0">
                         تقرير عام عن حالة المركبة
                     </p>
                 </div>
                 <div class="col-md-6 my-3 d-flex wow zoomIn">
-                    <img src="images/icons/Group 3872.png" class="img-fluid my-2">
+                    <img src="{{asset('images/icons/Group 3872.png')}}" class="img-fluid my-2">
                     <p class="w-700 my-auto d-inline-block px-3 m-0">
                         آلية مزايده واضحة تحفظ حقوق كل الأطراف
                     </p>
                 </div>
                 <div class="col-md-6 my-3 d-flex wow zoomIn">
-                    <img src="images/icons/user.png" class="img-fluid my-2">
+                    <img src="{{asset('images/icons/user.png')}}" class="img-fluid my-2">
                     <p class="w-700 my-auto d-inline-block px-3 m-0">
                         نقل الملكية والتأمين بشكل ميسر
                     </p>
                 </div>
                 <div class="col-md-6 my-3 d-flex wow zoomIn">
-                    <img src="images/icons/Calculator.png" class="img-fluid my-2">
+                    <img src="{{asset('images/icons/Calculator.png')}}" class="img-fluid my-2">
                     <p class="w-700 my-auto d-inline-block px-3 m-0">
                         حاسبة توضح السعر النهائي قبل تأكيد المزايدة
                     </p>
                 </div>
                 <div class="col-md-6 my-3 d-flex wow zoomIn">
-                    <img src="images/icons/delivery.png" class="img-fluid my-2">
+                    <img src="{{asset('images/icons/delivery.png')}}" class="img-fluid my-2">
                     <p class="w-700 my-auto d-inline-block px-3 m-0">
                         خدمة شحن المركبة عند الطلب
                     </p>
@@ -177,7 +177,7 @@
                 <div class="col-md-4 my-3 wow zoomIn">
                     <div class="step h-100">
                         <div>
-                            <img src="images/icons/account.png" class="img-fluid mb-3">
+                            <img src="{{asset('images/icons/account.png')}}" class="img-fluid mb-3">
                         </div>
                         <h3 class="m-0">
                             فتح حساب و تعبئة البيانات المطلوبة
@@ -187,7 +187,7 @@
                 <div class="col-md-4 my-3 wow zoomIn">
                     <div class="step h-100">
                         <div>
-                            <img src="images/icons/dollar.png" class="img-fluid mb-3">
+                            <img src="{{asset('images/icons/dollar.png')}}" class="img-fluid mb-3">
                         </div>
                         <h3 class="m-0">
                             دفع عربون ابتداءً من ٥٠٠ ريال
@@ -197,7 +197,7 @@
                 <div class="col-md-4 my-3 wow zoomIn">
                     <div class="step h-100">
                         <div>
-                            <img src="images/icons/Group.png" class="img-fluid mb-3">
+                            <img src="{{asset('images/icons/Group.png')}}" class="img-fluid mb-3">
                         </div>
                         <h3 class="m-0">
                             زايد وراقب السوم وفالك التوفيق
@@ -215,8 +215,8 @@
                 حاليًا انت جاهز للمزايدة ، حمل التطبيق و فالك التوفيق
             </h1>
             <div class="mt-5">
-                <img src="images/google_play.png" class="store" alt="">
-                <img src="images/app-store.png" class="store" alt="">
+                <img src="{{asset('images/google_play.png')}}" class="store" alt="">
+                <img src="{{asset('images/app-store.png')}}" class="store" alt="">
             </div>
         </div>
     </div>
@@ -230,61 +230,62 @@
             </div>
             <div class="py-4">
                 <div class="d-inline-block">
-                    <img src="images/icons/phone-call.png" class="img-fluid my-2">
+                    <img src="{{asset('images/icons/phone-call.png')}}" class="img-fluid my-2">
                     <p class="w-700 d-inline-block px-3">
-                        0538074804
+                        {{\App\Setting::value('contacts')['mobile']}}
                     </p>
                 </div>
                 <div class="d-inline-block">
-                    <img src="images/icons/email.png" class="img-fluid my-2">
+                    <img src="{{asset('images/icons/email.png')}}" class="img-fluid my-2">
                     <p class="w-700 d-inline-block px-3">
-                        info@e-auction1.com
+                        {{\App\Setting::value('contacts')['email']}}
                     </p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4 my-3">
-                    <img src="images/icons/logo.png" class="img-fluid ">
+                    <img src="{{asset('images/icons/logo.png')}}" class="img-fluid ">
                 </div>
                 <div class="col-md-4 my-auto  my-3">
                     <ul class="m-0 p-0">
                         <li class="d-inline-block mx-2 my-3">
-                            <a href="" class="default-color w-700 ">
+                            <a href="{{route('policy')}}" class="default-color w-700 ">
                                 سياسة الخصوصية
                             </a>
                         </li>
                         <li class="d-inline-block mx-2 my-3">
-                            <a href="" class="default-color w-700 ">
+                            <a href="{{route('terms')}}" class="default-color w-700 ">
                                 الشروط و الأحكام
                             </a>
                         </li>
                         <li class="d-inline-block mx-2 my-3">
-                            <a href="" class="default-color w-700 ">
+                            <a href="{{route('questions')}}" class="default-color w-700 ">
                                 الأسئلة الشائعة
                             </a>
                         </li>
                     </ul>
                 </div>
                 <div class="col-md-4 my-auto  my-3">
+                    @php($socials=\App\Setting::value('socials'))
                     <ul class="m-0 p-0">
                         <li class="d-inline-block mx-2">
-                            <a href="eauction.sa">
-                                <img src="images/icons/facebook.png" class="img-fluid ">
+                            <a href="{{$socials['facebook']}}">
+                                <img src="{{asset('images/icons/facebook.png')}}" class="img-fluid ">
                             </a>
                         </li>
                         <li class="d-inline-block mx-2">
-                            <a href="eauction.sa">
-                                <img src="images/icons/snapchat.png" class="img-fluid ">
+                            <a href="{{$socials['snap']}}">
+                                <img src="{{asset('images/icons/snapchat.png')}}" class="img-fluid ">
                             </a>
                         </li>
                         <li class="d-inline-block mx-2">
-                            <a href="eauction.sa">
-                                <img src="images/icons/instagram.png" class="img-fluid ">
+                            <a href="{{$socials['instagram']}}">
+                                <img src="{{asset('images/icons/instagram.png')}}" class="img-fluid ">
                             </a>
                         </li>
                         <li class="d-inline-block mx-2">
-                            <a href="eauction_sa">
-                                <img src="images/icons/twitter.png" class="img-fluid ">
+                            <a href="{{$socials['twitter']}}">
+                                <img src="{{asset('images/icons/twitter.png')}}" class="img-fluid ">
                             </a>
                         </li>
                     </ul>
@@ -293,11 +294,11 @@
         </div>
     </footer>
     <!--scripts -->
-    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/wow.min.js"></script>
-    <script type="text/javascript" src="js/owl.carousel.min.js"></script>
-    <script type="text/javascript" src="js/scripts.js"></script>
+    <script type="text/javascript" src="{{asset('js/jquery-3.2.1.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/bootstrap.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/wow.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/owl.carousel.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js/scripts.js')}}"></script>
 </body>
 
 </html>

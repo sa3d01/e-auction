@@ -170,6 +170,19 @@
 
                                         <div class="form-group">
                                             <i class="os-icon os-icon-file-text"></i>
+                                            <label>سياسة الخصوصية باللغة العربية </label>
+                                            <textarea name="privacy_ar" class="form-control" cols="80" rows="5">{{$row->privacy['ar']}}</textarea>
+                                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <i class="os-icon os-icon-file-text"></i>
+                                            <label>سياسة الخصوصية باللغة الانجليزية </label>
+                                            <textarea name="privacy_en" class="form-control" cols="80" rows="5">{{$row->privacy['en']}}</textarea>
+                                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <i class="os-icon os-icon-file-text"></i>
                                             <label>النص التعريفى للقوة الشرائية باللغة العربية </label>
                                             <textarea name="purchasing_power_text_ar" class="form-control" cols="80" rows="5">{{$row->purchasing_power_text['ar']}}</textarea>
                                             <div class="help-block form-text with-errors form-control-feedback"></div>

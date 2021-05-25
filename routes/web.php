@@ -101,4 +101,13 @@ Auth::routes();
 Route::get('/', function (){
     return view('index');
 })->name('home');
+Route::get('/policy', function (){
+    return view('policy');
+})->name('policy');
+Route::get('/terms', function (){
+    return view('terms');
+})->name('terms');
+Route::get('/questions', function (){
+    return view('questions');
+})->name('questions');
 

@@ -40,6 +40,10 @@ class HomeController extends MasterController
         $licence['en']=$request['licence_en'];
         $data['licence']=$licence;
 
+        $privacy['ar']=$request['privacy_ar'];
+        $privacy['en']=$request['privacy_en'];
+        $data['privacy']=$privacy;
+
         $more_details['less_tenThousand']=$request['less_tenThousand'];
         $more_details['less_hundredThousand']=$request['less_hundredThousand'];
         $more_details['more_hundredThousand']=$request['more_hundredThousand'];

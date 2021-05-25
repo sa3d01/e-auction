@@ -17,6 +17,7 @@ class CreateSettingsTable extends Migration
             $table->id();
             $table->json('about')->nullable();
             $table->json('licence')->nullable();
+            $table->json('privacy')->nullable();
             $table->json('languages')->nullable();
             $table->json('socials')->nullable();
             $table->json('contacts')->nullable();
