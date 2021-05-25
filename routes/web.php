@@ -47,6 +47,10 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
     Route::resource('bank', 'BankController');
     Route::get('bank/activate/{id}', 'BankController@activate')->name('bank.activate');
 
+    Route::post('ask/{id}', 'AskController@update')->name('ask.update');
+    Route::resource('ask', 'AskController');
+    Route::get('ask/activate/{id}', 'AskController@activate')->name('ask.activate');
+
     Route::post('drop_down/{id}', 'DropDownController@update')->name('drop_down.update');
     Route::get('drop_down/new/{class}', 'DropDownController@new')->name('drop_down.new');
     Route::get('drop_down/{class}/class', 'DropDownController@list')->name('drop_down.list');
@@ -77,6 +81,7 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
 
     Route::resource('package', 'PackageController');
     Route::get('auction/{auction}/items', 'AuctionController@items')->name('auction.items');
+
     Route::resource('auction', 'AuctionController');
 
     Route::get('notification/admin_notify_type/{admin_notify_type}', 'NotificationController@notifications')->name('notification.admin_notify_type');
