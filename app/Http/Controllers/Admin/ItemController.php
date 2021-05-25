@@ -107,9 +107,9 @@ class ItemController extends MasterController
         $fields=[
             'الرقم التسلسلى' => 'id',
             'تاريخ الطلب'=>'created_at',
-            'صور المركباتة'=>'images',
+//            'صور المركباتة'=>'images',
             'عدد السندرات'=>'sunder_count',
-            'الممشى'=>'kms_count',
+//            'الممشى'=>'kms_count',
             'صورة الاستمارة'=>'paper_image',
             'السعر'=>'price',
         ];
