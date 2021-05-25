@@ -99,8 +99,10 @@ class ItemController extends MasterController
         if ($status=='accepted'){
             $rows=$this->model->whereIn('status',['accepted','delivered'])->latest()->get();
             $title='قائمة المركبات المطلوب اعدادها';
+            $index_fields=['الرقم التسلسلى' => 'id'];
         }else{
             $title='قائمة المركبات';
+            $index_fields=['الرقم التسلسلى' => 'id','تاريخ الطلب'=>'created_at'];
         }
         $fields=[
             'الرقم التسلسلى' => 'id',
@@ -120,43 +122,11 @@ class ItemController extends MasterController
             'selects'=>[
                 [
                     'name'=>'user',
-                    'title'=>'المستخدم',
+                    'title'=>'المستخدم'
                 ],
                 [
                     'name'=>'auction_type',
-                    'title'=>'نوع المزايدة',
-                ],
-                [
-                    'name'=>'mark',
-                    'title'=>'نوع المركبة',
-                ],
-                [
-                    'name'=>'model',
-                    'title'=>'موديل المركبة',
-                ],
-                [
-                    'name'=>'color',
-                    'title'=>'لون المركبة',
-                ],
-                [
-                    'name'=>'item_status',
-                    'title'=>'حالة المركبة',
-                ],
-                [
-                    'name'=>'fetes',
-                    'title'=>'نوع ناقل الحركة',
-                ],
-                [
-                    'name'=>'scan_status',
-                    'title'=>'حالة الفحص',
-                ],
-                [
-                    'name'=>'paper_status',
-                    'title'=>'حالة الاستمارة',
-                ],
-                [
-                    'name'=>'city',
-                    'title'=>'المدينة',
+                    'title'=>'نوع المزايدة'
                 ],
             ],
         ]);

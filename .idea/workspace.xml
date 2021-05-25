@@ -19,8 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="dash">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="item index">
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -357,21 +356,7 @@
       <workItem from="1621852397349" duration="2288000" />
       <workItem from="1621859690361" duration="14529000" />
       <workItem from="1621905321663" duration="103000" />
-      <workItem from="1621940590892" duration="9649000" />
-    </task>
-    <task id="LOCAL-00484" summary="year">
-      <created>1621425994335</created>
-      <option name="number" value="00484" />
-      <option name="presentableId" value="LOCAL-00484" />
-      <option name="project" value="LOCAL" />
-      <updated>1621425994335</updated>
-    </task>
-    <task id="LOCAL-00485" summary="text">
-      <created>1621765966250</created>
-      <option name="number" value="00485" />
-      <option name="presentableId" value="LOCAL-00485" />
-      <option name="project" value="LOCAL" />
-      <updated>1621765966251</updated>
+      <workItem from="1621940590892" duration="9986000" />
     </task>
     <task id="LOCAL-00486" summary="text">
       <created>1621767981476</created>
@@ -702,7 +687,21 @@
       <option name="project" value="LOCAL" />
       <updated>1621948562063</updated>
     </task>
-    <option name="localTasksCounter" value="533" />
+    <task id="LOCAL-00533" summary="item index">
+      <created>1621950845707</created>
+      <option name="number" value="00533" />
+      <option name="presentableId" value="LOCAL-00533" />
+      <option name="project" value="LOCAL" />
+      <updated>1621950845707</updated>
+    </task>
+    <task id="LOCAL-00534" summary="item index">
+      <created>1621950851834</created>
+      <option name="number" value="00534" />
+      <option name="presentableId" value="LOCAL-00534" />
+      <option name="project" value="LOCAL" />
+      <updated>1621950851834</updated>
+    </task>
+    <option name="localTasksCounter" value="535" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -722,7 +721,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="can-bid" />
     <MESSAGE value="year-bid" />
     <MESSAGE value="delete transfers of deleted user" />
     <MESSAGE value="dashboard" />
@@ -747,7 +745,8 @@
     <MESSAGE value="banks" />
     <MESSAGE value="landing page" />
     <MESSAGE value="dash" />
-    <option name="LAST_COMMIT_MESSAGE" value="dash" />
+    <MESSAGE value="item index" />
+    <option name="LAST_COMMIT_MESSAGE" value="item index" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
