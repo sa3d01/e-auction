@@ -20,6 +20,12 @@
             <div class="sub-menu-i">
                 <ul class="sub-menu">
                     <li>
+                        <a href="{{route('admin.bank.index')}}">الحسابات البنكية</a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.ask.index')}}">الأسئلة الشائعة</a>
+                    </li>
+                    <li>
                         <a href="{{route('admin.drop_down.list',['Partner'])}}">شركاء النجاح</a>
                     </li>
                     <li>
@@ -168,18 +174,6 @@
                 </ul>
             </div>
         </div>
-    </li>
-{{--    //banks--}}
-    <li class="sub-header">
-        <span>الحسابات البنكية </span>
-    </li>
-    <li class="sub-menu">
-        <a href="{{route('admin.bank.index')}}">
-            <div class="icon-w">
-                <div class="os-icon os-icon-credit-card"></div>
-            </div>
-            <span>الحسابات البنكية </span>
-        </a>
     </li>
 
 {{--    //users--}}

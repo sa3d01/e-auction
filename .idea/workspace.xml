@@ -19,15 +19,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="banks">
-      <change afterPath="$PROJECT_DIR$/resources/views/policy.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/questions.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/terms.blade.php" afterDir="false" />
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="landing page">
+      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/AskController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/dashboard/ask/create.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/dashboard/ask/index.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/dashboard/ask/show.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Setting.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Setting.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_04_11_121918_create_settings_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_04_11_121918_create_settings_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/master/main-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/master/main-menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/master/mobile-main-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/master/mobile-main-menu.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -186,7 +185,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="full.screen.before.presentation.mode" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/dashboard" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -198,10 +197,10 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/resources/views" />
-      <recent name="$PROJECT_DIR$/app/Http/Controllers/Api" />
       <recent name="$PROJECT_DIR$/resources/views/dashboard" />
       <recent name="$PROJECT_DIR$/app/Http/Controllers/Admin" />
+      <recent name="$PROJECT_DIR$/resources/views" />
+      <recent name="$PROJECT_DIR$/app/Http/Controllers/Api" />
       <recent name="$PROJECT_DIR$/app/Observers" />
     </key>
   </component>
@@ -363,14 +362,7 @@
       <workItem from="1621852397349" duration="2288000" />
       <workItem from="1621859690361" duration="14529000" />
       <workItem from="1621905321663" duration="103000" />
-      <workItem from="1621940590892" duration="6468000" />
-    </task>
-    <task id="LOCAL-00478" summary="images errors">
-      <created>1619388390116</created>
-      <option name="number" value="00478" />
-      <option name="presentableId" value="LOCAL-00478" />
-      <option name="project" value="LOCAL" />
-      <updated>1619388390117</updated>
+      <workItem from="1621940590892" duration="7468000" />
     </task>
     <task id="LOCAL-00479" summary="images errors">
       <created>1619388546995</created>
@@ -708,7 +700,14 @@
       <option name="project" value="LOCAL" />
       <updated>1621943941948</updated>
     </task>
-    <option name="localTasksCounter" value="527" />
+    <task id="LOCAL-00527" summary="landing page">
+      <created>1621947481284</created>
+      <option name="number" value="00527" />
+      <option name="presentableId" value="LOCAL-00527" />
+      <option name="project" value="LOCAL" />
+      <updated>1621947481284</updated>
+    </task>
+    <option name="localTasksCounter" value="528" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -728,7 +727,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="notifications admin" />
     <MESSAGE value="latest_file" />
     <MESSAGE value="can-bid" />
     <MESSAGE value="year-bid" />
@@ -753,7 +751,8 @@
     <MESSAGE value="transfer" />
     <MESSAGE value="wallet" />
     <MESSAGE value="banks" />
-    <option name="LAST_COMMIT_MESSAGE" value="banks" />
+    <MESSAGE value="landing page" />
+    <option name="LAST_COMMIT_MESSAGE" value="landing page" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
