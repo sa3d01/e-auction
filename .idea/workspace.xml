@@ -19,14 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="landing page">
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/AskController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/dashboard/ask/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/dashboard/ask/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/dashboard/ask/show.blade.php" afterDir="false" />
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="dash">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/master/main-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/master/main-menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/master/mobile-main-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/master/mobile-main-menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -362,42 +357,7 @@
       <workItem from="1621852397349" duration="2288000" />
       <workItem from="1621859690361" duration="14529000" />
       <workItem from="1621905321663" duration="103000" />
-      <workItem from="1621940590892" duration="7468000" />
-    </task>
-    <task id="LOCAL-00479" summary="images errors">
-      <created>1619388546995</created>
-      <option name="number" value="00479" />
-      <option name="presentableId" value="LOCAL-00479" />
-      <option name="project" value="LOCAL" />
-      <updated>1619388546996</updated>
-    </task>
-    <task id="LOCAL-00480" summary="images errors">
-      <created>1619388700410</created>
-      <option name="number" value="00480" />
-      <option name="presentableId" value="LOCAL-00480" />
-      <option name="project" value="LOCAL" />
-      <updated>1619388700410</updated>
-    </task>
-    <task id="LOCAL-00481" summary="images errors">
-      <created>1619388847471</created>
-      <option name="number" value="00481" />
-      <option name="presentableId" value="LOCAL-00481" />
-      <option name="project" value="LOCAL" />
-      <updated>1619388847471</updated>
-    </task>
-    <task id="LOCAL-00482" summary="images errors">
-      <created>1619389027368</created>
-      <option name="number" value="00482" />
-      <option name="presentableId" value="LOCAL-00482" />
-      <option name="project" value="LOCAL" />
-      <updated>1619389027368</updated>
-    </task>
-    <task id="LOCAL-00483" summary="wallet">
-      <created>1621421445524</created>
-      <option name="number" value="00483" />
-      <option name="presentableId" value="LOCAL-00483" />
-      <option name="project" value="LOCAL" />
-      <updated>1621421445525</updated>
+      <workItem from="1621940590892" duration="9649000" />
     </task>
     <task id="LOCAL-00484" summary="year">
       <created>1621425994335</created>
@@ -707,7 +667,42 @@
       <option name="project" value="LOCAL" />
       <updated>1621947481284</updated>
     </task>
-    <option name="localTasksCounter" value="528" />
+    <task id="LOCAL-00528" summary="dash">
+      <created>1621948272952</created>
+      <option name="number" value="00528" />
+      <option name="presentableId" value="LOCAL-00528" />
+      <option name="project" value="LOCAL" />
+      <updated>1621948272952</updated>
+    </task>
+    <task id="LOCAL-00529" summary="dash">
+      <created>1621948348024</created>
+      <option name="number" value="00529" />
+      <option name="presentableId" value="LOCAL-00529" />
+      <option name="project" value="LOCAL" />
+      <updated>1621948348024</updated>
+    </task>
+    <task id="LOCAL-00530" summary="dash">
+      <created>1621948422439</created>
+      <option name="number" value="00530" />
+      <option name="presentableId" value="LOCAL-00530" />
+      <option name="project" value="LOCAL" />
+      <updated>1621948422439</updated>
+    </task>
+    <task id="LOCAL-00531" summary="dash">
+      <created>1621948485028</created>
+      <option name="number" value="00531" />
+      <option name="presentableId" value="LOCAL-00531" />
+      <option name="project" value="LOCAL" />
+      <updated>1621948485029</updated>
+    </task>
+    <task id="LOCAL-00532" summary="dash">
+      <created>1621948562063</created>
+      <option name="number" value="00532" />
+      <option name="presentableId" value="LOCAL-00532" />
+      <option name="project" value="LOCAL" />
+      <updated>1621948562063</updated>
+    </task>
+    <option name="localTasksCounter" value="533" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -727,7 +722,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="latest_file" />
     <MESSAGE value="can-bid" />
     <MESSAGE value="year-bid" />
     <MESSAGE value="delete transfers of deleted user" />
@@ -752,25 +746,21 @@
     <MESSAGE value="wallet" />
     <MESSAGE value="banks" />
     <MESSAGE value="landing page" />
-    <option name="LAST_COMMIT_MESSAGE" value="landing page" />
+    <MESSAGE value="dash" />
+    <option name="LAST_COMMIT_MESSAGE" value="dash" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/routes/web.php</url>
-          <line>95</line>
+          <line>100</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/routes/web.php</url>
-          <line>91</line>
+          <line>96</line>
           <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/routes/web.php</url>
-          <line>61</line>
-          <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php-line-method">
           <url>file://$PROJECT_DIR$/app/Http/Controllers/Controller.php</url>
