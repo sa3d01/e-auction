@@ -1,23 +1,23 @@
 @extends('dashboard.master.base')
 @section('title',$title)
-@section('style')
-    <style>
-        #sortable1, #sortable2 {
-            border: 1px solid #eee;
-            min-height: 100px;
-            margin: 0;
-            padding: 5px 0 0 0;
-            /*float: left;*/
-            /*margin-right: 10px;*/
-        }
-        #sortable1 li, #sortable2 li {
-            margin: 0 5px 5px 5px;
-            padding: 5px;
-            font-size: 1.2em;
-            /*width: 120px;*/
-        }
-    </style>
-@endsection
+{{--@section('style')--}}
+{{--    <style>--}}
+{{--        #sortable1, #sortable2 {--}}
+{{--            border: 1px solid #eee;--}}
+{{--            min-height: 100px;--}}
+{{--            margin: 0;--}}
+{{--            padding: 5px 0 0 0;--}}
+{{--            /*float: left;*/--}}
+{{--            /*margin-right: 10px;*/--}}
+{{--        }--}}
+{{--        #sortable1 li, #sortable2 li {--}}
+{{--            margin: 0 5px 5px 5px;--}}
+{{--            padding: 5px;--}}
+{{--            font-size: 1.2em;--}}
+{{--            /*width: 120px;*/--}}
+{{--        }--}}
+{{--    </style>--}}
+{{--@endsection--}}
 @section('content')
     <div class="content-i">
         <div class="content-box">
@@ -118,26 +118,26 @@
     </div>
 @endsection
 @section('script')
-    <script>
-        $('#submit').click(function (){
-            let sortable_li=$('#sortable2 li');
-            if (sortable_li.length<1){
-                alert('تأكد من اضافة سلعة واحدة على الأقل للمزاد');
-                window.reload();
-            }
-            sortable_li.each(function() {
-                $("form[name='create-form']").append('<input name="items[]" type="hidden" value="'+parseInt($(this).data('id'))+'" />');
-            });
-            $("form[name='create-form']").submit();
-        });
-    </script>
+{{--    <script>--}}
+{{--        $('#submit').click(function (){--}}
+{{--            let sortable_li=$('#sortable2 li');--}}
+{{--            if (sortable_li.length<1){--}}
+{{--                alert('تأكد من اضافة سلعة واحدة على الأقل للمزاد');--}}
+{{--                window.reload();--}}
+{{--            }--}}
+{{--            sortable_li.each(function() {--}}
+{{--                $("form[name='create-form']").append('<input name="items[]" type="hidden" value="'+parseInt($(this).data('id'))+'" />');--}}
+{{--            });--}}
+{{--            $("form[name='create-form']").submit();--}}
+{{--        });--}}
+{{--    </script>--}}
 {{--    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>--}}
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
-        $( "#sortable1, #sortable2" ).sortable({
-            connectWith: ".connectedSortable",
-        }).disableSelection();
-    </script>
+{{--    <script>--}}
+{{--        $( "#sortable1, #sortable2" ).sortable({--}}
+{{--            connectWith: ".connectedSortable",--}}
+{{--        }).disableSelection();--}}
+{{--    </script>--}}
     @if($errors->any())
         <div style="visibility: hidden" id="errors" data-content="{{$errors}}"></div>
         <script type="text/javascript">
