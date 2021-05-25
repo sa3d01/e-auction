@@ -35,7 +35,7 @@ class BankController extends MasterController
     public function index()
     {
         $rows = $this->model->all();
-        $index_fields=['الاسم' => 'name','الماركة'=>'parent_id'];
+        $index_fields=['الاسم' => 'name','رقم الإيبان'=>'iban_number'];
         return View('dashboard.bank.index', [
                 'rows' => $rows,
                 'title'=>'الحسابات البنكية',
