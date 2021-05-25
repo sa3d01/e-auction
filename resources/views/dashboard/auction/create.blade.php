@@ -80,16 +80,27 @@
                                             @if(isset($multi_select))
                                                 <div class="col-sm-12">
                                                     <div class="form-group">
-                                                        <label for="sortable1"> {{$multi_select['title']}}</label>
-                                                        <ul id="sortable1" class="connectedSortable col-sm-6">
+                                                        <label for=""> {{$multi_select['title']}} </label>
+                                                        <select class="form-control select2" multiple="true">
                                                             @foreach($multi_select['rows'] as $multi_select_row)
-                                                                <li data-id="{{$multi_select_row->id}}" class="ui-state-default">{{$multi_select_row->nameForSelect()}}</li>
+                                                                <option value="" selected="true">
+                                                                    {{$multi_select_row->nameForSelect()}}
+                                                                </option>
                                                             @endforeach
-                                                        </ul>
-                                                        <label for="sortable2"> السلع المضمنة بالمزاد</label>
-                                                        <ul id="sortable2" class="connectedSortable col-sm-6">
-                                                        </ul>
+                                                        </select>
                                                     </div>
+
+{{--                                                    <div class="form-group">--}}
+{{--                                                        <label for="sortable1"> {{$multi_select['title']}}</label>--}}
+{{--                                                        <ul id="sortable1" class="connectedSortable col-sm-6">--}}
+{{--                                                            @foreach($multi_select['rows'] as $multi_select_row)--}}
+{{--                                                                <li data-id="{{$multi_select_row->id}}" class="ui-state-default">{{$multi_select_row->nameForSelect()}}</li>--}}
+{{--                                                            @endforeach--}}
+{{--                                                        </ul>--}}
+{{--                                                        <label for="sortable2"> السلع المضمنة بالمزاد</label>--}}
+{{--                                                        <ul id="sortable2" class="connectedSortable col-sm-6">--}}
+{{--                                                        </ul>--}}
+{{--                                                    </div>--}}
                                                 </div>
                                             @endif
                                         </div>
