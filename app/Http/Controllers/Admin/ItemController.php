@@ -128,6 +128,38 @@ class ItemController extends MasterController
                     'name'=>'auction_type',
                     'title'=>'نوع المزايدة'
                 ],
+                [
+                    'name'=>'mark',
+                    'title'=>'نوع المركبة',
+                ],
+                [
+                    'name'=>'model',
+                    'title'=>'موديل المركبة',
+                ],
+                [
+                    'name'=>'color',
+                    'title'=>'لون المركبة',
+                ],
+                [
+                    'name'=>'item_status',
+                    'title'=>'حالة المركبة',
+                ],
+                [
+                    'name'=>'fetes',
+                    'title'=>'نوع ناقل الحركة',
+                ],
+                [
+                    'name'=>'scan_status',
+                    'title'=>'حالة الفحص',
+                ],
+                [
+                    'name'=>'paper_status',
+                    'title'=>'حالة الاستمارة',
+                ],
+                [
+                    'name'=>'city',
+                    'title'=>'المدينة',
+                ],
             ],
         ]);
     }
