@@ -114,7 +114,7 @@ class Item extends Model
         }
     }
     public function nameForSelect(){
-        return $this->id.'-'.$this->model->name['ar'].'-'.$this->auction_type->name['ar'];
+        return $this->id.'-'.$this->year.'-'.$this->mark->name['ar'].'-'.$this->model->name['ar'].'-'.$this->auction_type->name['ar'];
     }
     public function itemStatusIcon()
     {
