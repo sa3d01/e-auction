@@ -144,11 +144,19 @@
                                         <td>{!! $vip !!}</td>
                                     @endif
                                     <td>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <a class='reject btn btn-danger btn-sm' data-id="{{$row->id}}"  data-href='{{route('admin.item.reject',$row->id)}}' href=''><i class='os-icon os-icon-cancel-circle'></i><span>رفض المركبة</span></a>
+                                            </div>
+                                            <div class="col-md-6 text-right">
+                                                <a class='accept btn btn-success btn-sm' data-id="{{$row->id}}" data-href='{{route('admin.item.accept',$row->id)}}' href=''><i class='os-icon os-icon-shopping-cart'></i><span>قبول المركبة</span></a>
+                                            </div>
+                                        </div>
                                         <form class="delete" data-id="{{$row->id}}" method="POST" action="{{ route('admin.'.$type.'.destroy',[$row->id]) }}">
                                             @csrf
                                             {{ method_field('DELETE') }}
                                             <input type="hidden" value="{{$row->id}}">
-                                            <button type="button " class="btn p-0 no-bg">
+                                            <button type="button" class="btn p-0 no-bg">
                                                 <i class="fa fa-trash text-danger"></i>
                                             </button>
                                         </form>
@@ -267,5 +275,74 @@
             }
             return true;
         }
+    </script>
+    <script>
+        $(document).on('click', '.reject', function (e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'من فضلك اذكر سبب الرفض',
+                input: 'text',
+                showCancelButton: true,
+                confirmButtonText: 'رفض',
+                cancelButtonText: 'الغاء',
+                showLoaderOnConfirm: true,
+                preConfirm: (reject_reason) => {
+                    $.ajax({
+                        url: $(this).data('href'),
+                        type:'GET',
+                        data: {reject_reason}
+                    })
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then(() => {
+                location.href = "/e-auction/public/admin/item/status/rejected";
+            })
+        });
+        $(document).on('click', '.accept', function (e) {
+            e.preventDefault();
+            let shipping_by = document.getElementById('shipping_by').getAttribute("data-value");
+            console.log(shipping_by)
+            if (shipping_by==='user'){
+                Swal.fire({
+                    title: "هل انت متأكد من القبول ؟",
+                    text: "تأكد من اجابتك قبل التأكيد!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonClass: 'btn-info',
+                    confirmButtonText: 'نعم , قم بالقبول!',
+                    cancelButtonText: 'ﻻ , الغى عملية القبول!',
+                    closeOnConfirm: false,
+                    closeOnCancel: false,
+                    preConfirm: () => {
+                        $.ajax({
+                            url: $(this).data('href'),
+                            type:'GET',
+                        })
+                    },
+                    allowOutsideClick: () => !Swal.isLoading()
+                }).then(() => {
+                    location.href = "/e-auction/public/admin/item/status/accepted";
+                })
+            }else {
+                Swal.fire({
+                    title: "من فضلك اذكر سعر الشحن!",
+                    input: 'number',
+                    showCancelButton: true,
+                    confirmButtonText: 'نعم , قم بالقبول!',
+                    cancelButtonText: 'ﻻ , الغى عملية القبول!',
+                    showLoaderOnConfirm: true,
+                    preConfirm: (shipping_price) => {
+                        $.ajax({
+                            url: $(this).data('href'),
+                            type:'GET',
+                            data: {shipping_price}
+                        })
+                    },
+                    allowOutsideClick: () => !Swal.isLoading()
+                }).then(() => {
+                    location.href = "/e-auction/public/admin/item/status/accepted";
+                })
+            }
+        });
     </script>
 @endsection
