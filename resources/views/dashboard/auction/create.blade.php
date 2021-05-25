@@ -83,7 +83,7 @@
                                                         <label for=""> {{$multi_select['title']}} </label>
                                                         <select name="items[]" class="form-control select2" multiple="true">
                                                             @foreach($multi_select['rows'] as $multi_select_row)
-                                                                <option value="" selected="true">
+                                                                <option value="{{$multi_select_row->id}}" selected="true">
                                                                     {{$multi_select_row->nameForSelect()}}
                                                                 </option>
                                                             @endforeach
