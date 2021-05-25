@@ -70,23 +70,23 @@
             <div class="icon-w">
                 <div class="os-icon os-icon-wallet-loaded"></div>
             </div>
-            <span>السلع</span>
+            <span>المركبات</span>
         </a>
         <ul class="sub-menu">
             <li>
-                <a href="{{route('admin.item.create')}}"> إضافة سلعة </a>
+                <a href="{{route('admin.item.create')}}"> إضافة مركبة </a>
             </li>
             <li>
-                <a href="{{route('admin.item.status',['status'=>'pending'])}}"> السلع الجديدة </a>
+                <a href="{{route('admin.item.status',['status'=>'pending'])}}"> المركبات الجديدة </a>
             </li>
             <li>
-                <a href="{{route('admin.item.status',['status'=>'rejected'])}}"> السلع المرفوضة  </a>
+                <a href="{{route('admin.item.status',['status'=>'rejected'])}}"> المركبات المرفوضة  </a>
             </li>
             <li>
-                <a href="{{route('admin.item.status',['status'=>'accepted'])}}"> السلع فى انتظار الاعداد لمزاد </a>
+                <a href="{{route('admin.item.status',['status'=>'accepted'])}}"> المركبات فى انتظار الاعداد لمزاد </a>
             </li>
             <li>
-                <a href="{{route('admin.items.vip')}}"> السلع المميزة </a>
+                <a href="{{route('admin.items.vip')}}"> المركبات المميزة </a>
             </li>
         </ul>
     </li>
@@ -106,6 +106,15 @@
                 <a href="{{route('admin.auction.create')}}"> إضافة مزاد  </a>
             </li>
         </ul>
+    </li>
+
+    <li class="sub-menu">
+        <a href="{{route('admin.bank.index')}}">
+            <div class="icon-w">
+                <div class="os-icon os-icon-credit-card"></div>
+            </div>
+            <span> الحسابات البنكية</span>
+        </a>
     </li>
 
     <li class="sub-menu">

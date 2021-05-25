@@ -104,17 +104,17 @@
 {{--    </li>--}}
 {{--    //items--}}
     <li class="sub-header">
-        <span>السلع </span>
+        <span>المركبات </span>
     </li>
     <li class=" has-sub-menu">
         <a href="#">
             <div class="icon-w">
                 <div class="os-icon os-icon-shopping-cart"></div>
             </div>
-            <span>السلع </span></a>
+            <span>المركبات </span></a>
         <div class="sub-menu-w">
             <div class="sub-menu-header">
-                السلع
+                المركبات
             </div>
             <div class="sub-menu-icon">
                 <i class="os-icon os-icon-shopping-cart"></i>
@@ -122,19 +122,19 @@
             <div class="sub-menu-i">
                 <ul class="sub-menu">
                     <li>
-                        <a href="{{route('admin.item.create')}}"> إضافة سلعة </a>
+                        <a href="{{route('admin.item.create')}}"> إضافة مركبة </a>
                     </li>
                     <li>
-                        <a href="{{route('admin.item.status',['status'=>'pending'])}}"> السلع الجديدة </a>
+                        <a href="{{route('admin.item.status',['status'=>'pending'])}}"> المركبات الجديدة </a>
                     </li>
                     <li>
-                        <a href="{{route('admin.item.status',['status'=>'rejected'])}}"> السلع المرفوضة  </a>
+                        <a href="{{route('admin.item.status',['status'=>'rejected'])}}"> المركبات المرفوضة  </a>
                     </li>
                     <li>
-                        <a href="{{route('admin.item.status',['status'=>'accepted'])}}"> السلع فى انتظار الاعداد لمزاد </a>
+                        <a href="{{route('admin.item.status',['status'=>'accepted'])}}"> المركبات فى انتظار الاعداد لمزاد </a>
                     </li>
                     <li>
-                        <a href="{{route('admin.items.vip')}}"> السلع المميزة </a>
+                        <a href="{{route('admin.items.vip')}}"> المركبات المميزة </a>
                     </li>
                 </ul>
             </div>
@@ -169,6 +169,19 @@
             </div>
         </div>
     </li>
+{{--    //banks--}}
+    <li class="sub-header">
+        <span>الحسابات البنكية </span>
+    </li>
+    <li class="sub-menu">
+        <a href="{{route('admin.bank.index')}}">
+            <div class="icon-w">
+                <div class="os-icon os-icon-credit-card"></div>
+            </div>
+            <span>الحسابات البنكية </span>
+        </a>
+    </li>
+
 {{--    //users--}}
     <li class="sub-header">
         <span>الأعضاء </span>
