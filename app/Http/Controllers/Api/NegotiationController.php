@@ -310,10 +310,11 @@ class NegotiationController extends MasterController
 
             if ($offer->sender_id==$auction_item->item->user_id){
                 $buyer_offer=Offer::where('auction_item_id',$offer->auction_item_id)->where('sender_id',$offer->receiver_id)->latest()->first();
+                $owner_offer=Offer::where('auction_item_id',$offer->auction_item_id)->where('sender_id',$offer->auction_item->item->user_id)->where('receiver_id',$offer->receiver_id)->latest()->first();
             }else{
                 $buyer_offer=Offer::where('auction_item_id',$offer->auction_item_id)->where('sender_id',$offer->sender_id)->latest()->first();
+                $owner_offer=Offer::where('auction_item_id',$offer->auction_item_id)->where('sender_id',$offer->auction_item->item->user_id)->where('receiver_id',$offer->receiver_id)->latest()->first();
             }
-            $owner_offer=Offer::where('auction_item_id',$offer->auction_item_id)->where('sender_id',$offer->auction_item->item->user_id)->latest()->first();
             $arr['owner_offer']=$owner_offer->price??"";
             $arr['buyer_offer']=$buyer_offer->price??"";
             $data[] = $arr;
