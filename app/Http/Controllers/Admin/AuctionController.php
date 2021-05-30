@@ -125,7 +125,6 @@ class AuctionController extends MasterController
     {
         $key = 0;
         foreach ($auction->items as $item_id) {
-            $seconds = $key * ($auction->duration);
             $item = Item::find($item_id);
             $item->update(['status' => 'shown']);
             if ($item->auction_price==null){
@@ -133,6 +132,7 @@ class AuctionController extends MasterController
             }else{
                 $item_auction_price=$item->auction_price;
             }
+            $seconds = $key * ($auction->duration);
             $start_date = Carbon::createFromTimestamp($auction->start_date)->addSeconds($seconds)->timestamp;
             AuctionItem::create([
                 'item_id' => $item_id,

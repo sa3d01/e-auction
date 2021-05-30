@@ -19,10 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="transfer">
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="risk">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/TransferController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/TransferController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/AuctionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/AuctionController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -359,21 +358,7 @@
       <workItem from="1621859690361" duration="14529000" />
       <workItem from="1621905321663" duration="103000" />
       <workItem from="1621940590892" duration="15808000" />
-      <workItem from="1622376546346" duration="5014000" />
-    </task>
-    <task id="LOCAL-00502" summary="api">
-      <created>1621866373176</created>
-      <option name="number" value="00502" />
-      <option name="presentableId" value="LOCAL-00502" />
-      <option name="project" value="LOCAL" />
-      <updated>1621866373176</updated>
-    </task>
-    <task id="LOCAL-00503" summary="api">
-      <created>1621866463389</created>
-      <option name="number" value="00503" />
-      <option name="presentableId" value="LOCAL-00503" />
-      <option name="project" value="LOCAL" />
-      <updated>1621866463389</updated>
+      <workItem from="1622376546346" duration="6863000" />
     </task>
     <task id="LOCAL-00504" summary="api">
       <created>1621866551307</created>
@@ -704,7 +689,21 @@
       <option name="project" value="LOCAL" />
       <updated>1622379929950</updated>
     </task>
-    <option name="localTasksCounter" value="551" />
+    <task id="LOCAL-00551" summary="transfer">
+      <created>1622381957184</created>
+      <option name="number" value="00551" />
+      <option name="presentableId" value="LOCAL-00551" />
+      <option name="project" value="LOCAL" />
+      <updated>1622381957184</updated>
+    </task>
+    <task id="LOCAL-00552" summary="risk">
+      <created>1622382109903</created>
+      <option name="number" value="00552" />
+      <option name="presentableId" value="LOCAL-00552" />
+      <option name="project" value="LOCAL" />
+      <updated>1622382109903</updated>
+    </task>
+    <option name="localTasksCounter" value="553" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -724,7 +723,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="year-bid" />
     <MESSAGE value="delete transfers of deleted user" />
     <MESSAGE value="dashboard" />
     <MESSAGE value="total_amount" />
@@ -749,7 +747,8 @@
     <MESSAGE value="dash" />
     <MESSAGE value="item index" />
     <MESSAGE value="transfer" />
-    <option name="LAST_COMMIT_MESSAGE" value="transfer" />
+    <MESSAGE value="risk" />
+    <option name="LAST_COMMIT_MESSAGE" value="risk" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
