@@ -146,6 +146,7 @@ class ItemCollection extends ResourceCollection
             $arr['item_status']= $obj->item_status->name[$this->lang()];
             $arr['city']= $obj->city->name[$this->lang()];
             $arr['image']=$obj->images[0];
+            $arr['images']=$obj->images;
             $arr['is_favourite']=$is_favourite;
             $arr['win']=$win;
             $arr["my_item"]=$my_item;

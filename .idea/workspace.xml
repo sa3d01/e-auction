@@ -19,9 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="risk">
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="search">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/AuctionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/AuctionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/ItemCollection.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/ItemCollection.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -358,14 +358,7 @@
       <workItem from="1621859690361" duration="14529000" />
       <workItem from="1621905321663" duration="103000" />
       <workItem from="1621940590892" duration="15808000" />
-      <workItem from="1622376546346" duration="7775000" />
-    </task>
-    <task id="LOCAL-00505" summary="api">
-      <created>1621867249578</created>
-      <option name="number" value="00505" />
-      <option name="presentableId" value="LOCAL-00505" />
-      <option name="project" value="LOCAL" />
-      <updated>1621867249578</updated>
+      <workItem from="1622376546346" duration="10984000" />
     </task>
     <task id="LOCAL-00506" summary="transfer">
       <created>1621867489511</created>
@@ -703,7 +696,14 @@
       <option name="project" value="LOCAL" />
       <updated>1622384374406</updated>
     </task>
-    <option name="localTasksCounter" value="554" />
+    <task id="LOCAL-00554" summary="search">
+      <created>1622385505080</created>
+      <option name="number" value="00554" />
+      <option name="presentableId" value="LOCAL-00554" />
+      <option name="project" value="LOCAL" />
+      <updated>1622385505080</updated>
+    </task>
+    <option name="localTasksCounter" value="555" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -723,7 +723,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="delete transfers of deleted user" />
     <MESSAGE value="dashboard" />
     <MESSAGE value="total_amount" />
     <MESSAGE value="from dashboard" />
@@ -748,7 +747,8 @@
     <MESSAGE value="item index" />
     <MESSAGE value="transfer" />
     <MESSAGE value="risk" />
-    <option name="LAST_COMMIT_MESSAGE" value="risk" />
+    <MESSAGE value="search" />
+    <option name="LAST_COMMIT_MESSAGE" value="search" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
