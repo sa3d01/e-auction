@@ -409,18 +409,20 @@ class ItemController extends MasterController
 //        }
         $note['ar']='تم قبول اضافة منتجك من قبل الادارة ..';
         $note['en']='your added item is accepted from admin  ..';
+        $this->editWallet($item->user,-$request['shipping_price']);
+        $more_details['shipping_price_status']='paid';
 
-        if ($item->shipping_by=='app'){
-            $more_details['shipping_price']=$request['shipping_price'];
-            if ($request['shipping_price'] < $item->user->wallet){
-                $this->walletPay($item->user,$request['shipping_price'],'shipping');
-                $more_details['shipping_price_status']='paid';
-            }else{
-                $more_details['shipping_price_status']='pending';
-                $note['ar']='تم قبول اضافة منتجك من قبل الادارة ..ويرجى شحن محفظتك قريبا لتحصيل مستحقات التطبيق المالية';
-                $note['en']='your added item is accepted from admin..please charge your wallet ..';
-            }
-        }
+//        if ($item->shipping_by=='app'){
+//            $more_details['shipping_price']=$request['shipping_price'];
+//            if ($request['shipping_price'] < $item->user->wallet){
+//                $this->walletPay($item->user,$request['shipping_price'],'shipping');
+//                $more_details['shipping_price_status']='paid';
+//            }else{
+//                $more_details['shipping_price_status']='pending';
+//                $note['ar']='تم قبول اضافة منتجك من قبل الادارة ..ويرجى شحن محفظتك قريبا لتحصيل مستحقات التطبيق المالية';
+//                $note['en']='your added item is accepted from admin..please charge your wallet ..';
+//            }
+//        }
         $item->update([
             'status'=>'accepted',
             'more_details'=>$more_details,
