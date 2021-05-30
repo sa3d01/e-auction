@@ -65,7 +65,6 @@ class NegotiationController extends MasterController
         $this->notify_admin($admin_title, $auction_item);
         return $this->sendResponse('تمت العملية بنجاح');
     }
-
     public function sendOffer($item_id, Request $request):object
     {
         $sender = $request->user();
@@ -147,7 +146,6 @@ class NegotiationController extends MasterController
         $this->new_offer_notify($offer);
         return $this->sendResponse('تم الإرسال بنجاح');
     }
-
     public function acceptOffer($item_id, $offer_id, Request $request): string
     {
         $user = $request->user();

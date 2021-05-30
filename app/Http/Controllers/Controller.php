@@ -309,7 +309,9 @@ class Controller extends BaseController
                 'pay_type' => $pay_type
             ]
         ];
-        $this->reOrderAuctionItems($auction_item);
+        if ($auction_item->more_details['status']=='soon'){
+            $this->reOrderAuctionItems($auction_item);
+        }
         return $data;
     }
 
