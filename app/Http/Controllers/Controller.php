@@ -68,22 +68,6 @@ class Controller extends BaseController
         }
     }
 
-    public function editWallet($user, $amount)
-    {
-        $user->update([
-            'wallet' => $user->wallet + ($amount)
-        ]);
-    }
-
-//    function addToCredit($auction_user)
-//    {
-//        $auction_item = AuctionItem::where(['item_id' => $auction_user->item_id, 'auction_id' => $auction_user->auction_id])->latest()->first();
-//        $latest_credit = $auction_user->item->user->credit;
-//        $auction_user->item->user->update([
-//            'credit' => (integer)($latest_credit + $auction_item->auction_price)
-//        ]);
-//    }
-
     function auctionItemStatusUpdate()
     {
         $this->check_negotiation_auctions();
@@ -229,16 +213,6 @@ class Controller extends BaseController
             }
         }
     }
-    function totalAmount($auction_item):Integer
-    {
-//        $setting=Setting::first();
-        $auction_price=$auction_item->price;
-        return (integer)$auction_price;
-//        $auction_user=AuctionUser::where(['auction_id'=>$auction_item->auction_id,'item_id'=>$auction_item->item_id])->latest()->first();
-//        $winner_finish_paper=$auction_user->finish_papers==1?$setting->finish_papers:0;
-//        $owner_tax=$auction_item->item->tax=='true'?($auction_price*$setting->owner_tax_ratio/100):0;
-//        return (integer)$auction_price+$owner_tax+($setting->tax_ratio)+($auction_price*$setting->app_ratio/100)+$winner_finish_paper;
-    }
 
     function auction_item_update($auction_item,$status){
         if ($status=='expired'){
@@ -264,6 +238,128 @@ class Controller extends BaseController
             ];
         }
         $auction_item->update($data);
+    }
+
+    public function editWallet($user, $amount)
+    {
+        $user->update([
+            'wallet' => $user->wallet + ($amount)
+        ]);
+    }
+
+//    function addToCredit($auction_user)
+//    {
+//        $auction_item = AuctionItem::where(['item_id' => $auction_user->item_id, 'auction_id' => $auction_user->auction_id])->latest()->first();
+//        $latest_credit = $auction_user->item->user->credit;
+//        $auction_user->item->user->update([
+//            'credit' => (integer)($latest_credit + $auction_item->auction_price)
+//        ]);
+//    }
+
+    function totalAmount($auction_item)
+    {
+//        $setting=Setting::first();
+        $auction_price=$auction_item->price;
+        return (integer)$auction_price;
+//        $auction_user=AuctionUser::where(['auction_id'=>$auction_item->auction_id,'item_id'=>$auction_item->item_id])->latest()->first();
+//        $winner_finish_paper=$auction_user->finish_papers==1?$setting->finish_papers:0;
+//        $owner_tax=$auction_item->item->tax=='true'?($auction_price*$setting->owner_tax_ratio/100):0;
+//        return (integer)$auction_price+$owner_tax+($setting->tax_ratio)+($auction_price*$setting->app_ratio/100)+$winner_finish_paper;
+    }
+
+    public function pay($user,$auction_item,$auction_user,$charge_price,$price,$pay_type):array
+    {
+        $winner=User::find($auction_user->user_id);
+//        if ($winner->purchasing_power > $this->totalAmount($auction_item)){
+//            $auction_user->update([
+//                'more_details'=>[
+//                    'status'=>'paid',
+//                    'total_amount'=>$this->totalAmount($auction_item),
+//                    'paid'=>$this->totalAmount($auction_item),
+//                    'remain'=>0
+//                ]
+//            ]);
+//            $winner->update([
+//                'purchasing_power'=> ((integer)$winner->purchasing_power)-$this->totalAmount($auction_item)
+//            ]);
+//            $data=[
+//                'vip' => 'false',
+//                'price' => $price,
+//                'latest_charge' => $charge_price,
+//                'more_details' => [
+//                    'status'=>'delivered',
+//                    'pay_type' => $pay_type
+//                ]
+//            ];
+//            $note['ar'] = 'تم خصم سعر السلعة من قوتك الشرائية :)';
+//            $note['en'] = 'تم خصم سعر السلعة من قوتك الشرائية :)';
+//            $this->base_notify($note,$winner->id,$auction_item->item_id,true);
+//        }else{
+//            $auction_user->update([
+//                'more_details'=>[
+//                    'status'=>'pending_for_transfer',
+//                    'total_amount'=>$this->totalAmount($auction_item),
+//                    'remain'=>$this->totalAmount($auction_item)-((integer)$user->purchasing_power),
+//                    'paid'=>$winner->purchasing_power,
+//                ]
+//            ]);
+//            $user->update([
+//                'purchasing_power'=> 0,
+//            ]);
+//            $data=[
+//                'vip' => 'false',
+//                'price' => $price,
+//                'latest_charge' => $charge_price,
+//                'more_details' => [
+//                    'status'=>'paid',
+//                    'pay_type' => $pay_type
+//                ]
+//            ];
+//        }
+        $take=(10*($price))/100;
+        $remain=$price-$take;
+        $auction_user->update([
+            'more_details'=>[
+                'status'=>'pending_for_transfer',
+                'total_amount'=>$price,
+                'remain'=>$remain,
+                'paid'=>$take,
+            ]
+        ]);
+        $winner->update([
+            'purchasing_power'=> ((integer)$winner->purchasing_power-$take)
+        ]);
+        $this->editWallet($winner,-$remain);
+        $data=[
+            'vip' => 'false',
+            'price' => $price??0,
+            'latest_charge' => $charge_price??0,
+            'more_details' => [
+                'status'=>'paid',
+                'pay_type' => $pay_type
+            ]
+        ];
+        $this->reOrderAuctionItems($auction_item);
+        return $data;
+    }
+
+    public function reOrderAuctionItems($auction_item)
+    {
+        $auction=$auction_item->auction;
+        $after_auction_items=AuctionItem::where('auction_id',$auction->id)->where('id','>',$auction_item->id)->get();
+        foreach ($after_auction_items as $after_auction_item){
+            $new_date=Carbon::createFromTimestamp($after_auction_item->start_date)->subSeconds($auction->duration)->timestamp;
+            $after_auction_item->update([
+                'start_date'=> $new_date
+            ]);
+        }
+        $new_end_date=Carbon::createFromTimestamp($auction->more_details['end_date'])->subSeconds($auction->duration)->timestamp;
+        $auction->update([
+            'more_details'=>[
+                'end_date'=>$new_end_date
+            ]
+        ]);
+
     }
 
     function expire_offers($expired_offers){
@@ -360,99 +456,5 @@ class Controller extends BaseController
         $data['type'] = 'admin';
         $data['admin_notify_type'] = 'all';
         Notification::create($data);
-    }
-
-    public function pay($user,$auction_item,$auction_user,$charge_price,$price,$pay_type):array
-    {
-        $winner=User::find($auction_user->user_id);
-//        if ($winner->purchasing_power > $this->totalAmount($auction_item)){
-//            $auction_user->update([
-//                'more_details'=>[
-//                    'status'=>'paid',
-//                    'total_amount'=>$this->totalAmount($auction_item),
-//                    'paid'=>$this->totalAmount($auction_item),
-//                    'remain'=>0
-//                ]
-//            ]);
-//            $winner->update([
-//                'purchasing_power'=> ((integer)$winner->purchasing_power)-$this->totalAmount($auction_item)
-//            ]);
-//            $data=[
-//                'vip' => 'false',
-//                'price' => $price,
-//                'latest_charge' => $charge_price,
-//                'more_details' => [
-//                    'status'=>'delivered',
-//                    'pay_type' => $pay_type
-//                ]
-//            ];
-//            $note['ar'] = 'تم خصم سعر السلعة من قوتك الشرائية :)';
-//            $note['en'] = 'تم خصم سعر السلعة من قوتك الشرائية :)';
-//            $this->base_notify($note,$winner->id,$auction_item->item_id,true);
-//        }else{
-//            $auction_user->update([
-//                'more_details'=>[
-//                    'status'=>'pending_for_transfer',
-//                    'total_amount'=>$this->totalAmount($auction_item),
-//                    'remain'=>$this->totalAmount($auction_item)-((integer)$user->purchasing_power),
-//                    'paid'=>$winner->purchasing_power,
-//                ]
-//            ]);
-//            $user->update([
-//                'purchasing_power'=> 0,
-//            ]);
-//            $data=[
-//                'vip' => 'false',
-//                'price' => $price,
-//                'latest_charge' => $charge_price,
-//                'more_details' => [
-//                    'status'=>'paid',
-//                    'pay_type' => $pay_type
-//                ]
-//            ];
-//        }
-        $take=(10*($price))/100;
-        $remain=$price-$take;
-        $auction_user->update([
-            'more_details'=>[
-                'status'=>'pending_for_transfer',
-                'total_amount'=>$price,
-                'remain'=>$remain,
-                'paid'=>$take,
-            ]
-        ]);
-        $winner->update([
-            'purchasing_power'=> ((integer)$winner->purchasing_power-$take)
-        ]);
-        $this->editWallet($winner,-$remain);
-        $data=[
-            'vip' => 'false',
-            'price' => $price??0,
-            'latest_charge' => $charge_price??0,
-            'more_details' => [
-                'status'=>'paid',
-                'pay_type' => $pay_type
-            ]
-        ];
-        $this->reOrderAuctionItems($auction_item);
-        return $data;
-    }
-    public function reOrderAuctionItems($auction_item)
-    {
-        $auction=$auction_item->auction;
-        $after_auction_items=AuctionItem::where('auction_id',$auction->id)->where('id','>',$auction_item->id)->get();
-        foreach ($after_auction_items as $after_auction_item){
-            $new_date=Carbon::createFromTimestamp($after_auction_item->start_date)->subSeconds($auction->duration)->timestamp;
-            $after_auction_item->update([
-                'start_date'=> $new_date
-            ]);
-        }
-        $new_end_date=Carbon::createFromTimestamp($auction->more_details['end_date'])->subSeconds($auction->duration)->timestamp;
-        $auction->update([
-            'more_details'=>[
-                'end_date'=>$new_end_date
-            ]
-        ]);
-
     }
 }
