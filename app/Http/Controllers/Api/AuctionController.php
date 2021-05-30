@@ -13,6 +13,7 @@ use App\Item;
 use App\Report;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class AuctionController extends MasterController
 {
@@ -42,8 +43,8 @@ class AuctionController extends MasterController
         if ($request['name']){
             $marks=DropDown::whereClass('Mark')->where('name','LIKE','%'.$request['name'].'%')->pluck('id');
             $models=DropDown::whereClass('Model')->where('name','LIKE','%'.$request['name'].'%')->pluck('id');
-            $data=new ItemCollection(Item::whereIn('mark_id',$marks)->orWhereIn('model_id',$models)->latest()->get());
-//            $data=new ItemCollection(Item::where('name','LIKE','%'.$request['name'].'%')->latest()->get());
+            $q=Item::whereIn('mark_id',$marks)->orWhereIn('model_id',$models);
+//            $data=new ItemCollection(Item::whereIn('mark_id',$marks)->orWhereIn('model_id',$models)->latest()->get());
         }else{
             $q=Item::query();
             if ($request['from_date'] && $request['to_date']){
@@ -56,8 +57,11 @@ class AuctionController extends MasterController
                 if ($value=='' || $value==null || $key=='from_date' || $key=='to_date') continue;
                 $q=$q->where($key,$value);
             }
-            $data=new ItemCollection($q->latest()->get());
         }
+        $item_ids=$q->pluck('id')->toArray();
+        $valid_items=AuctionItem::where('more_details->status','!=','expired')->whereIn('item_id',$item_ids)->pluck('item_id')->toArray();
+
+        $data=new ItemCollection(Item::whereIn('id',$valid_items)->latest()->get());
         return $this->sendResponse($data);
     }
     public function show($id){
