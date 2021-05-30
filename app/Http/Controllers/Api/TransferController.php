@@ -27,7 +27,7 @@ class TransferController extends MasterController
         $user = auth()->user();
         $data = $request->all();
         $data['user_id'] = $user->id;
-        if (Transfer::where(['status'=>0,'purchasing_type'=>'bank'])->latest()->first()){
+        if (Transfer::where(['user_id'=>$user->id,'status'=>0,'purchasing_type'=>'bank'])->latest()->first()){
             return $this->sendError('يرجى انتظار رد الإدارة على تحويلك السابق');
         }
         if ($request['type'] == 'purchasing_power' && $request['purchasing_type'] == 'online') {
