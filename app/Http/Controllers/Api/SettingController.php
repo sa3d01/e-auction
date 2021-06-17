@@ -45,6 +45,8 @@ class SettingController extends MasterController
         $data['email'] = $setting->contacts['email'];
         $data['mobile'] = $setting->contacts['mobile'];
         $data['address'] = $setting->contacts['address'];
+        $data['lat'] = (double)$setting->contacts['lat'];
+        $data['lng'] = (double)$setting->contacts['lng'];
 
         return $this->sendResponse($data);
     }

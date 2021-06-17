@@ -52,6 +52,8 @@ class HomeController extends MasterController
         $contacts['email']=$request['email'];
         $contacts['mobile']=$request['mobile'];
         $contacts['address']=$request['address'];
+        $contacts['lat']=$request['lat'];
+        $contacts['lng']=$request['lng'];
         $data['contacts']=$contacts;
 
         Setting::updateOrCreate(['id'=>1],$data);

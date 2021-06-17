@@ -2,6 +2,27 @@
 @section('title','الاعدادات العامة')
 @section('style')
     <link rel="stylesheet" href="{{asset('panel/dropify/dist/css/dropify.min.css')}}">
+    <style>
+        .map
+        {
+            position: absolute !important;
+            height: 100% !important;
+            width: 100% !important;
+        }
+        .file-upload input[type='file']{
+            height:200px;
+            width:200px;
+            position:absolute;
+            top:0;
+            left:0;
+            opacity:0;
+            cursor:pointer;
+        }
+    </style>
+
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZ7PLBfMF15gMexw6vZrbfSqWBcNeyKlM&language=ar&&callback=initMap&libraries=places" type="text/javascript">
+    </script>
 @endsection
 @section('content')
     <div class="content-i">
@@ -51,7 +72,14 @@
                                             <input name="address" value="{{$row->contacts['address']}}" class="form-control" type="text">
                                             <div class="help-block form-text with-errors form-control-feedback"></div>
                                         </div>
-
+                                        <div class="col-sm-12">
+                                            <div class="card-img" style="height: 400px">
+                                                <label for="map">الموقع</label>
+                                                <div id="map" data-lat="{{$row->address['lat']}}" data-lng="{{$row->address['lng']}}" class="map"></div>
+                                                <input name="lat" type="hidden" id="lat">
+                                                <input name="lng" type="hidden" id="lng">
+                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <label>
                                                 <i class="os-icon os-icon-dollar-sign"></i>مقدار المزايدة على السلع الأقل سعرها من عشرة الاف
@@ -73,7 +101,6 @@
                                             <input name="more_hundredThousand" value="{{$row->more_details['more_hundredThousand']}}" class="form-control" type="number" min="0">
                                             <div class="help-block form-text with-errors form-control-feedback"></div>
                                         </div>
-
                                         <div class="form-group">
                                             <label>
                                                 <i class="os-icon os-icon-percent"></i>نسبة التطبيق على المزايد
@@ -233,7 +260,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -292,4 +318,58 @@
             })
         </script>
     @endif
+    <script type="text/javascript">
+        let new_map;
+        let old_map;
+        let marker;
+        function initMap() {
+            if (!document.getElementById('show_map')){
+                marker = false;
+            }else {
+                // show map
+                let lat_str = document.getElementById('map').getAttribute("data-lat");
+                let long_str = document.getElementById('map').getAttribute("data-lng");
+                let uluru = {lat:parseFloat(lat_str), lng: parseFloat(long_str)};
+                let centerOfOldMap = new google.maps.LatLng(uluru);
+                let oldMapOptions = {
+                    center: centerOfOldMap,
+                    zoom: 14
+                };
+                old_map = new google.maps.Map(document.getElementById('map'), oldMapOptions);
+                marker = new google.maps.Marker({position: centerOfOldMap,animation:google.maps.Animation.BOUNCE});
+                marker.setMap(old_map);
+                // end show map
+            }
+            // new map
+            let centerOfNewMap = new google.maps.LatLng(24.665658,46.7440368);
+            let newMapOptions = {
+                center: centerOfNewMap,
+                zoom: 14
+            };
+            new_map = new google.maps.Map(document.getElementById('map'), newMapOptions);
+            // end new map
+            google.maps.event.addListener(new_map, 'click', function(event) {
+                let clickedLocation = event.latLng;
+                if(marker === false){
+                    marker = new google.maps.Marker({
+                        position: clickedLocation,
+                        map: new_map,
+                        draggable: true
+                    });
+                    google.maps.event.addListener(marker, 'dragend', function(event){
+                        markerLocation();
+                    });
+                } else{
+                    marker.setPosition(clickedLocation);
+                }
+                markerLocation();
+            });
+        }
+        function markerLocation(){
+            let currentLocation = marker.getPosition();
+            document.getElementById('lat').value = currentLocation.lat();
+            document.getElementById('lng').value = currentLocation.lng();
+        }
+        google.maps.event.addDomListener(window, 'load', initMap);
+    </script>
 @stop

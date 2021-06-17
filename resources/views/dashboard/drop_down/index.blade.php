@@ -55,7 +55,7 @@
                                         @endif
                                     @endforeach
                                     <td>
-                                        {!!$row->getStatusIcon()!!}
+                                        {!!$row->activate()!!}
                                     </td>
                                     @if($image==true)
                                         <td data-toggle="modal" data-target="#imgModal{{$row->id}}">
