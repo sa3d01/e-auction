@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class HomeController extends MasterController
 {
@@ -24,7 +25,7 @@ class HomeController extends MasterController
     }
     public function update_setting(Request $request){
         $data=$request->all();
-
+        $settings=Setting::first();
         $socials['twitter']=$request['twitter'];
         $socials['facebook']=$request['facebook'];
         $socials['snap']=$request['snap'];
@@ -36,9 +37,23 @@ class HomeController extends MasterController
         $about['en']=$request['about_en'];
         $data['about']=$about;
 
-        $licence['ar']=$request['licence_ar'];
-        $licence['en']=$request['licence_en'];
+
+        $licence['ar']=$settings->licence['ar'];
+        $licence['en']=$settings->licence['en'];
+        if ($request['licence_ar']){
+            $file=$request['licence_ar'];
+            $filename = Str::random(10) . '.' . $file->getClientOriginalExtension();
+            $file->move('media/files/', $filename);
+            $licence['ar'] = $filename;
+        }
+        if ($request['licence_en']){
+            $file=$request['licence_en'];
+            $filename = Str::random(10) . '.' . $file->getClientOriginalExtension();
+            $file->move('media/files/', $filename);
+            $licence['en'] = $filename;
+        }
         $data['licence']=$licence;
+
 
         $privacy['ar']=$request['privacy_ar'];
         $privacy['en']=$request['privacy_en'];

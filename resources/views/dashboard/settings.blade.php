@@ -80,6 +80,7 @@
                                                 <input name="lng" type="hidden" id="lng">
                                             </div>
                                         </div>
+                                        <br>
                                         <div class="form-group">
                                             <label>
                                                 <i class="os-icon os-icon-dollar-sign"></i>مقدار المزايدة على السلع الأقل سعرها من عشرة الاف
@@ -137,13 +138,6 @@
                                             <div class="help-block form-text with-errors form-control-feedback"></div>
                                         </div>
 
-{{--                                        <div class="form-group">--}}
-{{--                                            <label>--}}
-{{--                                                <i class="os-icon os-icon-calendar-time"></i>مدة الزيادة على المزاد الموشك على الانتهاء--}}
-{{--                                            </label>--}}
-{{--                                            <input name="auction_increasing_period" value="{{$row->auction_increasing_period}}" class="form-control" type="number" min="0">--}}
-{{--                                            <div class="help-block form-text with-errors form-control-feedback"></div>--}}
-{{--                                        </div>--}}
 
                                         <div class="form-group">
                                             <label>
@@ -185,15 +179,30 @@
                                         <div class="form-group">
                                             <i class="os-icon os-icon-file-text"></i>
                                             <label>شروط الاستخدام باللغة العربية </label>
-                                            <textarea name="licence_ar" class="form-control" cols="80" rows="5">{{$row->licence['ar']}}</textarea>
+                                            <input id="licence_ar" name="licence_ar" type="file" accept="application/pdf"/>
                                             <div class="help-block form-text with-errors form-control-feedback"></div>
                                         </div>
+                                        <br/>
+                                        <div class="form-group" id="licence_ar_preview">
+                                            @if($row->licence['ar']!=null)
+                                                <iframe id="iframe" src="https://e-auction1.com/media/files/{{$row->licence['ar']}}" style="width:100%; height:500px;" frameborder="0"></iframe>
+                                            @endif
+                                        </div>
+                                        <br>
+
                                         <div class="form-group">
                                             <i class="os-icon os-icon-file-text"></i>
                                             <label>شروط الاستخدام باللغة الانجليزية </label>
-                                            <textarea name="licence_en" class="form-control" cols="80" rows="5">{{$row->licence['en']}}</textarea>
+                                            <input id="licence_en" name="licence_en" type="file" accept="application/pdf"/>
                                             <div class="help-block form-text with-errors form-control-feedback"></div>
                                         </div>
+                                        <br/>
+                                        <div class="form-group" id="licence_en_preview">
+                                            @if($row->licence['en']!=null)
+                                                <iframe id="iframe" src="https://e-auction1.com/media/files/{{$row->licence['en']}}" style="width:100%; height:500px;" frameborder="0"></iframe>
+                                            @endif
+                                        </div>
+                                        <br>
 
                                         <div class="form-group">
                                             <i class="os-icon os-icon-file-text"></i>
@@ -371,5 +380,25 @@
             document.getElementById('lng').value = currentLocation.lng();
         }
         google.maps.event.addDomListener(window, 'load', initMap);
+    </script>
+    <script>
+        $("#licence_ar").change(function(){
+            $('#licence_ar_preview').html("");
+            var total_file=document.getElementById("licence_ar").files.length;
+            for(var i=0;i<total_file;i++)
+            {
+                $('#licence_ar_preview').append("" +
+                    "<iframe src='"+URL.createObjectURL(event.target.files[i])+"' style='width:100%; height:500px;'></iframe>");
+            }
+        });
+        $("#licence_en").change(function(){
+            $('#licence_en_preview').html("");
+            var total_file=document.getElementById("licence_en").files.length;
+            for(var i=0;i<total_file;i++)
+            {
+                $('#licence_en_preview').append("" +
+                    "<iframe src='"+URL.createObjectURL(event.target.files[i])+"' style='width:100%; height:500px;'></iframe>");
+            }
+        });
     </script>
 @stop
