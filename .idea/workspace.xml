@@ -19,7 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="edits">
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="licence pdf">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/HomeController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/SettingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/SettingController.php" afterDir="false" />
@@ -364,14 +364,8 @@
       <workItem from="1623507272543" duration="598000" />
       <workItem from="1623932979124" duration="2103000" />
       <workItem from="1623937922259" duration="9540000" />
-      <workItem from="1624199687043" duration="2822000" />
-    </task>
-    <task id="LOCAL-00510" summary="transfer">
-      <created>1621868331067</created>
-      <option name="number" value="00510" />
-      <option name="presentableId" value="LOCAL-00510" />
-      <option name="project" value="LOCAL" />
-      <updated>1621868331067</updated>
+      <workItem from="1624199687043" duration="3213000" />
+      <workItem from="1624266255476" duration="941000" />
     </task>
     <task id="LOCAL-00511" summary="transfer">
       <created>1621869155669</created>
@@ -709,7 +703,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623962233055</updated>
     </task>
-    <option name="localTasksCounter" value="559" />
+    <task id="LOCAL-00559" summary="licence pdf">
+      <created>1624202638463</created>
+      <option name="number" value="00559" />
+      <option name="presentableId" value="LOCAL-00559" />
+      <option name="project" value="LOCAL" />
+      <updated>1624202638463</updated>
+    </task>
+    <option name="localTasksCounter" value="560" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -729,7 +730,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="reorder" />
     <MESSAGE value="over_bid_pay" />
     <MESSAGE value="negotiations" />
     <MESSAGE value="bid" />
@@ -754,7 +754,8 @@
     <MESSAGE value="images" />
     <MESSAGE value="price" />
     <MESSAGE value="edits" />
-    <option name="LAST_COMMIT_MESSAGE" value="edits" />
+    <MESSAGE value="licence pdf" />
+    <option name="LAST_COMMIT_MESSAGE" value="licence pdf" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

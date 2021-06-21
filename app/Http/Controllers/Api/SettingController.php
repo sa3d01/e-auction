@@ -21,11 +21,11 @@ class SettingController extends MasterController
         $setting = Setting::first();
         $data = [];
         if (request()->header('lang') == 'en') {
-            $data['about'] = $setting->about['en'];
+            $data['about'] = asset('media/files/'.$setting->about['en']);
             $data['licence'] = asset('media/files/'.$setting->licence['en']);
             $data['purchasing_power_text'] = $setting->purchasing_power_text['en'];
         } else {
-            $data['about'] = $setting->about['ar'];
+            $data['about'] = asset('media/files/'.$setting->about['ar']);
             $data['licence'] = asset('media/files/'.$setting->licence['ar']);
             $data['purchasing_power_text'] = $setting->purchasing_power_text['ar'];
         }

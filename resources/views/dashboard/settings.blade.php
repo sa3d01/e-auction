@@ -166,15 +166,30 @@
                                         <div class="form-group">
                                             <i class="os-icon os-icon-file-text"></i>
                                             <label> عن التطبيق باللغة العربية</label>
-                                            <textarea name="about_ar" class="form-control" cols="80" rows="5">{{$row->about['ar']}}</textarea>
+                                            <input id="about_ar" name="about_ar" type="file" accept="application/pdf"/>
                                             <div class="help-block form-text with-errors form-control-feedback"></div>
                                         </div>
+                                        <br/>
+                                        <div class="form-group" id="about_ar_preview">
+                                            @if($row->about['ar']!=null)
+                                                <iframe id="iframe" src="https://e-auction1.com/media/files/{{$row->about['ar']}}" style="width:100%; height:500px;" frameborder="0"></iframe>
+                                            @endif
+                                        </div>
+                                        <br>
+
                                         <div class="form-group">
                                             <i class="os-icon os-icon-file-text"></i>
                                             <label> عن التطبيق باللغة الانجليزية</label>
-                                            <textarea name="about_en" class="form-control" cols="80" rows="5">{{$row->about['en']}}</textarea>
+                                            <input id="about_en" name="about_en" type="file" accept="application/pdf"/>
                                             <div class="help-block form-text with-errors form-control-feedback"></div>
                                         </div>
+                                        <br/>
+                                        <div class="form-group" id="about_en_preview">
+                                            @if($row->about['en']!=null)
+                                                <iframe id="iframe" src="https://e-auction1.com/media/files/{{$row->about['en']}}" style="width:100%; height:500px;" frameborder="0"></iframe>
+                                            @endif
+                                        </div>
+                                        <br>
 
                                         <div class="form-group">
                                             <i class="os-icon os-icon-file-text"></i>
@@ -397,6 +412,26 @@
             for(var i=0;i<total_file;i++)
             {
                 $('#licence_en_preview').append("" +
+                    "<iframe src='"+URL.createObjectURL(event.target.files[i])+"' style='width:100%; height:500px;'></iframe>");
+            }
+        });
+
+
+        $("#about_ar").change(function(){
+            $('#about_ar_preview').html("");
+            var total_file=document.getElementById("about_ar").files.length;
+            for(var i=0;i<total_file;i++)
+            {
+                $('#about_ar_preview').append("" +
+                    "<iframe src='"+URL.createObjectURL(event.target.files[i])+"' style='width:100%; height:500px;'></iframe>");
+            }
+        });
+        $("#about_en").change(function(){
+            $('#about_en_preview').html("");
+            var total_file=document.getElementById("about_en").files.length;
+            for(var i=0;i<total_file;i++)
+            {
+                $('#about_en_preview').append("" +
                     "<iframe src='"+URL.createObjectURL(event.target.files[i])+"' style='width:100%; height:500px;'></iframe>");
             }
         });
