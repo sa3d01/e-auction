@@ -69,8 +69,12 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
     Route::post('item/{id}/images', 'ItemController@uploadImages')->name('item.upload-images');
     Route::get('item/{id}/auction_price', 'ItemController@auction_price')->name('item.auction_price');
     Route::resource('item', 'ItemController');
+    Route::get('sold_items', 'ItemController@sold_auction_items')->name('items.sold');
+    Route::get('hidden_items', 'ItemController@hidden_auction_items')->name('items.hidden');
     Route::get('vip_items', 'ItemController@vip_auction_items')->name('items.vip');
     Route::get('update_vip/{item_id}', 'ItemController@update_vip')->name('item_vip.update');
+    Route::get('sold_items/hide/{id}', 'ItemController@hide')->name('item.app_hidden');
+
     Route::get('item_delivered_to_garage/{item_id}', 'ItemController@item_delivered_to_garage')->name('item_delivered_to_garage.update');
 
     Route::get('report/add/{item_id}', 'ReportController@add')->name('report.add');

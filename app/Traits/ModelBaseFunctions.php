@@ -137,6 +137,22 @@ trait ModelBaseFunctions
         }
         return "<a class='$class btn btn-$key btn-sm' data-href='$action' href='$action'><i class='os-icon os-icon-$icon-circle'></i><span>$name</span></a>";
     }
+    public function appHidden()
+    {
+        $action = route('admin.'.$this->route.'.app_hidden', ['id' => $this->attributes['id']]);
+        if ($this->attributes['status'] == 'shown') {
+            $name = 'اخفاء';
+            $key = 'success';
+            $icon = 'check';
+            $class = '';
+        } else {
+            $name = 'اظهار';
+            $key = 'danger';
+            $icon = 'cancel';
+            $class = 'block';
+        }
+        return "<a class='$class btn btn-$key btn-sm' data-href='$action' href='$action'><i class='os-icon os-icon-$icon-circle'></i><span>$name</span></a>";
+    }
 
     protected function setStartDateAttribute()
     {

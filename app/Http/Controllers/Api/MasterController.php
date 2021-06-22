@@ -18,7 +18,13 @@ class MasterController extends Controller
         $this->auctionItemStatusUpdate();
         parent::__construct();
     }
-
+    function lang(){
+        if (\request()->header('lang')){
+            return \request()->header('lang');
+        }else{
+            return 'ar';
+        }
+    }
     public function sendResponse($result)
     {
         $response = [
@@ -55,10 +61,14 @@ class MasterController extends Controller
         $user_purchasing_power=$user->purchasing_power;
         $user_purchasing_power=$user_purchasing_power+$user->package->purchasing_power_increase;
         if ($user_purchasing_power*$this->purchasing_power_ratio < $price){
-            return $this->sendError(' قوتك الشرائية لا تسمح بهذه الصفقه .');
+            $ar_msg='قوتك الشرائية لا تسمح بهذه الصفقه';
+            $en_msg=' your purchasing power doesnt match this auction';
+            return $this->sendError($this->lang()=='ar'?$ar_msg:$en_msg);
         }
         if (Transfer::where(['user_id'=>$user->id,'type'=>'refund_purchasing_power','status'=>0])->first()){
-            return $this->sendError(' قوتك الشرائية معلقة حاليا لحين رد الإدارة .');
+            $ar_msg=' قوتك الشرائية معلقة حاليا لحين رد الإدارة';
+            $en_msg=' your purchasing power is paused for now';
+            return $this->sendError($this->lang()=='ar'?$ar_msg:$en_msg);
         }
         return true;
     }

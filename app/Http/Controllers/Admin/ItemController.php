@@ -432,7 +432,24 @@ class ItemController extends MasterController
         $item->refresh();
         return redirect()->back()->with('updated');
     }
-
+    public function hide($id,Request $request){
+        $item=$this->model->find($id);
+        if($item->status == 'shown'){
+            $item->update(
+                [
+                    'status'=>'hidden',
+                ]
+            );
+        }else{
+            $item->update(
+                [
+                    'status'=>'shown',
+                ]
+            );
+        }
+        $item->refresh();
+        return redirect()->back()->with('updated');
+    }
     function itemStatusNotify($item,$note){
         Notification::create([
             'receiver_id'=>$item->user_id,
@@ -551,6 +568,55 @@ class ItemController extends MasterController
         return View('dashboard.item.index', [
             'rows' => $rows,
             'status'=>'shown',
+            'type'=>'item',
+            'title'=>$title,
+            'index_fields'=>$index_fields,
+            'selects'=>[
+                [
+                    'name'=>'user',
+                    'title'=>'المستخدم'
+                ],
+                [
+                    'name'=>'auction_type',
+                    'title'=>'نوع المزايدة'
+                ],
+            ],
+        ]);
+    }
+
+    public function sold_auction_items()
+    {
+        $solid_items = AuctionItem::where('more_details->status', 'paid')->orWhere('more_details->status', 'delivered')->pluck('item_id')->toArray();
+        $rows=$this->model->whereIn('id',$solid_items)->latest()->get();
+        $title='قائمة المركبات المباعة';
+        $index_fields=['الرقم التسلسلى' => 'id'];
+        return View('dashboard.item.index', [
+            'rows' => $rows,
+            'status'=>'sold',
+            'type'=>'item',
+            'title'=>$title,
+            'index_fields'=>$index_fields,
+            'selects'=>[
+                [
+                    'name'=>'user',
+                    'title'=>'المستخدم'
+                ],
+                [
+                    'name'=>'auction_type',
+                    'title'=>'نوع المزايدة'
+                ],
+            ],
+        ]);
+    }
+    public function hidden_auction_items()
+    {
+        $solid_items = AuctionItem::where('more_details->status', 'paid')->orWhere('more_details->status', 'delivered')->pluck('item_id')->toArray();
+        $rows=$this->model->whereIn('id',$solid_items)->where('status','hidden')->latest()->get();
+        $title='قائمة المركبات المخفاه من التطبيق';
+        $index_fields=['الرقم التسلسلى' => 'id'];
+        return View('dashboard.item.index', [
+            'rows' => $rows,
+            'status'=>'hidden',
             'type'=>'item',
             'title'=>$title,
             'index_fields'=>$index_fields,

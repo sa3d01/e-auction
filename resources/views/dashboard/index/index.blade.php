@@ -102,14 +102,15 @@
                                         <td><img width="50px" height="50px" src="{{$row->image}}"></td>
                                     @endif
                                     <td>
-                                        <form class="delete" data-id="{{$row->id}}" method="POST" action="{{ route('admin.'.$type.'.destroy',[$row->id]) }}">
-                                            @csrf
-                                            {{ method_field('DELETE') }}
-                                            <input type="hidden" value="{{$row->id}}">
-                                            <button type="button " class="btn p-0 no-bg">
-                                                <i class="fa fa-trash text-danger"></i>
-                                            </button>
-                                        </form>
+{{--                                        <form class="delete" data-id="{{$row->id}}" method="POST" action="{{ route('admin.'.$type.'.destroy',[$row->id]) }}">--}}
+{{--                                            @csrf--}}
+{{--                                            {{ method_field('DELETE') }}--}}
+{{--                                            <input type="hidden" value="{{$row->id}}">--}}
+{{--                                            <button type="button " class="btn p-0 no-bg">--}}
+{{--                                                <i class="fa fa-trash text-danger"></i>--}}
+{{--                                            </button>--}}
+{{--                                        </form>--}}
+                                        {!! $row->activate() !!}
                                         <a href="{{route('admin.'.$type.'.show',$row->id)}}"><i class="os-icon os-icon-grid-10"></i></a>
                                     </td>
                                 </tr>

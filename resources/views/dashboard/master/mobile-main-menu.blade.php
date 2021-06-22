@@ -94,6 +94,12 @@
             <li>
                 <a href="{{route('admin.items.vip')}}"> المركبات المميزة </a>
             </li>
+            <li>
+                <a href="{{route('admin.items.sold')}}"> المركبات المباعة </a>
+            </li>
+{{--            <li>--}}
+{{--                <a href="{{route('admin.items.hidden')}}"> المركبات المختفيه من التطبيق </a>--}}
+{{--            </li>--}}
         </ul>
     </li>
 

@@ -124,16 +124,22 @@ class BidController extends MasterController
 //        $auction_item_end=Carbon::createFromTimestamp($auction_item->start->date)->addSeconds($auction_item->auction->duration)
         if ($auction_item->more_details != null) {
             if ($auction_item->more_details['status'] == 'expired' || $auction_item->more_details['status'] == 'paid') {
-                return $this->sendError('هذه المركبة قد انتهى وقت المزايدة عليها :(');
+                $ar_msg='هذه المركبة قد انتهى وقت المزايدة عليها :(';
+                $en_msg='timout auction :(';
+                return $this->sendError($this->lang()=='ar'?$ar_msg:$en_msg);
             }elseif ($auction_item->more_details['status'] == 'soon' && ($now->diffInSeconds(Carbon::createFromTimestamp($auction_item->auction->start_date))) < $bid_pause_period){
-                return $this->sendError('يرجى الانتظار لبداية المزاد المباشر');
+                $ar_msg='يرجى الانتظار لبداية المزاد المباشر';
+                $en_msg='please wait to start auction time';
+                return $this->sendError($this->lang()=='ar'?$ar_msg:$en_msg);
             }
 //            elseif ($auction_item->more_details['status']=='live'){
 //
 //            }
         }
         if ($user->profileAndPurchasingPowerIsFilled() == false) {
-            return $this->sendError(' يجب اكمال بيانات ملفك الشخصى أولا وشحن قوتك الشرائية');
+            $ar_msg='يجب اكمال بيانات ملفك الشخصى أولا وشحن قوتك الشرائية';
+            $en_msg='please complete your profile , and charge your purchasing power';
+            return $this->sendError($this->lang()=='ar'?$ar_msg:$en_msg);
         }
         if ($this->validate_purchasing_power($user, $auction_item->price + $request['charge_price']) !== true) {
             return $this->validate_purchasing_power($user, $auction_item->price + $request['charge_price']);
@@ -147,14 +153,16 @@ class BidController extends MasterController
         ]);
         $this->simpleBid($auction_item,$request['charge_price'],$user);
         $this->topicNotify();
-        return $this->sendResponse('تمت المزايدة بنجاح');
+        $ar_msg=' تمت المزايدة بنجاح';
+        $en_msg=' success bid :)';
+        return $this->sendError($this->lang()=='ar'?$ar_msg:$en_msg);
     }
     public function charge_notify($auction_item,$user,$charge_price){
         $users_id=AuctionUser::where(['item_id'=>$auction_item->item_id,'auction_id'=>$auction_item->auction_id])->groupBy('user_id')->pluck('user_id')->toArray();
         $fav_users_id=Favourite::where(['item_id'=>$auction_item->item_id,'auction_id'=>$auction_item->auction_id])->groupBy('user_id')->pluck('user_id')->toArray();
         $users = User::whereIn('id',array_merge($users_id,$fav_users_id,(array)$auction_item->item->user_id))->get();
         $title['ar'] = 'تم إضافة مزايدة جديدة بقيمة '. $charge_price . 'ريال سعودى عن طريق مستخدم رقم ' .$user->id .' بمزاد رقم '.$auction_item->item->id;
-        $title['en'] = 'تم إضافة مزايدة جديدة بقيمة '. $charge_price . 'ريال سعودى عن طريق مستخدم رقم ' .$user->id .'بمزاد رقم '.$auction_item->item->id;
+        $title['en'] = 'there is new bid with amount '. $charge_price . 'SR by user number ' .$user->id .'auction ID '.$auction_item->item->id;
         foreach ($users as $user_notify) {
             if($user->id == $user_notify->id){
                 continue;

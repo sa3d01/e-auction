@@ -51,6 +51,8 @@
                                     <th>الحالة</th>
                                 @elseif($status=='shown')
                                     <th>VIP</th>
+                                @elseif($status=='sold')
+                                    <th>الظهور بالتطبيق</th>
                                 @endif
                                 <th>المزيد</th>
                             </tr>
@@ -73,6 +75,8 @@
                                     <th>الحالة</th>
                                 @elseif($status=='shown')
                                     <th>VIP</th>
+                                @elseif($status=='sold')
+                                    <th>الظهور بالتطبيق</th>
                                 @endif
                                 <th>المزيد</th>
                             </tr>
@@ -142,6 +146,8 @@
                                             }
                                         ?>
                                         <td>{!! $vip !!}</td>
+                                    @elseif($status=='sold')
+                                        <td>{!! $row->appHidden() !!}</td>
                                     @endif
                                     <td>
                                         @if($status=='pending')

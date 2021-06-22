@@ -11,7 +11,8 @@
                     <div class="element-wrapper">
                         @if($errors->any())
                             <div class="alert alert-danger alert-dismissible fade in" role="alert">
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                        aria-hidden="true">×</span></button>
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
                                 @endforeach
@@ -46,7 +47,8 @@
                                                     <div class="form-group row">
                                                         <label for="{{$value}}" class="col-form-label">{{$key}}</label>
                                                         <span style="color: red">*</span>
-                                                        <input required class="upload form-control" id="uploadFile" type="file" accept="image/*" name="images[]" multiple />
+                                                        <input required class="upload form-control" id="uploadFile"
+                                                               type="file" accept="image/*" name="images[]" multiple/>
                                                     </div>
                                                 </div>
                                                 <br/>
@@ -56,8 +58,10 @@
                                                     <div class="form-group" id="{{$value}}">
                                                         <label for=""> {{$key}}</label>
                                                         <span style="color: red">*</span>
-                                                        <input name="{{$value}}" class="form-control" type="number" min="1">
-                                                        <div class="help-block form-text with-errors form-control-feedback"></div>
+                                                        <input name="{{$value}}" class="form-control" type="number"
+                                                               min="1">
+                                                        <div
+                                                            class="help-block form-text with-errors form-control-feedback"></div>
                                                     </div>
                                                 </div>
                                             @endif
@@ -66,158 +70,174 @@
                                             <div class="white-box">
                                                 <label for="input-file-now-custom-1">صورة الاستمارة</label>
                                                 <span style="color: red">*</span>
-                                                <input name="paper_image" type="file" id="input-file-now-custom-1 image" class="dropify" data-default-file="{{asset('media/images/user/default.jpeg')}}"/>
+                                                <input name="paper_image" type="file" id="input-file-now-custom-1 image"
+                                                       class="dropify"
+                                                       data-default-file="{{asset('media/images/user/default.jpeg')}}"/>
                                             </div>
                                         </div>
 
-                                            <div class="col-sm-12" id="marks">
-                                                <div class="form-group">
-                                                    <label for=""> الماركة </label>
-                                                    <span style="color: red">*</span>
-                                                    <select id="mark_id" name="mark_id" class="form-control">
-                                                        @foreach(\App\DropDown::active()->where('class','Mark')->whereHas('childs')->get() as $mark)
-                                                            <option value="{{$mark->id}}">
-                                                                {{$mark->name['ar']}}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
+                                        <div class="col-sm-12" id="marks">
+                                            <div class="form-group">
+                                                <label for=""> الماركة </label>
+                                                <span style="color: red">*</span>
+                                                <select id="mark_id" name="mark_id" class="form-control">
+                                                    @foreach(\App\DropDown::active()->where('class','Mark')->whereHas('childs')->get() as $mark)
+                                                        <option value="{{$mark->id}}">
+                                                            {{$mark->name['ar']}}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
+                                        </div>
 
-                                            <div class="col-sm-12" id="models" hidden>
-                                                <div class="form-group">
-                                                    <label for=""> الموديل </label>
-                                                    <span style="color: red">*</span>
-                                                    <select required id="model_id" name="model_id" class="form-control">
-                                                        @foreach(\App\DropDown::active()->where('class','Mark')->whereHas('childs')->first()->childs() as $model)
-                                                            <option value="{{$model->id}}">
-                                                                {{$model->name['ar']}}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
+                                        <div class="col-sm-12" id="models" hidden>
+                                            <div class="form-group">
+                                                <label for=""> الموديل </label>
+                                                <span style="color: red">*</span>
+                                                <select required id="model_id" name="model_id" class="form-control">
+                                                    @foreach(\App\DropDown::active()->where('class','Mark')->whereHas('childs')->first()->childs() as $model)
+                                                        <option value="{{$model->id}}">
+                                                            {{$model->name['ar']}}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
+                                        </div>
 
-                                            <div id="year" class="col-sm-12">
-                                                <div class="form-group">
-                                                    <label for="">سنة الصنع</label>
-                                                    <span style="color: red">*</span>
-                                                    <select id="year" name="year" class="form-control">
-                                                        @for($year=1980;$year<=2040;$year++)
-                                                            <option value="{{$year}}">
-                                                                {{$year}}
-                                                            </option>
-                                                        @endfor
-                                                    </select>
-                                                </div>
+                                        <div id="year" class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="">سنة الصنع</label>
+                                                <span style="color: red">*</span>
+                                                <select id="year" name="year" class="form-control">
+                                                    @for($year=1980;$year<=2040;$year++)
+                                                        <option value="{{$year}}">
+                                                            {{$year}}
+                                                        </option>
+                                                    @endfor
+                                                </select>
                                             </div>
+                                        </div>
 
-                                            <div id="color" class="col-sm-12">
-                                                <div class="form-group">
-                                                    <label for="">اللون</label>
-                                                    <span style="color: red">*</span>
-                                                    <select id="color" name="color_id" class="form-control">
-                                                        @foreach(\App\DropDown::active()->where('class','Color')->get() as $color)
-                                                            <option value="{{$color->id}}">
-                                                                {{$color->name['ar']}}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
+                                        <div id="color" class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="">اللون</label>
+                                                <span style="color: red">*</span>
+                                                <select id="color" name="color_id" class="form-control">
+                                                    @foreach(\App\DropDown::active()->where('class','Color')->get() as $color)
+                                                        <option value="{{$color->id}}">
+                                                            {{$color->name['ar']}}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
+                                        </div>
 
-                                            <div id="fetes_id" class="col-sm-12">
-                                                <div class="form-group">
-                                                    <label for="">نوع ناقل الحركة</label>
-                                                    <span style="color: red">*</span>
-                                                    <select id="fetes_id" name="fetes_id" class="form-control">
-                                                        @foreach(\App\DropDown::active()->where('class','Fetes')->get() as $fetes)
-                                                            <option value="{{$fetes->id}}">
-                                                                {{$fetes->name['ar']}}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
+                                        <div id="fetes_id" class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="">نوع ناقل الحركة</label>
+                                                <span style="color: red">*</span>
+                                                <select id="fetes_id" name="fetes_id" class="form-control">
+                                                    @foreach(\App\DropDown::active()->where('class','Fetes')->get() as $fetes)
+                                                        <option value="{{$fetes->id}}">
+                                                            {{$fetes->name['ar']}}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
+                                        </div>
 
-                                            <div id="item_status_id" class="col-sm-12">
-                                                <div class="form-group">
-                                                    <label for="">حالة المركبة</label>
-                                                    <span style="color: red">*</span>
-                                                    <select id="item_status_id" name="item_status_id" class="form-control">
-                                                        @foreach(\App\DropDown::active()->where('class','ItemStatus')->get() as $item_status)
-                                                            <option value="{{$item_status->id}}">
-                                                                {{$item_status->name['ar']}}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
+                                        <div id="item_status_id" class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="">حالة المركبة</label>
+                                                <span style="color: red">*</span>
+                                                <select id="item_status_id" name="item_status_id" class="form-control">
+                                                    @foreach(\App\DropDown::active()->where('class','ItemStatus')->get() as $item_status)
+                                                        <option value="{{$item_status->id}}">
+                                                            {{$item_status->name['ar']}}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
+                                        </div>
 
-                                            <div id="scan_status_id" class="col-sm-12">
-                                                <div class="form-group">
-                                                    <label for="">حالة الفحص</label>
-                                                    <span style="color: red">*</span>
-                                                    <select id="scan_status_id" name="scan_status_id" class="form-control">
-                                                        @foreach(\App\DropDown::active()->where('class','ScanStatus')->get() as $scan_status)
-                                                            <option value="{{$scan_status->id}}">
-                                                                {{$scan_status->name['ar']}}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
+                                        <div id="scan_status_id" class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="">حالة الفحص</label>
+                                                <span style="color: red">*</span>
+                                                <select id="scan_status_id" name="scan_status_id" class="form-control">
+                                                    @foreach(\App\DropDown::active()->where('class','ScanStatus')->get() as $scan_status)
+                                                        <option value="{{$scan_status->id}}">
+                                                            {{$scan_status->name['ar']}}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
+                                        </div>
 
-                                            <div id="paper_status_id" class="col-sm-12">
-                                                <div class="form-group">
-                                                    <label for="">حالة الاستمارة</label>
-                                                    <span style="color: red">*</span>
-                                                    <select id="paper_status_id" name="paper_status_id" class="form-control">
-                                                        @foreach(\App\DropDown::active()->where('class','PaperStatus')->get() as $paper_status)
-                                                            <option value="{{$paper_status->id}}">
-                                                                {{$paper_status->name['ar']}}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
+                                        <div id="paper_status_id" class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="">حالة الاستمارة</label>
+                                                <span style="color: red">*</span>
+                                                <select id="paper_status_id" name="paper_status_id"
+                                                        class="form-control">
+                                                    @foreach(\App\DropDown::active()->where('class','PaperStatus')->get() as $paper_status)
+                                                        <option value="{{$paper_status->id}}">
+                                                            {{$paper_status->name['ar']}}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
+                                        </div>
 
-                                            <div id="city_id" class="col-sm-12">
-                                                <div class="form-group">
-                                                    <label for="">المدينة </label>
-                                                    <span style="color: red">*</span>
-                                                    <select id="city_id" name="city_id" class="form-control">
-                                                        @foreach(\App\DropDown::active()->where('class','City')->get() as $city)
-                                                            <option value="{{$city->id}}">
-                                                                {{$city->name['ar']}}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
+                                        <div id="city_id" class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="">المدينة </label>
+                                                <span style="color: red">*</span>
+                                                <select id="city_id" name="city_id" class="form-control">
+                                                    @foreach(\App\DropDown::active()->where('class','City')->get() as $city)
+                                                        <option value="{{$city->id}}">
+                                                            {{$city->name['ar']}}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
+                                        </div>
 
-                                            <div id="auction_type" class="col-sm-12">
-                                                <div class="form-group">
-                                                    <label for="">نوع المزاد</label>
-                                                    <span style="color: red">*</span>
-                                                    <select id="auction_type_id" name="auction_type_id" class="form-control">
-                                                        @foreach(\App\AuctionType::all() as $auction_type)
-                                                            <option value="{{$auction_type->id}}">
-                                                                {{$auction_type->name['ar']}}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
+                                        <div id="auction_type" class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="">نوع المزاد</label>
+                                                <span style="color: red">*</span>
+                                                <select id="auction_type_id" name="auction_type_id"
+                                                        class="form-control">
+                                                    @foreach(\App\AuctionType::all() as $auction_type)
+                                                        <option value="{{$auction_type->id}}">
+                                                            {{$auction_type->name['ar']}}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
+                                        </div>
 
-                                            <div class="col-sm-12" id="user_price" hidden>
-                                                <div class="form-group">
-                                                    <label for="">سعر المركبة</label>
+                                        <div class="col-sm-12" id="user_price" hidden>
+                                            <div class="form-group">
+                                                <label for="">سعر المركبة</label>
+                                                <span style="color: red">*</span>
+                                                <input name="price" class="form-control" type="number" min="1">
+                                                <div
+                                                    class="help-block form-text with-errors form-control-feedback"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <div class="form-check">
                                                     <span style="color: red">*</span>
-                                                    <input name="price" class="form-control" type="number" min="1">
-                                                    <div class="help-block form-text with-errors form-control-feedback"></div>
+                                                    <input name="tax" class="form-check-input" type="checkbox"
+                                                           value="true" id="tax">
+                                                    <label class="form-check-label" for="tax">لدي سجل ضريبي</label>
                                                 </div>
                                             </div>
+                                        </div>
 
                                     </div>
                                 </fieldset>
@@ -235,42 +255,40 @@
 @endsection
 @section('script')
     <script type="text/javascript">
-        $("#uploadFile").change(function(){
+        $("#uploadFile").change(function () {
             $('#image_preview').html("");
-            var total_file=document.getElementById("uploadFile").files.length;
-            for(var i=0;i<total_file;i++)
-            {
-                $('#image_preview').append("<img style='pointer-events: none;max-height: 100px;max-width: 100px;height: 100px;border-radius: 10px;margin: 5px;' src='"+URL.createObjectURL(event.target.files[i])+"'>");
+            var total_file = document.getElementById("uploadFile").files.length;
+            for (var i = 0; i < total_file; i++) {
+                $('#image_preview').append("<img style='pointer-events: none;max-height: 100px;max-width: 100px;height: 100px;border-radius: 10px;margin: 5px;' src='" + URL.createObjectURL(event.target.files[i]) + "'>");
             }
         });
-        window.onload = function (){
-            $('#mark_id').change(function (){
+        window.onload = function () {
+            $('#mark_id').change(function () {
                 var mark_id = $('#mark_id').val();
                 $.ajax({
                     type: "GET",
-                    url:'/admin/get_models/'+mark_id,
+                    url: '/admin/get_models/' + mark_id,
                     dataType: 'json',
-                    success: function( data ) {
+                    success: function (data) {
                         console.log(data)
                         $('#models').empty();
                         var res = '<div class="form-group"><label for=""> الموديل </label><select id="model_id" name="model_id" class="form-control">';
-                        $.each (data, function (key, value)
-                        {
+                        $.each(data, function (key, value) {
                             res +=
-                                '<option value="'+value.id+'">'+value.name+'</option>';
+                                '<option value="' + value.id + '">' + value.name + '</option>';
                         });
-                        res +='</select></div></div>';
+                        res += '</select></div></div>';
                         $('#models').html(res);
                         $('#models').removeAttr('hidden');
                     }
                 });
             });
-            $('#auction_type_id').change(function (){
+            $('#auction_type_id').change(function () {
                 var auction_type_id = $('#auction_type_id').val();
-                if(auction_type_id==3 || auction_type_id==4){
+                if (auction_type_id == 3 || auction_type_id == 4) {
                     $('#user_price').removeAttr('hidden');
-                }else {
-                    $('#user_price').attr('hidden','hidden');
+                } else {
+                    $('#user_price').attr('hidden', 'hidden');
                 }
             });
         };
@@ -278,7 +296,7 @@
     </script>
     <script src="{{asset('panel/dropify/dist/js/dropify.min.js')}}"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             // Basic
             $('.dropify').dropify();
             // Translated
@@ -292,18 +310,18 @@
             });
             // Used events
             var drEvent = $('#input-file-events').dropify();
-            drEvent.on('dropify.beforeClear', function(event, element) {
+            drEvent.on('dropify.beforeClear', function (event, element) {
                 return confirm("Do you really want to delete \"" + element.file.name + "\" ?");
             });
-            drEvent.on('dropify.afterClear', function(event, element) {
+            drEvent.on('dropify.afterClear', function (event, element) {
                 alert('File deleted');
             });
-            drEvent.on('dropify.errors', function(event, element) {
+            drEvent.on('dropify.errors', function (event, element) {
                 console.log('Has Errors');
             });
             var drDestroy = $('#input-file-to-destroy').dropify();
             drDestroy = drDestroy.data('dropify')
-            $('#toggleDropify').on('click', function(e) {
+            $('#toggleDropify').on('click', function (e) {
                 e.preventDefault();
                 if (drDestroy.isDropified()) {
                     drDestroy.destroy();
@@ -314,16 +332,13 @@
         });
     </script>
     <script type="text/javascript">
-        function checkSize(max_img_size)
-        {
+        function checkSize(max_img_size) {
             var input = document.getElementById("uploadFile");
             // check for browser support (may need to be modified)
-            if(input.files)
-            {
-                for (var i=0;i<input.files.length;i++){
-                    if (input.files[i].size > max_img_size)
-                    {
-                        alert("The file must be less than " + (max_img_size/1024/1024) + "MB");
+            if (input.files) {
+                for (var i = 0; i < input.files.length; i++) {
+                    if (input.files[i].size > max_img_size) {
+                        alert("The file must be less than " + (max_img_size / 1024 / 1024) + "MB");
                         return false;
                     }
                 }
@@ -336,13 +351,13 @@
         <div style="visibility: hidden" id="errors" data-content="{{$errors}}"></div>
         <script type="text/javascript">
             $(document).ready(function () {
-                var errors=$('#errors').attr('data-content');
-                $.each(JSON.parse(errors), function( index, value ) {
+                var errors = $('#errors').attr('data-content');
+                $.each(JSON.parse(errors), function (index, value) {
                     // $('input[name="note"]').notify(
-                    $('#'+index).notify(
+                    $('#' + index).notify(
                         value,
                         'error',
-                        { position:"top" }
+                        {position: "top"}
                     );
                 });
             })

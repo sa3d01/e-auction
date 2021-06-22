@@ -76,23 +76,23 @@ class ItemCollection extends ResourceCollection
 
                 $arr['is_paid']=false;
                 if ($features['status']=='paid'){
-                    $arr['status_text']='مغلق';
+                    $arr['status_text']=$this->lang()=='ar'?'مغلق':'closed';
                     if (Transfer::where('more_details->item_id',$obj->id)->where('type','buy_item')->where('status',0)->latest()->first()){
                         $arr['is_paid']=true;
-                        $arr['status_text']='مغلق';
+                        $arr['status_text']=$this->lang()=='ar'?'مغلق':'closed';
                     }
                 }elseif ($features['status']=='delivered'){
                     $arr['is_paid']=true;
-                    $arr['status_text']='مغلق';
+                    $arr['status_text']=$this->lang()=='ar'?'مغلق':'closed';
                 }elseif ($features['status']=='negotiation'){
                     $arr['is_paid']=true;
-                    $arr['status_text']='مغلق';
+                    $arr['status_text']=$this->lang()=='ar'?'مغلق':'closed';
                 }elseif ($features['status']=='soon'){
                     $arr['status_text']='';
                 }elseif ($features['status']=='expired'){
-                    $arr['status_text']='مغلق';
+                    $arr['status_text']=$this->lang()=='ar'?'مغلق':'closed';
                 }elseif ($features['status']=='live'){
-                    $arr['status_text']='مباشر';
+                    $arr['status_text']=$this->lang()=='ar'?'مباشر':'live';
                 }
                 $now=Carbon::now();
                 $bid_pause_period=Setting::value('bid_pause_period');
@@ -110,19 +110,20 @@ class ItemCollection extends ResourceCollection
             }else{
                 if($obj->status=='pending'){
                     $arr['auction_status']='تم طلب الاضافة';
-                    $arr['status_text']='تم طلب الاضافة';
+                    $arr['status_text']=$this->lang()=='ar'?'تم طلب الاضافة':'requested to add';
                 }elseif ($obj->status=='rejected'){
                     $arr['auction_status']='تم رفض السلعة من قبل الادارة';
-                    $arr['status_text']='تم رفض السلعة من قبل الادارة';
+                    $arr['status_text']=$this->lang()=='ar'?'تم رفض السلعة من قبل الادارة':'rejected from admin';
                 }elseif ($obj->status=='accepted'){
                     $arr['auction_status']='بانتظار تسليم المركبة لساحة الحفظ';
-                    $arr['status_text']='بانتظار تسليم المركبة لساحة الحفظ';
+                    $arr['status_text']=$this->lang()=='ar'?'بانتظار تسليم المركبة لساحة الحفظ':'waiting for deliver car to admin garage';
                 }elseif ($obj->status=='delivered'){
                     $arr['auction_status']='تم استلام المركبة من قبل الادارة';
                     $arr['status_text']='تم استلام المركبة من قبل الادارة';
+                    $arr['status_text']=$this->lang()=='ar'?'تم استلام المركبة من قبل الادارة':'car delivered to admin garage';
                 }else{
                     $arr['auction_status']='تم جدولتها للمزاد';
-                    $arr['status_text']='تم جدولتها للمزاد';
+                    $arr['status_text']=$this->lang()=='ar'?'تم جدولتها لمزاد':'prepared for auction';
                 }
                 $arr['negotiation']=false;
                 $arr['direct_pay']=false;

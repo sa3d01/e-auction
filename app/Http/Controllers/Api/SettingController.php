@@ -22,10 +22,12 @@ class SettingController extends MasterController
         $data = [];
         if (request()->header('lang') == 'en') {
             $data['about'] = $setting->about['en'];
+            $data['privacy'] = $setting->privacy['en'];
             $data['licence'] = asset('media/files/'.$setting->licence['en']);
             $data['purchasing_power_text'] = $setting->purchasing_power_text['en'];
         } else {
             $data['about'] = $setting->about['ar'];
+            $data['privacy'] = $setting->privacy['ar'];
             $data['licence'] = asset('media/files/'.$setting->licence['ar']);
             $data['purchasing_power_text'] = $setting->purchasing_power_text['ar'];
         }

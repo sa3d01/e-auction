@@ -127,7 +127,7 @@ class Item extends Model
             $start_auction=Carbon::createFromTimestamp($auction_item->start_date);
             if ($end_auction < Carbon::now()){
                 if (is_array($auction_item->more_details)){
-                    if ($auction_item->more_details['status']=='paid') {
+                    if ($auction_item->more_details['status']=='paid' || $auction_item->more_details['status']=='delivered') {
                         $name= 'سلعة مباعة';
                         $key = 'success';
                     }elseif ($auction_item->more_details['status']=='negotiation'){

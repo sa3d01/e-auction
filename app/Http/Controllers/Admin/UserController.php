@@ -16,8 +16,8 @@ class UserController extends MasterController
     public function validation_func($method, $id = null)
     {
         if ($method == 1)
-            return ['name' => 'required', 'mobile' => 'required|unique:users|max:10|regex:/(05)[0-9]{8}/', 'email' => 'required|unique:users|email|max:50', 'image' => 'mimes:png,jpg,jpeg', 'password' => 'required|min:6'];
-        return ['name' => 'required', 'mobile' => 'required|regex:/(05)[0-9]{8}/|max:10|unique:users,mobile,' . $id, 'email' => 'required|email|max:50|unique:users,email,' . $id, 'image' => 'mimes:png,jpg,jpeg'];
+            return ['name' => 'required', 'phone' => 'required|unique:users|max:10|regex:/(05)[0-9]{8}/', 'email' => 'required|unique:users|email|max:50', 'image' => 'mimes:png,jpg,jpeg', 'password' => 'required|min:6'];
+        return ['name' => 'required', 'phone' => 'required|regex:/(05)[0-9]{8}/|max:10|unique:users,mobile,' . $id, 'email' => 'required|email|max:50|unique:users,email,' . $id, 'image' => 'mimes:png,jpg,jpeg'];
     }
     public function validation_msg()
     {
@@ -49,7 +49,7 @@ class UserController extends MasterController
             'type'=>'user',
             'action'=>'admin.user.store',
             'title'=>'أضافة عميل',
-            'create_fields'=>['الاسم' => 'name', 'البريد الإلكترونى' => 'email', 'الجوال' => 'mobile'],
+            'create_fields'=>['الاسم' => 'name', 'البريد الإلكترونى' => 'email', 'الجوال' => 'phone'],
             'status'=>true,
             'password'=>true,
             'image'=>true,
@@ -71,7 +71,7 @@ class UserController extends MasterController
             'type'=>'user',
             'action'=>'admin.user.update',
             'title'=>'الملف الشخصى',
-            'edit_fields'=>['الاسم' => 'name', 'البريد الإلكترونى' => 'email', 'الجوال' => 'mobile', 'المحفظة' => 'wallet', 'القوة الشرائية' => 'purchasing_power'],
+            'edit_fields'=>['الاسم' => 'name', 'البريد الإلكترونى' => 'email', 'الجوال' => 'phone', 'المحفظة' => 'wallet', 'القوة الشرائية' => 'purchasing_power'],
             'selects'=>[[
                 'title'=>'الباقة',
                 'name'=>'package',
