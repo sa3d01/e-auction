@@ -43,40 +43,59 @@ class RefundController extends MasterController
 
     public function accept($id){
         $row=$this->model->find($id);
-        $row->update(
-            [
-                'status'=>1,
-            ]
-        );
-        $user=User::find($row->user_id);
-        $note['ar'] = 'تم الموافقة على طلب استرداد مستحقاتك بنجاح :)';
-        $note['en'] = 'your refund order is accepted from admin  ..';
-        if ($row->type=='refund_purchasing_power'){
-            $user->update([
-               'purchasing_power'=>0
-            ]);
-        }elseif ($row->type=='refund_wallet'){
-            $user->update([
-                'wallet'=>0
-            ]);
+        if ($row->status==0){
+            $row->update(
+                [
+                    'status'=>1,
+                ]
+            );
+            $user=User::find($row->user_id);
+            $note['ar'] = 'تم الموافقة على طلب استرداد مستحقاتك بنجاح :)';
+            $note['en'] = 'your refund order is accepted from admin  ..';
+            if ($row->type=='refund_purchasing_power'){
+                $user->update([
+                    'purchasing_power'=>0
+                ]);
+            }elseif ($row->type=='refund_wallet'){
+                $user->update([
+                    'wallet'=>0
+                ]);
+            }
+            $this->notify($user, $note);
         }
-        $this->notify($user, $note);
         $row->refresh();
-        return redirect()->back()->with('updated');
+
+        $rows = $this->model->where('type','refund_wallet')->orWhere('type','refund_purchasing_power')->latest()->get();
+        return View('dashboard.transfer.index', [
+            'rows' => $rows,
+            'type'=>'refund',
+            'title'=>'قائمة استرداد المستحقات',
+            'index_fields'=>['النوع' => 'type','المستخدم' => 'user_id','المبلغ' => 'money','تاريخ الارسال' => 'created_at'],
+            'status'=>true,
+        ])->with('updated');
     }
     public function reject($id,Request $request){
         $row=$this->model->find($id);
-        $row->update(
-            [
-                'status'=>-1,
-            ]
-        );
-        $user=User::find($row->user_id);
-        $note['ar']='تم رفض طلب استرداد مستحقاتك للسبب التالى : '.$request['reject_reason'];
-        $note['en'] = 'your refund order is rejected from admin  ..'.$request['reject_reason'];
-        $this->notify($user, $note);
+        if ($row->status==0){
+            $row->update(
+                [
+                    'status'=>-1,
+                ]
+            );
+            $user=User::find($row->user_id);
+            $note['ar']='تم رفض طلب استرداد مستحقاتك للسبب التالى : '.$request['reject_reason'];
+            $note['en'] = 'your refund order is rejected from admin  ..'.$request['reject_reason'];
+            $this->notify($user, $note);
+        }
         $row->refresh();
-        return redirect()->back()->with('updated');
+        $rows = $this->model->where('type','refund_wallet')->orWhere('type','refund_purchasing_power')->latest()->get();
+        return View('dashboard.transfer.index', [
+            'rows' => $rows,
+            'type'=>'refund',
+            'title'=>'قائمة استرداد المستحقات',
+            'index_fields'=>['النوع' => 'type','المستخدم' => 'user_id','المبلغ' => 'money','تاريخ الارسال' => 'created_at'],
+            'status'=>true,
+        ])->with('updated');
     }
     function notify($user, $note)
     {

@@ -33,20 +33,8 @@ class HomeController extends MasterController
         $data['socials']=$socials;
 
 
-        $about['ar']=$settings->about['ar'];
-        $about['en']=$settings->about['en'];
-        if ($request['about_ar']){
-            $file=$request['about_ar'];
-            $filename = Str::random(10) . '.' . $file->getClientOriginalExtension();
-            $file->move('media/files/', $filename);
-            $about['ar'] = $filename;
-        }
-        if ($request['about_en']){
-            $file=$request['about_en'];
-            $filename = Str::random(10) . '.' . $file->getClientOriginalExtension();
-            $file->move('media/files/', $filename);
-            $about['en'] = $filename;
-        }
+        $about['ar']=$request['about_ar'];
+        $about['en']=$request['about_en'];
         $data['about']=$about;
 
 

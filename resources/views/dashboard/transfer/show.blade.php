@@ -23,9 +23,8 @@
                             <div class="row">
                                 @if($row->status===0 && $type=='transfer')
                                     <div class="col-md-6">
-                                        <form class="POST" name="reject" enctype="multipart/form-data" method="POST" style="width: 125px" data-href="{{route('admin.transfer.reject',$row->id)}}" action="{{route('admin.transfer.reject',$row->id)}}" data-type="{{$type}}" id="reject">
+                                        <form class="POST" name="reject" method="GET" style="width: 125px" data-href="{{route('admin.transfer.reject',$row->id)}}" action="{{route('admin.transfer.reject',$row->id)}}" data-type="{{$type}}" id="reject_transfer">
                                             @csrf
-                                            {{ method_field('PUT') }}
                                         <button type="button"
                                                 class="btn btn-danger btn-custom waves-effect waves-light">
                                             <i
@@ -34,9 +33,8 @@
                                         </form>
                                     </div>
                                     <div class="col-md-6">
-                                        <form class="POST" name="accept" enctype="multipart/form-data" method="POST" style="width: 125px" data-href="{{route('admin.transfer.accept',$row->id)}}" action="{{route('admin.transfer.accept',$row->id)}}" data-type="{{$type}}" id="accept">
+                                        <form class="POST" name="accept" method="GET" style="width: 125px" data-href="{{route('admin.transfer.accept',$row->id)}}" action="{{route('admin.transfer.accept',$row->id)}}" data-type="{{$type}}" id="accept_transfer">
                                             @csrf
-                                            {{ method_field('PUT') }}
                                             <button type="button"
                                                     class="btn btn-success btn-custom waves-effect waves-light">
                                                 <i
@@ -46,9 +44,8 @@
                                     </div>
                                 @elseif($row->status===0 && $type=='refund')
                                     <div class="col-md-6">
-                                        <form class="POST" name="refund_reject" enctype="multipart/form-data" method="POST" style="width: 125px" data-href="{{route('admin.refund.reject',$row->id)}}" action="{{route('admin.refund.reject',$row->id)}}" data-type="{{$type}}" id="reject">
+                                        <form class="POST" name="refund_reject" method="GET" style="width: 125px" data-href="{{route('admin.refund.reject',$row->id)}}" action="{{route('admin.refund.reject',$row->id)}}" data-type="{{$type}}" id="reject_refund">
                                             @csrf
-                                            {{ method_field('PUT') }}
                                             <button type="button"
                                                     class="btn btn-danger btn-custom waves-effect waves-light">
                                                 <i
@@ -57,9 +54,8 @@
                                         </form>
                                     </div>
                                     <div class="col-md-6">
-                                        <form class="POST" name="refund_accept" enctype="multipart/form-data" method="POST" style="width: 125px" data-href="{{route('admin.refund.accept',$row->id)}}" action="{{route('admin.refund.accept',$row->id)}}" data-type="{{$type}}" id="accept">
+                                        <form class="POST" name="refund_accept" method="GET" style="width: 125px" data-href="{{route('admin.refund.accept',$row->id)}}" action="{{route('admin.refund.accept',$row->id)}}" data-type="{{$type}}" id="accept_refund">
                                             @csrf
-                                            {{ method_field('PUT') }}
                                             <button type="button"
                                                     class="btn btn-success btn-custom waves-effect waves-light">
                                                 <i
@@ -193,7 +189,53 @@
 @section('script')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script>
-        $(document).on('click', '#reject', function (e) {
+        $(document).on('click', '#reject_transfer', function (e) {
+            e.preventDefault();
+            console.log($(this).data('href'))
+            Swal.fire({
+                title: 'من فضلك اذكر سبب الرفض',
+                input: 'text',
+                showCancelButton: true,
+                confirmButtonText: 'رفض',
+                cancelButtonText: 'الغاء',
+                showLoaderOnConfirm: true,
+                preConfirm: (reject_reason) => {
+                    $.ajax({
+                        url: $(this).data('href'),
+                        type:'GET',
+                        data: {reject_reason}
+                    })
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then(() => {
+                location.href = '/admin/transfer';
+            })
+        });
+        $(document).on('click', '#accept_transfer', function (e) {
+            e.preventDefault();
+            console.log($(this).data('href'))
+            Swal.fire({
+                title: "هل انت متأكد من القبول ؟",
+                text: "تأكد من اجابتك قبل التأكيد!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: 'btn-danger',
+                confirmButtonText: 'نعم , قم بتأكيد التحويل!',
+                cancelButtonText: 'ﻻ , الغى العملية !',
+                closeOnConfirm: false,
+                closeOnCancel: false,
+                preConfirm: () => {
+                    $.ajax({
+                        url: $(this).data('href'),
+                        type:'GET',
+                    })
+                },
+                allowOutsideClick: () => !Swal.isLoading()
+            }).then(() => {
+                window.location.href = '/admin/transfer';
+            })
+        });
+        $(document).on('click', '#reject_refund', function (e) {
             e.preventDefault();
             Swal.fire({
                 title: 'من فضلك اذكر سبب الرفض',
@@ -211,10 +253,11 @@
                 },
                 allowOutsideClick: () => !Swal.isLoading()
             }).then(() => {
-                location.href = '/e-auction/public/admin/transfer';
+                location.href = '/admin/refund';
             })
         });
-        $(document).on('click', '#accept', function (e) {
+        $(document).on('click', '#accept_refund', function (e) {
+            console.log($(this).data('href'))
             e.preventDefault();
             Swal.fire({
                 title: "هل انت متأكد من القبول ؟",
@@ -234,51 +277,7 @@
                 },
                 allowOutsideClick: () => !Swal.isLoading()
             }).then(() => {
-                window.location.href = '/e-auction/public/admin/transfer';
-            })
-        });
-        $(document).on('click', '#refund_reject', function (e) {
-            e.preventDefault();
-            Swal.fire({
-                title: 'من فضلك اذكر سبب الرفض',
-                input: 'text',
-                showCancelButton: true,
-                confirmButtonText: 'رفض',
-                cancelButtonText: 'الغاء',
-                showLoaderOnConfirm: true,
-                preConfirm: (reject_reason) => {
-                    $.ajax({
-                        url: $(this).data('href'),
-                        type:'GET',
-                        data: {reject_reason}
-                    })
-                },
-                allowOutsideClick: () => !Swal.isLoading()
-            }).then(() => {
-                location.href = '/e-auction/public/admin/refund';
-            })
-        });
-        $(document).on('click', '#refund_accept', function (e) {
-            e.preventDefault();
-            Swal.fire({
-                title: "هل انت متأكد من القبول ؟",
-                text: "تأكد من اجابتك قبل التأكيد!",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonClass: 'btn-danger',
-                confirmButtonText: 'نعم , قم بتأكيد التحويل!',
-                cancelButtonText: 'ﻻ , الغى العملية !',
-                closeOnConfirm: false,
-                closeOnCancel: false,
-                preConfirm: () => {
-                    $.ajax({
-                        url: $(this).data('href'),
-                        type:'GET',
-                    })
-                },
-                allowOutsideClick: () => !Swal.isLoading()
-            }).then(() => {
-                window.location.href = '/e-auction/public/admin/refund';
+                window.location.href = '/admin/refund';
             })
         });
     </script>

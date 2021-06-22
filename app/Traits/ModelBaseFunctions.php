@@ -124,7 +124,7 @@ trait ModelBaseFunctions
     public function activate()
     {
         $action = route('admin.'.$this->route.'.activate', ['id' => $this->attributes['id']]);
-        if ($this->attributes['status'] === null || $this->attributes['status'] === 0) {
+        if ($this->attributes['status'] == null || $this->attributes['status'] == 0) {
             $name = 'تفعيل';
             $key = 'success';
             $icon = 'check';

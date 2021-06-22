@@ -48,67 +48,89 @@ class TransferController extends MasterController
 
     public function accept($id){
         $row=$this->model->find($id);
-        $row->update(
-            [
-                'status'=>1,
-            ]
-        );
-        if ($row->type=='wallet'){
-            try {
-                $paid_auction_items=AuctionItem::where('more_details->status','paid')->get();
-                $item_ids=[];
-                foreach ($paid_auction_items as $paid_auction_item){
-                    $winner=AuctionUser::where(['auction_id'=>$paid_auction_item->auction_id,'item_id'=>$paid_auction_item->item_id])->latest()->value('user_id');
-                    if ($winner==$row->user_id){
-                        $item_ids[]=$paid_auction_item->item_id;
+        if ($row->status==0){
+            $row->update(
+                [
+                    'status'=>1,
+                ]
+            );
+            if ($row->type=='wallet'){
+                try {
+                    $paid_auction_items=AuctionItem::where('more_details->status','paid')->get();
+                    $item_ids=[];
+                    foreach ($paid_auction_items as $paid_auction_item){
+                        $winner=AuctionUser::where(['auction_id'=>$paid_auction_item->auction_id,'item_id'=>$paid_auction_item->item_id])->latest()->value('user_id');
+                        if ($winner==$row->user_id){
+                            $item_ids[]=$paid_auction_item->item_id;
+                        }
                     }
-                }
-                $paid_items=Item::whereIn('id',$item_ids)->latest()->get();
-                foreach ($paid_items as $item){
-                    $auction_user=AuctionUser::where(['item_id'=>$item->id,'user_id'=>$row->user_id])->latest()->first();
-                    $auction_item=AuctionItem::where('item_id',$item->id)->where('more_details->status','paid')->latest()->first();
-                    $auction_user->update([
-                        'more_details'=>[
-                            'status'=>'paid',
-                            'total_amount'=>$this->totalAmount($auction_item),
-                            'paid'=>$this->totalAmount($auction_item),
-                            'remain'=>0
-                        ]
-                    ]);
-                    $auction_item->update([
-                        'more_details' => [
-                            'status'=>'delivered',
-                            'pay_type' => $auction_item->more_details['pay_type']
-                        ]
-                    ]);
-                }
-            }catch (\Exception $e){
+                    $paid_items=Item::whereIn('id',$item_ids)->latest()->get();
+                    foreach ($paid_items as $item){
+                        $auction_user=AuctionUser::where(['item_id'=>$item->id,'user_id'=>$row->user_id])->latest()->first();
+                        $auction_item=AuctionItem::where('item_id',$item->id)->where('more_details->status','paid')->latest()->first();
+                        $auction_user->update([
+                            'more_details'=>[
+                                'status'=>'paid',
+                                'total_amount'=>$this->totalAmount($auction_item),
+                                'paid'=>$this->totalAmount($auction_item),
+                                'remain'=>0
+                            ]
+                        ]);
+                        $auction_item->update([
+                            'more_details' => [
+                                'status'=>'delivered',
+                                'pay_type' => $auction_item->more_details['pay_type']
+                            ]
+                        ]);
+                    }
+                }catch (\Exception $e){
 
+                }
+
+                $this->editWallet($row->user,$row->money);
+            }else{
+                $row->user->update(['purchasing_power' =>$row->user->purchasing_power+ $row->money]);
             }
-
-            $this->editWallet($row->user,$row->money);
-        }else{
-            $row->user->update(['purchasing_power' =>$row->user->purchasing_power+ $row->money]);
+            $note['ar'] = 'تم الموافقة على تحويلك البنكى بنجاح :)';
+            $note['en'] = 'your transfer is accepted from admin  ..';
+            $this->notify($row->user, $note);
         }
-        $note['ar'] = 'تم الموافقة على تحويلك البنكى بنجاح :)';
-        $note['en'] = 'your transfer is accepted from admin  ..';
-        $this->notify($row->user, $note);
         $row->refresh();
-        return redirect()->back()->with('updated');
+        $rows=$this->model->where('purchasing_type','bank')->where(function ($query){
+            $query->where('type','wallet')->orWhere('type','purchasing_power');
+        })->latest()->get();
+        return View('dashboard.transfer.index', [
+            'rows' => $rows,
+            'type'=>'transfer',
+            'title'=>'قائمة الحوالات',
+            'index_fields'=>['المستخدم' => 'user_id','المبلغ' => 'money','تاريخ الارسال' => 'created_at'],
+            'status'=>true,
+        ])->with('updated');
     }
     public function reject($id,Request $request){
         $row=$this->model->find($id);
-        $row->update(
-            [
-                'status'=>-1,
-            ]
-        );
-        $user=User::find($row->user_id);
-        $note['ar']='تم رفض تحويلك البنكى للسبب التالى : '.$request['reject_reason'];
-        $note['en'] = 'your transfer is rejected from admin  ..'.$request['reject_reason'];
-        $this->notify($user, $note);
+        if ($row->status==0){
+            $row->update(
+                [
+                    'status'=>-1,
+                ]
+            );
+            $user=User::find($row->user_id);
+            $note['ar']='تم رفض تحويلك البنكى للسبب التالى : '.$request['reject_reason'];
+            $note['en'] = 'your transfer is rejected from admin  ..'.$request['reject_reason'];
+            $this->notify($user, $note);
+        }
         $row->refresh();
-        return redirect()->back()->with('updated');
+        $rows=$this->model->where('purchasing_type','bank')->where(function ($query){
+            $query->where('type','wallet')->orWhere('type','purchasing_power');
+        })->latest()->get();
+        return View('dashboard.transfer.index', [
+            'rows' => $rows,
+            'type'=>'transfer',
+            'title'=>'قائمة الحوالات',
+            'index_fields'=>['المستخدم' => 'user_id','المبلغ' => 'money','تاريخ الارسال' => 'created_at'],
+            'status'=>true,
+        ])->with('updated');
     }
     function notify($user, $note)
     {

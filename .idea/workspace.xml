@@ -19,11 +19,22 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="licence pdf">
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="about pdf">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/RefundController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/RefundController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/TransferController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/TransferController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/ItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/ItemController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/SettingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/SettingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Traits/ModelBaseFunctions.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Traits/ModelBaseFunctions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/auction/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/auction/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/item/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/item/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/item/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/item/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/item/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/item/show.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/dashboard/settings.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/settings.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/transfer/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/transfer/show.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -365,14 +376,8 @@
       <workItem from="1623932979124" duration="2103000" />
       <workItem from="1623937922259" duration="9540000" />
       <workItem from="1624199687043" duration="3213000" />
-      <workItem from="1624266255476" duration="941000" />
-    </task>
-    <task id="LOCAL-00511" summary="transfer">
-      <created>1621869155669</created>
-      <option name="number" value="00511" />
-      <option name="presentableId" value="LOCAL-00511" />
-      <option name="project" value="LOCAL" />
-      <updated>1621869155669</updated>
+      <workItem from="1624266255476" duration="2160000" />
+      <workItem from="1624280826788" duration="8185000" />
     </task>
     <task id="LOCAL-00512" summary="wallet">
       <created>1621870021172</created>
@@ -710,7 +715,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624202638463</updated>
     </task>
-    <option name="localTasksCounter" value="560" />
+    <task id="LOCAL-00560" summary="about pdf">
+      <created>1624267491673</created>
+      <option name="number" value="00560" />
+      <option name="presentableId" value="LOCAL-00560" />
+      <option name="project" value="LOCAL" />
+      <updated>1624267491674</updated>
+    </task>
+    <option name="localTasksCounter" value="561" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -730,7 +742,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="over_bid_pay" />
     <MESSAGE value="negotiations" />
     <MESSAGE value="bid" />
     <MESSAGE value="next live" />
@@ -755,7 +766,8 @@
     <MESSAGE value="price" />
     <MESSAGE value="edits" />
     <MESSAGE value="licence pdf" />
-    <option name="LAST_COMMIT_MESSAGE" value="licence pdf" />
+    <MESSAGE value="about pdf" />
+    <option name="LAST_COMMIT_MESSAGE" value="about pdf" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

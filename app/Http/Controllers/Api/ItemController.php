@@ -48,6 +48,9 @@ class ItemController extends MasterController
 //        if (Transfer::where(['user_id'=>$user->id,'type'=>'refund_wallet','status'=>0])->first()){
 //            return $this->sendError(' محفظتك معلقة حاليا لحين رد الإدارة .');
 //        }
+        if ($request['fetes_id']==null){
+            return $this->sendError('يجب ادخال نوع ناقل الحركة');
+        }
         $data=$request->all();
         $data['user_id']=$user->id;
         $items_images=[];
