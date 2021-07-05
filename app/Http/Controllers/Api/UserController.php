@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Auction;
 use App\AuctionItem;
 use App\AuctionUser;
 use App\Favourite;
@@ -210,7 +211,104 @@ class UserController extends MasterController
     {
         $user = auth()->user();
         $my_items = Item::where('user_id', $user->id)->latest()->get();
-        return $this->sendResponse(new ItemCollection($my_items));
+        $data=[];
+        foreach ($my_items as $my_item){
+            $auction_item=AuctionItem::where('item_id',$my_item->id);
+            $auction=Auction::whereJsonContains('items',$my_item->id)->where('more_details->end_date','<',Carbon::now()->timestamp)->latest()->first();
+            if ($auction){
+                $auction_item=$auction_item->where('auction_id',$auction->id)->latest()->first();
+            }else{
+                $auction_item=$auction_item->latest()->first();
+            }
+            $is_favourite=false;
+            $favourite=Favourite::where(['user_id'=>\request()->user()->id, 'item_id'=>$my_item->id])->first();
+            if ($favourite){
+                $is_favourite=true;
+            }
+            $arr['status_text']='';
+            $arr['bid_count']=0;
+            $arr['can_bid']=false;
+            if ($auction_item){
+                $features=$auction_item->auctionTypeFeatures(auth()->user()->id);
+                $arr['auction_status']=$features['status'];
+                $arr['negotiation']=$features['negotiation'];
+                $arr['direct_pay']=$features['direct_pay'];
+                $arr['user_price']=$features['user_price'];
+                $arr['live']=$features['live'];
+                $arr['is_paid']=false;
+                if ($features['status']=='paid'){
+                    $arr['status_text']=$this->lang()=='ar'?'مغلق':'closed';
+                    if (Transfer::where('more_details->item_id',$my_item->id)->where('type','buy_item')->where('status',0)->latest()->first()){
+                        $arr['is_paid']=true;
+                        $arr['status_text']=$this->lang()=='ar'?'مغلق':'closed';
+                    }
+                }elseif ($features['status']=='delivered'){
+                    $arr['is_paid']=true;
+                    $arr['status_text']=$this->lang()=='ar'?'مغلق':'closed';
+                }elseif ($features['status']=='negotiation'){
+                    $arr['is_paid']=true;
+                    $arr['status_text']=$this->lang()=='ar'?'مغلق':'closed';
+                }elseif ($features['status']=='soon'){
+                    $arr['status_text']=$this->lang()=='ar'?'تم جدولتها لمزاد':'prepared for auction';
+                }elseif ($features['status']=='expired'){
+                    $arr['status_text']=$this->lang()=='ar'?'مغلق':'closed';
+                }elseif ($features['status']=='live'){
+                    $arr['status_text']=$this->lang()=='ar'?'مباشر':'live';
+                }
+                $arr['auction_type']= $my_item->auction_type->name[$this->lang()];
+                $arr['start_date']= $auction_item->auction->start_date;
+                $arr['now_date']= Carbon::now()->format('Y-m-d h:i:s A');
+                $arr['end_string_date']=Carbon::createFromTimestamp($auction_item->auction->more_details['end_date'])->format('Y-m-d h:i:s A');
+                $arr['start_string_date']=Carbon::createFromTimestamp($auction_item->auction->start_date)->format('Y-m-d h:i:s A');
+                $arr['auction_duration']=$auction_item->auction->duration;
+                $arr['auction_price']=$auction_item->price;
+                $arr['bid_count']=(int)AuctionUser::where(['auction_id'=>$auction_item->auction_id,'item_id'=>$auction_item->item_id])->count();
+            }else{
+                if($my_item->status=='pending'){
+                    $arr['auction_status']='تم طلب الاضافة';
+                    $arr['status_text']=$this->lang()=='ar'?'تم طلب الاضافة':'requested to add';
+                }elseif ($my_item->status=='rejected'){
+                    $arr['auction_status']='تم رفض السلعة من قبل الادارة';
+                    $arr['status_text']=$this->lang()=='ar'?'تم رفض السلعة من قبل الادارة':'rejected from admin';
+                }elseif ($my_item->status=='accepted'){
+                    $arr['auction_status']='بانتظار تسليم المركبة لساحة الحفظ';
+                    $arr['status_text']=$this->lang()=='ar'?'بانتظار تسليم المركبة لساحة الحفظ':'waiting for deliver car to admin garage';
+                }elseif ($my_item->status=='delivered'){
+                    $arr['auction_status']='تم استلام المركبة من قبل الادارة';
+                    $arr['status_text']=$this->lang()=='ar'?'تم استلام المركبة من قبل الادارة':'car delivered to admin garage';
+                }else{
+                    $arr['auction_status']='تم جدولتها للمزاد';
+                    $arr['status_text']=$this->lang()=='ar'?'تم جدولتها لمزاد':'prepared for auction';
+                }
+                $arr['negotiation']=false;
+                $arr['direct_pay']=false;
+                $arr['user_price']="";
+                $arr['live']=false;
+                $arr['auction_type']= $my_item->auction_type->name[$this->lang()];
+                $arr['start_date']= 123;
+                $arr['auction_duration']=1;
+                $arr['auction_price']=0;
+            }
+            $arr['id']=(int)$my_item->id;
+            $year = $my_item->year;
+            $mark = $my_item->mark->name[$this->lang()];
+            $model= $my_item->model->name[$this->lang()];
+            if ($this->lang()=='ar'){
+                $name= sprintf(' %d - %s - %s ' ,$year, $mark , $model );
+            }else{
+                $name= sprintf(' %s - %s - %s ', $year,  $mark , $model );
+            }
+            $arr['name']=$name;
+            $arr['item_status']= $my_item->item_status->name[$this->lang()];
+            $arr['city']= $my_item->city->name[$this->lang()];
+            $arr['image']=$my_item->images[0];
+            $arr['images']=$my_item->images;
+            $arr['is_favourite']=$is_favourite;
+            $arr['win']=false;
+            $arr["my_item"]=false;
+            $data[]=$arr;
+        }
+        return $this->sendResponse($data);
     }
 
     public function userAuctions()

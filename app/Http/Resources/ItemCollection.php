@@ -119,7 +119,6 @@ class ItemCollection extends ResourceCollection
                     $arr['status_text']=$this->lang()=='ar'?'بانتظار تسليم المركبة لساحة الحفظ':'waiting for deliver car to admin garage';
                 }elseif ($obj->status=='delivered'){
                     $arr['auction_status']='تم استلام المركبة من قبل الادارة';
-                    $arr['status_text']='تم استلام المركبة من قبل الادارة';
                     $arr['status_text']=$this->lang()=='ar'?'تم استلام المركبة من قبل الادارة':'car delivered to admin garage';
                 }else{
                     $arr['auction_status']='تم جدولتها للمزاد';

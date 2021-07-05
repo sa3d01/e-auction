@@ -19,14 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="22-6">
-      <change afterPath="$PROJECT_DIR$/app/Mail/SendCode.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/mails/confirmation_code.blade.php" afterDir="false" />
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="auth mobile email">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/mail.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/mail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -377,14 +372,8 @@
       <workItem from="1624546862823" duration="164000" />
       <workItem from="1624548541976" duration="996000" />
       <workItem from="1625417083646" duration="1013000" />
-      <workItem from="1625502995790" duration="1211000" />
-    </task>
-    <task id="LOCAL-00514" summary="wallet">
-      <created>1621871934098</created>
-      <option name="number" value="00514" />
-      <option name="presentableId" value="LOCAL-00514" />
-      <option name="project" value="LOCAL" />
-      <updated>1621871934098</updated>
+      <workItem from="1625502995790" duration="4081000" />
+      <workItem from="1625520009889" duration="1202000" />
     </task>
     <task id="LOCAL-00515" summary="wallet">
       <created>1621872497481</created>
@@ -722,7 +711,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624378307678</updated>
     </task>
-    <option name="localTasksCounter" value="563" />
+    <task id="LOCAL-00563" summary="auth mobile email">
+      <created>1625504546060</created>
+      <option name="number" value="00563" />
+      <option name="presentableId" value="LOCAL-00563" />
+      <option name="project" value="LOCAL" />
+      <updated>1625504546062</updated>
+    </task>
+    <option name="localTasksCounter" value="564" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -742,7 +738,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="next live" />
     <MESSAGE value="report item" />
     <MESSAGE value="periods" />
     <MESSAGE value="order next live" />
@@ -767,7 +762,8 @@
     <MESSAGE value="about pdf" />
     <MESSAGE value="٢١-٦" />
     <MESSAGE value="22-6" />
-    <option name="LAST_COMMIT_MESSAGE" value="22-6" />
+    <MESSAGE value="auth mobile email" />
+    <option name="LAST_COMMIT_MESSAGE" value="auth mobile email" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
