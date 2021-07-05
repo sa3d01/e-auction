@@ -71,7 +71,11 @@ Route::group(['prefix' => 'v1','namespace'=>'Api'], function () {
         //register
         Route::post('/update', 'UserController@update')->middleware(CheckApiToken::class);
         Route::get('/logout', 'UserController@logout')->middleware(CheckApiToken::class);
+
         Route::get('/profile', 'UserController@profile')->middleware(CheckApiToken::class);
+        Route::get('/items', 'UserController@userItems')->middleware(CheckApiToken::class);
+        Route::get('/auctions', 'UserController@userAuctions')->middleware(CheckApiToken::class);
+
         Route::get('/favourite', 'UserController@favourite')->middleware(CheckApiToken::class);
         Route::get('/auction_reports', 'UserController@auctionReports')->middleware(CheckApiToken::class);
         Route::get('/products_reports', 'UserController@productsReports')->middleware(CheckApiToken::class);

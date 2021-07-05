@@ -13,11 +13,13 @@ use App\Http\Resources\ItemCollection;
 use App\Http\Resources\paidItemCollection;
 use App\Http\Resources\UserResource;
 use App\Item;
+use App\Mail\SendCode;
 use App\Transfer;
 use App\User;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends MasterController
 {
@@ -29,28 +31,31 @@ class UserController extends MasterController
         parent::__construct();
     }
 
-    public function authPhoneAndMail(LoginRequest $request):object
+    public function authPhoneAndMail(LoginRequest $request): object
     {
         if (!$request->has('email') && !$request->has('phone')) {
             return $this->sendError('يجب ادخال وسيلة ارسال واحدة على الأقل');
         }
-        $activation_code =1111;//rand(1111, 9999);
-        if ($request->has('email') && $request->has('phone')){
-            $user = User::where(['email'=> $request['email'],'phone'=> $request['phone']])->first();
-            if (!$user)
-                return $this->sendError('البريد الالكترونى أو رقم الهاتف مسجل من قبل');
-        }elseif ($request->has('email')){
+        $activation_code = 1111;//rand(1111, 9999);
+        if ($request->has('email') && $request->has('phone')) {
+            $user = User::where(['email' => $request['email'], 'phone' => $request['phone']])->first();
+//            if (!$user)
+//                return $this->sendError('البريد الالكترونى أو رقم الهاتف مسجل من قبل');
+        } elseif ($request->has('email')) {
             $user = User::where('email', $request['email'])->first();
-        }else{
+        } else {
             $user = User::where('phone', $request['phone'])->first();
         }
         $all = $request->all();
         $all['activation_code'] = $activation_code;
         if (!$user) {
 //            $all['wallet']=10000;
-            $all['package_id']=5;
+            $all['package_id'] = 5;
             User::create($all);
         } else {
+            if ($user->status == 0) {
+                return $this->sendError('تم حظرك من قبل إدارة التطبيق ..');
+            }
             $user->update($all);
         }
         $this->send_code($activation_code, $request['email'], $request['phone']);
@@ -81,13 +86,15 @@ class UserController extends MasterController
 
     function sendToMail($email, $activation_code)
     {
-//        Mail::to($email)->send(new ConfirmCode($activation_code));
+        Mail::to($email)->send(new SendCode($activation_code));
     }
+
     private function buildHttpClient()
     {
         $endpoint = 'https://www.hisms.ws/';
         return new Client(['base_uri' => $endpoint]);
     }
+
     function sendToPhone($phone, $activation_code)
     {
         $normalizedPhone = substr($phone, 1); // remove +
@@ -95,7 +102,7 @@ class UserController extends MasterController
         $response = $client->request('GET', 'api.php', [
             'query' => [
                 'username' => "966595073103",
-                'password' => "H123m456",
+                'password' => "cjsHSD106Df27P",
                 'numbers' => $normalizedPhone,
                 'sender' => "E-Auction",
                 'message' => $activation_code,
@@ -111,9 +118,9 @@ class UserController extends MasterController
         if (!$request->has('email') && !$request->has('phone')) {
             return $this->sendError('يجب ادخال وسيلة ارسال واحدة على الأقل');
         }
-        if ($request->has('email')){
+        if ($request->has('email')) {
             $user = User::where('email', $request['email'])->first();
-        }else{
+        } else {
             $user = User::where('phone', $request['phone'])->first();
         }
         if (!$user) {
@@ -142,12 +149,12 @@ class UserController extends MasterController
     public function update(ProfileUpdateRequest $request)
     {
         $user = auth()->user();
-        $data=$request->except(['package_id', 'wallet','purchasing_power']);
-        $data['more_details']=[
-            'bank'=>[
-                'bank_name'=>$request['bank_name'],
-                'iban_number'=>$request['iban_number'],
-                'account_number'=>$request['account_number'],
+        $data = $request->except(['package_id', 'wallet', 'purchasing_power']);
+        $data['more_details'] = [
+            'bank' => [
+                'bank_name' => $request['bank_name'],
+                'iban_number' => $request['iban_number'],
+                'account_number' => $request['account_number'],
             ]
         ];
         $user->update($data);
@@ -161,9 +168,9 @@ class UserController extends MasterController
         if (!$request->has('email') && !$request->has('phone')) {
             return $this->sendError('يجب ادخال وسيلة ارسال واحدة على الأقل');
         }
-        if ($request->has('email')){
+        if ($request->has('email')) {
             $user = User::where('email', $request['email'])->first();
-        }else{
+        } else {
             $user = User::where('phone', $request['phone'])->first();
         }
         if (!$user) {
@@ -192,24 +199,39 @@ class UserController extends MasterController
     {
         $user = auth()->user();
         $data['user'] = new UserResource($user);
-        $my_items=Item::where('user_id', $user->id)->latest()->get();
-        $data['my_items'] = new ItemCollection($my_items);
-        $auction_users = AuctionUser::where('user_id', $user->id)->pluck('item_id');
-        $data['my_auctions'] = new ItemCollection(Item::whereIn('id', $auction_users)->latest()->get());
+//        $my_items=Item::where('user_id', $user->id)->latest()->get();
+//        $data['my_items'] = new ItemCollection($my_items);
+//        $auction_users = AuctionUser::where('user_id', $user->id)->pluck('item_id');
+//        $data['my_auctions'] = new ItemCollection(Item::whereIn('id', $auction_users)->latest()->get());
         return $this->sendResponse($data);
     }
 
-    public function myPaidItems(){
+    public function userItems()
+    {
         $user = auth()->user();
-        $paid_auction_items=AuctionItem::where('more_details->status','paid')->orWhere('more_details->status','delivered')->get();
-        $item_ids=[];
-        foreach ($paid_auction_items as $paid_auction_item){
-            $winner=AuctionUser::where(['auction_id'=>$paid_auction_item->auction_id,'item_id'=>$paid_auction_item->item_id])->latest()->value('user_id');
-            if ($winner==$user->id){
-                $item_ids[]=$paid_auction_item->item_id;
+        $my_items = Item::where('user_id', $user->id)->latest()->get();
+        return $this->sendResponse(new ItemCollection($my_items));
+    }
+
+    public function userAuctions()
+    {
+        $user = auth()->user();
+        $auction_users = AuctionUser::where('user_id', $user->id)->pluck('item_id');
+        return $this->sendResponse(new ItemCollection(Item::whereIn('id', $auction_users)->latest()->get()));
+    }
+
+    public function myPaidItems()
+    {
+        $user = auth()->user();
+        $paid_auction_items = AuctionItem::where('more_details->status', 'paid')->orWhere('more_details->status', 'delivered')->get();
+        $item_ids = [];
+        foreach ($paid_auction_items as $paid_auction_item) {
+            $winner = AuctionUser::where(['auction_id' => $paid_auction_item->auction_id, 'item_id' => $paid_auction_item->item_id])->latest()->value('user_id');
+            if ($winner == $user->id) {
+                $item_ids[] = $paid_auction_item->item_id;
             }
         }
-        return $this->sendResponse(new paidItemCollection(Item::whereIn('id',$item_ids)->latest()->get()));
+        return $this->sendResponse(new paidItemCollection(Item::whereIn('id', $item_ids)->latest()->get()));
     }
 
     public function auctionReports()
@@ -232,7 +254,7 @@ class UserController extends MasterController
         $pre_auction_items = 0;
         $live_auction_items = 0;
         $user_items_ids = $user->items()->pluck('id');
-        $paid_auction_items = AuctionItem::whereIn('item_id', $user_items_ids)->where(function($query) {
+        $paid_auction_items = AuctionItem::whereIn('item_id', $user_items_ids)->where(function ($query) {
             $query->where('more_details->status', 'paid')
                 ->orWhere('more_details->status', 'delivered');
         })->get();
@@ -242,7 +264,7 @@ class UserController extends MasterController
         }
         foreach ($user->items() as $item) {
             $auction_item = AuctionItem::where('item_id', $item->id)->latest()->first();
-            $now=Carbon::now();
+            $now = Carbon::now();
             if ((Carbon::createFromTimestamp($auction_item->auction->more_details['end_date']) >= $now) && (Carbon::createFromTimestamp($auction_item->auction->start_date) <= $now)) {
                 $live_auction_items++;
             } else {
@@ -268,10 +290,10 @@ class UserController extends MasterController
     public function canBid($id)
     {
         $user = User::find($id);
-        $response['profileCompleted']=$user->profileAndPurchasingPowerIsFilled();
-        $user_purchasing_power=$user->purchasing_power;
-        $user_purchasing_power=$user_purchasing_power+$user->package->purchasing_power_increase;
-        $response['maxBid']=(double)$user_purchasing_power*$this->purchasing_power_ratio;
+        $response['profileCompleted'] = $user->profileAndPurchasingPowerIsFilled();
+        $user_purchasing_power = $user->purchasing_power;
+        $user_purchasing_power = $user_purchasing_power + $user->package->purchasing_power_increase;
+        $response['maxBid'] = (double)$user_purchasing_power * $this->purchasing_power_ratio;
         return $this->sendResponse($response);
     }
 
@@ -282,14 +304,15 @@ class UserController extends MasterController
         return $this->sendResponse($items);
     }
 
-    public function addBankAccount(Request $request){
-        $user=\request()->user();
+    public function addBankAccount(Request $request)
+    {
+        $user = \request()->user();
         $user->update([
-            'more_details'=>[
-                'bank'=>[
-                    'bank_name'=>$request['bank_name'],
-                    'iban_number'=>$request['iban_number'],
-                    'account_number'=>$request['account_number'],
+            'more_details' => [
+                'bank' => [
+                    'bank_name' => $request['bank_name'],
+                    'iban_number' => $request['iban_number'],
+                    'account_number' => $request['account_number'],
                 ]
             ],
         ]);

@@ -448,6 +448,20 @@ class ItemController extends MasterController
             );
         }
         $item->refresh();
+        $push = new PushNotification('fcm');
+        $msg = [
+            'notification' => null,
+            'data' => [
+                'title' => '',
+                'body' => '',
+                'type'=>'new_auction',
+                'db'=>false,
+            ],
+            'priority' => 'high',
+        ];
+        $push->setMessage($msg)
+            ->sendByTopic('new_auction')
+            ->send();
         return redirect()->back()->with('updated');
     }
     function itemStatusNotify($item,$note){
