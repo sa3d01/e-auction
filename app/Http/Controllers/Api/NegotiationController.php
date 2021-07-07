@@ -21,7 +21,6 @@ class NegotiationController extends MasterController
     public function __construct(Offer $model)
     {
         $this->model = $model;
-        $this->purchasing_power_ratio = Setting::first()->value('purchasing_power_ratio');
         parent::__construct();
     }
 
@@ -29,20 +28,25 @@ class NegotiationController extends MasterController
     {
         $user = $request->user();
         $auction_item = AuctionItem::where('item_id', $item_id)->latest()->first();
+        //validates
         if ($auction_item->more_details['status'] == 'expired' || $auction_item->more_details['status'] == 'paid') {
-            return $this->sendError('هذه المركبة قد انتهى وقت المزايدة عليها :(');
+            $ar_msg='هذه المركبة قد انتهى وقت المزايدة عليها :(';
+            $en_msg='timout auction :(';
+            return $this->sendError($this->lang()=='ar'?$ar_msg:$en_msg);
         }
-        if ($user->profileAndPurchasingPowerIsFilled()==false){
-            return $this->sendError(' يجب اكمال بيانات ملفك الشخصى أولا وشحن قوتك الشرائية');
+        if ($this->checkCompletedProfile($user) !== true)
+        {
+            return $this->checkCompletedProfile($user);
         }
+        if ($this->validate_purchasing_power($user,$auction_item->item->price,$auction_item)!==true){
+            return $this->validate_purchasing_power($user,$auction_item->item->price,$auction_item);
+        }
+        //end-validates
         $latest_auction_user = AuctionUser::where('item_id', $item_id)->latest()->first();
         if ($latest_auction_user) {
             $charge_price = $auction_item->item->price - $auction_item->price;
         } else {
             $charge_price = $auction_item->item->price;
-        }
-        if ($this->validate_purchasing_power($user,$auction_item->item->price)!==true){
-            return $this->validate_purchasing_power($user,$auction_item->item->price);
         }
         $auction_user=AuctionUser::create([
             'finish_papers'=>$request->input('finish_papers',0),
@@ -51,9 +55,8 @@ class NegotiationController extends MasterController
             'auction_id' => $auction_item->auction_id,
             'charge_price' => $charge_price
         ]);
-//        $this->addToCredit($auction_user);
         //winner
-        $auction_item_data=$this->pay($user,$auction_item,$auction_user,$charge_price,$auction_item->item->price,'direct_pay');
+        $auction_item_data=$this->pay($auction_item,$auction_user,$charge_price,$auction_item->item->price,'direct_pay');
         $auction_item->update($auction_item_data);
         //owner
         $this->editWallet($auction_user->item->user,$auction_item->price);
@@ -76,8 +79,8 @@ class NegotiationController extends MasterController
             if ($sender->profileAndPurchasingPowerIsFilled()==false){
                 return $this->sendError(' يجب اكمال بيانات ملفك الشخصى أولا وشحن قوتك الشرائية');
             }
-            if ($this->validate_purchasing_power($sender,$request['price'])!==true){
-                return $this->validate_purchasing_power($sender,$request['price']);
+            if ($this->validate_purchasing_power($sender,$request['price'],$auction_item)!==true){
+                return $this->validate_purchasing_power($sender,$request['price'],$auction_item);
             }
             if ($latest_user_offer){
                 if ($latest_user_offer->price > $request['price']) {
@@ -91,10 +94,6 @@ class NegotiationController extends MasterController
                 }
             }
         }
-//        else{
-////            البائع
-//
-//        }
 
         if ($request->has('offer_id') && $request['offer_id']!=null){
             $latest_offer=Offer::find($request['offer_id']);
@@ -148,7 +147,6 @@ class NegotiationController extends MasterController
     }
     public function acceptOffer($item_id, $offer_id, Request $request): string
     {
-        $user = $request->user();
         $auction_item = AuctionItem::where('item_id', $item_id)->latest()->first();
         if ($auction_item->more_details['status'] == 'expired' || $auction_item->more_details['status'] == 'paid') {
             return $this->sendError('هذا المركبة قد انتهى وقت المزايدة عليها :(');
@@ -169,11 +167,10 @@ class NegotiationController extends MasterController
         ]);
         $auction_user->refresh();
         //winner
-        $auction_item_data=$this->pay($user,$auction_item,$auction_user,$charge_price,$offer->price,'negotiation');
+        $auction_item_data=$this->pay($auction_item,$auction_user,$charge_price,$offer->price,'negotiation');
         $auction_item->update($auction_item_data);
         //owner
         $this->editWallet($auction_user->item->user,$auction_item->price);
-//        $this->addToCredit($auction_user);
         $winner_title['ar'] = 'تهانينا اليك ! لقد فزت فى المزاد الذى قمت بالمشاركة به رقم ' . $auction_item->item_id;
         $owner_title['ar'] = 'تهانينا اليك ! لقد تم بيع سلعتك بمزاد رقم ' . $auction_item->item_id;
         $admin_title['ar'] = 'تم بيع المركبة رقم ' . $auction_item->item_id;
@@ -186,7 +183,6 @@ class NegotiationController extends MasterController
         }
         return $this->sendResponse('تمت العملية بنجاح');
     }
-
     public function refuseOffer($item_id, Request $request):object
     {
         $refused_offer=Offer::find($request['offer_id']);
@@ -258,7 +254,6 @@ class NegotiationController extends MasterController
             ->send();
         return $this->sendResponse('تمت العملية بنجاح');
     }
-
     public function itemOffers($item_id): object
     {
         $auction_item = AuctionItem::where('item_id', $item_id)->latest()->first();
@@ -319,7 +314,6 @@ class NegotiationController extends MasterController
         }
         return $this->sendResponse($data);
     }
-
     public function new_offer_notify($offer)
     {
         $title['ar'] = 'تم إرسال عرض اليك على المزاد رقم ' . $offer->auction_item->item_id;
@@ -349,7 +343,6 @@ class NegotiationController extends MasterController
             ->setDevicesToken($offer->receiver->device['id'])
             ->send();
     }
-
     public function myNegotiationItems():object{
         $q_offers=Offer::query();
         $q_offers=$q_offers->where('status','pending');

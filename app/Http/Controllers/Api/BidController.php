@@ -33,6 +33,7 @@ class BidController extends MasterController
             return 'ar';
         }
     }
+
     function liveResponse($item)
     {
         $auction_item=AuctionItem::where('item_id',$item->id)->orderBy('created_at','desc')->first();
@@ -117,45 +118,33 @@ class BidController extends MasterController
     }
     public function bid($item_id,Request $request){
         $user=$request->user();
-        $now=Carbon::now();
-        $bid_pause_period=Setting::value('bid_pause_period');
-//        $auction_increasing_period=Setting::value('auction_increasing_period');
         $auction_item = AuctionItem::where('item_id', $item_id)->latest()->first();
-//        $auction_item_end=Carbon::createFromTimestamp($auction_item->start->date)->addSeconds($auction_item->auction->duration)
-        if ($auction_item->more_details != null) {
-            if ($auction_item->more_details['status'] == 'expired' || $auction_item->more_details['status'] == 'paid') {
-                $ar_msg='هذه المركبة قد انتهى وقت المزايدة عليها :(';
-                $en_msg='timout auction :(';
-                return $this->sendError($this->lang()=='ar'?$ar_msg:$en_msg);
-            }elseif ($auction_item->more_details['status'] == 'soon' && ($now->diffInSeconds(Carbon::createFromTimestamp($auction_item->auction->start_date))) < $bid_pause_period){
-                $ar_msg='يرجى الانتظار لبداية المزاد المباشر';
-                $en_msg='please wait to start auction time';
-                return $this->sendError($this->lang()=='ar'?$ar_msg:$en_msg);
-            }
-//            elseif ($auction_item->more_details['status']=='live'){
-//
-//            }
+        //checkCanBid
+        if ($this->canBid($user,$auction_item,$request['charge_price']) !== true){
+            return $this->canBid($user,$auction_item,$request['charge_price']);
         }
-        if ($user->profileAndPurchasingPowerIsFilled() == false) {
-            $ar_msg='يجب اكمال بيانات ملفك الشخصى أولا وشحن قوتك الشرائية';
-            $en_msg='please complete your profile , and charge your purchasing power';
-            return $this->sendError($this->lang()=='ar'?$ar_msg:$en_msg);
-        }
-        if ($this->validate_purchasing_power($user, $auction_item->price + $request['charge_price']) !== true) {
-            return $this->validate_purchasing_power($user, $auction_item->price + $request['charge_price']);
-        }
+        //store bid
+        $this->completedBidOperations($auction_item,$request['charge_price'],$user,$request->input('finish_papers', 0));
+        return $this->sendError($this->lang()=='ar'?'تمت المزايدة بنجاح':'success bid :)');
+    }
+    function completedBidOperations($auction_item,$charge_price,$user,$finish_papers)
+    {
         AuctionUser::create([
-            'finish_papers' => $request->input('finish_papers', 0),
+            'finish_papers' => $finish_papers,
             'user_id' => $user->id,
-            'item_id' => $item_id,
+            'item_id' => $auction_item->item_id,
             'auction_id' => $auction_item->auction_id,
-            'charge_price' => $request['charge_price']
+            'charge_price' => $charge_price
         ]);
-        $this->simpleBid($auction_item,$request['charge_price'],$user);
+        $auction_item->update([
+            'price' => $auction_item->price + $charge_price,
+            'latest_charge' => $charge_price
+        ]);
         $this->topicNotify();
-        $ar_msg=' تمت المزايدة بنجاح';
-        $en_msg=' success bid :)';
-        return $this->sendError($this->lang()=='ar'?$ar_msg:$en_msg);
+        $now=Carbon::now();
+        if (!(Carbon::createFromTimestamp($auction_item->auction->more_details['end_date']) >= $now) && ((Carbon::createFromTimestamp($auction_item->auction->start_date)) <= $now)) {
+            $this->charge_notify($auction_item, $user, $charge_price);
+        }
     }
     public function charge_notify($auction_item,$user,$charge_price){
         $users_id=AuctionUser::where(['item_id'=>$auction_item->item_id,'auction_id'=>$auction_item->auction_id])->groupBy('user_id')->pluck('user_id')->toArray();
@@ -210,15 +199,5 @@ class BidController extends MasterController
             ->sendByTopic('new_auction')
             ->send();
     }
-    function simpleBid($auction_item,$charge_price,$user)
-    {
-        $now=Carbon::now();
-        $auction_item->update([
-            'price' => $auction_item->price + $charge_price,
-            'latest_charge' => $charge_price
-        ]);
-        if (!(Carbon::createFromTimestamp($auction_item->auction->more_details['end_date']) >= $now) && ((Carbon::createFromTimestamp($auction_item->auction->start_date)) <= $now)) {
-            $this->charge_notify($auction_item, $user, $charge_price);
-        }
-    }
+
 }

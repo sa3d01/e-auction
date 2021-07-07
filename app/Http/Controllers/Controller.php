@@ -96,7 +96,7 @@ class Controller extends BaseController
                         $this->base_notify($winner_title, $soon_winner->user_id, $auction_item->item_id,'clickable');
                         $latest_auction_user = AuctionUser::where('item_id', $auction_item->item_id)->latest()->first();
                         //winner
-                        $auction_item_data=$this->pay('$user',$auction_item,$latest_auction_user,$latest_auction_user->charge_price,$auction_item->price,'achieve_top_requested');
+                        $auction_item_data=$this->pay($auction_item,$latest_auction_user,$latest_auction_user->charge_price,$auction_item->price,'achieve_top_requested');
                         $auction_item->update($auction_item_data);
                         //owner
                         $this->editWallet($latest_auction_user->item->user,$auction_item->price);
@@ -131,7 +131,7 @@ class Controller extends BaseController
                         $this->base_notify($winner_title, $soon_winner->user_id, $auction_item->item_id,'clickable');
                         $latest_auction_user = AuctionUser::where('item_id', $auction_item->item_id)->latest()->first();
                         //winner
-                        $auction_item_data=$this->pay('$user',$auction_item,$latest_auction_user,$latest_auction_user->charge_price,$auction_item->price,'achieve_top_requested');
+                        $auction_item_data=$this->pay($auction_item,$latest_auction_user,$latest_auction_user->charge_price,$auction_item->price,'achieve_top_requested');
                         $auction_item->update($auction_item_data);
                         //owner
                         $this->editWallet($latest_auction_user->item->user,$auction_item->price);
@@ -147,7 +147,7 @@ class Controller extends BaseController
                             $this->base_notify($winner_title, $soon_winner->user_id, $auction_item->item_id,'clickable');
                             $latest_auction_user = AuctionUser::where('item_id', $auction_item->item_id)->latest()->first();
                             //winner
-                            $auction_item_data=$this->pay('$user',$auction_item,$latest_auction_user,$latest_auction_user->charge_price,$auction_item->price,'top_bid');
+                            $auction_item_data=$this->pay($auction_item,$latest_auction_user,$latest_auction_user->charge_price,$auction_item->price,'top_bid');
                             $auction_item->update($auction_item_data);
                             //owner
                             $this->editWallet($latest_auction_user->item->user,$auction_item->price);
@@ -169,7 +169,7 @@ class Controller extends BaseController
                         $this->base_notify($winner_title, $soon_winner->user_id, $auction_item->item_id,'clickable');
                         $latest_auction_user = AuctionUser::where('item_id', $auction_item->item_id)->latest()->first();
                         //winner
-                        $auction_item_data=$this->pay('$user',$auction_item,$latest_auction_user,$latest_auction_user->charge_price,$auction_item->price,'top_bid');
+                        $auction_item_data=$this->pay($auction_item,$latest_auction_user,$latest_auction_user->charge_price,$auction_item->price,'top_bid');
                         $auction_item->update($auction_item_data);
                         //owner
                         $this->editWallet($latest_auction_user->item->user,$auction_item->price);
@@ -223,107 +223,43 @@ class Controller extends BaseController
         ]);
     }
 
-//    function addToCredit($auction_user)
-//    {
-//        $auction_item = AuctionItem::where(['item_id' => $auction_user->item_id, 'auction_id' => $auction_user->auction_id])->latest()->first();
-//        $latest_credit = $auction_user->item->user->credit;
-//        $auction_user->item->user->update([
-//            'credit' => (integer)($latest_credit + $auction_item->auction_price)
-//        ]);
-//    }
-
     function totalAmount($auction_item)
     {
-//        $setting=Setting::first();
-        $auction_price=$auction_item->price;
-        return (integer)$auction_price;
-//        $auction_user=AuctionUser::where(['auction_id'=>$auction_item->auction_id,'item_id'=>$auction_item->item_id])->latest()->first();
-//        $winner_finish_paper=$auction_user->finish_papers==1?$setting->finish_papers:0;
-//        $owner_tax=$auction_item->item->tax=='true'?($auction_price*$setting->owner_tax_ratio/100):0;
-//        return (integer)$auction_price+$owner_tax+($setting->tax_ratio)+($auction_price*$setting->app_ratio/100)+$winner_finish_paper;
+        return (integer)$auction_item->price;
     }
 
-    public function pay($user,$auction_item,$auction_user,$charge_price,$price,$pay_type):array
+    function remainCalc($auction_item,$price,$take)
+    {
+        $app_ratio=(Setting::value('app_ratio')*($price))/100;
+        $tax_ratio=Setting::value('tax_ratio');
+        $owner_tax_ratio=Setting::value('owner_tax_ratio');
+        $first_remain=$price-$take;
+        $second_remain=$first_remain+$app_ratio+$tax_ratio;
+        if ($auction_item->item->tax=='true'){
+            $latest_remain=$second_remain+(($price+$app_ratio+$tax_ratio)*$owner_tax_ratio/100);
+        }else{
+            $latest_remain=$second_remain+(($app_ratio+$tax_ratio)*$owner_tax_ratio/100);
+        }
+        return $latest_remain;
+    }
+
+    public function pay($auction_item,$auction_user,$charge_price,$price,$pay_type):array
     {
         $winner=User::find($auction_user->user_id);
-//        if ($winner->purchasing_power > $this->totalAmount($auction_item)){
-//            $auction_user->update([
-//                'more_details'=>[
-//                    'status'=>'paid',
-//                    'total_amount'=>$this->totalAmount($auction_item),
-//                    'paid'=>$this->totalAmount($auction_item),
-//                    'remain'=>0
-//                ]
-//            ]);
-//            $winner->update([
-//                'purchasing_power'=> ((integer)$winner->purchasing_power)-$this->totalAmount($auction_item)
-//            ]);
-//            $data=[
-//                'vip' => 'false',
-//                'price' => $price,
-//                'latest_charge' => $charge_price,
-//                'more_details' => [
-//                    'status'=>'delivered',
-//                    'pay_type' => $pay_type
-//                ]
-//            ];
-//            $note['ar'] = 'تم خصم سعر السلعة من قوتك الشرائية :)';
-//            $note['en'] = 'تم خصم سعر السلعة من قوتك الشرائية :)';
-//            $this->base_notify($note,$winner->id,$auction_item->item_id,true);
-//        }else{
-//            $auction_user->update([
-//                'more_details'=>[
-//                    'status'=>'pending_for_transfer',
-//                    'total_amount'=>$this->totalAmount($auction_item),
-//                    'remain'=>$this->totalAmount($auction_item)-((integer)$user->purchasing_power),
-//                    'paid'=>$winner->purchasing_power,
-//                ]
-//            ]);
-//            $user->update([
-//                'purchasing_power'=> 0,
-//            ]);
-//            $data=[
-//                'vip' => 'false',
-//                'price' => $price,
-//                'latest_charge' => $charge_price,
-//                'more_details' => [
-//                    'status'=>'paid',
-//                    'pay_type' => $pay_type
-//                ]
-//            ];
-//        }
         $take=(10*($price))/100;
-
         $winner->update([
             'purchasing_power'=> ((integer)$winner->purchasing_power-$take)
         ]);
 //
-        $app_ratio=(Setting::value('app_ratio')*($price))/100;//200
-        $tax_ratio=Setting::value('tax_ratio');//250
-        $owner_tax_ratio=Setting::value('owner_tax_ratio');
-        $first_remain=$price-$take;//9000
-        $second_remain=$first_remain+$app_ratio+$tax_ratio;//9450
-        if ($auction_item->item->tax=='true'){
-            $latest_remain=$second_remain+(($price+$app_ratio+$tax_ratio)*$owner_tax_ratio/100);
-        }else{
-            $latest_remain=$second_remain+(($app_ratio+$tax_ratio)*$owner_tax_ratio/100);//9517
-        }
-
+        $latest_remain=$this->remainCalc($auction_item,$price,$take);
         $auction_user->update([
             'more_details'=>[
                 'status'=>'pending_for_transfer',
                 'total_amount'=>$price,
-                'remain'=>$latest_remain,
                 'paid'=>$take,
+                'remain'=>$latest_remain,
             ]
         ]);
-
-        //plus رس،م ادارية و نسبة التطبيق
-        //1000 - ((price-take) + app_ration + tax_ration)
-        //if item have tax:
-        //1000-(()+()15%)
-        //else
-        //1000-(()-900)15%
         $this->editWallet($winner,-$latest_remain);
         $data=[
             'vip' => 'false',
@@ -356,7 +292,6 @@ class Controller extends BaseController
                 'end_date'=>$new_end_date
             ]
         ]);
-
     }
 
     function expire_offers($expired_offers){
