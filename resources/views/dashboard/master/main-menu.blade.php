@@ -145,6 +145,9 @@
                     <li>
                         <a href="{{route('admin.items.sold')}}"> المركبات المباعة </a>
                     </li>
+                    <li>
+                        <a href="{{route('admin.items.expired')}}"> المركبات المغلقة </a>
+                    </li>
 {{--                    <li>--}}
 {{--                        <a href="{{route('admin.items.hidden')}}"> المركبات المختفيه من التطبيق </a>--}}
 {{--                    </li>--}}

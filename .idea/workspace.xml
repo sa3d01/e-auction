@@ -19,17 +19,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="validate purchasing power">
-      <change afterPath="$PROJECT_DIR$/app/Http/Requests/Api/Auth/PhoneUpdateRequest.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Requests/Api/Auth/SubmitPhoneUpdateRequest.php" afterDir="false" />
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="latest live">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Api/Auth/LoginRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Api/Auth/LoginRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Api/Auth/ProfileUpdateRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Api/Auth/ProfileUpdateRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Api/Auth/ResendPhoneVerificationRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Api/Auth/ResendPhoneVerificationRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Api/Auth/VerifyPhoneRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Api/Auth/VerifyPhoneRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/show/activity-box.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/show/activity-box.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/AuctionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/AuctionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Traits/ModelBaseFunctions.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Traits/ModelBaseFunctions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/item/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/item/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/master/main-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/master/main-menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/master/mobile-main-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/master/mobile-main-menu.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,7 +186,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="full.screen.before.presentation.mode" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Requests/Api/Auth" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -200,11 +198,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/app/Http/Requests/Api/Auth" />
       <recent name="$PROJECT_DIR$/resources/views/mails" />
       <recent name="$PROJECT_DIR$/app" />
       <recent name="$PROJECT_DIR$/resources/views/dashboard" />
-      <recent name="$PROJECT_DIR$/app/Http/Controllers/Admin" />
     </key>
   </component>
   <component name="RunManager">
@@ -385,21 +383,7 @@
       <workItem from="1625657271432" duration="13293000" />
       <workItem from="1625748335678" duration="5544000" />
       <workItem from="1625781846026" duration="1110000" />
-      <workItem from="1626094634917" duration="4995000" />
-    </task>
-    <task id="LOCAL-00517" summary="wallet">
-      <created>1621874057928</created>
-      <option name="number" value="00517" />
-      <option name="presentableId" value="LOCAL-00517" />
-      <option name="project" value="LOCAL" />
-      <updated>1621874057928</updated>
-    </task>
-    <task id="LOCAL-00518" summary="wallet">
-      <created>1621874284930</created>
-      <option name="number" value="00518" />
-      <option name="presentableId" value="LOCAL-00518" />
-      <option name="project" value="LOCAL" />
-      <updated>1621874284930</updated>
+      <workItem from="1626094634917" duration="11518000" />
     </task>
     <task id="LOCAL-00519" summary="banks">
       <created>1621942925252</created>
@@ -730,7 +714,21 @@
       <option name="project" value="LOCAL" />
       <updated>1625686319888</updated>
     </task>
-    <option name="localTasksCounter" value="566" />
+    <task id="LOCAL-00566" summary="latest live">
+      <created>1626103737178</created>
+      <option name="number" value="00566" />
+      <option name="presentableId" value="LOCAL-00566" />
+      <option name="project" value="LOCAL" />
+      <updated>1626103737179</updated>
+    </task>
+    <task id="LOCAL-00567" summary="latest live">
+      <created>1626103948505</created>
+      <option name="number" value="00567" />
+      <option name="presentableId" value="LOCAL-00567" />
+      <option name="project" value="LOCAL" />
+      <updated>1626103948505</updated>
+    </task>
+    <option name="localTasksCounter" value="568" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -750,7 +748,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="order next live" />
     <MESSAGE value="images errors" />
     <MESSAGE value="year" />
     <MESSAGE value="text" />
@@ -775,20 +772,20 @@
     <MESSAGE value="auth mobile email" />
     <MESSAGE value="my items" />
     <MESSAGE value="validate purchasing power" />
-    <option name="LAST_COMMIT_MESSAGE" value="validate purchasing power" />
+    <MESSAGE value="latest live" />
+    <option name="LAST_COMMIT_MESSAGE" value="latest live" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/routes/web.php</url>
-          <line>104</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/routes/web.php</url>
-          <line>100</line>
-          <option name="timeStamp" value="9" />
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/app/Item.php</url>
+          <line>118</line>
+          <properties>
+            <option name="className" value="\App\Item" />
+            <option name="methodName" value="itemStatusIcon" />
+          </properties>
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

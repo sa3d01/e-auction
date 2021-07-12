@@ -70,6 +70,7 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
     Route::get('item/{id}/auction_price', 'ItemController@auction_price')->name('item.auction_price');
     Route::resource('item', 'ItemController');
     Route::get('sold_items', 'ItemController@sold_auction_items')->name('items.sold');
+    Route::get('items_expired', 'ItemController@expired_auction_items')->name('items.expired');
     Route::get('hidden_items', 'ItemController@hidden_auction_items')->name('items.hidden');
     Route::get('vip_items', 'ItemController@vip_auction_items')->name('items.vip');
     Route::get('update_vip/{item_id}', 'ItemController@update_vip')->name('item_vip.update');

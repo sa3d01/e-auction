@@ -99,18 +99,12 @@ class ItemController extends MasterController
         if ($status=='accepted'){
             $rows=$this->model->whereIn('status',['accepted','delivered'])->latest()->get();
             $title='قائمة المركبات المطلوب اعدادها';
-            $index_fields=['الرقم التسلسلى' => 'id'];
         }else{
             $title='قائمة المركبات';
-            $index_fields=['الرقم التسلسلى' => 'id','تاريخ الطلب'=>'created_at'];
         }
         $fields=[
             'الرقم التسلسلى' => 'id',
-//            'تاريخ الطلب'=>'created_at',
-//            'صور المركباتة'=>'images',
             'عدد السندرات'=>'sunder_count',
-//            'الممشى'=>'kms_count',
-//            'صورة الاستمارة'=>'paper_image',
             'السعر'=>'price',
         ];
         return View('dashboard.item.index', [
@@ -388,7 +382,6 @@ class ItemController extends MasterController
         $item->refresh();
         return redirect()->back()->with('updated');
     }
-
     public function accept($id,Request $request){
         $item=$this->model->find($id);
         $history[date('Y-m-d')]['accepted']=[
@@ -597,7 +590,38 @@ class ItemController extends MasterController
             ],
         ]);
     }
-
+    public function expired_auction_items()
+    {
+        $ids=[];
+        foreach (Item::all() as $item) {
+            $auction_item = AuctionItem::where('item_id', $item->id)->latest()->first();
+            if ($auction_item){
+                if ($auction_item->more_details['status']=='expired') {
+                    $ids[]=$item->id;
+                }
+            }
+        }
+        $rows=$this->model->whereIn('id',$ids)->latest()->get();
+        $title='قائمة المركبات المغلقة ولم يتم بيعها';
+        $index_fields=['الرقم التسلسلى' => 'id','تاريخ الطلب'=>'created_at'];
+        return View('dashboard.item.index', [
+            'rows' => $rows,
+            'status'=>'expired',
+            'type'=>'item',
+            'title'=>$title,
+            'index_fields'=>$index_fields,
+            'selects'=>[
+                [
+                    'name'=>'user',
+                    'title'=>'المستخدم'
+                ],
+                [
+                    'name'=>'auction_type',
+                    'title'=>'نوع المزايدة'
+                ],
+            ],
+        ]);
+    }
     public function sold_auction_items()
     {
         $solid_items = AuctionItem::where('more_details->status', 'paid')->orWhere('more_details->status', 'delivered')->pluck('item_id')->toArray();

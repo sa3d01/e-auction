@@ -153,6 +153,22 @@ trait ModelBaseFunctions
         }
         return "<a class='$class btn btn-$key btn-sm' data-href='$action' href='$action'><i class='os-icon os-icon-$icon-circle'></i><span>$name</span></a>";
     }
+    public function ItemStatusExpiredChange()
+    {
+        $action = route('admin.item_delivered_to_garage.update', $this->attributes['id']);
+        if ($this->attributes['status'] != 'expired') {
+            $name = 'تم الإدراج';
+            $key = 'success';
+            $icon = 'check';
+            $class = '';
+        } else {
+            $name = 'ادراج';
+            $key = 'warning';
+            $icon = 'cancel';
+            $class = 'block';
+        }
+        return "<a class='$class btn btn-$key btn-sm' data-href='$action' href='$action'><i class='os-icon os-icon-$icon-circle'></i><span>$name</span></a>";
+    }
 
     protected function setStartDateAttribute()
     {

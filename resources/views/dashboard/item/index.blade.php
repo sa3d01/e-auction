@@ -51,6 +51,8 @@
                                     <th>الحالة</th>
                                 @elseif($status=='shown')
                                     <th>VIP</th>
+                                @elseif($status=='expired')
+                                    <th>العرض عن إضافة مزاد</th>
                                 @elseif($status=='sold')
                                     <th>الظهور بالتطبيق</th>
                                 @endif
@@ -77,6 +79,8 @@
                                     <th>VIP</th>
                                 @elseif($status=='sold')
                                     <th>الظهور بالتطبيق</th>
+                                @elseif($status=='expired')
+                                    <th>العرض عن إضافة مزاد</th>
                                 @endif
                                 <th>المزيد</th>
                             </tr>
@@ -146,6 +150,8 @@
                                             }
                                         ?>
                                         <td>{!! $vip !!}</td>
+                                    @elseif($status=='expired')
+                                        <td>{!! $row->ItemStatusExpiredChange() !!}</td>
                                     @elseif($status=='sold')
                                         <td>{!! $row->appHidden() !!}</td>
                                     @endif
