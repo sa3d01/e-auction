@@ -6,7 +6,7 @@ use App\Http\Requests\Api\ApiMasterRequest;
 use App\Utils\PreparePhone;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class VerifyPhoneRequest extends ApiMasterRequest
+class SubmitPhoneUpdateRequest extends ApiMasterRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -19,15 +19,15 @@ class VerifyPhoneRequest extends ApiMasterRequest
     }
     protected function prepareForValidation()
     {
-        if ($this->has('phone')) {
-            $phone = new PreparePhone($this->phone);
+        if ($this->has('new_phone')) {
+            $phone = new PreparePhone($this->new_phone);
             if (!$phone->isValid()) {
                 throw new HttpResponseException(response()->json([
                     'status' =>400,
                     'message' => $phone->errorMsg()
                 ]));
             }
-            $this->merge(['phone' => $phone->getNormalized()]);
+            $this->merge(['new_phone' => $phone->getNormalized()]);
         }
     }
     /**
@@ -38,9 +38,14 @@ class VerifyPhoneRequest extends ApiMasterRequest
     public function rules()
     {
         return [
-            'phone' => 'nullable|string|max:90|exists:users',
-            'email' => 'nullable|string|max:90|exists:users',
-            'activation_code' => 'required|numeric|max:9999',
+            'new_phone' => 'required|string|max:90|unique:users,phone',
+            'activation_code' => 'required',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'new_phone.unique' => 'هذا الهاتف مسجل من قبل',
         ];
     }
 }

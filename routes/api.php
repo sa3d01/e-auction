@@ -68,8 +68,12 @@ Route::group(['prefix' => 'v1','namespace'=>'Api'], function () {
         // Verification
         Route::post('/validate-auth', 'UserController@authPhoneAndMail');
         Route::post('/verify', 'UserController@verifyUser');
-        //register
+        //authed
         Route::post('/update', 'UserController@update')->middleware(CheckApiToken::class);
+
+        Route::post('/request-update-phone', 'UserController@requestUpdatePhone')->middleware(CheckApiToken::class);
+        Route::post('/update-phone', 'UserController@updatePhone')->middleware(CheckApiToken::class);
+
         Route::get('/logout', 'UserController@logout')->middleware(CheckApiToken::class);
 
         Route::get('/profile', 'UserController@profile')->middleware(CheckApiToken::class);

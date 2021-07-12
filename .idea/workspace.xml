@@ -19,14 +19,17 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="my items">
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="validate purchasing power">
+      <change afterPath="$PROJECT_DIR$/app/Http/Requests/Api/Auth/PhoneUpdateRequest.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Http/Requests/Api/Auth/SubmitPhoneUpdateRequest.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/BidController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/BidController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/MasterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/MasterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/NegotiationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/NegotiationController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Api/Auth/LoginRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Api/Auth/LoginRequest.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Requests/Api/Auth/ProfileUpdateRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Api/Auth/ProfileUpdateRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Api/Auth/ResendPhoneVerificationRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Api/Auth/ResendPhoneVerificationRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/Api/Auth/VerifyPhoneRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/Api/Auth/VerifyPhoneRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/show/activity-box.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/show/activity-box.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +188,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="full.screen.before.presentation.mode" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/mails" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Http/Requests/Api/Auth" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -197,11 +200,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app/Http/Requests/Api/Auth" />
       <recent name="$PROJECT_DIR$/resources/views/mails" />
       <recent name="$PROJECT_DIR$/app" />
       <recent name="$PROJECT_DIR$/resources/views/dashboard" />
       <recent name="$PROJECT_DIR$/app/Http/Controllers/Admin" />
-      <recent name="$PROJECT_DIR$/resources/views" />
     </key>
   </component>
   <component name="RunManager">
@@ -379,14 +382,10 @@
       <workItem from="1625417083646" duration="1013000" />
       <workItem from="1625502995790" duration="4081000" />
       <workItem from="1625520009889" duration="2209000" />
-      <workItem from="1625657271432" duration="13154000" />
-    </task>
-    <task id="LOCAL-00516" summary="wallet">
-      <created>1621873620464</created>
-      <option name="number" value="00516" />
-      <option name="presentableId" value="LOCAL-00516" />
-      <option name="project" value="LOCAL" />
-      <updated>1621873620464</updated>
+      <workItem from="1625657271432" duration="13293000" />
+      <workItem from="1625748335678" duration="5544000" />
+      <workItem from="1625781846026" duration="1110000" />
+      <workItem from="1626094634917" duration="4995000" />
     </task>
     <task id="LOCAL-00517" summary="wallet">
       <created>1621874057928</created>
@@ -724,7 +723,14 @@
       <option name="project" value="LOCAL" />
       <updated>1625521432162</updated>
     </task>
-    <option name="localTasksCounter" value="565" />
+    <task id="LOCAL-00565" summary="validate purchasing power">
+      <created>1625686319887</created>
+      <option name="number" value="00565" />
+      <option name="presentableId" value="LOCAL-00565" />
+      <option name="project" value="LOCAL" />
+      <updated>1625686319888</updated>
+    </task>
+    <option name="localTasksCounter" value="566" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -744,7 +750,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="periods" />
     <MESSAGE value="order next live" />
     <MESSAGE value="images errors" />
     <MESSAGE value="year" />
@@ -769,7 +774,8 @@
     <MESSAGE value="22-6" />
     <MESSAGE value="auth mobile email" />
     <MESSAGE value="my items" />
-    <option name="LAST_COMMIT_MESSAGE" value="my items" />
+    <MESSAGE value="validate purchasing power" />
+    <option name="LAST_COMMIT_MESSAGE" value="validate purchasing power" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

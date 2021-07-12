@@ -25,7 +25,7 @@ class ProfileUpdateRequest extends ApiMasterRequest
                 throw new HttpResponseException(response()->json([
                     'status' =>400,
                     'message' => $phone->errorMsg()
-                ], 400));
+                ]));
             }
             $this->merge(['phone' => $phone->getNormalized()]);
         }
@@ -40,7 +40,7 @@ class ProfileUpdateRequest extends ApiMasterRequest
         return [
             'name' => 'required|string|max:110',
             'email' => 'email|max:90|unique:users,email,' . \request()->user()->id,
-            'phone' => 'nullable|string|max:90|unique:users,phone,' . \request()->user()->id,
+//            'phone' => 'nullable|string|max:90|unique:users,phone,' . \request()->user()->id,
             'device.id' => 'required',
             'device.type' => 'required|in:android,ios',
             'bank_name' => 'nullable',

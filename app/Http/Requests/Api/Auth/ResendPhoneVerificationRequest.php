@@ -26,7 +26,7 @@ class ResendPhoneVerificationRequest extends ApiMasterRequest
                 throw new HttpResponseException(response()->json([
                     'status' =>400,
                     'message' => $phone->errorMsg()
-                ], 400));
+                ]));
             }
             $this->merge(['phone' => $phone->getNormalized()]);
         }

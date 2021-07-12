@@ -61,7 +61,7 @@
                                     <strong>{{\Carbon\Carbon::parse($user_auction->created_at)->format('H:i A')}}</strong>
                                 </div>
                                 <div class="ta-activity">
-                                    {!!$item_href!!} قام بإضافة مزايدة بقيمة{{$user_auction->charge_price}}  على سلعة
+                                    {!!$auction_href!!} قام بإضافة مزايدة بقيمة{{$user_auction->charge_price}}  على سلعة
                                 </div>
                             </div>
                         </div>

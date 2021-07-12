@@ -26,7 +26,7 @@ class LoginRequest extends ApiMasterRequest
                 throw new HttpResponseException(response()->json([
                     'status' =>400,
                     'message' => $phone->errorMsg()
-                ], 400));
+                ], 200));
             }
             $this->merge(['phone' => $phone->getNormalized()]);
         }
