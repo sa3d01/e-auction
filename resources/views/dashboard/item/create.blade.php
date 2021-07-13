@@ -58,7 +58,7 @@
                                                     <div class="form-group" id="{{$value}}">
                                                         <label for=""> {{$key}}</label>
                                                         <span style="color: red">*</span>
-                                                        <input name="{{$value}}" class="form-control" type="number"
+                                                        <input required name="{{$value}}" class="form-control" type="number"
                                                                min="1">
                                                         <div
                                                             class="help-block form-text with-errors form-control-feedback"></div>

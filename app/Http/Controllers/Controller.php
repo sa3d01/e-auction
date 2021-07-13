@@ -60,9 +60,7 @@ class Controller extends BaseController
                 ]);
                 $expired_offers = Offer::where('auction_item_id', $negotiation_auction_item->id)->get();
                 foreach ($expired_offers as $expired_offer) {
-                    $expired_offer->update([
-                        'status' => 'expired'
-                    ]);
+                    $expired_offer->delete();
                 }
             }
         }
@@ -296,9 +294,7 @@ class Controller extends BaseController
 
     function expire_offers($expired_offers){
         foreach ($expired_offers as $expired_offer){
-            $expired_offer->update([
-                'status'=>'expired'
-            ]);
+            $expired_offer->delete();
         }
     }
 
@@ -375,6 +371,21 @@ class Controller extends BaseController
             $receiver = User::find($receiver_id);
             $push->setMessage($msg)
                 ->setDevicesToken($receiver->device['id'])
+                ->send();
+
+            $push = new PushNotification('fcm');
+            $msg = [
+                'notification' => null,
+                'data' => [
+                    'title' => '',
+                    'body' => '',
+                    'type' => 'new_auction',
+                    'db'=>false,
+                ],
+                'priority' => 'high',
+            ];
+            $push->setMessage($msg)
+                ->sendByTopic('new_auction')
                 ->send();
         }catch (\Exception $e){
 
