@@ -19,15 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="latest live">
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="expired items">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/AuctionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/AuctionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/ItemController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Traits/ModelBaseFunctions.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Traits/ModelBaseFunctions.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/item/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/item/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/master/main-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/master/main-menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/master/mobile-main-menu.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/master/mobile-main-menu.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/NegotiationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/NegotiationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/NotificationCollection.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/NotificationCollection.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -383,14 +378,8 @@
       <workItem from="1625657271432" duration="13293000" />
       <workItem from="1625748335678" duration="5544000" />
       <workItem from="1625781846026" duration="1110000" />
-      <workItem from="1626094634917" duration="11518000" />
-    </task>
-    <task id="LOCAL-00519" summary="banks">
-      <created>1621942925252</created>
-      <option name="number" value="00519" />
-      <option name="presentableId" value="LOCAL-00519" />
-      <option name="project" value="LOCAL" />
-      <updated>1621942925253</updated>
+      <workItem from="1626094634917" duration="12134000" />
+      <workItem from="1626185737609" duration="1235000" />
     </task>
     <task id="LOCAL-00520" summary="banks">
       <created>1621943037909</created>
@@ -728,7 +717,14 @@
       <option name="project" value="LOCAL" />
       <updated>1626103948505</updated>
     </task>
-    <option name="localTasksCounter" value="568" />
+    <task id="LOCAL-00568" summary="expired items">
+      <created>1626110269062</created>
+      <option name="number" value="00568" />
+      <option name="presentableId" value="LOCAL-00568" />
+      <option name="project" value="LOCAL" />
+      <updated>1626110269062</updated>
+    </task>
+    <option name="localTasksCounter" value="569" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -748,7 +744,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="images errors" />
     <MESSAGE value="year" />
     <MESSAGE value="text" />
     <MESSAGE value="can_bid" />
@@ -773,7 +768,8 @@
     <MESSAGE value="my items" />
     <MESSAGE value="validate purchasing power" />
     <MESSAGE value="latest live" />
-    <option name="LAST_COMMIT_MESSAGE" value="latest live" />
+    <MESSAGE value="expired items" />
+    <option name="LAST_COMMIT_MESSAGE" value="expired items" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

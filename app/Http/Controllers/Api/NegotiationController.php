@@ -61,7 +61,9 @@ class NegotiationController extends MasterController
         //owner
         $this->editWallet($auction_user->item->user,$auction_item->price);
         $winner_title['ar'] = 'تهانينا اليك ! لقد تمت عملية الشراء بنجاح .. مركبة رقم ' . $auction_item->item_id;
+        $winner_title['en'] = 'congratulations , your paid process is success on auction id : ' . $auction_item->item_id;
         $owner_title['ar'] = 'تهانينا اليك ! لقد تم بيع سلعتك بمزاد رقم ' . $auction_item->item_id;
+        $owner_title['en'] = 'congratulations , your item is paid at auction id: ' . $auction_item->item_id;
         $admin_title['ar'] = 'تم بيع المركبة رقم ' . $auction_item->item_id;
         $this->base_notify($winner_title, $user->id, $auction_item->item_id);
         $this->base_notify($owner_title, $auction_item->item->user_id, $auction_item->item_id);
@@ -172,7 +174,9 @@ class NegotiationController extends MasterController
         //owner
         $this->editWallet($auction_user->item->user,$auction_item->price);
         $winner_title['ar'] = 'تهانينا اليك ! لقد فزت فى المزاد الذى قمت بالمشاركة به رقم ' . $auction_item->item_id;
+        $winner_title['en'] = 'congratulations , you are the winner at auction id:' . $auction_item->item_id;
         $owner_title['ar'] = 'تهانينا اليك ! لقد تم بيع سلعتك بمزاد رقم ' . $auction_item->item_id;
+        $owner_title['en'] = 'congratulations , your item is paid at auction id: ' . $auction_item->item_id;
         $admin_title['ar'] = 'تم بيع المركبة رقم ' . $auction_item->item_id;
         $this->base_notify($winner_title, $auction_user_id, $auction_item->item_id);
         $this->base_notify($owner_title, $auction_item->item->user_id, $auction_item->item_id);
@@ -227,6 +231,7 @@ class NegotiationController extends MasterController
             $receiver = User::find($refused_offer->sender_id);
         }
         $title['ar'] = 'لقد تم رفض عرض السعر المقدم من قبلك على المزاد رقم ' . $auction_item->item_id;
+        $title['en'] = 'your offer is rejected on auction id: ' . $auction_item->item_id;
         $data = [];
         $data['title'] = $title;
         $data['note'] = $title;
@@ -317,7 +322,7 @@ class NegotiationController extends MasterController
     public function new_offer_notify($offer)
     {
         $title['ar'] = 'تم إرسال عرض اليك على المزاد رقم ' . $offer->auction_item->item_id;
-        $title['en'] = 'تم إرسال عرض اليك على المزاد رقم ' . $offer->auction_item->item_id;
+        $title['en'] = 'you have new offer on auction id : ' . $offer->auction_item->item_id;
         $data = [];
         $data['title'] = $title;
         $data['note'] = $title;

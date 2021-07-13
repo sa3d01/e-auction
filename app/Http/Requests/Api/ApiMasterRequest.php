@@ -19,6 +19,6 @@ class ApiMasterRequest extends FormRequest
         throw new HttpResponseException(response()->json([
             'status' => 400,
             'message' => $validator->errors()->first()
-        ], 400));
+        ]));
     }
 }

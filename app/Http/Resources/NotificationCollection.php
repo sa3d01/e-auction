@@ -20,8 +20,13 @@ class NotificationCollection extends ResourceCollection
             $arr['type']=$obj->type;
             $arr['read']=($obj->read == 'true') ? true : false;
             if (\request()->header('lang')=='en'){
-                $arr['title']=$obj->note['en'];
-                $arr['note']=$obj->note['en'];
+                try {
+                    $arr['title']=$obj->note['en'];
+                    $arr['note']=$obj->note['en'];
+                }catch (\Exception $e){
+                    $arr['title']=$obj->note['ar'];
+                    $arr['note']=$obj->note['ar'];
+                }
             }else{
                 $arr['title']=$obj->note['ar'];
                 $arr['note']=$obj->note['ar'];
