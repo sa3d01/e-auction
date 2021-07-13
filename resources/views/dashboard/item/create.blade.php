@@ -267,7 +267,7 @@
                 var mark_id = $('#mark_id').val();
                 $.ajax({
                     type: "GET",
-                    url: '/admin/get_models/' + mark_id,
+                    url: '/e-auction/public/admin/get_models/' + mark_id,
                     dataType: 'json',
                     success: function (data) {
                         console.log(data)
