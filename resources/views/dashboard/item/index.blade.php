@@ -56,6 +56,7 @@
                                 @elseif($status=='sold')
                                     <th>الظهور بالتطبيق</th>
                                 @endif
+                                <th>السجل الضريبي</th>
                                 <th>المزيد</th>
                             </tr>
                             </thead>
@@ -82,6 +83,7 @@
                                 @elseif($status=='expired')
                                     <th>العرض عن إضافة مزاد</th>
                                 @endif
+                                <th>السجل الضريبي</th>
                                 <th>المزيد</th>
                             </tr>
                             </tfoot>
@@ -155,6 +157,13 @@
                                     @elseif($status=='sold')
                                         <td>{!! $row->appHidden() !!}</td>
                                     @endif
+                                    <td>
+                                        @if($row->tax=='true')
+                                            يوجد
+                                        @else
+                                            لا يوجد
+                                        @endif
+                                    </td>
                                     <td>
                                         @if($status=='pending')
                                             <div class="row">
