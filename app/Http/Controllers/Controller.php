@@ -319,6 +319,7 @@ class Controller extends BaseController
             'status' => 'pending'
         ]);
         $title['ar'] = 'تم انتهاء المزاد على سلعتك رقم ' . $offer->auction_item->item_id . ' بسعر ' . $auction_item->price;
+        $title['en'] = 'auction expired on your item id:' . $offer->auction_item->item_id . ' price, ' . $auction_item->price;
         $data = [];
         $data['title'] = $title;
         $data['note'] = $title;

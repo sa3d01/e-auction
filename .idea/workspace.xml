@@ -19,9 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="routes">
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="tax">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/item/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/item/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/MasterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/MasterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -378,14 +379,7 @@
       <workItem from="1625748335678" duration="5544000" />
       <workItem from="1625781846026" duration="1110000" />
       <workItem from="1626094634917" duration="12134000" />
-      <workItem from="1626185737609" duration="3320000" />
-    </task>
-    <task id="LOCAL-00522" summary="banks">
-      <created>1621943285562</created>
-      <option name="number" value="00522" />
-      <option name="presentableId" value="LOCAL-00522" />
-      <option name="project" value="LOCAL" />
-      <updated>1621943285562</updated>
+      <workItem from="1626185737609" duration="4581000" />
     </task>
     <task id="LOCAL-00523" summary="banks">
       <created>1621943383791</created>
@@ -723,7 +717,14 @@
       <option name="project" value="LOCAL" />
       <updated>1626188347269</updated>
     </task>
-    <option name="localTasksCounter" value="571" />
+    <task id="LOCAL-00571" summary="tax">
+      <created>1626189128988</created>
+      <option name="number" value="00571" />
+      <option name="presentableId" value="LOCAL-00571" />
+      <option name="project" value="LOCAL" />
+      <updated>1626189128988</updated>
+    </task>
+    <option name="localTasksCounter" value="572" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -743,7 +744,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="can_bid" />
     <MESSAGE value="settings" />
     <MESSAGE value="api" />
     <MESSAGE value="wallet" />
@@ -768,7 +768,8 @@
     <MESSAGE value="expired items" />
     <MESSAGE value="notifications en" />
     <MESSAGE value="routes" />
-    <option name="LAST_COMMIT_MESSAGE" value="routes" />
+    <MESSAGE value="tax" />
+    <option name="LAST_COMMIT_MESSAGE" value="tax" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\AuctionItem;
 use App\AuctionUser;
 use App\Http\Controllers\Controller;
+use App\Offer;
 use App\Setting;
 use App\Transfer;
 use Carbon\Carbon;
@@ -72,7 +73,6 @@ class MasterController extends Controller
         $other_auction_items = $other_auction_items->where('more_details->status', '!=', 'delivered');
         $other_auction_items = $other_auction_items->where('more_details->status', '!=', 'expired');
         $other_auction_items = $other_auction_items->where('more_details->status', '!=', 'negotiation')->get();
-
         foreach ($other_auction_items as $other_auction_item)
         {
             if ($other_auction_item->id != $auction_item->id){
@@ -82,6 +82,22 @@ class MasterController extends Controller
                 }
             }
         }
+        //user negotiations
+        $offers=Offer::where('sender_id',$user->id)->pluck('auction_item_id')->toArray();
+        $other_auction_items = AuctionItem::whereIn('id',$offers);
+        $other_auction_items = $other_auction_items->where(function($query) {
+            $query->where('more_details->status','negotiation')->orWhere('more_details->status','soon');
+        })->get();
+        foreach ($other_auction_items as $other_auction_item)
+        {
+            if ($other_auction_item->id != $auction_item->id){
+                $offer_price=Offer::where(['sender_id'=>$user->id,'auction_item_id'=>$other_auction_item->id])->latest()->value('price');
+                if ($offer_price){
+                    $user_purchasing_power=$user_purchasing_power-$offer_price;
+                }
+            }
+        }
+        //check
         if ($user_purchasing_power < $price){
             $ar_msg='قوتك الشرائية لا تسمح بهذه الصفقه';
             $en_msg=' your purchasing power doesnt match this auction';
