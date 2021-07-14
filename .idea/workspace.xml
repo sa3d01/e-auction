@@ -19,10 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="offers in purchasing power">
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="edits">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/AuctionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/AuctionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/ItemCollection.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/ItemCollection.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -383,21 +382,7 @@
       <workItem from="1626210161018" duration="2448000" />
       <workItem from="1626264244592" duration="1129000" />
       <workItem from="1626265933751" duration="87000" />
-      <workItem from="1626287099863" duration="2531000" />
-    </task>
-    <task id="LOCAL-00527" summary="landing page">
-      <created>1621947481284</created>
-      <option name="number" value="00527" />
-      <option name="presentableId" value="LOCAL-00527" />
-      <option name="project" value="LOCAL" />
-      <updated>1621947481284</updated>
-    </task>
-    <task id="LOCAL-00528" summary="dash">
-      <created>1621948272952</created>
-      <option name="number" value="00528" />
-      <option name="presentableId" value="LOCAL-00528" />
-      <option name="project" value="LOCAL" />
-      <updated>1621948272952</updated>
+      <workItem from="1626287099863" duration="4222000" />
     </task>
     <task id="LOCAL-00529" summary="dash">
       <created>1621948348024</created>
@@ -728,7 +713,21 @@
       <option name="project" value="LOCAL" />
       <updated>1626265105633</updated>
     </task>
-    <option name="localTasksCounter" value="576" />
+    <task id="LOCAL-00576" summary="edits">
+      <created>1626289798072</created>
+      <option name="number" value="00576" />
+      <option name="presentableId" value="LOCAL-00576" />
+      <option name="project" value="LOCAL" />
+      <updated>1626289798072</updated>
+    </task>
+    <task id="LOCAL-00577" summary="edits">
+      <created>1626290080382</created>
+      <option name="number" value="00577" />
+      <option name="presentableId" value="LOCAL-00577" />
+      <option name="project" value="LOCAL" />
+      <updated>1626290080382</updated>
+    </task>
+    <option name="localTasksCounter" value="578" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -759,7 +758,6 @@
     <MESSAGE value="search" />
     <MESSAGE value="images" />
     <MESSAGE value="price" />
-    <MESSAGE value="edits" />
     <MESSAGE value="licence pdf" />
     <MESSAGE value="about pdf" />
     <MESSAGE value="٢١-٦" />
@@ -773,7 +771,8 @@
     <MESSAGE value="routes" />
     <MESSAGE value="tax" />
     <MESSAGE value="offers in purchasing power" />
-    <option name="LAST_COMMIT_MESSAGE" value="offers in purchasing power" />
+    <MESSAGE value="edits" />
+    <option name="LAST_COMMIT_MESSAGE" value="edits" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

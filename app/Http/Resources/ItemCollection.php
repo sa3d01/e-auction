@@ -61,7 +61,7 @@ class ItemCollection extends ResourceCollection
                     $features=$auction_item->auctionTypeFeatures(auth()->user()->id);
                     $soon_winner=AuctionUser::where('item_id',$obj->id)->latest()->value('user_id');
                     if ($soon_winner){
-                        if ($soon_winner==\request()->user()->id){
+                        if ($soon_winner==\request()->user()->id && $auction_item->item->status!='expired'){
                             $win=true;
                         }
                     }
