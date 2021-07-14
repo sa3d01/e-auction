@@ -68,6 +68,13 @@ class AuctionController extends MasterController
         if (gettype($request['items']) == 'string') {
             $data['items'] = explode(',', $request['items']);
         }
+        $q_items=Item::query();
+        $q_items = $q_items->where(function($query) {
+            $query->where('status','delivered');
+        })->pluck('id');
+        if (!in_array($q_items,$data['items'])){
+            return redirect()->back()->withErrors('قم بتحديث الصفحه');
+        }
         $auction = $this->model->create($data);
         $this->auction_items($auction);
         $push = new PushNotification('fcm');
