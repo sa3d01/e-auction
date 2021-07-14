@@ -596,7 +596,7 @@ class ItemController extends MasterController
         foreach (Item::all() as $item) {
             $auction_item = AuctionItem::where('item_id', $item->id)->latest()->first();
             if ($auction_item){
-                if ($auction_item->more_details['status']=='expired') {
+                if ($auction_item->item->status=='expired') {
                     $ids[]=$item->id;
                 }
             }

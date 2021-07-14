@@ -247,6 +247,11 @@ class NegotiationController extends MasterController
                 'status' => 'expired',
                 'reason' => 'resale'
             ]);
+            $auction_item->update([
+               'more_details'=>[
+                   'status'=>'expired'
+               ]
+            ]);
             $refused_offer->delete();
         }
         return $this->sendResponse('تمت العملية بنجاح');
