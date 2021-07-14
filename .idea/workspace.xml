@@ -19,7 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="delete offers" />
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="sms">
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/paidItemCollection.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/paidItemCollection.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -379,14 +381,7 @@
       <workItem from="1626210161018" duration="2448000" />
       <workItem from="1626264244592" duration="1129000" />
       <workItem from="1626265933751" duration="87000" />
-      <workItem from="1626287099863" duration="5986000" />
-    </task>
-    <task id="LOCAL-00532" summary="dash">
-      <created>1621948562063</created>
-      <option name="number" value="00532" />
-      <option name="presentableId" value="LOCAL-00532" />
-      <option name="project" value="LOCAL" />
-      <updated>1621948562063</updated>
+      <workItem from="1626287099863" duration="6790000" />
     </task>
     <task id="LOCAL-00533" summary="item index">
       <created>1621950845707</created>
@@ -724,7 +719,14 @@
       <option name="project" value="LOCAL" />
       <updated>1626293018713</updated>
     </task>
-    <option name="localTasksCounter" value="581" />
+    <task id="LOCAL-00581" summary="sms">
+      <created>1626293474870</created>
+      <option name="number" value="00581" />
+      <option name="presentableId" value="LOCAL-00581" />
+      <option name="project" value="LOCAL" />
+      <updated>1626293474870</updated>
+    </task>
+    <option name="localTasksCounter" value="582" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -744,7 +746,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="wallet" />
     <MESSAGE value="banks" />
     <MESSAGE value="landing page" />
     <MESSAGE value="dash" />
@@ -769,7 +770,8 @@
     <MESSAGE value="offers in purchasing power" />
     <MESSAGE value="edits" />
     <MESSAGE value="delete offers" />
-    <option name="LAST_COMMIT_MESSAGE" value="delete offers" />
+    <MESSAGE value="sms" />
+    <option name="LAST_COMMIT_MESSAGE" value="sms" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

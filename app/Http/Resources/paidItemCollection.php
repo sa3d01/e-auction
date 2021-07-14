@@ -56,7 +56,7 @@ class paidItemCollection extends ResourceCollection
                 }
             }elseif ($features['status']=='delivered'){
                 $arr['is_paid']=true;
-                $arr['status_text']='تم التسليم';
+                $arr['status_text']='تم الدفع';
             }
             $arr['auction_type']= $obj->auction_type->name[$this->lang()];
             $arr['start_date']= $auction_item->auction->start_date;
