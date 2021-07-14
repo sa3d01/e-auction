@@ -22,7 +22,7 @@
                     <div class="user-profile compact">
                         @php
                         try {
-                            $single_image=$row->images[0];
+                            $single_image='$row->images[0]';
                          }catch (\Exception $e){
                             $single_image='';
                          }
