@@ -21,8 +21,8 @@
                 <div class="col-sm-5">
                     <div class="user-profile compact">
                         @php
-                        if (is_array($row->images)){
-                            if (count($row->images)>0){
+                        if (is_array($row->imagesArray())){
+                            if (count($row->imagesArray())>0){
                               $single_image=$row->images[0];
                             }else{
                                 $single_image='';
