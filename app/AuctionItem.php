@@ -42,6 +42,10 @@ class AuctionItem extends Model
             if ($now->between($start_auction, $end_date)) {
                 $arr['live'] = true;
                 $arr['status'] = 'live';
+                $this_offers=Offer::where('auction_item_id',$this->id)->get();
+                foreach ($this_offers as $this_offer){
+                    $this_offer->delete();
+                }
             }
             if ($this->item->auction_type_id == 4) {
                 //البيع المباشر
