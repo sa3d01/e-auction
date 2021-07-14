@@ -71,9 +71,11 @@ class AuctionController extends MasterController
         $q_items=Item::query();
         $q_items = $q_items->where(function($query) {
             $query->where('status','delivered');
-        })->pluck('id');
-        if (!in_array($q_items,$data['items'])){
-            return redirect()->back()->withErrors('قم بتحديث الصفحه');
+        })->pluck('id')->toArray();
+        foreach ($data['items'] as $datum){
+            if (!in_array($datum,$q_items)){
+                return redirect()->back()->withErrors('قم بتحديث الصفحه');
+            }
         }
         $auction = $this->model->create($data);
         $this->auction_items($auction);
