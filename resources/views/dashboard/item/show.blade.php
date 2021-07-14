@@ -20,7 +20,14 @@
 {{--                first box--}}
                 <div class="col-sm-5">
                     <div class="user-profile compact">
-                        <div class="up-head-w" style="background-image:url({{$row->images[0]}})">
+                        @php
+                        try {
+                            $single_image=$row->images[0];
+                         }catch (\Exception $e){
+                            $single_image='';
+                         }
+                        @endphp
+                        <div class="up-head-w" style="background-image:url({{$single_image}})">
                             <div class="up-main-info">
                                 <h2 class="up-header">
                                     {{$row->name}}
