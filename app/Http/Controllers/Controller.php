@@ -92,15 +92,17 @@ class Controller extends BaseController
                     if ($auction_item->item->price <= $auction_item->price)
                     {
                         $latest_auction_user = AuctionUser::where('item_id', $auction_item->item_id)->latest()->first();
-                        //winner
-                        $auction_item_data=$this->pay($auction_item,$latest_auction_user,$latest_auction_user->charge_price,$auction_item->price,'achieve_top_requested');
-                        $auction_item->update($auction_item_data);
-                        $this->base_notify($winner_title, $latest_auction_user->user_id, $auction_item->item_id,'clickable');
-                        //owner
-                        $this->editWallet($latest_auction_user->item->user,$auction_item->price);
-                        $this->base_notify($owner_paid_title, $auction_item->item->user_id, $auction_item->item_id);
-                        $this->notify_admin($admin_paid_title, $auction_item);
-                        $this->expire_offers(Offer::where('auction_item_id',$auction_item->id)->get());
+                        if ($latest_auction_user){
+                            //winner
+                            $auction_item_data=$this->pay($auction_item,$latest_auction_user,$latest_auction_user->charge_price,$auction_item->price,'achieve_top_requested');
+                            $auction_item->update($auction_item_data);
+                            $this->base_notify($winner_title, $latest_auction_user->user_id, $auction_item->item_id,'clickable');
+                            //owner
+                            $this->editWallet($latest_auction_user->item->user,$auction_item->price);
+                            $this->base_notify($owner_paid_title, $auction_item->item->user_id, $auction_item->item_id);
+                            $this->notify_admin($admin_paid_title, $auction_item);
+                            $this->expire_offers(Offer::where('auction_item_id',$auction_item->id)->get());
+                        }
                     }elseif ($soon_winner) {
                         $this->auction_item_update($auction_item,'negotiation');
                         $this->autoSendOffer($auction_item);
