@@ -86,7 +86,11 @@ class Item extends Model
         $images=json_decode($this->imagesArray());
         $arr_images=[];
         foreach ($images as $image){
-            $arr_images[]="<img style='pointer-events: none;max-height: 100px;max-width: 100px;border-radius: 10px;' src='$image'>";
+            try {
+                $arr_images[]="<img style='pointer-events: none;max-height: 100px;max-width: 100px;border-radius: 10px;' src='$image'>";
+            }catch (\Exception $e){
+
+            }
         }
         $string_images=implode("'\'",$arr_images);
         return"<a data-id='$this->id' style='cursor: pointer' data-toggle='modal' data-target='#uploadImagesModal-$this->id' class='images nav-link'>$string_images</a>";
