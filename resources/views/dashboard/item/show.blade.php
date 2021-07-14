@@ -21,11 +21,11 @@
                 <div class="col-sm-5">
                     <div class="user-profile compact">
                         @php
-                        try {
-                            $single_image='$row->images[0]';
-                         }catch (\Exception $e){
+                        if (count($row->images)>0){
+                            $single_image=$row->images[0];
+                        }else{
                             $single_image='';
-                         }
+                        }
                         @endphp
                         <div class="up-head-w" style="background-image:url({{$single_image}})">
                             <div class="up-main-info">
