@@ -91,11 +91,11 @@ class Controller extends BaseController
                 if ($auction_item->item->auction_type_id==4) {
                     if ($auction_item->item->price <= $auction_item->price)
                     {
-                        $this->base_notify($winner_title, $soon_winner->user_id, $auction_item->item_id,'clickable');
                         $latest_auction_user = AuctionUser::where('item_id', $auction_item->item_id)->latest()->first();
                         //winner
                         $auction_item_data=$this->pay($auction_item,$latest_auction_user,$latest_auction_user->charge_price,$auction_item->price,'achieve_top_requested');
                         $auction_item->update($auction_item_data);
+                        $this->base_notify($winner_title, $latest_auction_user->user_id, $auction_item->item_id,'clickable');
                         //owner
                         $this->editWallet($latest_auction_user->item->user,$auction_item->price);
                         $this->base_notify($owner_paid_title, $auction_item->item->user_id, $auction_item->item_id);
