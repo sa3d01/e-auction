@@ -81,9 +81,9 @@ class UserController extends MasterController
 //        if ($email) {
 //            //$this->sendToMail($email, $activation_code);
 //        }
-//        if ($phone) {
-//            $this->sendToPhone($phone, $activation_code);
-//        }
+        if ($phone) {
+            $this->sendToPhone($phone, $activation_code);
+        }
     }
 
     function sendToMail($email, $activation_code)
@@ -108,9 +108,9 @@ class UserController extends MasterController
     function sendToPhone($phone, $activation_code)
     {
         $client = $this->buildHttpClient();
-        $response = $client->request('POST', 'instance300985/sendMessage?token=4yzckhnltxq5m7g3', [
+        $response = $client->request('POST', 'instance304158/sendMessage?token=17u577kh4wcj4cjg', [
             'query' => [
-                'token' => '4yzckhnltxq5m7g3',
+                'token' => '17u577kh4wcj4cjg',
                 'phone' => substr($phone, 1),
                 'body' => "E-Auction verification code is '" . $activation_code . "'",
             ]
