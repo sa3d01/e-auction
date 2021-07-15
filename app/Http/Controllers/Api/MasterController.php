@@ -91,7 +91,7 @@ class MasterController extends Controller
         foreach ($other_auction_items as $other_auction_item)
         {
             if ($other_auction_item->id != $auction_item->id){
-                $offer_price=Offer::where(['sender_id'=>$user->id,'auction_item_id'=>$other_auction_item->id])->latest()->value('price');
+                $offer_price=Offer::where(['sender_id'=>$user->id,'auction_item_id'=>$other_auction_item->id,'status'=>'pending'])->latest()->value('price');
                 if ($offer_price){
                     $user_purchasing_power=$user_purchasing_power-$offer_price;
                 }
