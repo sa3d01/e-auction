@@ -24,7 +24,7 @@ class RefundController extends MasterController
         return View('dashboard.transfer.index', [
             'rows' => $rows,
             'type'=>'refund',
-            'title'=>'قائمة استرداد المستحقات',
+            'title'=>'قائمة طلبات استرداد المستحقات',
             'index_fields'=>['النوع' => 'type','المستخدم' => 'user_id','المبلغ' => 'money','تاريخ الارسال' => 'created_at'],
             'status'=>true,
         ]);

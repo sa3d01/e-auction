@@ -28,7 +28,11 @@
                                 @if(isset($status))
                                     <th>الحالة</th>
                                 @endif
-                                <th>الغرض من الحوالة</th>
+                                @if($type=='refund')
+                                    <th>نوع الاسترداد</th>
+                                @else
+                                    <th>الغرض من الحوالة</th>
+                                @endif
                                 <th>المزيد</th>
                             </tr>
                             </thead>
@@ -41,7 +45,11 @@
                                 @if(isset($status))
                                     <th>الحالة</th>
                                 @endif
-                                <th>الغرض من الحوالة</th>
+                                @if($type=='refund')
+                                    <th>نوع الاسترداد</th>
+                                @else
+                                    <th>الغرض من الحوالة</th>
+                                @endif
                                 <th>المزيد</th>
                             </tr>
                             </tfoot>
@@ -68,7 +76,19 @@
                                         {!!$row->getStatusIcon()!!}
                                     </td>
                                     <td>
-                                        {{$row->type=='wallet'?'دفع مستحقات':'دفع عربون'}}
+                                        @if($type=='refund')
+                                            @if($row->type=='refund_wallet')
+                                                استرداد مستحقات
+                                            @else
+                                                استرداد عربون
+                                            @endif
+                                        @else
+                                            @if($row->type=='wallet')
+                                                دفع مستحقات
+                                            @else
+                                                دفع عربون
+                                            @endif
+                                        @endif
                                     </td>
                                     <td>
                                         <div class=" row border-0">

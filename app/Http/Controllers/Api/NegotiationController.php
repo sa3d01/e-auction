@@ -95,7 +95,6 @@ class NegotiationController extends MasterController
                 }
             }
         }
-
         if ($request->has('offer_id') && $request['offer_id'] != null) {
             $latest_offer = Offer::find($request['offer_id']);
             if ($sender->id == $item->user_id) {
