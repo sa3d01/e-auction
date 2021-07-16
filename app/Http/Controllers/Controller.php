@@ -77,12 +77,12 @@ class Controller extends BaseController
             $admin_expired_title['en'] = 'auction expired on item id: ' . $auction_item->item_id;
             $admin_paid_title['ar'] = 'تم بيع السلعة رقم ' . $auction_item->item_id;
             $admin_paid_title['en'] = 'item paid ,id: ' . $auction_item->item_id;
-            $owner_expired_title['ar'] = 'حظ أوفر المره القادمه ! لم يتم المزايده من قبل أحد على مزادك رقم ' . $auction_item->item_id;
-            $owner_expired_title['en'] = 'no body bid on your item ,id: ' . $auction_item->item_id;
-            $owner_paid_title['ar'] = 'تهانينا اليك ! لقد تم بيع سلعتك بمزاد رقم ' . $auction_item->item_id;
-            $owner_paid_title['en'] = 'congratulation :) ,your item is paid ,id: ' . $auction_item->item_id;
-            $winner_title['ar'] = 'تهانينا اليك ! لقد فزت فى المزاد الذى قمت بالمشاركة به رقم ' . $auction_item->item_id;
-            $winner_title['en'] = 'congratulation :) ,you win in auction id: ' . $auction_item->item_id;
+            $owner_expired_title['ar'] = 'عميلنا العزيز, يؤسفنا عدم وجود مزايدات على مركبتكم رقم ' . $auction_item->item_id.'  يمكنكم سحب المركبة او إعادة جدولتها لمزاد اخر';
+            $owner_expired_title['en'] = 'Sorry, there are no bids on your vehicle #' . $auction_item->item_id.' You can either take it or reschedule it';
+            $owner_paid_title['ar'] = 'عميلنا العزيز, لقد تم بيع مركبتكم رقم  ' . $auction_item->item_id .' بنجاح! . يمكنكم رفع طلب مستحقات عبر المحفظة ';
+            $owner_paid_title['en'] = 'Congratulation ! you vehicle #' . $auction_item->item_id.'   has been sold. Check the wallet for outstanding balance';
+            $winner_title['ar'] = 'عميلنا العزيز, نبارك لكم الفوز بالمزاد رقم ' . $auction_item->item_id.'   يرجى الذهاب للمحفظة وسداد المستحقات ';
+            $winner_title['en'] = 'Congratulation ! you win the vehicle #' . $auction_item->item_id.'   . Please check the wallet to pay the outstanding balance';
             if ((Carbon::createFromTimestamp($auction_item->start_date) <= $now) && (Carbon::createFromTimestamp($auction_item->start_date)->addSeconds($auction_item->auction->duration) >= $now)) {
                 $this->auction_item_update($auction_item,'live');
                 $this->expire_offers(Offer::where('auction_item_id',$auction_item->id)->get());
@@ -338,8 +338,8 @@ class Controller extends BaseController
             'price' => $auction_item->price,
             'status' => 'pending'
         ]);
-        $title['ar'] = 'تم انتهاء المزاد على سلعتك رقم ' . $offer->auction_item->item_id . ' بسعر ' . $auction_item->price;
-        $title['en'] = 'auction expired on your item id:' . $offer->auction_item->item_id . ' price, ' . $auction_item->price;
+        $title['ar'] = 'تم إنتهاء المزاد رقم ' . $offer->auction_item->item_id .' .يرجى الذهاب لصفحة المفاوضات';
+        $title['en'] = 'Live auction #' . $offer->auction_item->item_id . 'is over ! Please go to the negotiation page ';
         $data = [];
         $data['title'] = $title;
         $data['note'] = $title;

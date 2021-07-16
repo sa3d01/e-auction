@@ -99,8 +99,8 @@ class MasterController extends Controller
         }
         //check
         if ($user_purchasing_power < $price){
-            $ar_msg='قوتك الشرائية لا تسمح بهذه الصفقه';
-            $en_msg=' your purchasing power doesnt match this auction';
+            $ar_msg='عذرا رصيدك لايكفي للمزايدة. يرجى شحن العربون';
+            $en_msg=' Sorry, your purchasing power is not enough to bid !';
             return $this->sendError($this->lang()=='ar'?$ar_msg:$en_msg);
         }
         if (Transfer::where(['user_id'=>$user->id,'type'=>'refund_purchasing_power','status'=>0])->first()){

@@ -125,7 +125,7 @@ class BidController extends MasterController
         }
         //store bid
         $this->completedBidOperations($auction_item,$request['charge_price'],$user,$request->input('finish_papers', 0));
-        return $this->sendError($this->lang()=='ar'?'تمت المزايدة بنجاح':'success bid :)');
+        return $this->sendError($this->lang()=='ar'?'تمت المزايدة بنجاح!':'Your bid has been accepted !');
     }
     function completedBidOperations($auction_item,$charge_price,$user,$finish_papers)
     {

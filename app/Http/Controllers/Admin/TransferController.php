@@ -86,13 +86,15 @@ class TransferController extends MasterController
                 }catch (\Exception $e){
 
                 }
-
+                $note['ar'] = 'تم إستلام المستحقات الخاصة بكم ! . شكرا لثقتكم ';
+                $note['en'] = 'Your outstanding balance has been cleared !. Thanks ';
                 $this->editWallet($row->user,$row->money);
             }else{
                 $row->user->update(['purchasing_power' =>$row->user->purchasing_power+ $row->money]);
+                $note['ar'] = 'تم قبول طلب شحن العربون بنجاح ! . يمكنكم البدأ بالمزايدة';
+                $note['en'] = 'Your deposit has been approved !. You can start bidding';
             }
-            $note['ar'] = 'تم الموافقة على تحويلك البنكى بنجاح :)';
-            $note['en'] = 'your transfer is accepted from admin  ..';
+
             $this->notify($row->user, $note);
         }
         $row->refresh();
@@ -116,8 +118,13 @@ class TransferController extends MasterController
                 ]
             );
             $user=User::find($row->user_id);
-            $note['ar']='تم رفض تحويلك البنكى للسبب التالى : '.$request['reject_reason'];
-            $note['en'] = 'your transfer is rejected from admin  ..'.$request['reject_reason'];
+            if ($row->type=='purchasing_power'){
+                $note['ar']='تم رفض طلب شحن العربون وذلك للأسباب التالية: '.$request['reject_reason'];
+                $note['en'] = 'Your request to put a deposit has been declined for this reason: '.$request['reject_reason'];
+            }else{
+                $note['ar']='تم رفض طلب دفع المستحقات للإسباب التالية: '.$request['reject_reason'];
+                $note['en'] = 'your request to pay your outstanding balance is declined for this reason: '.$request['reject_reason'];
+            }
             $this->notify($user, $note);
         }
         $row->refresh();

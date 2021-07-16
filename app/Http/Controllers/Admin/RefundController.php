@@ -50,13 +50,17 @@ class RefundController extends MasterController
                 ]
             );
             $user=User::find($row->user_id);
-            $note['ar'] = 'تم الموافقة على طلب استرداد مستحقاتك بنجاح :)';
-            $note['en'] = 'your refund order is accepted from admin  ..';
+            $note['ar'] = 'تم تحويل مستحقاتك لحسابك البنكي بنجاح ! ';
+            $note['en'] = 'Your dues has been wired to your bank account successfully !';
             if ($row->type=='refund_purchasing_power'){
+                $note['ar'] = 'تم تحويل عربونك لحسابك البنكي بنجاح ! ';
+                $note['en'] = 'Your deposit has been wired to your bank account successfully !';
                 $user->update([
                     'purchasing_power'=>0
                 ]);
             }elseif ($row->type=='refund_wallet'){
+                $note['ar'] = 'تم تحويل مستحقاتك لحسابك البنكي بنجاح ! ';
+                $note['en'] = 'Your dues has been wired to your bank account successfully !';
                 $user->update([
                     'wallet'=>0
                 ]);
@@ -84,7 +88,15 @@ class RefundController extends MasterController
             );
             $user=User::find($row->user_id);
             $note['ar']='تم رفض طلب استرداد مستحقاتك للسبب التالى : '.$request['reject_reason'];
-            $note['en'] = 'your refund order is rejected from admin  ..'.$request['reject_reason'];
+            $note['en'] = 'your refund dues is rejected from admin  ..'.$request['reject_reason'];
+            if ($row->type=='refund_purchasing_power'){
+                $note['ar']='تم رفض طلب استرداد عربونك للسبب التالى : '.$request['reject_reason'];
+                $note['en'] = 'your refund deposit is rejected from admin  ..'.$request['reject_reason'];
+            }elseif ($row->type=='refund_wallet'){
+                $note['ar']='تم رفض طلب استرداد مستحقاتك للسبب التالى : '.$request['reject_reason'];
+                $note['en'] = 'your refund dues is rejected from admin  ..'.$request['reject_reason'];
+            }
+
             $this->notify($user, $note);
         }
         $row->refresh();

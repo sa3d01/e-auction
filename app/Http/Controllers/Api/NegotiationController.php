@@ -177,10 +177,10 @@ class NegotiationController extends MasterController
         $auction_item->update($auction_item_data);
         //owner
         $this->editWallet($auction_user->item->user, $auction_item->price);
-        $winner_title['ar'] = 'تهانينا اليك ! لقد فزت فى المزاد الذى قمت بالمشاركة به رقم ' . $auction_item->item_id;
-        $winner_title['en'] = 'congratulations , you are the winner at auction id:' . $auction_item->item_id;
-        $owner_title['ar'] = 'تهانينا اليك ! لقد تم بيع سلعتك بمزاد رقم ' . $auction_item->item_id;
-        $owner_title['en'] = 'congratulations , your item is paid at auction id: ' . $auction_item->item_id;
+        $winner_title['ar'] = 'تهانينا ! لقد تمت الموافقة على العرض المقدم  للمركبة رقم #' . $auction_item->item_id.'  . يرجى الذهاب للمحفطة لسداد المستحقات ';
+        $winner_title['en'] = 'Congratulation ! the offer on vehicle #' . $auction_item->item_id.'   has been accepted. Please check the wallet for outstanding balance';
+        $owner_title['ar'] = 'عميلنا العزيز, لقد تم بيع مركبتكم رقم ' . $auction_item->item_id. ' بنجاح! . يمكنكم رفع طلب مستحقات عبر المحفظة ';
+        $owner_title['en'] = 'Congratulation ! you vehicle #' . $auction_item->item_id.'   has been sold. Check the wallet for outstanding balance';
         $admin_title['ar'] = 'تم بيع المركبة رقم ' . $auction_item->item_id;
         $this->base_notify($winner_title, $auction_user_id, $auction_item->item_id);
         $this->base_notify($owner_title, $auction_item->item->user_id, $auction_item->item_id);
@@ -189,7 +189,7 @@ class NegotiationController extends MasterController
         foreach ($offers as $offer) {
             $offer->delete();
         }
-        return $this->sendResponse('تمت العملية بنجاح');
+        return $this->sendError('تمت العملية بنجاح');
     }
 
     public function refuseOffer($item_id, Request $request): object
@@ -201,6 +201,9 @@ class NegotiationController extends MasterController
         if ($user->id != $item->user_id) {
             $opposite_offer = Offer::where(['auction_item_id' => $auction_item->id, 'sender_id' => $user->id, 'receiver_id' => $refused_offer->sender_id])->where('status', 'opposite')->latest()->first();
             if ($opposite_offer) {
+                if ($this->validate_purchasing_power($user, $opposite_offer->price, $auction_item) !== true) {
+                    return $this->validate_purchasing_power($user, $opposite_offer->price, $auction_item);
+                }
                 $opposite_offer->update([
                     'status' => 'pending'
                 ]);
@@ -214,8 +217,8 @@ class NegotiationController extends MasterController
         } else {
             $receiver = User::find($refused_offer->sender_id);
         }
-        $title['ar'] = 'لقد تم رفض عرض السعر المقدم من قبلك على المزاد رقم ' . $auction_item->item_id;
-        $title['en'] = 'your offer is rejected on auction id: ' . $auction_item->item_id;
+        $title['ar'] = 'لقد تم رفض عرضك المقدم للمركبة رقم #' . $auction_item->item_id;
+        $title['en'] = 'Your offer for vehicle #' . $auction_item->item_id.' has been declined ';
         $data = [];
         $data['title'] = $title;
         $data['note'] = $title;
@@ -319,8 +322,8 @@ class NegotiationController extends MasterController
 
     public function new_offer_notify($offer)
     {
-        $title['ar'] = 'تم إرسال عرض اليك على المزاد رقم ' . $offer->auction_item->item_id;
-        $title['en'] = 'you have new offer on auction id : ' . $offer->auction_item->item_id;
+        $title['ar'] = 'لديك عرض على المركبة رقم #' . $offer->auction_item->item_id.'   يرجى مراجعتها في صفحة المفاوضات';
+        $title['en'] = 'You have an offer on vehicle #' . $offer->auction_item->item_id.'. Please check negotiation page to reply ';
         $data = [];
         $data['title'] = $title;
         $data['note'] = $title;

@@ -31,7 +31,7 @@ class ItemController extends MasterController
             'type' => 'item',
             'action' => 'admin.item.store',
             'title' => 'أضافة سلعة',
-            'create_fields'=>['صور المركبة'=>'images','عدد السلندرات'=>'sunder_count','الممشى'=>'kms_count'],
+            'create_fields'=>['صور المركبة'=>'images',' حجم المكينة'=>'sunder_count','عدد الكيلومترات'=>'kms_count'],
             'images'=>true,
             'paper_image'=>true,
         ]);
@@ -355,8 +355,8 @@ class ItemController extends MasterController
         $item->update([
             'status'=>'delivered'
         ]);
-        $note['ar']='تم تأكيد استلام مركبتك الى ساحة الحفظ من قبل الادارة ..';
-        $note['en']='your added item is delivered to admin garage..';
+        $note['ar']='تم إستلام مركبتم من قبل إدارة ساحة الحفظ وجاري إعدادها للمزاد ..';
+        $note['en']='Your vehicle was received by our team and being prepeared for auction..';
         $this->itemStatusNotify($item,$note);
         $item->refresh();
         return redirect()->back()->with('updated');
@@ -389,33 +389,10 @@ class ItemController extends MasterController
             'admin_id'=>Auth::user()->id,
         ];
         $more_details['history']=$history;
-//        $add_item_tax=Setting::first()->value('add_item_tax');
-//        if ($add_item_tax < $item->user->wallet){
-//            $this->itemTaxPay($item);
-//        }
-//        if ($item->pay_status==1){
-//            $note['ar']='تم قبول اضافة منتجك من قبل الادارة ..';
-//            $note['en']='your added item is accepted from admin  ..';
-//        }else{
-//            $note['ar']='تم قبول اضافة منتجك من قبل الادارة ..ويرجى شحن محفظتك قريبا لتحصيل ضريبة الاضافة لمزاد';
-//            $note['en']='your added item is accepted from admin..please charge your wallet to add to auction';
-//        }
-        $note['ar']='تم قبول اضافة منتجك من قبل الادارة ..';
-        $note['en']='your added item is accepted from admin  ..';
+        $note['ar']=' تمت الموافقة على طلب بيع مركبة. يرجى تسليمها لإدارة ساحة الحفظ  ..';
+        $note['en']='Vehicle Sale request is approved. Please deliver it to Warehouse  ..';
         $this->editWallet($item->user,-$request['shipping_price']);
         $more_details['shipping_price_status']='paid';
-
-//        if ($item->shipping_by=='app'){
-//            $more_details['shipping_price']=$request['shipping_price'];
-//            if ($request['shipping_price'] < $item->user->wallet){
-//                $this->walletPay($item->user,$request['shipping_price'],'shipping');
-//                $more_details['shipping_price_status']='paid';
-//            }else{
-//                $more_details['shipping_price_status']='pending';
-//                $note['ar']='تم قبول اضافة منتجك من قبل الادارة ..ويرجى شحن محفظتك قريبا لتحصيل مستحقات التطبيق المالية';
-//                $note['en']='your added item is accepted from admin..please charge your wallet ..';
-//            }
-//        }
         $item->update([
             'status'=>'accepted',
             'more_details'=>$more_details,
