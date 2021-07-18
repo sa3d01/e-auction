@@ -215,8 +215,12 @@
                 حاليًا انت جاهز للمزايدة ، حمل التطبيق و فالك التوفيق
             </h1>
             <div class="mt-5">
-                <img src="{{asset('images/google_play.png')}}" class="store" alt="">
-                <img src="{{asset('images/app-store.png')}}" class="store" alt="">
+                <a href="https://play.google.com/store/apps/details?id=com.rowad.mazadat" target="_blank">
+                    <img src="{{asset('images/google_play.png')}}" class="store" alt="">
+                </a>
+                <a href="https://apps.apple.com/app/e-auction/id1573749910" target="_blank">
+                    <img src="{{asset('images/app-store.png')}}" class="store" alt="">
+                </a>
             </div>
         </div>
     </div>
