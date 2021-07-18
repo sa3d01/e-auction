@@ -208,7 +208,7 @@
                 },
                 allowOutsideClick: () => !Swal.isLoading()
             }).then(() => {
-                location.href = '/e-auction/public/admin/transfer';
+                location.href = '/admin/transfer';
             })
         });
         $(document).on('click', '#accept_transfer', function (e) {
@@ -232,7 +232,7 @@
                 },
                 allowOutsideClick: () => !Swal.isLoading()
             }).then(() => {
-                window.location.href = '/e-auction/public/admin/transfer';
+                window.location.href = '/admin/transfer';
             })
         });
         $(document).on('click', '#reject_refund', function (e) {
@@ -253,7 +253,7 @@
                 },
                 allowOutsideClick: () => !Swal.isLoading()
             }).then(() => {
-                location.href = '/e-auction/public/admin/refund';
+                location.href = '/admin/refund';
             })
         });
         $(document).on('click', '#accept_refund', function (e) {
@@ -277,7 +277,7 @@
                 },
                 allowOutsideClick: () => !Swal.isLoading()
             }).then(() => {
-                window.location.href = '/e-auction/public/admin/refund';
+                window.location.href = '/admin/refund';
             })
         });
     </script>
