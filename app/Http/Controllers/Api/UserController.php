@@ -107,15 +107,19 @@ class UserController extends MasterController
 
     function sendToPhone($phone, $activation_code)
     {
-        $client = $this->buildHttpClient();
-        $response = $client->request('POST', 'instance304158/sendMessage?token=17u577kh4wcj4cjg', [
-            'query' => [
-                'token' => '17u577kh4wcj4cjg',
-                'phone' => substr($phone, 1),
-                'body' => "E-Auction verification code is '" . $activation_code . "'",
-            ]
-        ]);
-        $array = json_decode($response->getBody(), true);
+        try {
+            $client = $this->buildHttpClient();
+            $response = $client->request('POST', 'instance304158/sendMessage?token=17u577kh4wcj4cjg', [
+                'query' => [
+                    'token' => '17u577kh4wcj4cjg',
+                    'phone' => substr($phone, 1),
+                    'body' => "E-Auction verification code is '" . $activation_code . "'",
+                ]
+            ]);
+            $array = json_decode($response->getBody(), true);
+        }catch (\Exception $e){
+
+        }
     }
 
     public function verifyUser(VerifyPhoneRequest $request)
