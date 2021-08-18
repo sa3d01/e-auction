@@ -191,7 +191,7 @@
                                                 <div class="col-sm-12" id="{{$value}}">
                                                     <div class="form-group row hidden">
                                                         <label for="{{$value}}" class="col-2 col-form-label">{{$key}}</label>
-                                                        <input hidden disabled class="upload form-control" id="itemImages" type="file" data-images="{{$row->imagesArray()}}" accept="image/*" name="images[]" multiple />
+                                                        <input class="upload form-control" id="itemImages" type="file" data-images="{{$row->imagesArray()}}" accept="image/*" name="images[]" multiple />
                                                     </div>
                                                 </div>
                                                 <br/>
@@ -340,10 +340,16 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
+            $("#uploadFile").change(function () {
+                $('#image_preview').html("");
+                var total_file = document.getElementById("uploadFile").files.length;
+                for (var i = 0; i < total_file; i++) {
+                    $('#image_preview').append("<img style='pointer-events: none;max-height: 100px;max-width: 100px;height: 100px;border-radius: 10px;margin: 5px;' src='" + URL.createObjectURL(event.target.files[i]) + "'>");
+                }
+            });
             let files=JSON.parse($("#itemImages").attr('data-images'));
             for(var i=0;i<files.length;i++)
             {
-                console.log(files[i])
                 $('#image_preview').append("<img style='pointer-events: none;max-height: 100px;max-width: 100px;margin-right: 5px;margin-left: 5px;border-radius: 10px;' src='"+files[i]+"'>");
             }
         });
