@@ -168,11 +168,6 @@ class ItemController extends MasterController
         $fields=[
             'الرقم التسلسلى' => 'id',
             'تاريخ الطلب'=>'created_at',
-            'صور المركباتة'=>'images',
-            'عدد السندرات'=>'sunder_count',
-            'الممشى'=>'kms_count',
-            'صورة الاستمارة'=>'paper_image',
-            'السعر'=>'price',
         ];
         return View('dashboard.item.show', [
             'row' => $row,
@@ -185,43 +180,7 @@ class ItemController extends MasterController
                     'name'=>'user',
                     'title'=>'المستخدم',
                     'route'=>route('admin.user.show',[$row->user_id])
-                ],
-                [
-                    'name'=>'auction_type',
-                    'title'=>'نوع المزايدة',
-                ],
-                [
-                    'name'=>'mark',
-                    'title'=>'نوع المركبة',
-                ],
-                [
-                    'name'=>'model',
-                    'title'=>'موديل المركبة',
-                ],
-                [
-                    'name'=>'color',
-                    'title'=>'لون المركبة',
-                ],
-                [
-                    'name'=>'item_status',
-                    'title'=>'حالة المركبة',
-                ],
-                [
-                    'name'=>'fetes',
-                    'title'=>'نوع ناقل الحركة',
-                ],
-                [
-                    'name'=>'scan_status',
-                    'title'=>'حالة الفحص',
-                ],
-                [
-                    'name'=>'paper_status',
-                    'title'=>'حالة الاستمارة',
-                ],
-                [
-                    'name'=>'city',
-                    'title'=>'المدينة',
-                ],
+                ]
             ],
             'location'=>true,
             'only_show'=>true,

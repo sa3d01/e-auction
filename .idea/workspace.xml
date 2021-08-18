@@ -19,11 +19,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="edits">
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="18-8">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/item/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/item/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/item/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/item/show.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -394,21 +391,7 @@
       <workItem from="1627326860937" duration="2163000" />
       <workItem from="1628447859757" duration="608000" />
       <workItem from="1628453590278" duration="607000" />
-      <workItem from="1629219483406" duration="2380000" />
-    </task>
-    <task id="LOCAL-00548" summary="transfer">
-      <created>1622378397178</created>
-      <option name="number" value="00548" />
-      <option name="presentableId" value="LOCAL-00548" />
-      <option name="project" value="LOCAL" />
-      <updated>1622378397178</updated>
-    </task>
-    <task id="LOCAL-00549" summary="transfer">
-      <created>1622379693893</created>
-      <option name="number" value="00549" />
-      <option name="presentableId" value="LOCAL-00549" />
-      <option name="project" value="LOCAL" />
-      <updated>1622379693893</updated>
+      <workItem from="1629219483406" duration="3191000" />
     </task>
     <task id="LOCAL-00550" summary="transfer">
       <created>1622379929950</created>
@@ -739,7 +722,21 @@
       <option name="project" value="LOCAL" />
       <updated>1626614009215</updated>
     </task>
-    <option name="localTasksCounter" value="597" />
+    <task id="LOCAL-00597" summary="18-8">
+      <created>1629254609274</created>
+      <option name="number" value="00597" />
+      <option name="presentableId" value="LOCAL-00597" />
+      <option name="project" value="LOCAL" />
+      <updated>1629254609274</updated>
+    </task>
+    <task id="LOCAL-00598" summary="18-8">
+      <created>1629254935220</created>
+      <option name="number" value="00598" />
+      <option name="presentableId" value="LOCAL-00598" />
+      <option name="project" value="LOCAL" />
+      <updated>1629254935220</updated>
+    </task>
+    <option name="localTasksCounter" value="599" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -759,7 +756,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="item index" />
     <MESSAGE value="transfer" />
     <MESSAGE value="risk" />
     <MESSAGE value="search" />
@@ -784,7 +780,8 @@
     <MESSAGE value="negotiation" />
     <MESSAGE value="transfers" />
     <MESSAGE value="edits" />
-    <option name="LAST_COMMIT_MESSAGE" value="edits" />
+    <MESSAGE value="18-8" />
+    <option name="LAST_COMMIT_MESSAGE" value="18-8" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
