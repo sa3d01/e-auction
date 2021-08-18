@@ -250,6 +250,43 @@
                                                 </div>
                                                 <br>
                                             @endif
+                                            <div class="col-sm-12" id="images">
+                                                <div class="form-group row">
+                                                    <label for="images" class="col-form-label">صور المركبة</label>
+                                                    <input required class="upload form-control" id="uploadFile"
+                                                           type="file" accept="image/*" name="images[]" multiple/>
+                                                </div>
+                                            </div>
+                                            <br/>
+                                            <div class="form-group" id="image_preview"></div>
+                                            <div class="col-sm-12">
+                                                <div class="white-box">
+                                                    <label for="input-file-now-custom-1">صورة الاستمارة</label>
+                                                    <span style="color: red">*</span>
+                                                    <input name="paper_image" type="file" id="input-file-now-custom-1 image"
+                                                           class="dropify"
+                                                           data-default-file="{{$row->paper_image}}"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group" id="sunder_count">
+                                                    <label for=""> حجم الماكينة</label>
+                                                    <input required value="{{$row->sunder_count}}" name="sunder_count" class="form-control" type="number"
+                                                           min="1">
+                                                    <div
+                                                        class="help-block form-text with-errors form-control-feedback"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="form-group" id="kms_count">
+                                                    <label for="">عدد الكيلومترات</label>
+                                                    <input required value="{{$row->kms_count}}" name="kms_count" class="form-control" type="number"
+                                                           min="1">
+                                                    <div
+                                                        class="help-block form-text with-errors form-control-feedback"></div>
+                                                </div>
+                                            </div>
+
                                     </div>
                                 </fieldset>
                         </div>
