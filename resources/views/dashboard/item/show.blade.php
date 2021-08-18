@@ -187,23 +187,7 @@
                                 <fieldset class="form-group">
                                     <div class="row">
                                         @foreach($show_fields as $key=>$value)
-                                            @if($value=='images')
-                                                <div class="col-sm-12" id="{{$value}}">
-                                                    <div class="form-group row hidden">
-                                                        <label for="{{$value}}" class="col-2 col-form-label">{{$key}}</label>
-                                                        <input class="upload form-control" id="itemImages" type="file" data-images="{{$row->imagesArray()}}" accept="image/*" name="images[]" multiple />
-                                                    </div>
-                                                </div>
-                                                <br/>
-                                                <div class="form-group" id="image_preview"></div>
-                                            @elseif($value== 'paper_image')
-                                                <div class="col-sm-12">
-                                                    <div class="form-group" id="{{$value}}">
-                                                        <label for=""> {{$key}}</label>
-                                                        <img src="{{$row->$value}}">
-                                                    </div>
-                                                </div>
-                                            @elseif($value== 'created_at')
+                                            @if($value== 'created_at')
                                                 <div class="col-sm-12">
                                                     <div class="form-group" id="{{$value}}">
                                                         <label for=""> {{$key}}</label>
@@ -255,6 +239,8 @@
                                             <div class="col-sm-12" id="images">
                                                 <div class="form-group row">
                                                     <label for="images" class="col-form-label">صور المركبة</label>
+                                                    <div id="itemImages" data-images="{{$row->imagesArray()}}">
+                                                    </div>
                                                     <input required class="upload form-control" id="uploadFile"
                                                            type="file" accept="image/*" name="images[]" multiple/>
                                                 </div>
