@@ -189,16 +189,18 @@
                                                 <div class="col-sm-12" id="{{$value}}">
                                                     <div class="form-group row hidden">
                                                         <label for="{{$value}}" class="col-2 col-form-label">{{$key}}</label>
-                                                        <input hidden disabled class="upload form-control" id="itemImages" type="file" data-images="{{$row->imagesArray()}}" accept="image/*" name="images[]" multiple />
+                                                        <input class="upload form-control" id="uploadFile" type="file" data-images="{{$row->imagesArray()}}" accept="image/*" name="images[]" multiple />
                                                     </div>
                                                 </div>
                                                 <br/>
                                                 <div class="form-group" id="image_preview"></div>
                                             @elseif($value== 'paper_image')
                                                 <div class="col-sm-12">
-                                                    <div class="form-group" id="{{$value}}">
-                                                        <label for=""> {{$key}}</label>
-                                                        <img src="{{$row->$value}}">
+                                                    <div class="white-box">
+                                                        <label for="input-file-now-custom-1">صورة الاستمارة</label>
+                                                        <input name="paper_image" type="file" id="input-file-now-custom-1 image"
+                                                               class="dropify"
+                                                               data-default-file="{{$row->$value}}"/>
                                                     </div>
                                                 </div>
                                             @elseif($value== 'created_at')
@@ -211,7 +213,8 @@
                                             @else
                                                 <div class="col-sm-12">
                                                     <div class="form-group" id="{{$value}}">
-                                                        <label for=""> {{$key}}</label><input disabled name="{{$value}}" class="form-control" value="{{$row->$value}}" type="text">
+                                                        <label for=""> {{$key}}</label>
+                                                        <input name="{{$value}}" class="form-control" value="{{$row->$value}}" type="text">
                                                         <div class="help-block form-text with-errors form-control-feedback"></div>
                                                     </div>
                                                 </div>
@@ -232,10 +235,10 @@
                                                             <label for=""> {{$select['title']}} </label>
                                                             @if(array_key_exists("route",$select))
                                                                 <a href="{{$select['route']}}">
-                                                                    <input disabled value="{!!$row->$related_model?$row->$related_model->nameForSelect():""!!}" class="form-control" type="text">
+                                                                    <input value="{!!$row->$related_model?$row->$related_model->nameForSelect():""!!}" class="form-control" type="text">
                                                                 </a>
                                                             @else
-                                                                <input disabled value="{!!$row->$related_model?$row->$related_model->nameForSelect():""!!}" class="form-control" type="text">
+                                                                <input value="{!!$row->$related_model?$row->$related_model->nameForSelect():""!!}" class="form-control" type="text">
                                                             @endif
                                                         </div>
                                                     </div>
@@ -267,7 +270,6 @@
             let files=JSON.parse($("#itemImages").attr('data-images'));
             for(var i=0;i<files.length;i++)
             {
-                console.log(files[i])
                 $('#image_preview').append("<img style='pointer-events: none;max-height: 100px;max-width: 100px;margin-right: 5px;margin-left: 5px;border-radius: 10px;' src='"+files[i]+"'>");
             }
         });

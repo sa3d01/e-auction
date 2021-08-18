@@ -109,7 +109,7 @@
                                                 <label for="">سنة الصنع</label>
                                                 <span style="color: red">*</span>
                                                 <select id="year" name="year" class="form-control">
-                                                    @for($year=1980;$year<=2040;$year++)
+                                                    @for($year=1900;$year<=2040;$year++)
                                                         <option value="{{$year}}">
                                                             {{$year}}
                                                         </option>
