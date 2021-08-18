@@ -111,7 +111,11 @@ class ItemController extends MasterController
             }
             $data['images'] = $items_images;
         }
-
+        if ($request['auction_type_id']==3 || $request['auction_type_id']==4){
+            $data['price']=$request['price'];
+        }else{
+            $data['price']=null;
+        }
         $this->model->find($id)->update($data);
         return back()->with('updated', 'تم التعديل بنجاح');
     }
