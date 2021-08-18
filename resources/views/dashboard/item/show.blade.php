@@ -172,7 +172,10 @@
                 <div class="col-sm-7">
                     <div class="element-wrapper">
                         <div class="element-box">
-                                <div class="element-info">
+                        <form method="POST" action="{{route('admin.item.update',$row->id)}}" enctype="multipart/form-data" data-parsley-validate novalidate>
+                            @csrf
+                            @method('PUT')
+                            <div class="element-info">
                                     <div class="element-info-with-icon">
                                         <div class="element-info-icon">
                                             <div class="os-icon os-icon-wallet-loaded"></div>
@@ -467,6 +470,10 @@
 
                                     </div>
                                 </fieldset>
+                            <div class="form-buttons-w">
+                                <button class="btn btn-primary create-submit" type="submit"> تعديل</button>
+                            </div>
+                            {!! Form::close() !!}
                         </div>
                     </div>
                 </div>

@@ -19,10 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="18-8">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/item/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/item/show.blade.php" afterDir="false" />
-    </list>
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="18-8" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -393,14 +390,7 @@
       <workItem from="1628447859757" duration="608000" />
       <workItem from="1628453590278" duration="607000" />
       <workItem from="1629219483406" duration="4408000" />
-      <workItem from="1629309027260" duration="1878000" />
-    </task>
-    <task id="LOCAL-00556" summary="price">
-      <created>1622406090329</created>
-      <option name="number" value="00556" />
-      <option name="presentableId" value="LOCAL-00556" />
-      <option name="project" value="LOCAL" />
-      <updated>1622406090329</updated>
+      <workItem from="1629309027260" duration="2471000" />
     </task>
     <task id="LOCAL-00557" summary="edits">
       <created>1623951494595</created>
@@ -738,7 +728,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629328768147</updated>
     </task>
-    <option name="localTasksCounter" value="605" />
+    <task id="LOCAL-00605" summary="18-8">
+      <created>1629329676468</created>
+      <option name="number" value="00605" />
+      <option name="presentableId" value="LOCAL-00605" />
+      <option name="project" value="LOCAL" />
+      <updated>1629329676468</updated>
+    </task>
+    <option name="localTasksCounter" value="606" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
