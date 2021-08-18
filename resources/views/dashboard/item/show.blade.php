@@ -454,7 +454,7 @@
                                                 <div class="form-group">
                                                     <label for="">سعر المركبة</label>
                                                     <span style="color: red">*</span>
-                                                    <input name="price" class="form-control" type="number" min="1">
+                                                    <input name="price" value="{{$row->price}}" class="form-control" type="number" min="1">
                                                     <div
                                                         class="help-block form-text with-errors form-control-feedback"></div>
                                                 </div>
