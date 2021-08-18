@@ -92,7 +92,29 @@ class ItemController extends MasterController
         $item=$this->model->create($data);
         return redirect()->route('admin.item.status',['status'=>'accepted'])->with('created', 'تمت الاضافة بنجاح');
     }
+    public function update($id,Request $request)
+    {
+        $data=$request->all();
+        if($request['model_id']==null){
+            return redirect()->back()->withErrors(['تأكد من اختيار موديل المركبة..']);
+        }
+        $items_images=[];
+        if ($request->images){
+            foreach ($request->images as $image){
+                if ($image->getSize() > 4194304){
+                    return redirect()->back()->withErrors(['حجم الصورة كبير جدا..']);
+                }
+                $filename = Str::random(10) . '.' . $image->getClientOriginalExtension();
+                $image->move('media/images/item/', $filename);
+                $local_name=asset('media/images/item/').'/'.$filename;
+                $items_images[]=$local_name;
+            }
+            $data['images'] = $items_images;
+        }
 
+        $this->model->find($id)->update($data);
+        return back()->with('updated', 'تم التعديل بنجاح');
+    }
     public function items($status)
     {
         $rows=$this->model->where('status',$status)->latest()->get();

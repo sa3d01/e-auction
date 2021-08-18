@@ -473,7 +473,7 @@
                             <div class="form-buttons-w">
                                 <button class="btn btn-primary create-submit" type="submit"> تعديل</button>
                             </div>
-                            {!! Form::close() !!}
+                        </form>>
                         </div>
                     </div>
                 </div>
