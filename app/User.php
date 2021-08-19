@@ -53,4 +53,15 @@ class User extends Authenticatable implements JWTSubject
     public function profileAndPurchasingPowerIsFilled():bool{
         return $this->profileIsFilled() && $this->attributes['purchasing_power']!=0 ;
     }
+    protected function getImageAttribute()
+    {
+        $dest=$this->images_link;
+        try {
+            if ($this->attributes['image'])
+                return asset($dest). '/' . $this->attributes['image'];
+            return asset($dest) . '/auction.png';
+        }catch (\Exception $e){
+            return asset($dest) . '/auction.png';
+        }
+    }
 }

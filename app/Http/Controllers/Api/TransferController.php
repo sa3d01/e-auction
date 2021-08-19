@@ -25,6 +25,11 @@ class TransferController extends MasterController
     public function transfer(Request $request)
     {
         $user = auth()->user();
+        if ($user->profileIsFilled() == false) {
+            $ar_msg='يجب اكمال بيانات ملفك الشخصى أولا ';
+            $en_msg='please complete your profile , and charge your purchasing power';
+            return $this->sendError($this->lang()=='ar'?$ar_msg:$en_msg);
+        }
         $data = $request->all();
         $data['user_id'] = $user->id;
         if (Transfer::where(['user_id'=>$user->id,'status'=>0,'purchasing_type'=>'bank'])->latest()->first()){
@@ -82,6 +87,11 @@ class TransferController extends MasterController
         $user = auth()->user();
         if (Transfer::where(['type'=>$request['type'],'status'=>0,'user_id'=>$user->id])->latest()->first()){
             return $this->sendError('يرجى انتظار رد الإدارة على طلبك السابق');
+        }
+        if ($user->profileIsFilled() == false) {
+            $ar_msg='يجب اكمال بيانات ملفك الشخصى أولا ';
+            $en_msg='please complete your profile , and charge your purchasing power';
+            return $this->sendError($this->lang()=='ar'?$ar_msg:$en_msg);
         }
         $data['user_id']=$user->id;
         $data['money']=$request['money'];
