@@ -103,7 +103,7 @@
                                         </div>
                                         @if($row->wallet>0)
                                             <div class="col-md-4">
-                                                <a class='clear_wallet btn btn-warning btn-sm' data-href='{{route('admin.user.clear_wallet',$row->id)}}' href=''><i class='os-icon os-icon-cancel-circle'></i><span>تصفير المستحقات</span></a>
+                                                <a class='clear_wallet btn btn-warning btn-sm' data-href='{{route('admin.user.clear_wallet',$row->id)}}' href='{{route('admin.user.clear_wallet',$row->id)}}'><i class='os-icon os-icon-cancel-circle'></i><span>تصفير المستحقات</span></a>
                                             </div>
                                         @endif
                                     @elseif($value== 'created_at')
