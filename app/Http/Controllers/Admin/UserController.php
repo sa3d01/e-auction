@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Notification;
 use App\User;
+use Edujugon\PushNotification\PushNotification;
 use Illuminate\Http\Request;
 
 class UserController extends MasterController
@@ -99,6 +101,39 @@ class UserController extends MasterController
                 ]
             );
         }
+        $user->refresh();
+        return redirect()->back()->with('updated');
+    }
+
+    public function clearWallet($id)
+    {
+        $user=User::find($id);
+        $note['ar'] = 'تم تحويل مستحقاتك لحسابك البنكي بنجاح ! ';
+        $note['en'] = 'Your dues has been wired to your bank account successfully !';
+        $user->update([
+            'wallet'=>0
+        ]);
+        Notification::create([
+            'receiver_id' => $user->id,
+            'title' => $note,
+            'note' => $note,
+        ]);
+        $push = new PushNotification('fcm');
+        $msg = [
+            'notification' => array('title' => $note['ar'], 'sound' => 'default'),
+            'data' => [
+                'title' => $note['ar'],
+                'body' => $note['ar'],
+                'type' => 'transfer',
+                'db'=>true,
+            ],
+            'priority' => 'high',
+        ];
+        $push->setMessage($msg)
+            ->setDevicesToken($user->device['id'])
+            ->send()
+            ->getFeedback();
+
         $user->refresh();
         return redirect()->back()->with('updated');
     }
