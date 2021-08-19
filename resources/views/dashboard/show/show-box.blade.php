@@ -93,6 +93,19 @@
                                                 <div class="help-block form-text with-errors form-control-feedback"></div>
                                             </div>
                                         </div>
+                                    @elseif($value=='wallet')
+                                        <div class="col-sm-8">
+                                            <div class="form-group" id="{{$value}}">
+                                                <label for=""> {{$key}}</label>
+                                                <input disabled name="wallet" value="{{$row->wallet}}" class="form-control" type="number">
+                                                <div class="help-block form-text with-errors form-control-feedback"></div>
+                                            </div>
+                                        </div>
+                                        @if($row->wallet>0)
+                                            <div class="col-md-4">
+                                                <a class='clear_wallet btn btn-warning btn-sm' data-href='{{route('admin.user.clear_wallet',$row->id)}}' href=''><i class='os-icon os-icon-cancel-circle'></i><span>تصفير المستحقات</span></a>
+                                            </div>
+                                        @endif
                                     @elseif($value== 'created_at')
                                         <div class="col-sm-12">
                                             <div class="form-group" id="{{$value}}">

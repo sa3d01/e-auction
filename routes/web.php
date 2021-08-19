@@ -41,6 +41,7 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
     Route::post('user/{id}', 'UserController@update')->name('user.update');
     Route::resource('user', 'UserController');
     Route::get('user/activate/{id}', 'UserController@activate')->name('user.activate');
+    Route::get('user/{id}/clear_wallet', 'UserController@clearWallet')->name('user.clear_wallet');
 
 
     Route::post('bank/{id}', 'BankController@update')->name('bank.update');
