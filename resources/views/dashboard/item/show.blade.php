@@ -470,9 +470,11 @@
 
                                     </div>
                                 </fieldset>
-                            <div class="form-buttons-w">
-                                <button class="btn btn-primary create-submit" type="submit"> تعديل</button>
-                            </div>
+                            @if($row->status=='pending' || $row->status=='accepted')
+                                <div class="form-buttons-w">
+                                    <button class="btn btn-primary create-submit" type="submit"> تعديل</button>
+                                </div>
+                            @endif
                         </form>>
                         </div>
                     </div>
