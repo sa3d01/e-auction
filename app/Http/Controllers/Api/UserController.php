@@ -157,6 +157,7 @@ class UserController extends MasterController
 
     public function update(ProfileUpdateRequest $request)
     {
+        $request->validated();
         $user = auth()->user();
         $data = $request->except(['package_id', 'wallet', 'purchasing_power']);
         $data['more_details'] = [
