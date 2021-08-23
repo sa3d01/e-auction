@@ -116,11 +116,11 @@ class ItemController extends MasterController
         }else{
             $data['price']=null;
         }
-        $this->model->find($id)->update($data);
+        $item=$this->model->find($id)->update($data);
 
 
-        $rows=$this->model->where('status',$this->status)->latest()->get();
-        if ($this->status=='accepted'){
+        $rows=$this->model->where('status',$item->status)->latest()->get();
+        if ($item->status=='accepted'){
             $rows=$this->model->whereIn('status',['accepted','delivered'])->latest()->get();
             $title='قائمة المركبات المطلوب اعدادها';
         }else{
@@ -133,7 +133,7 @@ class ItemController extends MasterController
         ];
         return View('dashboard.item.index', [
             'rows' => $rows,
-            'status'=>$this->status,
+            'status'=>$item->status,
             'type'=>'item',
             'title'=>$title,
             'index_fields'=>$fields,
