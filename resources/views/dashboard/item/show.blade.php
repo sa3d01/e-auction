@@ -247,7 +247,7 @@
                                                     <label for="images" class="col-form-label">صور المركبة</label>
                                                     <div id="itemImages" data-images="{{$row->imagesArray()}}">
                                                     </div>
-                                                    <input @if($row->status!='pending' && $row->status!='accepted') disabled @endif required class="upload form-control" id="uploadFile"
+                                                    <input @if($row->status!='pending' && $row->status!='delivered' && $row->status!='accepted') disabled @endif required class="upload form-control" id="uploadFile"
                                                            type="file" accept="image/*" name="images[]" multiple/>
                                                 </div>
                                             </div>
@@ -257,7 +257,7 @@
                                                 <div class="white-box">
                                                     <label for="input-file-now-custom-1">صورة الاستمارة</label>
                                                     <span style="color: red">*</span>
-                                                    <input @if($row->status!='pending' && $row->status!='accepted') disabled @endif name="paper_image" type="file" id="input-file-now-custom-1 image"
+                                                    <input @if($row->status!='pending' && $row->status!='delivered' && $row->status!='accepted') disabled @endif name="paper_image" type="file" id="input-file-now-custom-1 image"
                                                            class="dropify"
                                                            data-default-file="{{$row->paper_image}}"/>
                                                 </div>
@@ -265,7 +265,7 @@
                                             <div class="col-sm-12">
                                                 <div class="form-group" id="sunder_count">
                                                     <label for=""> حجم الماكينة</label>
-                                                    <input @if($row->status!='pending' && $row->status!='accepted') disabled @endif required value="{{$row->sunder_count}}" name="sunder_count" class="form-control" type="number"
+                                                    <input @if($row->status!='pending' && $row->status!='delivered' && $row->status!='accepted') disabled @endif required value="{{$row->sunder_count}}" name="sunder_count" class="form-control" type="number"
                                                            min="1">
                                                     <div
                                                         class="help-block form-text with-errors form-control-feedback"></div>
@@ -274,7 +274,7 @@
                                             <div class="col-sm-12">
                                                 <div class="form-group" id="kms_count">
                                                     <label for="">عدد الكيلومترات</label>
-                                                    <input @if($row->status!='pending' && $row->status!='accepted') disabled @endif required value="{{$row->kms_count}}" name="kms_count" class="form-control" type="number"
+                                                    <input @if($row->status!='pending' && $row->status!='delivered' && $row->status!='accepted') disabled @endif required value="{{$row->kms_count}}" name="kms_count" class="form-control" type="number"
                                                            min="1">
                                                     <div
                                                         class="help-block form-text with-errors form-control-feedback"></div>
@@ -286,7 +286,7 @@
                                                 <div class="form-group">
                                                     <label for=""> الماركة </label>
                                                     <span style="color: red">*</span>
-                                                    <select @if($row->status!='pending' && $row->status!='accepted') disabled @endif id="mark_id" name="mark_id" class="form-control">
+                                                    <select @if($row->status!='pending' && $row->status!='delivered' && $row->status!='accepted') disabled @endif id="mark_id" name="mark_id" class="form-control">
                                                         <option value="{{$row->mark_id}}">
                                                             {{$row->mark->name['ar']}}
                                                         </option>
@@ -303,7 +303,7 @@
                                                 <div class="form-group">
                                                     <label for=""> الموديل </label>
                                                     <span style="color: red">*</span>
-                                                    <select @if($row->status!='pending' && $row->status!='accepted') disabled @endif required id="model_id" name="model_id" class="form-control">
+                                                    <select @if($row->status!='pending' && $row->status!='delivered' && $row->status!='accepted') disabled @endif required id="model_id" name="model_id" class="form-control">
                                                         <option value="{{$row->model->id}}">
                                                             {{$row->model->name['ar']}}
                                                         </option>
@@ -316,7 +316,7 @@
                                                 <div class="form-group">
                                                     <label for="">سنة الصنع</label>
                                                     <span style="color: red">*</span>
-                                                    <select @if($row->status!='pending' && $row->status!='accepted') disabled @endif id="year" name="year" class="form-control">
+                                                    <select @if($row->status!='pending' && $row->status!='delivered' && $row->status!='accepted') disabled @endif id="year" name="year" class="form-control">
                                                         <option value="{{$row->year}}">
                                                             {{$row->year}}
                                                         </option>
@@ -333,7 +333,7 @@
                                                 <div class="form-group">
                                                     <label for="">اللون</label>
                                                     <span style="color: red">*</span>
-                                                    <select @if($row->status!='pending' && $row->status!='accepted') disabled @endif id="color" name="color_id" class="form-control">
+                                                    <select @if($row->status!='pending' && $row->status!='delivered' && $row->status!='accepted') disabled @endif id="color" name="color_id" class="form-control">
                                                         <option value="{{$row->color->id}}">
                                                             {{$row->color->name['ar']}}
                                                         </option>
@@ -350,7 +350,7 @@
                                                 <div class="form-group">
                                                     <label for="">نوع ناقل الحركة</label>
                                                     <span style="color: red">*</span>
-                                                    <select @if($row->status!='pending' && $row->status!='accepted') disabled @endif id="fetes_id" name="fetes_id" class="form-control">
+                                                    <select @if($row->status!='pending' && $row->status!='delivered' && $row->status!='accepted') disabled @endif id="fetes_id" name="fetes_id" class="form-control">
                                                         <option value="{{$row->fetes->id}}">
                                                             {{$row->fetes->name['ar']}}
                                                         </option>
@@ -367,7 +367,7 @@
                                                 <div class="form-group">
                                                     <label for="">حالة المركبة</label>
                                                     <span style="color: red">*</span>
-                                                    <select @if($row->status!='pending' && $row->status!='accepted') disabled @endif id="item_status_id" name="item_status_id" class="form-control">
+                                                    <select @if($row->status!='pending' && $row->status!='delivered' && $row->status!='accepted') disabled @endif id="item_status_id" name="item_status_id" class="form-control">
                                                         <option value="{{$row->item_status->id}}">
                                                             {{$row->item_status->name['ar']}}
                                                         </option>
@@ -384,7 +384,7 @@
                                                 <div class="form-group">
                                                     <label for="">حالة الفحص</label>
                                                     <span style="color: red">*</span>
-                                                    <select @if($row->status!='pending' && $row->status!='accepted') disabled @endif id="scan_status_id" name="scan_status_id" class="form-control">
+                                                    <select @if($row->status!='pending' && $row->status!='delivered' && $row->status!='accepted') disabled @endif id="scan_status_id" name="scan_status_id" class="form-control">
                                                         <option value="{{$row->scan_status->id}}">
                                                             {{$row->scan_status->name['ar']}}
                                                         </option>
@@ -401,7 +401,7 @@
                                                 <div class="form-group">
                                                     <label for="">حالة الاستمارة</label>
                                                     <span style="color: red">*</span>
-                                                    <select @if($row->status!='pending' && $row->status!='accepted') disabled @endif id="paper_status_id" name="paper_status_id"
+                                                    <select @if($row->status!='pending' && $row->status!='delivered' && $row->status!='accepted') disabled @endif id="paper_status_id" name="paper_status_id"
                                                             class="form-control">
                                                         <option value="{{$row->paper_status->id}}">
                                                             {{$row->paper_status->name['ar']}}
@@ -419,7 +419,7 @@
                                                 <div class="form-group">
                                                     <label for="">المدينة </label>
                                                     <span style="color: red">*</span>
-                                                    <select @if($row->status!='pending' && $row->status!='accepted') disabled @endif id="city_id" name="city_id" class="form-control">
+                                                    <select @if($row->status!='pending' && $row->status!='delivered' && $row->status!='accepted') disabled @endif id="city_id" name="city_id" class="form-control">
                                                         <option value="{{$row->city->id}}">
                                                             {{$row->city->name['ar']}}
                                                         </option>
@@ -436,7 +436,7 @@
                                                 <div class="form-group">
                                                     <label for="">نوع المزاد</label>
                                                     <span style="color: red">*</span>
-                                                    <select @if($row->status!='pending' && $row->status!='accepted') disabled @endif id="auction_type_id" name="auction_type_id"
+                                                    <select @if($row->status!='pending' && $row->status!='delivered' && $row->status!='accepted') disabled @endif id="auction_type_id" name="auction_type_id"
                                                             class="form-control">
                                                         <option value="{{$row->auction_type->id}}">
                                                             {{$row->auction_type->name['ar']}}
@@ -454,7 +454,7 @@
                                                 <div class="form-group">
                                                     <label for="">سعر المركبة</label>
                                                     <span style="color: red">*</span>
-                                                    <input @if($row->status!='pending' && $row->status!='accepted') disabled @endif name="price" value="{{$row->price}}" class="form-control" type="number" min="1">
+                                                    <input @if($row->status!='pending' && $row->status!='delivered' && $row->status!='accepted') disabled @endif name="price" value="{{$row->price}}" class="form-control" type="number" min="1">
                                                     <div
                                                         class="help-block form-text with-errors form-control-feedback"></div>
                                                 </div>
