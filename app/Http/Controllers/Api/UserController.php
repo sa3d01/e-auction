@@ -166,6 +166,9 @@ class UserController extends MasterController
                 'account_number' => $request['account_number'],
             ]
         ];
+        if (!$request->has('email')){
+            $data['email']=null;
+        }
         $user->update($data);
         $user_model = new UserResource($user);
         $token = auth()->login($user);
