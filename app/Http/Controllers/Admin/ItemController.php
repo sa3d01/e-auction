@@ -118,69 +118,7 @@ class ItemController extends MasterController
         }
         $item=$this->model->find($id);
         $item->update($data);
-
-
-        $rows=$this->model->where('status',$item->status)->latest()->get();
-        if ($item->status=='accepted'){
-            $rows=$this->model->whereIn('status',['accepted','delivered'])->latest()->get();
-            $title='قائمة المركبات المطلوب اعدادها';
-        }else{
-            $title='قائمة المركبات';
-        }
-        $fields=[
-            'الرقم التسلسلى' => 'id',
-            'عدد السندرات'=>'sunder_count',
-            'السعر'=>'price',
-        ];
-        return View('dashboard.item.index', [
-            'rows' => $rows,
-            'status'=>$item->status,
-            'type'=>'item',
-            'title'=>$title,
-            'index_fields'=>$fields,
-            'selects'=>[
-                [
-                    'name'=>'user',
-                    'title'=>'المستخدم'
-                ],
-                [
-                    'name'=>'auction_type',
-                    'title'=>'نوع المزايدة'
-                ],
-                [
-                    'name'=>'mark',
-                    'title'=>'نوع المركبة',
-                ],
-                [
-                    'name'=>'model',
-                    'title'=>'موديل المركبة',
-                ],
-                [
-                    'name'=>'color',
-                    'title'=>'لون المركبة',
-                ],
-                [
-                    'name'=>'item_status',
-                    'title'=>'حالة المركبة',
-                ],
-                [
-                    'name'=>'fetes',
-                    'title'=>'نوع ناقل الحركة',
-                ],
-                [
-                    'name'=>'scan_status',
-                    'title'=>'حالة الفحص',
-                ],
-                [
-                    'name'=>'paper_status',
-                    'title'=>'حالة الاستمارة',
-                ],
-                [
-                    'name'=>'city',
-                    'title'=>'المدينة',
-                ],
-            ],
-        ])->with('updated', 'تم التعديل بنجاح');
+        return redirect()->back()->with('updated', 'تم التعديل بنجاح');
     }
     public function items($status)
     {
