@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\AuctionItem;
+use App\AuctionUser;
+use App\Item;
 use App\Notification;
 use App\User;
 use Edujugon\PushNotification\PushNotification;
@@ -108,8 +111,44 @@ class UserController extends MasterController
     public function clearWallet($id)
     {
         $user=User::find($id);
-        $note['ar'] = 'تم تحويل مستحقاتك لحسابك البنكي بنجاح ! ';
-        $note['en'] = 'Your dues has been wired to your bank account successfully !';
+        if ($user->wallet>0){
+            $note['ar'] = 'تم تحويل مستحقاتك لحسابك البنكي بنجاح ! ';
+            $note['en'] = 'Your dues has been wired to your bank account successfully !';
+        }else{
+            try {
+                $paid_auction_items=AuctionItem::where('more_details->status','paid')->get();
+                $item_ids=[];
+                foreach ($paid_auction_items as $paid_auction_item){
+                    $winner=AuctionUser::where(['auction_id'=>$paid_auction_item->auction_id,'item_id'=>$paid_auction_item->item_id])->latest()->value('user_id');
+                    if ($winner==$user->id){
+                        $item_ids[]=$paid_auction_item->item_id;
+                    }
+                }
+                $paid_items=Item::whereIn('id',$item_ids)->latest()->get();
+                foreach ($paid_items as $item){
+                    $auction_user=AuctionUser::where(['item_id'=>$item->id,'user_id'=>$user->id])->latest()->first();
+                    $auction_item=AuctionItem::where('item_id',$item->id)->where('more_details->status','paid')->latest()->first();
+                    $auction_user->update([
+                        'more_details'=>[
+                            'status'=>'paid',
+                            'total_amount'=>$this->totalAmount($auction_item),
+                            'paid'=>$this->totalAmount($auction_item),
+                            'remain'=>0
+                        ]
+                    ]);
+                    $auction_item->update([
+                        'more_details' => [
+                            'status'=>'delivered',
+                            'pay_type' => $auction_item->more_details['pay_type']
+                        ]
+                    ]);
+                }
+            }catch (\Exception $e){
+
+            }
+            $note['ar'] = 'تم إستلام المستحقات الخاصة بكم ! . شكرا لثقتكم ';
+            $note['en'] = 'Your outstanding balance has been cleared !. Thanks ';
+        }
         $user->update([
             'wallet'=>0
         ]);

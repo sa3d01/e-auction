@@ -17,7 +17,6 @@ class RefundController extends MasterController
         parent::__construct();
     }
 
-
     public function index()
     {
         $rows = $this->model->where('type','refund_wallet')->orWhere('type','refund_purchasing_power')->latest()->get();
