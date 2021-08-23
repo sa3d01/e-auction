@@ -159,6 +159,9 @@ class UserController extends MasterController
     {
         $request->validated();
         $user = auth()->user();
+        if ($user->licence_image==null && !$request->has('licence_image')){
+            return $this->sendError('صورة الهوية الزامية');
+        }
         $data = $request->except(['package_id', 'wallet', 'purchasing_power']);
         $data['more_details'] = [
             'bank' => [
