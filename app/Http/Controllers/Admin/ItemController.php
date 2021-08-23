@@ -116,7 +116,8 @@ class ItemController extends MasterController
         }else{
             $data['price']=null;
         }
-        $item=$this->model->find($id)->update($data);
+        $item=$this->model->find($id);
+        $item->update($data);
 
 
         $rows=$this->model->where('status',$item->status)->latest()->get();
