@@ -55,6 +55,7 @@ class ProfileUpdateRequest extends ApiMasterRequest
         return [
             'phone.unique' => 'هذا الهاتف مسجل من قبل',
             'email.unique' => 'هذا البريد مسجل من قبل',
+            'licence_image.required' => 'صورة الهوية الزامية',
         ];
     }
 }

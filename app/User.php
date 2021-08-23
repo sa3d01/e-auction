@@ -48,7 +48,7 @@ class User extends Authenticatable implements JWTSubject
         return $this->name ;
     }
     public function profileIsFilled():bool{
-        return $this->attributes['name']!=null && $this->attributes['package_id']!=null ;
+        return $this->attributes['name']!=null && $this->attributes['package_id']!=null && $this->attributes['licence_image']!=null ;
     }
     public function profileAndPurchasingPowerIsFilled():bool{
         return $this->profileIsFilled() && $this->attributes['purchasing_power']!=0 ;
