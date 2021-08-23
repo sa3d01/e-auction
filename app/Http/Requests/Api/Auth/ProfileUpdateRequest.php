@@ -47,6 +47,7 @@ class ProfileUpdateRequest extends ApiMasterRequest
             'iban_number' => 'nullable',
             'account_number' => 'nullable',
             'licence_number' => 'nullable',
+            'licence_image' => 'required',
         ];
     }
     public function messages()

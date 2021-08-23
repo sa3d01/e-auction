@@ -472,10 +472,10 @@
                                 </fieldset>
                             @if($row->status=='pending' || $row->status=='accepted' || $row->status=='delivered')
                                 <div class="form-buttons-w">
-                                    <button class="btn btn-primary create-submit" type="submit"> تعديل</button>
+                                    <button class="btn btn-primary create-submit" type="submit"> تعديل </button>
                                 </div>
                             @endif
-                        </form>>
+                        </form>
                         </div>
                     </div>
                 </div>
