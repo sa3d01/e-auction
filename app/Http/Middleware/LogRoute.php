@@ -16,7 +16,10 @@ class LogRoute
      */
     public function handle($request, Closure $next)
     {
-        $response= $next($request);
+        return $next($request);
+    }
+    public function terminate($request, $response)
+    {
         $log = [
             'uri' => $request->getUri(),
             'method' => $request->getMethod(),
@@ -25,7 +28,6 @@ class LogRoute
             'ip' => $request->ip()
         ];
         DB::table('logs')->insert($log);
-     //   Log::info(json_encode($log));
-        return $response;
+//        Log::info('app.requests', ['request' => $request->all(), 'response' => $response]);
     }
 }

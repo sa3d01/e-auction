@@ -19,7 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="18-8/wallet" />
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="18-8/wallet">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -393,21 +395,7 @@
       <workItem from="1629309027260" duration="8113000" />
       <workItem from="1629675736166" duration="1571000" />
       <workItem from="1629725501239" duration="7190000" />
-      <workItem from="1629834937299" duration="4425000" />
-    </task>
-    <task id="LOCAL-00600" summary="18-8">
-      <created>1629255557417</created>
-      <option name="number" value="00600" />
-      <option name="presentableId" value="LOCAL-00600" />
-      <option name="project" value="LOCAL" />
-      <updated>1629255557417</updated>
-    </task>
-    <task id="LOCAL-00601" summary="18-8">
-      <created>1629327916192</created>
-      <option name="number" value="00601" />
-      <option name="presentableId" value="LOCAL-00601" />
-      <option name="project" value="LOCAL" />
-      <updated>1629327916192</updated>
+      <workItem from="1629834937299" duration="5445000" />
     </task>
     <task id="LOCAL-00602" summary="18-8">
       <created>1629328423364</created>
@@ -738,7 +726,21 @@
       <option name="project" value="LOCAL" />
       <updated>1629839086239</updated>
     </task>
-    <option name="localTasksCounter" value="649" />
+    <task id="LOCAL-00649" summary="18-8/wallet">
+      <created>1629839562150</created>
+      <option name="number" value="00649" />
+      <option name="presentableId" value="LOCAL-00649" />
+      <option name="project" value="LOCAL" />
+      <updated>1629839562150</updated>
+    </task>
+    <task id="LOCAL-00650" summary="18-8/wallet">
+      <created>1629839648097</created>
+      <option name="number" value="00650" />
+      <option name="presentableId" value="LOCAL-00650" />
+      <option name="project" value="LOCAL" />
+      <updated>1629839648097</updated>
+    </task>
+    <option name="localTasksCounter" value="651" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
