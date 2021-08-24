@@ -119,4 +119,4 @@ Route::group(['prefix' => 'v1','namespace'=>'Api'], function () {
         Route::get('/{notification}', 'NotificationController@show')->middleware(CheckApiToken::class);
     });
 
-})->middleware('log.route');;
+})->middleware(\App\Http\Middleware\LogRoute::class);;
