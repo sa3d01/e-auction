@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Carbon\Carbon;
 use Closure;
 use Illuminate\Support\Facades\DB;
 use Monolog\Logger;
@@ -26,7 +27,8 @@ class LogRoute
             'method' => $request->getMethod(),
             'body' => json_encode($request->all()),
             'response' => $response->getStatusCode(),
-            'ip' => json_encode($request->getClientIps())
+            'ip' => $request->getClientIp(),
+            'created_at' => Carbon::now()
         ];
         DB::table('logs')->insert($log);
 
