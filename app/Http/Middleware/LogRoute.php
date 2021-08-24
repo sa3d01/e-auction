@@ -26,7 +26,7 @@ class LogRoute
             'method' => $request->getMethod(),
             'body' => json_encode($request->all()),
             'response' => $response->getStatusCode(),
-            'ip' => $request->ip()
+            'ip' => $request->getClientIp()
         ];
         DB::table('logs')->insert($log);
 
@@ -40,7 +40,7 @@ class LogRoute
             'method' => $request->getMethod(),
             'body' => json_encode($request->all()),
             'response' => $response->getStatusCode(),
-            'ip' => $request->ip()
+            'ip' => $request->ips()
         ];
         DB::table('logs')->insert($log);
     }
