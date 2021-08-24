@@ -20,8 +20,8 @@ class LogRoute
         $log = [
             'uri' => $request->getUri(),
             'method' => $request->getMethod(),
-         //   'body' => $request->all(),
-         //   'response' => $response->getContent(),
+            'body' => json_decode($request->all()),
+            'response' => json_decode($response->getContent()),
             'ip' => $request->ip()
         ];
         DB::table('logs')->insert($log);
