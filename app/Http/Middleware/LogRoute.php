@@ -26,23 +26,10 @@ class LogRoute
             'method' => $request->getMethod(),
             'body' => json_encode($request->all()),
             'response' => $response->getStatusCode(),
-            'ip' => $request->getClientIps()
+            'ip' => json_encode($request->getClientIps())
         ];
         DB::table('logs')->insert($log);
 
         return $response;
     }
-
-    public function terminate($request, $response)
-    {
-        $log = [
-            'uri' => $request->getUri(),
-            'method' => $request->getMethod(),
-            'body' => json_encode($request->all()),
-            'response' => $response->getStatusCode(),
-            'ip' => $request->ips()
-        ];
-        DB::table('logs')->insert($log);
-    }
-
 }
