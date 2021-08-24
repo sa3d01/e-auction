@@ -21,6 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="18-8/wallet">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/LogRoute.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/LogRoute.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -395,14 +396,7 @@
       <workItem from="1629309027260" duration="8113000" />
       <workItem from="1629675736166" duration="1571000" />
       <workItem from="1629725501239" duration="7190000" />
-      <workItem from="1629834937299" duration="5445000" />
-    </task>
-    <task id="LOCAL-00602" summary="18-8">
-      <created>1629328423364</created>
-      <option name="number" value="00602" />
-      <option name="presentableId" value="LOCAL-00602" />
-      <option name="project" value="LOCAL" />
-      <updated>1629328423364</updated>
+      <workItem from="1629834937299" duration="6697000" />
     </task>
     <task id="LOCAL-00603" summary="18-8">
       <created>1629328634258</created>
@@ -740,7 +734,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629839648097</updated>
     </task>
-    <option name="localTasksCounter" value="651" />
+    <task id="LOCAL-00651" summary="18-8/wallet">
+      <created>1629840479750</created>
+      <option name="number" value="00651" />
+      <option name="presentableId" value="LOCAL-00651" />
+      <option name="project" value="LOCAL" />
+      <updated>1629840479750</updated>
+    </task>
+    <option name="localTasksCounter" value="652" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
