@@ -21,7 +21,7 @@ class LogRoute
             'uri' => $request->getUri(),
             'method' => $request->getMethod(),
            // 'body' => json_encode($request->all()),
-            'response' => json_decode($response->getContent()),
+            'response' =>$response->getStatusCode(),
             'ip' => $request->ip()
         ];
         DB::table('logs')->insert($log);
