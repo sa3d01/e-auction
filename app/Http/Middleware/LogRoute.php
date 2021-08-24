@@ -25,7 +25,7 @@ class LogRoute
             'ip' => $request->ip()
         ];
         DB::table('logs')->insert($log);
-        Log::info(json_encode($log));
+     //   Log::info(json_encode($log));
         return $response;
     }
 }
