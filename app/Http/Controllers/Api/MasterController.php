@@ -6,7 +6,7 @@ use App\AuctionItem;
 use App\AuctionUser;
 use App\Http\Controllers\Controller;
 use App\Offer;
-//use App\Setting;
+use App\Setting;
 use App\Transfer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
