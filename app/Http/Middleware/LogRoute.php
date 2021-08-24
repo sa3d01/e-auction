@@ -20,7 +20,7 @@ class LogRoute
         $log = [
             'uri' => $request->getUri(),
             'method' => $request->getMethod(),
-           // 'body' => json_encode($request->all()),
+            'body' => json_encode($request->all()),
             'response' =>$response->getStatusCode(),
             'ip' => $request->ip()
         ];
