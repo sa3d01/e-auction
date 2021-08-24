@@ -17,7 +17,7 @@ use \App\Http\Middleware\CheckApiToken;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::group(['prefix' => 'v1','namespace'=>'Api'], function () {
+Route::group(['prefix' => 'v1','namespace'=>'Api','middleware'=>'log.route'], function () {
     Route::group(['prefix' => '/general'], function () {
         Route::get('/setting', 'SettingController@index');
         Route::get('/asks', 'SettingController@asks');
@@ -119,4 +119,4 @@ Route::group(['prefix' => 'v1','namespace'=>'Api'], function () {
         Route::get('/{notification}', 'NotificationController@show')->middleware(CheckApiToken::class);
     });
 
-})->middleware(\App\Http\Middleware\LogRoute::class);;
+});
