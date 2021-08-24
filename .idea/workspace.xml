@@ -19,12 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="18-8/wallet">
-      <change afterPath="$PROJECT_DIR$/app/Http/Middleware/LogRoute.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
-    </list>
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="18-8/wallet" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -398,35 +393,7 @@
       <workItem from="1629309027260" duration="8113000" />
       <workItem from="1629675736166" duration="1571000" />
       <workItem from="1629725501239" duration="7190000" />
-      <workItem from="1629834937299" duration="1683000" />
-    </task>
-    <task id="LOCAL-00582" summary="sms">
-      <created>1626294154286</created>
-      <option name="number" value="00582" />
-      <option name="presentableId" value="LOCAL-00582" />
-      <option name="project" value="LOCAL" />
-      <updated>1626294154286</updated>
-    </task>
-    <task id="LOCAL-00583" summary="sms">
-      <created>1626303246029</created>
-      <option name="number" value="00583" />
-      <option name="presentableId" value="LOCAL-00583" />
-      <option name="project" value="LOCAL" />
-      <updated>1626303246029</updated>
-    </task>
-    <task id="LOCAL-00584" summary="view">
-      <created>1626304608174</created>
-      <option name="number" value="00584" />
-      <option name="presentableId" value="LOCAL-00584" />
-      <option name="project" value="LOCAL" />
-      <updated>1626304608174</updated>
-    </task>
-    <task id="LOCAL-00585" summary="view">
-      <created>1626304796791</created>
-      <option name="number" value="00585" />
-      <option name="presentableId" value="LOCAL-00585" />
-      <option name="project" value="LOCAL" />
-      <updated>1626304796791</updated>
+      <workItem from="1629834937299" duration="2051000" />
     </task>
     <task id="LOCAL-00586" summary="view">
       <created>1626304938294</created>
@@ -743,7 +710,35 @@
       <option name="project" value="LOCAL" />
       <updated>1629835598090</updated>
     </task>
-    <option name="localTasksCounter" value="631" />
+    <task id="LOCAL-00631" summary="18-8/wallet">
+      <created>1629836707063</created>
+      <option name="number" value="00631" />
+      <option name="presentableId" value="LOCAL-00631" />
+      <option name="project" value="LOCAL" />
+      <updated>1629836707063</updated>
+    </task>
+    <task id="LOCAL-00632" summary="18-8/wallet">
+      <created>1629836794352</created>
+      <option name="number" value="00632" />
+      <option name="presentableId" value="LOCAL-00632" />
+      <option name="project" value="LOCAL" />
+      <updated>1629836794352</updated>
+    </task>
+    <task id="LOCAL-00633" summary="18-8/wallet">
+      <created>1629836861310</created>
+      <option name="number" value="00633" />
+      <option name="presentableId" value="LOCAL-00633" />
+      <option name="project" value="LOCAL" />
+      <updated>1629836861310</updated>
+    </task>
+    <task id="LOCAL-00634" summary="18-8/wallet">
+      <created>1629836986316</created>
+      <option name="number" value="00634" />
+      <option name="presentableId" value="LOCAL-00634" />
+      <option name="project" value="LOCAL" />
+      <updated>1629836986317</updated>
+    </task>
+    <option name="localTasksCounter" value="635" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
