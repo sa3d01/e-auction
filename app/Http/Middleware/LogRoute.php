@@ -9,13 +9,6 @@ use Monolog\Logger;
 class LogRoute
 {
 
-    private $logger;
-
-    public function __construct(Logger $logger)
-    {
-        $this->logger = $logger;
-    }
-
     /**
      * Handle an incoming request.
      *
@@ -27,10 +20,6 @@ class LogRoute
     {
         $response = $next($request);
 
-        $this->logger->info('Dump request', [
-            'request' => serialize($request),
-            'response' => serialize($response),
-        ]);
 
         $log = [
             'uri' => $request->getUri(),
