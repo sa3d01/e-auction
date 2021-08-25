@@ -460,6 +460,18 @@
                                                 </div>
                                             </div>
 
+                                            @if($row->status=='pending' || $row->status=='delivered' || $row->status=='accepted')
+                                            <div class="col-sm-12">
+                                                <div class="form-group">
+                                                    <div class="form-check">
+                                                        <span style="color: red">*</span>
+                                                        <input name="tax" class="form-check-input" type="checkbox"
+                                                               value="{{$row->tax}}" id="tax">
+                                                        <label class="form-check-label" for="tax">لدي سجل ضريبي</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @endif
 
 
 
@@ -579,7 +591,7 @@
                 },
                 allowOutsideClick: () => !Swal.isLoading()
             }).then(() => {
-                location.href = "/e-auction/public/admin/item/status/rejected";
+                location.href = "/admin/item/status/rejected";
             })
         });
         $(document).on('click', '.accept', function (e) {
@@ -605,7 +617,7 @@
                     },
                     allowOutsideClick: () => !Swal.isLoading()
                 }).then(() => {
-                    location.href = "/e-auction/public/admin/item/status/accepted";
+                    location.href = "/admin/item/status/accepted";
                 })
             }else {
                 Swal.fire({
@@ -624,7 +636,7 @@
                     },
                     allowOutsideClick: () => !Swal.isLoading()
                 }).then(() => {
-                    location.href = "/e-auction/public/admin/item/status/accepted";
+                    location.href = "/admin/item/status/accepted";
                 })
             }
         });
@@ -636,7 +648,7 @@
                 var mark_id = $('#mark_id').val();
                 $.ajax({
                     type: "GET",
-                    url: '/e-auction/public/admin/get_models/' + mark_id,
+                    url: '/admin/get_models/' + mark_id,
                     dataType: 'json',
                     success: function (data) {
                         console.log(data)
