@@ -49,7 +49,7 @@ return [
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '3306'),
             'database' => "eauction_db",
-            'username' => "eauction_user",
+            'username' => "eauction_usr",
             'password' => "G$%a*A{TTkYs",
 //            'database' => env('DB_DATABASE', 'sanedapp_auction_db'),
 //            'username' => env('DB_USERNAME', 'sanedapp_eauction'),
