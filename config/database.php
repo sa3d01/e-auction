@@ -50,7 +50,7 @@ return [
             'port' => env('DB_PORT', '3306'),
             'database' => env('DB_DATABASE', 'eauction_db'),
             'username' => env('DB_USERNAME', 'eauction_user'),
-            'password' => env('DB_PASSWORD', 'ZId0dJ!L.5!@'),
+            'password' => env('DB_PASSWORD', "ZId0dJ!L.5!@"),
 //            'database' => env('DB_DATABASE', 'sanedapp_auction_db'),
 //            'username' => env('DB_USERNAME', 'sanedapp_eauction'),
 //            'password' => env('DB_PASSWORD', 'rnt@g_[fep4_'),
