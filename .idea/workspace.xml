@@ -19,19 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="18-8/wallet">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/auction/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/auction/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/contact/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/contact/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/feed_back/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/feed_back/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/item/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/item/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/item/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/item/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/item/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/item/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/master/base.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/master/base.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/package/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/package/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/transfer/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/transfer/show.blade.php" afterDir="false" />
-    </list>
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="live" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -406,14 +394,7 @@
       <workItem from="1629675736166" duration="1571000" />
       <workItem from="1629725501239" duration="7190000" />
       <workItem from="1629834937299" duration="9827000" />
-      <workItem from="1629933750780" duration="1001000" />
-    </task>
-    <task id="LOCAL-00614" summary="18-8">
-      <created>1629333964676</created>
-      <option name="number" value="00614" />
-      <option name="presentableId" value="LOCAL-00614" />
-      <option name="project" value="LOCAL" />
-      <updated>1629333964677</updated>
+      <workItem from="1629933750780" duration="1450000" />
     </task>
     <task id="LOCAL-00615" summary="18-8">
       <created>1629334829406</created>
@@ -751,7 +732,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629844179665</updated>
     </task>
-    <option name="localTasksCounter" value="663" />
+    <task id="LOCAL-00663" summary="live">
+      <created>1629934852092</created>
+      <option name="number" value="00663" />
+      <option name="presentableId" value="LOCAL-00663" />
+      <option name="project" value="LOCAL" />
+      <updated>1629934852092</updated>
+    </task>
+    <option name="localTasksCounter" value="664" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -771,7 +759,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="search" />
     <MESSAGE value="images" />
     <MESSAGE value="price" />
     <MESSAGE value="licence pdf" />
@@ -796,7 +783,8 @@
     <MESSAGE value="18-8" />
     <MESSAGE value="18-8/view link" />
     <MESSAGE value="18-8/wallet" />
-    <option name="LAST_COMMIT_MESSAGE" value="18-8/wallet" />
+    <MESSAGE value="live" />
+    <option name="LAST_COMMIT_MESSAGE" value="live" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
