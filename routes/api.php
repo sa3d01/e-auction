@@ -18,6 +18,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::group(['prefix' => 'v1','namespace'=>'Api','middleware'=>'log.route'], function () {
+    Route::get('current-version', function (){
+        return response()->json([
+            "data"=>"1.0.0",
+            "android"=>"https://play.google.com/store/apps/details?id=com.rowad.mazadat&hl=ar&gl=US",
+            "ios"=>"https://apps.apple.com/eg/app/e-auction/id1573749910"
+        ]);
+    });
     Route::group(['prefix' => '/general'], function () {
         Route::get('/setting', 'SettingController@index');
         Route::get('/asks', 'SettingController@asks');
