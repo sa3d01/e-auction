@@ -19,10 +19,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="live">
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="current-version">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -401,14 +399,7 @@
       <workItem from="1629933750780" duration="1450000" />
       <workItem from="1629966934664" duration="1052000" />
       <workItem from="1629988503426" duration="640000" />
-      <workItem from="1630335384903" duration="824000" />
-    </task>
-    <task id="LOCAL-00620" summary="18-8/view link">
-      <created>1629731816460</created>
-      <option name="number" value="00620" />
-      <option name="presentableId" value="LOCAL-00620" />
-      <option name="project" value="LOCAL" />
-      <updated>1629731816460</updated>
+      <workItem from="1630335384903" duration="1856000" />
     </task>
     <task id="LOCAL-00621" summary="18-8/view link">
       <created>1629731983159</created>
@@ -746,7 +737,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629967383506</updated>
     </task>
-    <option name="localTasksCounter" value="669" />
+    <task id="LOCAL-00669" summary="current-version">
+      <created>1630336552434</created>
+      <option name="number" value="00669" />
+      <option name="presentableId" value="LOCAL-00669" />
+      <option name="project" value="LOCAL" />
+      <updated>1630336552435</updated>
+    </task>
+    <option name="localTasksCounter" value="670" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -766,7 +764,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="images" />
     <MESSAGE value="price" />
     <MESSAGE value="licence pdf" />
     <MESSAGE value="about pdf" />
@@ -791,7 +788,8 @@
     <MESSAGE value="18-8/view link" />
     <MESSAGE value="18-8/wallet" />
     <MESSAGE value="live" />
-    <option name="LAST_COMMIT_MESSAGE" value="live" />
+    <MESSAGE value="current-version" />
+    <option name="LAST_COMMIT_MESSAGE" value="current-version" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
