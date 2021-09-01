@@ -103,7 +103,7 @@ class MasterController extends Controller
             $en_msg=' Sorry, your purchasing power is not enough to bid !';
             return response()->json([
                 'status'=>400,
-                'message'=> $this->lang()=='ar'?$ar_msg:$en_msg
+                'message'=> $ar_msg
             ]);
             return $this->sendError($this->lang()=='ar'?$ar_msg:$en_msg);
         }
