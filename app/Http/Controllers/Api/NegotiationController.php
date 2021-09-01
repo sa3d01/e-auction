@@ -189,7 +189,7 @@ class NegotiationController extends MasterController
         foreach ($offers as $offer) {
             $offer->delete();
         }
-        return $this->sendError('تمت العملية بنجاح');
+        return $this->sendResponse('تمت العملية بنجاح');
     }
 
     public function refuseOffer($item_id, Request $request): object
