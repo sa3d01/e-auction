@@ -146,7 +146,7 @@ class NegotiationController extends MasterController
         return $this->sendResponse('تم الإرسال بنجاح');
     }
 
-    public function acceptOffer($item_id, $offer_id, Request $request): string
+    public function acceptOffer($item_id, $offer_id, Request $request)
     {
         $auction_item = AuctionItem::where('item_id', $item_id)->latest()->first();
         if ($auction_item->more_details['status'] == 'expired' || $auction_item->more_details['status'] == 'paid') {
@@ -160,10 +160,6 @@ class NegotiationController extends MasterController
             $auction_user_id = $offer->sender_id;
         }
         if ($request->user()->id ==$auction_user_id){
-            return response()->json([
-                'status'=>400,
-                'message'=> '$ar_msg'
-            ]);
             if ($this->validate_purchasing_power(User::find($auction_user_id), $charge_price, $auction_item) !== true) {
                 return $this->validate_purchasing_power(User::find($auction_user_id), $charge_price, $auction_item);
             }
