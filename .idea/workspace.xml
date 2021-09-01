@@ -19,9 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="current-version">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="validation" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -401,28 +399,7 @@
       <workItem from="1629988503426" duration="640000" />
       <workItem from="1630335384903" duration="1856000" />
       <workItem from="1630353525575" duration="1853000" />
-      <workItem from="1630509315931" duration="3712000" />
-    </task>
-    <task id="LOCAL-00627" summary="18-8/view link">
-      <created>1629732735540</created>
-      <option name="number" value="00627" />
-      <option name="presentableId" value="LOCAL-00627" />
-      <option name="project" value="LOCAL" />
-      <updated>1629732735540</updated>
-    </task>
-    <task id="LOCAL-00628" summary="18-8/view link">
-      <created>1629734234161</created>
-      <option name="number" value="00628" />
-      <option name="presentableId" value="LOCAL-00628" />
-      <option name="project" value="LOCAL" />
-      <updated>1629734234161</updated>
-    </task>
-    <task id="LOCAL-00629" summary="18-8/wallet">
-      <created>1629736361900</created>
-      <option name="number" value="00629" />
-      <option name="presentableId" value="LOCAL-00629" />
-      <option name="project" value="LOCAL" />
-      <updated>1629736361900</updated>
+      <workItem from="1630509315931" duration="4032000" />
     </task>
     <task id="LOCAL-00630" summary="18-8/wallet">
       <created>1629835598089</created>
@@ -746,7 +723,28 @@
       <option name="project" value="LOCAL" />
       <updated>1630514177009</updated>
     </task>
-    <option name="localTasksCounter" value="676" />
+    <task id="LOCAL-00676" summary="validation">
+      <created>1630515779816</created>
+      <option name="number" value="00676" />
+      <option name="presentableId" value="LOCAL-00676" />
+      <option name="project" value="LOCAL" />
+      <updated>1630515779816</updated>
+    </task>
+    <task id="LOCAL-00677" summary="validation">
+      <created>1630515900091</created>
+      <option name="number" value="00677" />
+      <option name="presentableId" value="LOCAL-00677" />
+      <option name="project" value="LOCAL" />
+      <updated>1630515900091</updated>
+    </task>
+    <task id="LOCAL-00678" summary="validation">
+      <created>1630515987555</created>
+      <option name="number" value="00678" />
+      <option name="presentableId" value="LOCAL-00678" />
+      <option name="project" value="LOCAL" />
+      <updated>1630515987555</updated>
+    </task>
+    <option name="localTasksCounter" value="679" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -766,7 +764,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="price" />
     <MESSAGE value="licence pdf" />
     <MESSAGE value="about pdf" />
     <MESSAGE value="٢١-٦" />
@@ -791,7 +788,8 @@
     <MESSAGE value="18-8/wallet" />
     <MESSAGE value="live" />
     <MESSAGE value="current-version" />
-    <option name="LAST_COMMIT_MESSAGE" value="current-version" />
+    <MESSAGE value="validation" />
+    <option name="LAST_COMMIT_MESSAGE" value="validation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
