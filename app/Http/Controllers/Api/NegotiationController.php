@@ -161,7 +161,8 @@ class NegotiationController extends MasterController
         }
         if ($request->user()->id ==$auction_user_id){
             if ($this->validate_purchasing_power(User::find($auction_user_id), $charge_price, $auction_item) !== true) {
-                return $this->validate_purchasing_power(User::find($auction_user_id), $charge_price, $auction_item);
+                return $this->sendError($this->validate_purchasing_power(User::find($auction_user_id), $charge_price, $auction_item));
+
             }
         }
         $auction_user = AuctionUser::create([
