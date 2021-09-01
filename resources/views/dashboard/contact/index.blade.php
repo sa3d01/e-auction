@@ -82,7 +82,7 @@
                 var contact_id = $(this).attr('id');
                 $.ajax({
                     type: "GET",
-                    url:'/admin/show_single_contact/'+contact_id,
+                    url:'/e-auction/public/admin/show_single_contact/'+contact_id,
                     dataType: 'json',
                     success: function( data ) {
                         $('#single_message').empty();
@@ -128,7 +128,7 @@
             });
             $.ajax({
                 type: "GET",
-                url:'/admin/show_single_contact/0',
+                url:'/e-auction/public/admin/show_single_contact/0',
                 dataType: 'json',
                 success: function( data ) {
                     if(data===false){
