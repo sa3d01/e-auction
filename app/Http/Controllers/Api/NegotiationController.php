@@ -160,6 +160,10 @@ class NegotiationController extends MasterController
             $auction_user_id = $offer->sender_id;
         }
         if ($request->user()->id ==$auction_user_id){
+            return response()->json([
+                'status'=>400,
+                'message'=> '$ar_msg'
+            ]);
             if ($this->validate_purchasing_power(User::find($auction_user_id), $charge_price, $auction_item) !== true) {
                 return $this->validate_purchasing_power(User::find($auction_user_id), $charge_price, $auction_item);
             }

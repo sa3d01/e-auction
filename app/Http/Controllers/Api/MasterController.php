@@ -101,19 +101,11 @@ class MasterController extends Controller
         if ($user_purchasing_power < $price){
             $ar_msg='عذرا رصيدك لايكفي للمزايدة. يرجى شحن العربون';
             $en_msg=' Sorry, your purchasing power is not enough to bid !';
-            return response()->json([
-                'status'=>400,
-                'message'=> $ar_msg
-            ]);
             return $this->sendError($this->lang()=='ar'?$ar_msg:$en_msg);
         }
         if (Transfer::where(['user_id'=>$user->id,'type'=>'refund_purchasing_power','status'=>0])->first()){
             $ar_msg=' قوتك الشرائية معلقة حاليا لحين رد الإدارة';
             $en_msg=' your purchasing power is paused for now';
-            return response()->json([
-               'status'=>400,
-               'message'=> $this->lang()=='ar'?$ar_msg:$en_msg
-            ]);
             return $this->sendError($this->lang()=='ar'?$ar_msg:$en_msg);
         }
         return true;
