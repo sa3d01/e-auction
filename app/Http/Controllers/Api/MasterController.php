@@ -108,7 +108,6 @@ class MasterController extends Controller
             $en_msg=' your purchasing power is paused for now';
             return $this->sendError($this->lang()=='ar'?$ar_msg:$en_msg);
         }
-        return true;
     }
     function checkTimeForBid($auction_item)
     {
