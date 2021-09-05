@@ -51,7 +51,7 @@ class NotificationController extends MasterController
         $push->setMessage([
             'notification' => array('title'=>$title, 'sound' => 'default'),
             'data' => [
-                'title' => $title,
+                'title' => $note['ar'],
                 'body' => $note['ar'],
                 'status' => 'admin',
                 'type'=>'admin',
