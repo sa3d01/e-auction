@@ -63,7 +63,7 @@ class MasterController extends Controller
         $this->model->create($data);
         return $this->sendResponse('تم الانشاء بنجاح');
     }
-    protected function validate_purchasing_power($user,$price,$auction_item){
+    public function validate_purchasing_power($user,$price,$auction_item){
         $user_purchasing_power=$user->purchasing_power+$user->package->purchasing_power_increase;
         $user_purchasing_power=$user_purchasing_power*$this->purchasing_power_ratio;
         //user auction items bids

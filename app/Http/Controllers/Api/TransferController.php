@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\AuctionItem;
+use App\AuctionUser;
 use App\Http\Resources\UserResource;
+use App\Offer;
 use App\Transfer;
 use App\User;
 use Illuminate\Http\Request;
@@ -93,6 +96,11 @@ class TransferController extends MasterController
             $en_msg='please complete your profile , and charge your purchasing power';
             return $this->sendError($this->lang()=='ar'?$ar_msg:$en_msg);
         }
+        if($this->validate_purchasing_power_to_refund($user)==false) {
+            $ar_msg='يرجي انتظار انتهاء المزادات التي قمت بالمشاركة بها';
+            $en_msg='please wait your auctions to finish first.';
+            return $this->sendError($this->lang()=='ar'?$ar_msg:$en_msg);
+        }
         $data['user_id']=$user->id;
         $data['money']=$request['money'];
         $data['type']=$request['type'];
@@ -105,6 +113,32 @@ class TransferController extends MasterController
         Transfer::create($data);
         $data = new UserResource($user);
         return $this->sendResponse($data);
+    }
+    public function validate_purchasing_power_to_refund($user){
+        $user_purchasing_power=$user->purchasing_power+$user->package->purchasing_power_increase;
+        $user_purchasing_power=$user_purchasing_power*$this->purchasing_power_ratio;
+        //user auction items bids
+        $user_items_bids=AuctionUser::where('user_id',$user->id)->pluck('item_id')->toArray();
+        $other_auction_items = AuctionItem::whereIn('item_id',$user_items_bids);
+        $other_auction_items = $other_auction_items->where('more_details->status', '!=', 'paid');
+        $other_auction_items = $other_auction_items->where('more_details->status', '!=', 'delivered');
+        $other_auction_items = $other_auction_items->where('more_details->status', '!=', 'expired');
+        $other_auction_items = $other_auction_items->where('more_details->status', '!=', 'negotiation')->get();
+        if(count($other_auction_items)>0)
+        {
+            return false;
+        }
+        //user negotiations
+        $offers=Offer::where('sender_id',$user->id)->pluck('auction_item_id')->toArray();
+        $other_auction_items = AuctionItem::whereIn('id',$offers);
+        $other_auction_items = $other_auction_items->where(function($query) {
+            $query->where('more_details->status','negotiation')->orWhere('more_details->status','soon');
+        })->get();
+        if(count($other_auction_items)>0)
+        {
+            return false;
+        }
+        return true;
     }
 
 }
