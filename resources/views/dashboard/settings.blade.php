@@ -140,9 +140,17 @@
 
                                         <div class="form-group">
                                             <label>
-                                                <i class="os-icon os-icon-dollar-sign"></i>current-app-version
+                                                <i class="os-icon os-icon-dollar-sign"></i>current-android-version
                                             </label>
-                                            <input name="app_version" value="{{$row->app_version}}" class="form-control" type="text">
+                                            <input name="android_version" value="{{$row->android_version}}" class="form-control" type="text">
+                                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>
+                                                <i class="os-icon os-icon-dollar-sign"></i>current-ios-version
+                                            </label>
+                                            <input name="ios_version" value="{{$row->ios_version}}" class="form-control" type="text">
                                             <div class="help-block form-text with-errors form-control-feedback"></div>
                                         </div>
 
