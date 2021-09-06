@@ -38,7 +38,7 @@ class UserController extends MasterController
         if (!$request->has('email') && !$request->has('phone')) {
             return $this->sendError('يجب ادخال وسيلة ارسال واحدة على الأقل');
         }
-        $activation_code = 1111;//rand(1111, 9999);
+        $activation_code = rand(1111, 9999);
         if ($request->has('email') && $request->has('phone')) {
             $user = User::where(['email' => $request['email'], 'phone' => $request['phone']])->first();
 //            if (!$user)
@@ -182,7 +182,7 @@ class UserController extends MasterController
     public function requestUpdatePhone(PhoneUpdateRequest $request)
     {
         $user = auth()->user();
-        $activation_code = 1111;//rand(1111, 9999);
+        $activation_code = rand(1111, 9999);
         $user->update([
             'activation_code'=>$activation_code,
             'phone_details'=>[
@@ -229,7 +229,7 @@ class UserController extends MasterController
         if (!$user) {
             return $this->sendError('المستخدم غير مسجل');
         }
-        $activation_code =1111;//rand(1111, 9999);
+        $activation_code =rand(1111, 9999);
         $this->send_code($activation_code, $request['email'], $request['phone']);
         $user->update(['activation_code' => $activation_code]);
         return $this->sendResponse(['activation_code' => $activation_code]);
