@@ -429,9 +429,9 @@ class ItemController extends MasterController
         ]);
         $push = new PushNotification('fcm');
         $msg = [
-            'notification' => array('title' => $note['ar'], 'sound' => 'default'),
+            'notification' => array('title' => $item->nameForSelect(),'body' => $note['ar'], 'sound' => 'default'),
             'data' => [
-                'title' => $note['ar'],
+                'title' => $item->nameForSelect(),
                 'body' => $note['ar'],
                 'type' => 'item',
                 'item' => new ItemResource($item),

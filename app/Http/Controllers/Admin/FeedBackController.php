@@ -43,9 +43,9 @@ class FeedBackController extends MasterController
         ]);
         $push = new PushNotification('fcm');
         $msg = [
-            'notification' => array('title' => $note['ar'], 'sound' => 'default'),
+            'notification' => array('title' => 'رسالة إدارية','body' => $note['ar'], 'sound' => 'default'),
             'data' => [
-                'title' => $note['ar'],
+                'title' => 'رسالة إدارية',
                 'body' => $note['ar'],
                 'type' => 'feed_back',
                 'db'=>true,

@@ -349,9 +349,10 @@ class Controller extends BaseController
         Notification::create($data);
         $push = new PushNotification('fcm');
         $msg = [
-            'notification' => array('title' => $title['ar'], 'sound' => 'default'),
+            'notification' => array('title' => $offer->auction_item->item->nameForSelect(),
+            'body' => $title['ar'], 'sound' => 'default'),
             'data' => [
-                'title' => $title['ar'],
+                'title' => $offer->auction_item->item->nameForSelect(),
                 'body' => $title['ar'],
                 'status' => $offer->status,
                 'type' => 'offer',
@@ -378,11 +379,13 @@ class Controller extends BaseController
         ];
         Notification::create($data);
         try {
+            $item=Item::find($item_id);
             $push = new PushNotification('fcm');
             $msg = [
-                'notification' => array('title' => $title['ar'], 'sound' => 'default'),
+                'notification' => array('title' => $item->nameForSelect(),
+                'body' => $title['ar'], 'sound' => 'default'),
                 'data' => [
-                    'title' => $title['ar'],
+                    'title' => $item->nameForSelect(),
                     'body' => $title['ar'],
                     'status' => 'paid',
                     'type' => 'win',

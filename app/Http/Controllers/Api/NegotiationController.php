@@ -230,9 +230,9 @@ class NegotiationController extends MasterController
         Notification::create($data);
         $push = new PushNotification('fcm');
         $msg = [
-            'notification' => array('title' => $title['ar'], 'sound' => 'default'),
+            'notification' => array('title' => $auction_item->item->nameForSelect(),'body' => $title['ar'], 'sound' => 'default'),
             'data' => [
-                'title' => $title['ar'],
+                'title' => $auction_item->item->nameForSelect(),
                 'body' => $title['ar'],
                 'status' => 'refuse_offer',
                 'type' => 'refuse_offer',
@@ -333,9 +333,10 @@ class NegotiationController extends MasterController
         Notification::create($data);
         $push = new PushNotification('fcm');
         $msg = [
-            'notification' => array('title' => $title['ar'], 'sound' => 'default'),
+            'notification' => array('title' => $offer->auction_item->item->nameForSelect(),
+            'body' => $title['ar'], 'sound' => 'default'),
             'data' => [
-                'title' => $title['ar'],
+                'title' => $offer->auction_item->item->nameForSelect(),
                 'body' => $title['ar'],
                 'status' => $offer->status,
                 'type' => 'offer',

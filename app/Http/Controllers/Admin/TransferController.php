@@ -148,9 +148,9 @@ class TransferController extends MasterController
         ]);
         $push = new PushNotification('fcm');
         $msg = [
-            'notification' => array('title' => $note['ar'], 'sound' => 'default'),
+            'notification' => array('title' => 'رسالة ادارية','body' => $note['ar'], 'sound' => 'default'),
             'data' => [
-                'title' => $note['ar'],
+                'title' => 'رسالة ادارية',
                 'body' => $note['ar'],
                 'type' => 'transfer',
                 'db'=>true,

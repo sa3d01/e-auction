@@ -164,9 +164,9 @@ class BidController extends MasterController
             Notification::create($data);
             $push = new PushNotification('fcm');
             $msg = [
-                'notification' => array('title'=>$title['ar'], 'sound' => 'default'),
+                'notification' => array('title' => $auction_item->item->nameForSelect(),'body' => $title['ar'], 'sound' => 'default'),
                 'data' => [
-                    'title' => $title['ar'],
+                    'title' => $auction_item->item->nameForSelect(),
                     'body' => $title['ar'],
                     'status' => 'auction',
                     'type'=>'auction',
