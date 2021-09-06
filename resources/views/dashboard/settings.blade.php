@@ -138,6 +138,14 @@
                                             <div class="help-block form-text with-errors form-control-feedback"></div>
                                         </div>
 
+                                        <div class="form-group">
+                                            <label>
+                                                <i class="os-icon os-icon-dollar-sign"></i>current-app-version
+                                            </label>
+                                            <input name="app_version" value="{{$row->app_version}}" class="form-control" type="text">
+                                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                                        </div>
+
 
                                         <div class="form-group">
                                             <label>

@@ -35,6 +35,7 @@ class CreateSettingsTable extends Migration
             $table->integer('add_item_tax')->default(60);
             //نسبة بتضرب فى القوة الشرائية والنتيجة يقدر يزايد بيها
             $table->integer('purchasing_power_ratio')->default(60);
+            $table->string('app_version')->nullable();
             $table->json('more_details')->nullable();
             $table->timestamps();
         });
