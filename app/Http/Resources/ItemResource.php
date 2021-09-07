@@ -97,7 +97,7 @@ class ItemResource extends JsonResource
             'kms_count'=> $this->kms_count,
             'color'=> $this->color?$this->color->name[$this->lang()]:"",
             'sunder_count'=> $this->sunder_count,
-            'auction_type'=> $this->auction_type->name[$this->lang()],
+            'auction_type'=> $this->auction_type->name['ar'],
             'is_favourite'=> $is_favourite,
             'auction_status'=>$auction_status,
             'negotiation'=>$negotiation,
