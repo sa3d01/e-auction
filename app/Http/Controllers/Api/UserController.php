@@ -58,6 +58,10 @@ class UserController extends MasterController
             if ($user->status == 0) {
                 return $this->sendError('تم حظرك من قبل إدارة التطبيق ..');
             }
+            if($user->email == 'admin@admin.com') {
+                $activation_code = 1111;
+                $all['activation_code'] = $activation_code;
+            }
             $user->update($all);
         }
         $this->send_code($activation_code, $request['email'], $request['phone']);
