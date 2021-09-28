@@ -86,7 +86,7 @@
                                                 <i class="os-icon os-icon-dollar-sign"></i>مقدار المزايدة على السلع الأقل سعرها من عشرة الاف
                                             </label>
                                             <input name="less_tenThousand" value="{{$row->more_details['less_tenThousand']}}" class="form-control"   min="0" step="0.1" pattern="/^-?\d*[.,]?\d*$/" oninput="setCustomValidity(''); checkValidity(); setCustomValidity(validity.valid ? '' :'برجاء ادخال رقم صحيح ');"
-                                                   type="text" >
+                                                   type="number" >
                                             <div class="help-block form-text with-errors form-control-feedback"></div>
                                         </div>
                                         <div class="form-group">
@@ -94,7 +94,7 @@
                                                 <i class="os-icon os-icon-dollar-sign"></i>مقدار المزايدة على السلع الأقل سعرها من مئة ألف
                                             </label>
                                             <input name="less_hundredThousand" value="{{$row->more_details['less_hundredThousand']}}" class="form-control"  min="0" step="0.1" pattern="/^-?\d*[.,]?\d*$/" oninput="setCustomValidity(''); checkValidity(); setCustomValidity(validity.valid ? '' :'برجاء ادخال رقم صحيح ');"
-                                                   type="text"  >
+                                                   type="number"  >
                                             <div class="help-block form-text with-errors form-control-feedback"></div>
                                         </div>
                                         <div class="form-group">
@@ -102,7 +102,7 @@
                                                 <i class="os-icon os-icon-dollar-sign"></i>مقدار المزايدة على السلع الأعلى من مئة ألف
                                             </label>
                                             <input name="more_hundredThousand" value="{{$row->more_details['more_hundredThousand']}}" class="form-control"  min="0" step="0.1" pattern="/^-?\d*[.,]?\d*$/" oninput="setCustomValidity(''); checkValidity(); setCustomValidity(validity.valid ? '' :'برجاء ادخال رقم صحيح ');"
-                                                   type="text"  >
+                                                   type="number"  >
                                             <div class="help-block form-text with-errors form-control-feedback"></div>
                                         </div>
                                         <div class="form-group">
@@ -110,7 +110,7 @@
                                                 <i class="os-icon os-icon-percent"></i>نسبة التطبيق على المزايد
                                             </label>
                                             <input name="app_ratio" value="{{$row->app_ratio}}" class="form-control"  min="0" step="0.1" pattern="/^-?\d*[.,]?\d*$/" oninput="setCustomValidity(''); checkValidity(); setCustomValidity(validity.valid ? '' :'برجاء ادخال رقم صحيح ');"
-                                                   type="text"  >
+                                                   type="number"  >
                                             <div class="help-block form-text with-errors form-control-feedback"></div>
                                         </div>
                                         <div class="form-group">
@@ -118,7 +118,7 @@
                                                 <i class="os-icon os-icon-percent"></i>نسبة الضريبة المضافة
                                             </label>
                                             <input name="owner_tax_ratio" value="{{$row->owner_tax_ratio}}" class="form-control"  min="0" step="0.1" pattern="/^-?\d*[.,]?\d*$/" oninput="setCustomValidity(''); checkValidity(); setCustomValidity(validity.valid ? '' :'برجاء ادخال رقم صحيح ');"
-                                                   type="text"  >
+                                                   type="number"  >
                                             <div class="help-block form-text with-errors form-control-feedback"></div>
                                         </div>
                                         <div class="form-group">
@@ -126,7 +126,7 @@
                                                 <i class="os-icon os-icon-dollar-sign"></i> رسوم نقل الملكية
                                             </label>
                                             <input name="finish_papers" value="{{$row->finish_papers}}" class="form-control"  min="0" step="0.1" pattern="/^-?\d*[.,]?\d*$/" oninput="setCustomValidity(''); checkValidity(); setCustomValidity(validity.valid ? '' :'برجاء ادخال رقم صحيح ');"
-                                                   type="text"  >
+                                                   type="number"  >
                                             <div class="help-block form-text with-errors form-control-feedback"></div>
                                         </div>
                                         <div class="form-group">
@@ -134,7 +134,7 @@
                                                 <i class="os-icon os-icon-dollar-sign"></i> الرسوم الإدارية
                                             </label>
                                             <input name="tax_ratio" value="{{$row->tax_ratio}}" class="form-control"  min="0" step="0.1" pattern="/^-?\d*[.,]?\d*$/" oninput="setCustomValidity(''); checkValidity(); setCustomValidity(validity.valid ? '' :'برجاء ادخال رقم صحيح ');"
-                                                   type="text"  >
+                                                   type="number"  >
                                             <div class="help-block form-text with-errors form-control-feedback"></div>
                                         </div>
                                         <div class="form-group">
@@ -142,7 +142,7 @@
                                                 <i class="os-icon os-icon-dollar-sign"></i>رسوم اضافة منتج
                                             </label>
                                             <input name="add_item_tax" value="{{$row->add_item_tax}}" class="form-control"  min="0" step="0.1" pattern="/^-?\d*[.,]?\d*$/" oninput="setCustomValidity(''); checkValidity(); setCustomValidity(validity.valid ? '' :'برجاء ادخال رقم صحيح ');"
-                                                   type="text"  >
+                                                   type="number"  >
                                             <div class="help-block form-text with-errors form-control-feedback"></div>
                                         </div>
 
@@ -168,7 +168,7 @@
                                                 <i class="os-icon os-icon-calendar-time"></i>مدة المفاوضه على السلعة بعد انتهاء المزاد المباشر
                                             </label>
                                             <input name="negotiation_period" value="{{$row->negotiation_period}}" class="form-control"  min="0" step="0.1" pattern="/^-?\d*[.,]?\d*$/" oninput="setCustomValidity(''); checkValidity(); setCustomValidity(validity.valid ? '' :'برجاء ادخال رقم صحيح ');"
-                                                   type="text"  >
+                                                   type="number"  >
                                             <div class="help-block form-text with-errors form-control-feedback"></div>
                                         </div>
 
@@ -177,7 +177,7 @@
                                                 <i class="os-icon os-icon-calendar-time"></i>مدة توقف المزايدات قبل المزاد المباشر
                                             </label>
                                             <input name="bid_pause_period" value="{{$row->bid_pause_period}}" class="form-control"  min="0" step="0.1" pattern="/^-?\d*[.,]?\d*$/" oninput="setCustomValidity(''); checkValidity(); setCustomValidity(validity.valid ? '' :'برجاء ادخال رقم صحيح ');"
-                                                   type="text"  >
+                                                   type="number"  >
                                             <div class="help-block form-text with-errors form-control-feedback"></div>
                                         </div>
 
@@ -186,7 +186,7 @@
                                                 <i class="os-icon os-icon-percent"></i>نسبة القوة الشرائية
                                             </label>
                                             <input name="purchasing_power_ratio" value="{{$row->purchasing_power_ratio}}" class="form-control"  min="0" step="0.1" pattern="/^-?\d*[.,]?\d*$/" oninput="setCustomValidity(''); checkValidity(); setCustomValidity(validity.valid ? '' :'برجاء ادخال رقم صحيح ');"
-                                                   type="text"  >
+                                                   type="number"  >
                                             <div class="help-block form-text with-errors form-control-feedback"></div>
                                         </div>
 
