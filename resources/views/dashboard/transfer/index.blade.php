@@ -33,6 +33,9 @@
                                 @else
                                     <th>الغرض من الحوالة</th>
                                 @endif
+                                @if($type=='transfer')
+                                    <th>نوع الحوالة</th>
+                                @endif
                                 <th>المزيد</th>
                             </tr>
                             </thead>
@@ -49,6 +52,9 @@
                                     <th>نوع الاسترداد</th>
                                 @else
                                     <th>الغرض من الحوالة</th>
+                                @endif
+                                @if($type=='transfer')
+                                    <th>نوع الحوالة</th>
                                 @endif
                                 <th>المزيد</th>
                             </tr>
@@ -90,6 +96,15 @@
                                             @endif
                                         @endif
                                     </td>
+                                    @if($type=='transfer')
+                                        <td>
+                                            @if($row->purchasing_type=='bank')
+                                                حوالة بنكية
+                                            @else
+                                                دفع الكتروني
+                                            @endif
+                                        </td>
+                                    @endif
                                     <td>
                                         <div class=" row border-0">
                                             <div class="col-sm-3 mx-auto text-center">

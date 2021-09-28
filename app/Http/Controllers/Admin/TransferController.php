@@ -23,7 +23,7 @@ class TransferController extends MasterController
 
     public function index()
     {
-        $rows=$this->model->where('purchasing_type','bank')->where(function ($query){
+        $rows=$this->model->where(function ($query){
             $query->where('type','wallet')->orWhere('type','purchasing_power');
         })->latest()->get();
         return View('dashboard.transfer.index', [
