@@ -587,7 +587,7 @@
                 },
                 allowOutsideClick: () => !Swal.isLoading()
             }).then(() => {
-                location.href = "/e-auction/public/admin/item/status/rejected";
+                location.href = "/admin/item/status/rejected";
             })
         });
         $(document).on('click', '.accept', function (e) {
@@ -613,7 +613,7 @@
                     },
                     allowOutsideClick: () => !Swal.isLoading()
                 }).then(() => {
-                    location.href = "/e-auction/public/admin/item/status/accepted";
+                    location.href = "/admin/item/status/accepted";
                 })
             }else {
                 Swal.fire({
@@ -632,7 +632,7 @@
                     },
                     allowOutsideClick: () => !Swal.isLoading()
                 }).then(() => {
-                    location.href = "/e-auction/public/admin/item/status/accepted";
+                    location.href = "/admin/item/status/accepted";
                 })
             }
         });
@@ -644,7 +644,7 @@
                 var mark_id = $('#mark_id').val();
                 $.ajax({
                     type: "GET",
-                    url: '/e-auction/public/admin/get_models/' + mark_id,
+                    url: '/admin/get_models/' + mark_id,
                     dataType: 'json',
                     success: function (data) {
                         console.log(data)

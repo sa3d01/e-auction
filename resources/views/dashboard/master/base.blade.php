@@ -207,7 +207,7 @@
             $.ajax({
                 dataType: 'json',
                 type: 'GET',
-                url: "/e-auction/public/admin/send_single_notify/"+receiver_id+"/"+note,
+                url: "/admin/send_single_notify/"+receiver_id+"/"+note,
                 success: function(res) {
                     console.log(res)
                 },error:function (msg){
