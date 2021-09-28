@@ -19,7 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="links saned" />
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="links saned">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/item/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/item/show.blade.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -401,6 +404,11 @@
       <workItem from="1630335384903" duration="1856000" />
       <workItem from="1630353525575" duration="1853000" />
       <workItem from="1630509315931" duration="7044000" />
+      <workItem from="1631985510678" duration="1928000" />
+      <workItem from="1632239780883" duration="1245000" />
+      <workItem from="1632327468954" duration="2451000" />
+      <workItem from="1632505929133" duration="824000" />
+      <workItem from="1632788547092" duration="724000" />
     </task>
     <task id="LOCAL-00640" summary="18-8/wallet">
       <created>1629837287956</created>
