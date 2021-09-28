@@ -200,7 +200,6 @@
 {{--    //transfers--}}
     <li class="sub-header">
         <span>الحوالات البنكية </span>
-        <label class="danger">5</label>
     </li>
     <li class="sub-menu">
         <a href="{{route('admin.transfer.index')}}">
@@ -213,6 +212,7 @@
 {{--    //refund--}}
     <li class="sub-header">
         <span>طلبات استرداد المستحقات </span>
+<div class="new-messages-count">4</div>
     </li>
     <li class="sub-menu">
         <a href="{{route('admin.refund.index')}}">
