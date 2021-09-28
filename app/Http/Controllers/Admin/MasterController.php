@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Item;
 use App\Notification;
 use App\Setting;
+use App\Transfer;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -56,6 +57,13 @@ abstract class MasterController extends Controller
 //            }
         }
 
+        $pending_transfers_count=Transfer::where(['purchasing_type'=>'bank','status'=>0])->where(function ($query){
+            $query->where('type','wallet')->orWhere('type','purchasing_power');
+        })->count();
+
+        $pending_refunds_count = Transfer::where('type','refund_wallet')->orWhere('type','refund_purchasing_power')->count();
+
+
         $this->middleware('auth:admin');
         view()->share(array(
             'module_name' => $this->module_name,
@@ -75,6 +83,8 @@ abstract class MasterController extends Controller
             'pre_auction_items' => $pre_auction_items,
             'expire_auction_items' => $expire_auction_items,
             'live_auction_items' => $live_auction_items,
+            'pending_transfers_count'=>$pending_transfers_count,
+            'pending_refunds_count'=>$pending_refunds_count,
             'admin_notifications' => Notification::where(['receiver_id' => null,'receivers' => null, 'read' => 'false'])->latest()->get(),
         ));
     }
