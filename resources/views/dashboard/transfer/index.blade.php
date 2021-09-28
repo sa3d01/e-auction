@@ -70,8 +70,8 @@
                                             @endphp
                                             @if ($value=='user_id')
                                                 <td>
-{{--                                                    <a href="{{route('admin.user.show',$row->user_id)}}"> {{$related_model_val}}</a>--}}
-                                                    {{$related_model_val}}
+                                                    <a href="{{route('admin.user.show',$row->user_id)}}"> {{$related_model_val}}</a>
+{{--                                                    {{$related_model_val}}--}}
                                                 </td>
                                             @endif
                                         @else
