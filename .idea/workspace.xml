@@ -19,7 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="edit float settings" />
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="edit float settings">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -405,21 +407,7 @@
       <workItem from="1632239780883" duration="1245000" />
       <workItem from="1632327468954" duration="2451000" />
       <workItem from="1632505929133" duration="824000" />
-      <workItem from="1632788547092" duration="2766000" />
-    </task>
-    <task id="LOCAL-00644" summary="18-8/wallet">
-      <created>1629837625035</created>
-      <option name="number" value="00644" />
-      <option name="presentableId" value="LOCAL-00644" />
-      <option name="project" value="LOCAL" />
-      <updated>1629837625035</updated>
-    </task>
-    <task id="LOCAL-00645" summary="18-8/wallet">
-      <created>1629837661259</created>
-      <option name="number" value="00645" />
-      <option name="presentableId" value="LOCAL-00645" />
-      <option name="project" value="LOCAL" />
-      <updated>1629837661259</updated>
+      <workItem from="1632788547092" duration="4030000" />
     </task>
     <task id="LOCAL-00646" summary="18-8/wallet">
       <created>1629837733718</created>
@@ -750,7 +738,21 @@
       <option name="project" value="LOCAL" />
       <updated>1632791314579</updated>
     </task>
-    <option name="localTasksCounter" value="693" />
+    <task id="LOCAL-00693" summary="edit float settings">
+      <created>1632791421649</created>
+      <option name="number" value="00693" />
+      <option name="presentableId" value="LOCAL-00693" />
+      <option name="project" value="LOCAL" />
+      <updated>1632791421649</updated>
+    </task>
+    <task id="LOCAL-00694" summary="edit float settings">
+      <created>1632791546519</created>
+      <option name="number" value="00694" />
+      <option name="presentableId" value="LOCAL-00694" />
+      <option name="project" value="LOCAL" />
+      <updated>1632791546519</updated>
+    </task>
+    <option name="localTasksCounter" value="695" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

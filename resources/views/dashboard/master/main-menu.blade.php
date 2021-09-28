@@ -200,6 +200,7 @@
 {{--    //transfers--}}
     <li class="sub-header">
         <span>الحوالات البنكية </span>
+        <label class="danger">5</label>
     </li>
     <li class="sub-menu">
         <a href="{{route('admin.transfer.index')}}">
