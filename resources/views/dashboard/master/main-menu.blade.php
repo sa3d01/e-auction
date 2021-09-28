@@ -212,7 +212,7 @@
 {{--    //refund--}}
     <li class="sub-header">
         <span>طلبات استرداد المستحقات </span>
-<div class="new-messages-count">4</div>
+        <i class="new-messages-count danger">4</i>
     </li>
     <li class="sub-menu">
         <a href="{{route('admin.refund.index')}}">
