@@ -204,7 +204,9 @@
     <li class="sub-menu">
         <a href="{{route('admin.transfer.index')}}">
             <div class="icon-w">
-                <div style="background-color: red;border-radius: 50%" class="new-messages-count">{{$pending_transfers_count}}</div>
+                @if($pending_transfers_count > 0)
+                    <div style="background-color: red;border-radius: 50%" class="new-messages-count">{{$pending_transfers_count}}</div>
+                @endif
                 <div class="os-icon os-icon-mail"></div>
             </div>
             <span> الحوالات البنكية</span>
@@ -217,7 +219,9 @@
     <li class="sub-menu">
         <a href="{{route('admin.refund.index')}}">
             <div class="icon-w">
-                <div style="background-color: red;border-radius: 50%" class="new-messages-count">{{$pending_refunds_count}}</div>
+                @if($pending_refunds_count > 0)
+                    <div style="background-color: red;border-radius: 50%" class="new-messages-count">{{$pending_refunds_count}}</div>
+                @endif
                 <div class="os-icon os-icon-rewind"></div>
             </div>
             <span>طلبات استرداد المستحقات </span>
