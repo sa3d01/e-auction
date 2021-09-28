@@ -204,7 +204,7 @@
     <li class="sub-menu">
         <a href="{{route('admin.transfer.index')}}">
             <div class="icon-w">
-                <div class="new-messages-count">{{$pending_transfers_count}}</div>
+                <div style="background-color: red" class="new-messages-count">{{$pending_transfers_count}}</div>
                 <div class="os-icon os-icon-mail"></div>
             </div>
             <span> الحوالات البنكية</span>
