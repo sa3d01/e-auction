@@ -19,9 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="edit float settings">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="online transfers" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -408,21 +406,7 @@
       <workItem from="1632327468954" duration="2451000" />
       <workItem from="1632505929133" duration="824000" />
       <workItem from="1632788547092" duration="8534000" />
-      <workItem from="1632839761803" duration="1389000" />
-    </task>
-    <task id="LOCAL-00655" summary="18-8/wallet">
-      <created>1629842404273</created>
-      <option name="number" value="00655" />
-      <option name="presentableId" value="LOCAL-00655" />
-      <option name="project" value="LOCAL" />
-      <updated>1629842404273</updated>
-    </task>
-    <task id="LOCAL-00656" summary="18-8/wallet">
-      <created>1629842483975</created>
-      <option name="number" value="00656" />
-      <option name="presentableId" value="LOCAL-00656" />
-      <option name="project" value="LOCAL" />
-      <updated>1629842483975</updated>
+      <workItem from="1632839761803" duration="1741000" />
     </task>
     <task id="LOCAL-00657" summary="18-8/wallet">
       <created>1629842625144</created>
@@ -753,7 +737,21 @@
       <option name="project" value="LOCAL" />
       <updated>1632800581150</updated>
     </task>
-    <option name="localTasksCounter" value="704" />
+    <task id="LOCAL-00704" summary="online transfers">
+      <created>1632842441844</created>
+      <option name="number" value="00704" />
+      <option name="presentableId" value="LOCAL-00704" />
+      <option name="project" value="LOCAL" />
+      <updated>1632842441844</updated>
+    </task>
+    <task id="LOCAL-00705" summary="online transfers">
+      <created>1632842544508</created>
+      <option name="number" value="00705" />
+      <option name="presentableId" value="LOCAL-00705" />
+      <option name="project" value="LOCAL" />
+      <updated>1632842544508</updated>
+    </task>
+    <option name="localTasksCounter" value="706" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -773,7 +771,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="22-6" />
     <MESSAGE value="auth mobile email" />
     <MESSAGE value="my items" />
     <MESSAGE value="validate purchasing power" />
@@ -798,7 +795,8 @@
     <MESSAGE value="links saned" />
     <MESSAGE value="edit all items" />
     <MESSAGE value="edit float settings" />
-    <option name="LAST_COMMIT_MESSAGE" value="edit float settings" />
+    <MESSAGE value="online transfers" />
+    <option name="LAST_COMMIT_MESSAGE" value="online transfers" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

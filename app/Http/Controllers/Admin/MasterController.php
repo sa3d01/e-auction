@@ -57,7 +57,7 @@ abstract class MasterController extends Controller
 //            }
         }
 
-        $pending_transfers_count=Transfer::where(['purchasing_type'=>'bank','status'=>0])->where(function ($query){
+        $pending_transfers_count=Transfer::where(['status'=>0])->where(function ($query){
             $query->where('type','wallet')->orWhere('type','purchasing_power');
         })->count();
 

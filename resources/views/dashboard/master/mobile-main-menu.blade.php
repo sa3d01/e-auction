@@ -138,6 +138,9 @@
             <div class="icon-w">
                 <div class="os-icon os-icon-mail"></div>
             </div>
+            @if($pending_transfers_count > 0)
+                <div style="background-color: red;border-radius: 50%" class="new-messages-count">{{$pending_transfers_count}}</div>
+            @endif
             <span> الحوالات البنكية</span>
         </a>
     </li>
@@ -147,6 +150,9 @@
             <div class="icon-w">
                 <div class="os-icon os-icon-rewind"></div>
             </div>
+            @if($pending_refunds_count > 0)
+                <div style="background-color: red;border-radius: 50%" class="new-messages-count">{{$pending_refunds_count}}</div>
+            @endif
             <span>طلبات استرداد المستحقات </span>
         </a>
     </li>
