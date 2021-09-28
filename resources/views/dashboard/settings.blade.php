@@ -106,7 +106,7 @@
                                             <label>
                                                 <i class="os-icon os-icon-percent"></i>نسبة التطبيق على المزايد
                                             </label>
-                                            <input name="app_ratio" value="{{$row->app_ratio}}" class="form-control" type="number" min="0">
+                                            <input name="app_ratio" value="{{$row->app_ratio}}" class="form-control" type="number" min="0" step=0.01>
                                             <div class="help-block form-text with-errors form-control-feedback"></div>
                                         </div>
                                         <div class="form-group">

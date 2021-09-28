@@ -19,9 +19,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="links saned">
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="edit all items">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/item/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/item/show.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -408,14 +407,7 @@
       <workItem from="1632239780883" duration="1245000" />
       <workItem from="1632327468954" duration="2451000" />
       <workItem from="1632505929133" duration="824000" />
-      <workItem from="1632788547092" duration="724000" />
-    </task>
-    <task id="LOCAL-00640" summary="18-8/wallet">
-      <created>1629837287956</created>
-      <option name="number" value="00640" />
-      <option name="presentableId" value="LOCAL-00640" />
-      <option name="project" value="LOCAL" />
-      <updated>1629837287956</updated>
+      <workItem from="1632788547092" duration="1453000" />
     </task>
     <task id="LOCAL-00641" summary="18-8/wallet">
       <created>1629837393786</created>
@@ -753,7 +745,14 @@
       <option name="project" value="LOCAL" />
       <updated>1630537151392</updated>
     </task>
-    <option name="localTasksCounter" value="689" />
+    <task id="LOCAL-00689" summary="edit all items">
+      <created>1632789318354</created>
+      <option name="number" value="00689" />
+      <option name="presentableId" value="LOCAL-00689" />
+      <option name="project" value="LOCAL" />
+      <updated>1632789318354</updated>
+    </task>
+    <option name="localTasksCounter" value="690" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -773,7 +772,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="about pdf" />
     <MESSAGE value="٢١-٦" />
     <MESSAGE value="22-6" />
     <MESSAGE value="auth mobile email" />
@@ -798,7 +796,8 @@
     <MESSAGE value="current-version" />
     <MESSAGE value="validation" />
     <MESSAGE value="links saned" />
-    <option name="LAST_COMMIT_MESSAGE" value="links saned" />
+    <MESSAGE value="edit all items" />
+    <option name="LAST_COMMIT_MESSAGE" value="edit all items" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
