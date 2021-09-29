@@ -43,7 +43,7 @@ class UserController extends MasterController
             'rows' => $rows,
             'type'=>'user',
             'title'=>'قائمة العملاء',
-            'index_fields'=>['الاسم' => 'name', 'البريد الإلكترونى' => 'email', ' الجوال' => 'phone','تاريخ الانضمام'=>'created_at'],
+            'index_fields'=>['الاسم' => 'name', 'البريد الإلكترونى' => 'email', ' الجوال' => 'phone','العربون'=>'purchasing_power','المستحقات'=>'wallet','تاريخ الانضمام'=>'created_at'],
             'status'=>true,
             'image'=>true,
         ]);
