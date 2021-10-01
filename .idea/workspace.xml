@@ -19,7 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="domain">
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="user index">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -409,13 +409,8 @@
       <workItem from="1632505929133" duration="824000" />
       <workItem from="1632788547092" duration="8534000" />
       <workItem from="1632839761803" duration="4763000" />
-    </task>
-    <task id="LOCAL-00659" summary="18-8/wallet">
-      <created>1629843857756</created>
-      <option name="number" value="00659" />
-      <option name="presentableId" value="LOCAL-00659" />
-      <option name="project" value="LOCAL" />
-      <updated>1629843857756</updated>
+      <workItem from="1632939904940" duration="1425000" />
+      <workItem from="1632978133772" duration="839000" />
     </task>
     <task id="LOCAL-00660" summary="18-8/wallet">
       <created>1629844039444</created>
@@ -753,7 +748,14 @@
       <option name="project" value="LOCAL" />
       <updated>1632850977081</updated>
     </task>
-    <option name="localTasksCounter" value="708" />
+    <task id="LOCAL-00708" summary="user index">
+      <created>1632940087249</created>
+      <option name="number" value="00708" />
+      <option name="presentableId" value="LOCAL-00708" />
+      <option name="project" value="LOCAL" />
+      <updated>1632940087249</updated>
+    </task>
+    <option name="localTasksCounter" value="709" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -773,7 +775,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="my items" />
     <MESSAGE value="validate purchasing power" />
     <MESSAGE value="latest live" />
     <MESSAGE value="expired items" />
@@ -798,7 +799,8 @@
     <MESSAGE value="edit float settings" />
     <MESSAGE value="online transfers" />
     <MESSAGE value="domain" />
-    <option name="LAST_COMMIT_MESSAGE" value="domain" />
+    <MESSAGE value="user index" />
+    <option name="LAST_COMMIT_MESSAGE" value="user index" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

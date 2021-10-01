@@ -89,7 +89,8 @@
                                     <div class="col-sm-6">
                                         <a class="element-box el-tablo centered trend-in-corner padded bold-label">
                                             <div class="value">
-                                                {{\App\AuctionItem::where('item_id',$row->id)->latest()->value('price')}}
+                                                {{\App\AuctionUser::where('item_id',$row->id)->sum('charge_price')}}
+{{--                                                {{\App\AuctionItem::where('item_id',$row->id)->latest()->value('price')}}--}}
                                             </div>
                                             <div class="label">
                                                 السعر الأخير
@@ -111,7 +112,7 @@
                                     <div class="col-sm-6">
                                         <a class="element-box el-tablo centered trend-in-corner padded bold-label" href="{{route('admin.user.show',[\App\AuctionUser::where('item_id',$row->id)->latest()->value('user_id')])}}">
                                             <div class="value">
-                                                {{\App\User::whereId(\App\AuctionUser::where('item_id',$row->id)->latest()->value('user_id'))->value('name')}}
+                                                {{\App\User::whereId(\App\AuctionUser::where('item_id',$row->id)->orderBy('DESC')->value('user_id'))->value('name')}}
                                             </div>
                                             <div class="label">
                                                 الأعلى مزايدة
