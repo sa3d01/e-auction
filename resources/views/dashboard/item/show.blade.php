@@ -145,7 +145,7 @@
                                             <div class="ta-record-w">
                                                 <div class="ta-record">
                                                     <div class="ta-timestamp">
-                                                        <strong>{{\Carbon\Carbon::parse($auction_user->created_at)->format('H:i A')}}</strong>
+                                                        <strong>{{\Carbon\Carbon::parse($auction_user->created_at)->format('H:i:s A')}}</strong>
                                                     </div>
                                                     <div class="ta-activity">
                                                         {!! $item_href. 'قام بمزايدة بمبلغ ' .$auction_user->charge_price. ' ريال على سلعة ' . $user_href !!}
