@@ -19,9 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="item dashboard show">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="show item 17-11" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -423,14 +421,7 @@
       <workItem from="1635297358608" duration="636000" />
       <workItem from="1635712197610" duration="609000" />
       <workItem from="1636900243918" duration="607000" />
-      <workItem from="1637167658256" duration="1081000" />
-    </task>
-    <task id="LOCAL-00662" summary="18-8/wallet">
-      <created>1629844179665</created>
-      <option name="number" value="00662" />
-      <option name="presentableId" value="LOCAL-00662" />
-      <option name="project" value="LOCAL" />
-      <updated>1629844179665</updated>
+      <workItem from="1637167658256" duration="1895000" />
     </task>
     <task id="LOCAL-00663" summary="live">
       <created>1629934852092</created>
@@ -768,7 +759,14 @@
       <option name="project" value="LOCAL" />
       <updated>1633106507248</updated>
     </task>
-    <option name="localTasksCounter" value="711" />
+    <task id="LOCAL-00711" summary="show item 17-11">
+      <created>1637170052642</created>
+      <option name="number" value="00711" />
+      <option name="presentableId" value="LOCAL-00711" />
+      <option name="project" value="LOCAL" />
+      <updated>1637170052648</updated>
+    </task>
+    <option name="localTasksCounter" value="712" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -788,7 +786,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="latest live" />
     <MESSAGE value="expired items" />
     <MESSAGE value="notifications en" />
     <MESSAGE value="routes" />
@@ -813,7 +810,8 @@
     <MESSAGE value="domain" />
     <MESSAGE value="user index" />
     <MESSAGE value="item dashboard show" />
-    <option name="LAST_COMMIT_MESSAGE" value="item dashboard show" />
+    <MESSAGE value="show item 17-11" />
+    <option name="LAST_COMMIT_MESSAGE" value="show item 17-11" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -129,7 +129,7 @@
                             </h6>
                             <div class="timed-activities compact" style="overflow:scroll;max-height: 500px">
                                 @if(\App\AuctionUser::where('item_id',$row->id)->latest()->count() > 0)
-                                    @foreach(\App\AuctionUser::where('item_id',$row->id)->orderBy('id','desc')->get() as $auction_user)
+                                    @foreach(\App\AuctionUser::where('item_id',$row->id)->orderBy('id','asc')->get() as $auction_user)
                                         @php
                                             $user_route=route('admin.user.show',$auction_user->user_id);
                                             $user_name=\App\User::whereId($auction_user->user_id)->value('name');
