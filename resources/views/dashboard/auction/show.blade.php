@@ -187,7 +187,7 @@
                 },
                 allowOutsideClick: () => !Swal.isLoading()
             }).then(() => {
-                location.href = "/admin/item/status/rejected";
+                location.href = "https://sanedapps.com/e-auction/public/admin/item/status/rejected";
             })
         });
         $(document).on('click', '.accept', function (e) {
@@ -210,7 +210,7 @@
                 },
                 allowOutsideClick: () => !Swal.isLoading()
             }).then(() => {
-                location.href = "/admin/item/status/accepted";
+                location.href = "https://sanedapps.com/e-auction/public/admin/item/status/accepted";
             })
         });
     </script>
