@@ -252,7 +252,7 @@ class Controller extends BaseController
 
     function remainCalc($auction_item,$price,$take)
     {
-        $app_ratio=(Setting::value('app_ratio')*($price))/100;
+        $app_ratio=(double)(Setting::value('app_ratio')*($price))/100;
         $tax_ratio=Setting::value('tax_ratio');
         $owner_tax_ratio=Setting::value('owner_tax_ratio');
         $first_remain=$price-$take;
