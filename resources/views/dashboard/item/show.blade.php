@@ -79,7 +79,10 @@
                                     <div class="col-sm-6">
                                         <a class="element-box el-tablo centered trend-in-corner padded bold-label">
                                             <div class="value">
-                                                {{\App\AuctionItem::where('item_id',$row->id)->value('auction_id')}}
+                                                @php
+                                                    $auction_id=\App\AuctionItem::where('item_id',$row->id)->latest()->value('auction_id');
+                                                @endphp
+                                                {{\App\AuctionItem::where('item_id',$row->id)->latest()->value('auction_id')}}
                                             </div>
                                             <div class="label">
                                                 الرقم التسلسلى للمزاد
@@ -89,7 +92,7 @@
                                     <div class="col-sm-6">
                                         <a class="element-box el-tablo centered trend-in-corner padded bold-label">
                                             <div class="value">
-                                                {{\App\AuctionUser::where('item_id',$row->id)->sum('charge_price')}}
+                                                {{\App\AuctionUser::where(['item_id'=>$row->id,'auction_id'=>$auction_id])->sum('charge_price')}}
 {{--                                                {{\App\AuctionItem::where('item_id',$row->id)->latest()->value('price')}}--}}
                                             </div>
                                             <div class="label">
@@ -100,7 +103,7 @@
                                     <div class="col-sm-6">
                                         <a class="element-box el-tablo centered trend-in-corner padded bold-label">
                                             <div class="value">
-                                                {{\App\AuctionUser::where('item_id',$row->id)->count()}}
+                                                {{\App\AuctionUser::where(['item_id'=>$row->id,'auction_id'=>$auction_id])->count()}}
                                             </div>
                                             <div class="label">
                                                 عدد المزايدات
@@ -108,11 +111,11 @@
                                         </a>
                                     </div>
                                 @endif
-                                @if(\App\AuctionUser::where('item_id',$row->id)->count() > 0)
+                                @if(\App\AuctionUser::where(['item_id'=>$row->id,'auction_id'=>$auction_id])->count() > 0)
                                     <div class="col-sm-6">
                                         <a class="element-box el-tablo centered trend-in-corner padded bold-label" href="{{route('admin.user.show',[\App\AuctionUser::where('item_id',$row->id)->latest()->value('user_id')])}}">
                                             <div class="value">
-                                                {{\App\User::whereId(\App\AuctionUser::where('item_id',$row->id)->orderBy('created_at','DESC')->value('user_id'))->value('name')}}
+                                                {{\App\User::whereId(\App\AuctionUser::where(['item_id'=>$row->id,'auction_id'=>$auction_id])->orderBy('created_at','DESC')->value('user_id'))->value('name')}}
                                             </div>
                                             <div class="label">
                                                 الأعلى مزايدة
@@ -128,8 +131,8 @@
                                 اخر النشاطات
                             </h6>
                             <div class="timed-activities compact" style="overflow:scroll;max-height: 500px">
-                                @if(\App\AuctionUser::where('item_id',$row->id)->latest()->count() > 0)
-                                    @foreach(\App\AuctionUser::where('item_id',$row->id)->orderBy('id','DESC')->get() as $auction_user)
+                                @if(\App\AuctionUser::where(['item_id'=>$row->id,'auction_id'=>$auction_id])->latest()->count() > 0)
+                                    @foreach(\App\AuctionUser::where(['item_id'=>$row->id,'auction_id'=>$auction_id])->orderBy('id','DESC')->get() as $auction_user)
                                         @php
                                             $user_route=route('admin.user.show',$auction_user->user_id);
                                             $user_name=\App\User::whereId($auction_user->user_id)->value('name');
