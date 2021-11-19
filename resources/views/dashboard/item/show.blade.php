@@ -111,6 +111,7 @@
                                         </a>
                                     </div>
                                 @endif
+                            @if($auction_id)
                                 @if(\App\AuctionUser::where(['item_id'=>$row->id,'auction_id'=>$auction_id])->count() > 0)
                                     <div class="col-sm-6">
                                         <a class="element-box el-tablo centered trend-in-corner padded bold-label" href="{{route('admin.user.show',[\App\AuctionUser::where('item_id',$row->id)->latest()->value('user_id')])}}">
@@ -123,6 +124,7 @@
                                         </a>
                                     </div>
                                 @endif
+                            @endif
                         </div>
                     </div>
                     <div class="element-wrapper">
