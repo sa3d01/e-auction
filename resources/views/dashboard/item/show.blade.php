@@ -133,7 +133,7 @@
                                 اخر النشاطات
                             </h6>
                             <div class="timed-activities compact" style="overflow:scroll;max-height: 500px">
-                                @if(\App\AuctionUser::where(['item_id'=>$row->id,'auction_id'=>$auction_id])->latest()->count() > 0)
+                                @if(isset($auction_id) && \App\AuctionUser::where(['item_id'=>$row->id,'auction_id'=>$auction_id])->latest()->count() > 0)
                                     @foreach(\App\AuctionUser::where(['item_id'=>$row->id,'auction_id'=>$auction_id])->orderBy('id','DESC')->get() as $auction_user)
                                         @php
                                             $user_route=route('admin.user.show',$auction_user->user_id);
