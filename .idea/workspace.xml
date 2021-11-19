@@ -19,8 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="show item 17-11">
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="show item 19-11">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/dashboard/item/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/dashboard/item/show.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -424,14 +425,7 @@
       <workItem from="1635712197610" duration="609000" />
       <workItem from="1636900243918" duration="607000" />
       <workItem from="1637167658256" duration="2699000" />
-      <workItem from="1637352969132" duration="619000" />
-    </task>
-    <task id="LOCAL-00666" summary="live">
-      <created>1629967212965</created>
-      <option name="number" value="00666" />
-      <option name="presentableId" value="LOCAL-00666" />
-      <option name="project" value="LOCAL" />
-      <updated>1629967212965</updated>
+      <workItem from="1637352969132" duration="1446000" />
     </task>
     <task id="LOCAL-00667" summary="live">
       <created>1629967344074</created>
@@ -769,7 +763,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637170242133</updated>
     </task>
-    <option name="localTasksCounter" value="715" />
+    <task id="LOCAL-00715" summary="show item 19-11">
+      <created>1637357542100</created>
+      <option name="number" value="00715" />
+      <option name="presentableId" value="LOCAL-00715" />
+      <option name="project" value="LOCAL" />
+      <updated>1637357542101</updated>
+    </task>
+    <option name="localTasksCounter" value="716" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -789,7 +790,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="expired items" />
     <MESSAGE value="notifications en" />
     <MESSAGE value="routes" />
     <MESSAGE value="tax" />
@@ -814,7 +814,8 @@
     <MESSAGE value="user index" />
     <MESSAGE value="item dashboard show" />
     <MESSAGE value="show item 17-11" />
-    <option name="LAST_COMMIT_MESSAGE" value="show item 17-11" />
+    <MESSAGE value="show item 19-11" />
+    <option name="LAST_COMMIT_MESSAGE" value="show item 19-11" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
