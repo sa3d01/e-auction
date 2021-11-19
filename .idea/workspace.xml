@@ -19,9 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="show item 19-11">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="dev 1111" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -424,14 +422,7 @@
       <workItem from="1635712197610" duration="609000" />
       <workItem from="1636900243918" duration="607000" />
       <workItem from="1637167658256" duration="2699000" />
-      <workItem from="1637352969132" duration="2521000" />
-    </task>
-    <task id="LOCAL-00668" summary="live">
-      <created>1629967383506</created>
-      <option name="number" value="00668" />
-      <option name="presentableId" value="LOCAL-00668" />
-      <option name="project" value="LOCAL" />
-      <updated>1629967383506</updated>
+      <workItem from="1637352969132" duration="3297000" />
     </task>
     <task id="LOCAL-00669" summary="current-version">
       <created>1630336552434</created>
@@ -769,7 +760,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637358786052</updated>
     </task>
-    <option name="localTasksCounter" value="717" />
+    <task id="LOCAL-00717" summary="dev 1111">
+      <created>1637361145917</created>
+      <option name="number" value="00717" />
+      <option name="presentableId" value="LOCAL-00717" />
+      <option name="project" value="LOCAL" />
+      <updated>1637361145917</updated>
+    </task>
+    <option name="localTasksCounter" value="718" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -789,7 +787,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="notifications en" />
     <MESSAGE value="routes" />
     <MESSAGE value="tax" />
     <MESSAGE value="offers in purchasing power" />
@@ -814,7 +811,8 @@
     <MESSAGE value="item dashboard show" />
     <MESSAGE value="show item 17-11" />
     <MESSAGE value="show item 19-11" />
-    <option name="LAST_COMMIT_MESSAGE" value="show item 19-11" />
+    <MESSAGE value="dev 1111" />
+    <option name="LAST_COMMIT_MESSAGE" value="dev 1111" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
