@@ -199,5 +199,4 @@ class BidController extends MasterController
             ->sendByTopic('new_auction')
             ->send();
     }
-
 }

@@ -30,7 +30,7 @@ class NotificationController extends MasterController
             'admin_notify_type'=>$admin_notify_type,
             'title'=>$this->model->nameForShow($admin_notify_type),
             'index_fields'=>['نص الاشعار'=>'note','تاريخ الارسال'=>'created_at'],
-            'create_fields'=>['نص الاشعار' => 'note'],
+            'create_fields'=>['نص الاشعار باللغة العربية' => 'note_ar','نص الاشعار باللغة الانجليزية' => 'note_en'],
             'only_show'=>true,
         ]);
     }
@@ -39,8 +39,10 @@ class NotificationController extends MasterController
         $admin_notify_type=$request['admin_notify_type'];
         $receivers=User::all();
         $receivers_ids=$receivers->pluck('id');
-        $title='رسالة إدارية';
+        $title['ar']='رسالة إدارية';
+        $title['en']='administrator message';
         $note['ar']=$request['note_ar'];
+        $note['en']=$request['note_en'];
         $token_receivers=[];
         foreach ($receivers as $receiver){
             if ($receiver->device['id'] !='null'){
@@ -49,10 +51,10 @@ class NotificationController extends MasterController
         }
         $push = new PushNotification('fcm');
         $push->setMessage([
-            'notification' => array('title'=>$title,'body' => $note['ar'], 'sound' => 'default'),
+            'notification' => array('title'=>$title[request()->input('lang','ar')],'body' => $note[request()->input('lang','ar')], 'sound' => 'default'),
             'data' => [
-                'title' => $title,
-                'body' => $note['ar'],
+                'title' => $title[request()->input('lang','ar')],
+                'body' => $note[request()->input('lang','ar')],
                 'status' => 'admin',
                 'type'=>'admin',
                 'db'=>true,
