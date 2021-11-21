@@ -19,12 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="dev 1111">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/NotificationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/NotificationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/BidController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/BidController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" afterDir="false" />
-    </list>
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="notifies and controller" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -429,14 +424,7 @@
       <workItem from="1637167658256" duration="2699000" />
       <workItem from="1637352969132" duration="8409000" />
       <workItem from="1637442566692" duration="7000" />
-      <workItem from="1637517029011" duration="6371000" />
-    </task>
-    <task id="LOCAL-00674" summary="current-version">
-      <created>1630514024742</created>
-      <option name="number" value="00674" />
-      <option name="presentableId" value="LOCAL-00674" />
-      <option name="project" value="LOCAL" />
-      <updated>1630514024742</updated>
+      <workItem from="1637517029011" duration="6673000" />
     </task>
     <task id="LOCAL-00675" summary="current-version">
       <created>1630514177009</created>
@@ -774,7 +762,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637365054477</updated>
     </task>
-    <option name="localTasksCounter" value="723" />
+    <task id="LOCAL-00723" summary="notifies and controller">
+      <created>1637527031433</created>
+      <option name="number" value="00723" />
+      <option name="presentableId" value="LOCAL-00723" />
+      <option name="project" value="LOCAL" />
+      <updated>1637527031433</updated>
+    </task>
+    <option name="localTasksCounter" value="724" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -794,7 +789,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="routes" />
     <MESSAGE value="tax" />
     <MESSAGE value="offers in purchasing power" />
     <MESSAGE value="delete offers" />
@@ -819,7 +813,8 @@
     <MESSAGE value="show item 17-11" />
     <MESSAGE value="show item 19-11" />
     <MESSAGE value="dev 1111" />
-    <option name="LAST_COMMIT_MESSAGE" value="dev 1111" />
+    <MESSAGE value="notifies and controller" />
+    <option name="LAST_COMMIT_MESSAGE" value="notifies and controller" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
