@@ -82,7 +82,7 @@
                                                 @php
                                                     $auction_id=\App\AuctionItem::where('item_id',$row->id)->latest()->value('auction_id');
                                                 @endphp
-                                                {{\App\AuctionItem::where('item_id',$row->id)->latest()->value('auction_id')}}
+                                                {{$auction_id}}
                                             </div>
                                             <div class="label">
                                                 الرقم التسلسلى للمزاد
@@ -93,7 +93,7 @@
                                         <a class="element-box el-tablo centered trend-in-corner padded bold-label">
                                             <div class="value">
 {{--                                                {{\App\AuctionUser::where(['item_id'=>$row->id,'auction_id'=>$auction_id])->sum('charge_price')}}--}}
-                                                {{\App\AuctionItem::where(['item_id'=>$row->id,'auction_id'=>$auction_id])->latest()->value('price')}}
+                                                {{\App\AuctionItem::where(['item_id'=>$row->id,'auction_id'=>$auction_id])->orderBy('id','DESC')->value('price')}}
                                             </div>
                                             <div class="label">
                                                 السعر الأخير
@@ -116,7 +116,7 @@
                                     <div class="col-sm-6">
                                         <a class="element-box el-tablo centered trend-in-corner padded bold-label" href="{{route('admin.user.show',[\App\AuctionUser::where('item_id',$row->id)->latest()->value('user_id')])}}">
                                             <div class="value">
-                                                {{\App\User::whereId(\App\AuctionUser::where(['item_id'=>$row->id,'auction_id'=>$auction_id])->orderBy('created_at','DESC')->value('user_id'))->value('name')}}
+                                                {{\App\User::whereId(\App\AuctionUser::where(['item_id'=>$row->id,'auction_id'=>$auction_id])->orderBy('id','DESC')->value('user_id'))->value('name')}}
                                             </div>
                                             <div class="label">
                                                 الأعلى مزايدة
