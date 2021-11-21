@@ -114,7 +114,7 @@
                             @if(isset($auction_id))
                                 @if(\App\AuctionUser::where(['item_id'=>$row->id,'auction_id'=>$auction_id])->count() > 0)
                                     <div class="col-sm-6">
-                                        <a class="element-box el-tablo centered trend-in-corner padded bold-label" href="{{route('admin.user.show',[\App\AuctionUser::where('item_id',$row->id)->latest()->value('user_id')])}}">
+                                        <a class="element-box el-tablo centered trend-in-corner padded bold-label" href="{{route('admin.user.show',[\App\AuctionUser::where(['item_id'=>$row->id,'auction_id'=>$auction_id])->orderBy('id','DESC')->value('user_id')])}}">
                                             <div class="value">
                                                 {{\App\User::whereId(\App\AuctionUser::where(['item_id'=>$row->id,'auction_id'=>$auction_id])->orderBy('id','DESC')->value('user_id'))->value('name')}}
                                             </div>
