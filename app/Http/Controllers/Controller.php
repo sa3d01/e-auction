@@ -304,43 +304,52 @@ class Controller extends BaseController
     function autoSendOffer($auction_item)
     {
         $auction_user = AuctionUser::where(['item_id'=> $auction_item->item_id,'auction_id'=>$auction_item->auction_id])->orderBy('created_at','desc')->first();
-        $offer = Offer::create([
-            'sender_id' => $auction_user->user_id,
+        //check for duplicates
+        $pre_another_user_offer = Offer::where([
             'receiver_id' => $auction_item->item->user_id,
             'auction_item_id' => $auction_item->id,
-            'price' => $auction_item->price,
             'status' => 'pending'
-        ]);
-        $title['ar'] = 'تم إنتهاء المزاد رقم ' . $offer->auction_item->item_id .' .يرجى الذهاب لصفحة المفاوضات';
-        $title['en'] = 'Live auction #' . $offer->auction_item->item_id . 'is over ! Please go to the negotiation page ';
-        $data = [];
-        $data['title'] = $title;
-        $data['note'] = $title;
-        $data['receiver_id'] = $offer->receiver_id;
-        $data['item_id'] = $offer->auction_item->item_id;
-        $data['more_details'] = ['offer_id' => $offer->id];
-        Notification::create($data);
-        $push = new PushNotification('fcm');
-        $msg = [
-            'notification' => array(
-                'title' => $offer->auction_item->item->nameForSelect(),
-                'body' => $title[request()->input('lang','ar')],
-                'sound' => 'default'
-            ),
-            'data' => [
-                'title' => $offer->auction_item->item->nameForSelect(),
-                'body' => $title[request()->input('lang','ar')],
-                'status' => $offer->status,
-                'type' => 'offer',
-                'db'=>true,
-                'item' => new ItemResource(Item::find($offer->auction_item->item_id)),
-                'offer_id' => $offer->id
-            ],
-            'priority' => 'high',
-        ];
-        $push->setMessage($msg)
-            ->setDevicesToken($offer->receiver->device['id'])
-            ->send();
+        ])->latest()->first();
+        if (!$pre_another_user_offer)
+        {
+            $offer = Offer::create([
+                'sender_id' => $auction_user->user_id,
+                'receiver_id' => $auction_item->item->user_id,
+                'auction_item_id' => $auction_item->id,
+                'price' => $auction_item->price,
+                'status' => 'pending'
+            ]);
+            $title['ar'] = 'تم إنتهاء المزاد رقم ' . $offer->auction_item->item_id .' .يرجى الذهاب لصفحة المفاوضات';
+            $title['en'] = 'Live auction #' . $offer->auction_item->item_id . 'is over ! Please go to the negotiation page ';
+            $data = [];
+            $data['title'] = $title;
+            $data['note'] = $title;
+            $data['receiver_id'] = $offer->receiver_id;
+            $data['item_id'] = $offer->auction_item->item_id;
+            $data['more_details'] = ['offer_id' => $offer->id];
+            Notification::create($data);
+            $push = new PushNotification('fcm');
+            $msg = [
+                'notification' => array(
+                    'title' => $offer->auction_item->item->nameForSelect(),
+                    'body' => $title[request()->input('lang','ar')],
+                    'sound' => 'default'
+                ),
+                'data' => [
+                    'title' => $offer->auction_item->item->nameForSelect(),
+                    'body' => $title[request()->input('lang','ar')],
+                    'status' => $offer->status,
+                    'type' => 'offer',
+                    'db'=>true,
+                    'item' => new ItemResource(Item::find($offer->auction_item->item_id)),
+                    'offer_id' => $offer->id
+                ],
+                'priority' => 'high',
+            ];
+            $push->setMessage($msg)
+                ->setDevicesToken($offer->receiver->device['id'])
+                ->send();
+        }
     }
 
     function base_notify($title, $receiver_id, $item_id,$win=null)
