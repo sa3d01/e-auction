@@ -5,9 +5,13 @@ namespace App\Listeners;
 use App\Events\AuctionLive;
 use App\Offer;
 use Carbon\Carbon;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
-class NotifyAuctionLive
+class NotifyAuctionLive implements ShouldQueue
 {
+    public $connection='database';
+    public $queue='listeners';
+    public $delay=60;
     /**
      * Create the event listener.
      *

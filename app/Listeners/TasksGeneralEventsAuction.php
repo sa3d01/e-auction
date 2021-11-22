@@ -6,9 +6,13 @@ use App\Events\AuctionLive;
 use App\Events\AuctionTimeOut;
 use App\Events\GeneralEventsAuction;
 use Carbon\Carbon;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
-class TasksGeneralEventsAuction
+class TasksGeneralEventsAuction implements ShouldQueue
 {
+    public $connection='database';
+    public $queue='listeners';
+    public $delay=60;
     /**
      * Create the event listener.
      *
