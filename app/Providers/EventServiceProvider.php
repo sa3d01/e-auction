@@ -2,6 +2,12 @@
 
 namespace App\Providers;
 
+use App\Events\AuctionLive;
+use App\Events\AuctionNegotiation;
+use App\Events\AuctionTimeOut;
+use App\Listeners\NotifyAuctionLive;
+use App\Listeners\NotifyAuctionNegotiation;
+use App\Listeners\NotifyAuctionTimeOut;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -17,6 +23,15 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        AuctionTimeOut::class => [
+            NotifyAuctionTimeOut::class,
+        ],
+        AuctionLive::class => [
+            NotifyAuctionLive::class,
+        ],
+        AuctionNegotiation::class => [
+            NotifyAuctionNegotiation::class,
         ],
     ];
 

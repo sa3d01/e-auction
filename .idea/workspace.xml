@@ -20,9 +20,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="notifies and controller">
+      <change afterPath="$PROJECT_DIR$/app/Events/AuctionLive.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Events/AuctionNegotiation.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/Events/AuctionTimeOut.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Listeners/NotifyAuctionLive.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/Listeners/NotifyAuctionNegotiation.php" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/app/Listeners/NotifyAuctionTimeOut.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/BidController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/BidController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -429,21 +435,7 @@
       <workItem from="1637167658256" duration="2699000" />
       <workItem from="1637352969132" duration="8409000" />
       <workItem from="1637442566692" duration="7000" />
-      <workItem from="1637517029011" duration="9248000" />
-    </task>
-    <task id="LOCAL-00677" summary="validation">
-      <created>1630515900091</created>
-      <option name="number" value="00677" />
-      <option name="presentableId" value="LOCAL-00677" />
-      <option name="project" value="LOCAL" />
-      <updated>1630515900091</updated>
-    </task>
-    <task id="LOCAL-00678" summary="validation">
-      <created>1630515987555</created>
-      <option name="number" value="00678" />
-      <option name="presentableId" value="LOCAL-00678" />
-      <option name="project" value="LOCAL" />
-      <updated>1630515987555</updated>
+      <workItem from="1637517029011" duration="15366000" />
     </task>
     <task id="LOCAL-00679" summary="validation">
       <created>1630516302424</created>
@@ -774,7 +766,21 @@
       <option name="project" value="LOCAL" />
       <updated>1637527805451</updated>
     </task>
-    <option name="localTasksCounter" value="726" />
+    <task id="LOCAL-00726" summary="notifies and controller">
+      <created>1637536153453</created>
+      <option name="number" value="00726" />
+      <option name="presentableId" value="LOCAL-00726" />
+      <option name="project" value="LOCAL" />
+      <updated>1637536153453</updated>
+    </task>
+    <task id="LOCAL-00727" summary="notifies and controller">
+      <created>1637536659119</created>
+      <option name="number" value="00727" />
+      <option name="presentableId" value="LOCAL-00727" />
+      <option name="project" value="LOCAL" />
+      <updated>1637536659119</updated>
+    </task>
+    <option name="localTasksCounter" value="728" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

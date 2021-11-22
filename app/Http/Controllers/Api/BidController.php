@@ -141,6 +141,7 @@ class BidController extends MasterController
             'latest_charge' => $charge_price
         ]);
         $this->topicNotify();
+        //change time now to request bid time
         $now=Carbon::now();
         if (!(Carbon::createFromTimestamp($auction_item->auction->more_details['end_date']) >= $now) && ((Carbon::createFromTimestamp($auction_item->auction->start_date)) <= $now)) {
             $this->charge_notify($auction_item, $user, $charge_price);
