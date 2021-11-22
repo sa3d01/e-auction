@@ -12,13 +12,9 @@ use App\Setting;
 use App\User;
 use Carbon\Carbon;
 use Edujugon\PushNotification\PushNotification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
-class NotifyAuctionNegotiation implements ShouldQueue
+class NotifyAuctionNegotiation
 {
-    public $connection='database';
-    public $queue='listeners';
-    public $delay=60;
     /**
      * Create the event listener.
      *
