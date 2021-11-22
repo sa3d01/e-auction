@@ -5,9 +5,11 @@ namespace App\Providers;
 use App\Events\AuctionLive;
 use App\Events\AuctionNegotiation;
 use App\Events\AuctionTimeOut;
+use App\Events\GeneralEventsAuction;
 use App\Listeners\NotifyAuctionLive;
 use App\Listeners\NotifyAuctionNegotiation;
 use App\Listeners\NotifyAuctionTimeOut;
+use App\Listeners\TasksGeneralEventsAuction;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -32,6 +34,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         AuctionNegotiation::class => [
             NotifyAuctionNegotiation::class,
+        ],
+        GeneralEventsAuction::class => [
+            TasksGeneralEventsAuction::class,
         ],
     ];
 
