@@ -64,8 +64,7 @@ class MasterController extends Controller
         return $this->sendResponse('تم الانشاء بنجاح');
     }
     public function validate_purchasing_power($user,$price,$auction_item){
-        $user_purchasing_power=$user->purchasing_power+$user->package->purchasing_power_increase;
-        $user_purchasing_power=$user_purchasing_power*$this->purchasing_power_ratio;
+        $user_purchasing_power=($user->purchasing_power+$user->package->purchasing_power_increase)*$this->purchasing_power_ratio;
         //user auction items bids
         $user_items_bids=AuctionUser::where('user_id',$user->id)->pluck('item_id')->toArray();
         $other_auction_items = AuctionItem::whereIn('item_id',$user_items_bids);
@@ -110,10 +109,11 @@ class MasterController extends Controller
         }
         return true;
     }
-    function checkTimeForBid($auction_item)
+    function checkTimeForBid($auction_item,$bid_time)
     {
         if ($auction_item->more_details != null) {
-            $now=Carbon::now();
+           // $now=Carbon::now();
+            $now=Carbon::createFromTimestamp($bid_time);
             $bid_pause_period=Setting::value('bid_pause_period');
             if ($auction_item->more_details['status'] == 'expired' || $auction_item->more_details['status'] == 'paid') {
                 $ar_msg='هذه المركبة قد انتهى وقت المزايدة عليها :(';
@@ -136,19 +136,19 @@ class MasterController extends Controller
         }
         return true;
     }
-    function canBid($user,$auction_item,$charge_price)
+    function canBid($user,$auction_item,$total_price,$bid_time)
     {
-        if ($this->checkTimeForBid($auction_item) !== true)
+        if ($this->checkTimeForBid($auction_item,$bid_time) !== true)
         {
-            return $this->checkTimeForBid($auction_item);
+            return $this->checkTimeForBid($auction_item,$bid_time);
         }
         if ($this->checkCompletedProfile($user) !== true)
         {
             return $this->checkCompletedProfile($user);
         }
-        if ($this->validate_purchasing_power($user, $auction_item->price + $charge_price,$auction_item) !== true)
+        if ($this->validate_purchasing_power($user, $total_price,$auction_item) !== true)
         {
-            return $this->validate_purchasing_power($user, $auction_item->price + $charge_price,$auction_item);
+            return $this->validate_purchasing_power($user, $total_price,$auction_item);
         }
         return true;
     }

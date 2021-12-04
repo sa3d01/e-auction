@@ -268,7 +268,6 @@ class Controller extends BaseController
         } catch (\Exception $e) {
 
         }
-
     }
 
     function notify_admin($title, $auction_item)

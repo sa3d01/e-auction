@@ -117,18 +117,22 @@ class BidController extends MasterController
         return $this->sendResponse(new Object_());
     }
     public function bid($item_id,Request $request){
+        //total_price,bid_time
+        $total_price=$request['total_price'];
+        $bid_time=$request['bid_time'];
         $user=$request->user();
         $auction_item = AuctionItem::where('item_id', $item_id)->latest()->first();
         //checkCanBid
-        if ($this->canBid($user,$auction_item,$request['charge_price']) !== true){
-            return $this->canBid($user,$auction_item,$request['charge_price']);
+        if ($this->canBid($user,$auction_item,$total_price,$bid_time) !== true){
+            return $this->canBid($user,$auction_item,$total_price,$bid_time);
         }
         //store bid
-        $this->completedBidOperations($auction_item,$request['charge_price'],$user,$request->input('finish_papers', 0));
+        $this->completedBidOperations($auction_item,$user,$request->input('finish_papers', 0),$total_price,$bid_time);
         return $this->sendError($this->lang()=='ar'?'تمت المزايدة بنجاح!':'Your bid has been accepted !');
     }
-    function completedBidOperations($auction_item,$charge_price,$user,$finish_papers)
+    function completedBidOperations($auction_item,$user,$finish_papers,$total_price,$bid_time)
     {
+        $charge_price=$total_price-($auction_item->price);
         AuctionUser::create([
             'finish_papers' => $finish_papers,
             'user_id' => $user->id,
@@ -140,9 +144,10 @@ class BidController extends MasterController
             'price' => $auction_item->price + $charge_price,
             'latest_charge' => $charge_price
         ]);
+
         $this->topicNotify();
         //change time now to request bid time
-        $now=Carbon::now();
+        $now=Carbon::createFromTimestamp($bid_time);
         if (!(Carbon::createFromTimestamp($auction_item->auction->more_details['end_date']) >= $now) && ((Carbon::createFromTimestamp($auction_item->auction->start_date)) <= $now)) {
             $this->charge_notify($auction_item, $user, $charge_price);
         }
