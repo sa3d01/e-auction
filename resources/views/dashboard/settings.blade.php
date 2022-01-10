@@ -75,7 +75,7 @@
                                         <div class="col-sm-12">
                                             <div class="card-img" style="height: 400px">
                                                 <label for="map">الموقع</label>
-                                                <div id="map" data-lat="{{$row->address['lat']}}" data-lng="{{$row->address['lng']}}" class="map"></div>
+                                                <div id="map" data-lat="{{$row->contacts['lat']}}" data-lng="{{$row->contacts['lng']}}" class="map"></div>
                                                 <input name="lat" type="hidden" id="lat">
                                                 <input name="lng" type="hidden" id="lng">
                                             </div>
