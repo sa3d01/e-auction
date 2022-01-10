@@ -119,6 +119,9 @@ class BidController extends MasterController
     public function bid($item_id,Request $request){
         //total_price,bid_time
         $total_price=$request['total_price'];
+        if($total_price==0 || $total_price==''){
+            return $this->sendError($this->lang()=='ar'?'لا يمكن المزايدة بتلك القيمة!':'You can\'t bid by 0 amount !');
+        }
         $bid_time=$request['bid_time'];
         $user=$request->user();
         $auction_item = AuctionItem::where('item_id', $item_id)->latest()->first();

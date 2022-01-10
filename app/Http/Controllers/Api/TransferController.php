@@ -40,6 +40,7 @@ class TransferController extends MasterController
         }
         if ($request['type'] == 'purchasing_power' && $request['purchasing_type'] == 'online') {
             $data['purchasing_type']='online';
+            $data['status']=1;
             Transfer::create($data);
             $user->update(['purchasing_power' =>$user->purchasing_power+ $request['money']]);
         }else{

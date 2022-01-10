@@ -19,11 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="events">
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="bid time and total amount">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/BidController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/BidController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/MasterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/MasterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Controller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/TransferController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/TransferController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -432,14 +431,17 @@
       <workItem from="1637517029011" duration="19514000" />
       <workItem from="1637600315507" duration="731000" />
       <workItem from="1638477509161" duration="693000" />
-      <workItem from="1638649820827" duration="3854000" />
-    </task>
-    <task id="LOCAL-00683" summary="validation">
-      <created>1630516623894</created>
-      <option name="number" value="00683" />
-      <option name="presentableId" value="LOCAL-00683" />
-      <option name="project" value="LOCAL" />
-      <updated>1630516623895</updated>
+      <workItem from="1638649820827" duration="5037000" />
+      <workItem from="1638880828982" duration="1006000" />
+      <workItem from="1639346968568" duration="606000" />
+      <workItem from="1639829169657" duration="68000" />
+      <workItem from="1641375951599" duration="607000" />
+      <workItem from="1641419490384" duration="107000" />
+      <workItem from="1641466058548" duration="1333000" />
+      <workItem from="1641587424496" duration="759000" />
+      <workItem from="1641595469617" duration="601000" />
+      <workItem from="1641827280886" duration="3152000" />
+      <workItem from="1641845100006" duration="2932000" />
     </task>
     <task id="LOCAL-00684" summary="validation">
       <created>1630516659263</created>
@@ -777,7 +779,14 @@
       <option name="project" value="LOCAL" />
       <updated>1637547125649</updated>
     </task>
-    <option name="localTasksCounter" value="732" />
+    <task id="LOCAL-00732" summary="bid time and total amount">
+      <created>1638657304155</created>
+      <option name="number" value="00732" />
+      <option name="presentableId" value="LOCAL-00732" />
+      <option name="project" value="LOCAL" />
+      <updated>1638657304155</updated>
+    </task>
+    <option name="localTasksCounter" value="733" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -797,7 +806,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="offers in purchasing power" />
     <MESSAGE value="delete offers" />
     <MESSAGE value="sms" />
     <MESSAGE value="view" />
@@ -822,6 +830,7 @@
     <MESSAGE value="dev 1111" />
     <MESSAGE value="notifies and controller" />
     <MESSAGE value="events" />
-    <option name="LAST_COMMIT_MESSAGE" value="events" />
+    <MESSAGE value="bid time and total amount" />
+    <option name="LAST_COMMIT_MESSAGE" value="bid time and total amount" />
   </component>
 </project>
