@@ -150,7 +150,7 @@ class MasterController extends Controller
         {
             return $this->validate_purchasing_power($user, $total_price,$auction_item);
         }
-        if ($total_price->price <= $auction_item->price){
+        if ($total_price <= $auction_item->price){
             return $this->sendError('لا يمكن المزايدة بأقل من القيمة الحالية للمزاد');
         }
 
