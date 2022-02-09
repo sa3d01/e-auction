@@ -19,8 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="1-2">
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="add 2 hours">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/BidController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/BidController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/MasterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/MasterController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -443,13 +445,7 @@
       <workItem from="1642972077033" duration="679000" />
       <workItem from="1643747048669" duration="2731000" />
       <workItem from="1644002388131" duration="598000" />
-    </task>
-    <task id="LOCAL-00687" summary="links saned">
-      <created>1630537018842</created>
-      <option name="number" value="00687" />
-      <option name="presentableId" value="LOCAL-00687" />
-      <option name="project" value="LOCAL" />
-      <updated>1630537018842</updated>
+      <workItem from="1644437638477" duration="2295000" />
     </task>
     <task id="LOCAL-00688" summary="links saned">
       <created>1630537151392</created>
@@ -787,7 +783,14 @@
       <option name="project" value="LOCAL" />
       <updated>1643751743240</updated>
     </task>
-    <option name="localTasksCounter" value="736" />
+    <task id="LOCAL-00736" summary="add 2 hours">
+      <created>1644438107030</created>
+      <option name="number" value="00736" />
+      <option name="presentableId" value="LOCAL-00736" />
+      <option name="project" value="LOCAL" />
+      <updated>1644438107030</updated>
+    </task>
+    <option name="localTasksCounter" value="737" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -807,7 +810,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="view" />
     <MESSAGE value="negotiation" />
     <MESSAGE value="transfers" />
     <MESSAGE value="edits" />
@@ -832,6 +834,7 @@
     <MESSAGE value="bid time and total amount" />
     <MESSAGE value="١١-١" />
     <MESSAGE value="1-2" />
-    <option name="LAST_COMMIT_MESSAGE" value="1-2" />
+    <MESSAGE value="add 2 hours" />
+    <option name="LAST_COMMIT_MESSAGE" value="add 2 hours" />
   </component>
 </project>

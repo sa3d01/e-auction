@@ -113,7 +113,7 @@ class MasterController extends Controller
     {
         if ($auction_item->more_details != null) {
            // $now=Carbon::now();
-            $now=Carbon::createFromTimestamp($bid_time)->addHours(2);
+            $now=Carbon::createFromTimestamp($bid_time);
             $bid_pause_period=Setting::value('bid_pause_period');
             if ($auction_item->more_details['status'] == 'expired' || $auction_item->more_details['status'] == 'paid') {
                 $ar_msg='هذه المركبة قد انتهى وقت المزايدة عليها :(';
@@ -138,22 +138,21 @@ class MasterController extends Controller
     }
     function canBid($user,$auction_item,$total_price,$bid_time)
     {
+        if ($total_price <= $auction_item->price){
+            return $this->sendError('لا يمكن المزايدة بأقل من القيمة الحالية للمزاد');
+        }
         if ($this->checkTimeForBid($auction_item,$bid_time) !== true)
         {
             return $this->checkTimeForBid($auction_item,$bid_time);
-        }
-        if ($this->checkCompletedProfile($user) !== true)
-        {
-            return $this->checkCompletedProfile($user);
         }
         if ($this->validate_purchasing_power($user, $total_price,$auction_item) !== true)
         {
             return $this->validate_purchasing_power($user, $total_price,$auction_item);
         }
-        if ($total_price <= $auction_item->price){
-            return $this->sendError('لا يمكن المزايدة بأقل من القيمة الحالية للمزاد');
+        if ($this->checkCompletedProfile($user) !== true)
+        {
+            return $this->checkCompletedProfile($user);
         }
-
         return true;
     }
 
