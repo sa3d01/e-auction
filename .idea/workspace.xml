@@ -19,7 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="١١-١">
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="1-2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -441,14 +441,8 @@
       <workItem from="1641827280886" duration="3152000" />
       <workItem from="1641845100006" duration="4299000" />
       <workItem from="1642972077033" duration="679000" />
-      <workItem from="1643747048669" duration="2027000" />
-    </task>
-    <task id="LOCAL-00686" summary="validation">
-      <created>1630516803584</created>
-      <option name="number" value="00686" />
-      <option name="presentableId" value="LOCAL-00686" />
-      <option name="project" value="LOCAL" />
-      <updated>1630516803584</updated>
+      <workItem from="1643747048669" duration="2731000" />
+      <workItem from="1644002388131" duration="598000" />
     </task>
     <task id="LOCAL-00687" summary="links saned">
       <created>1630537018842</created>
@@ -786,7 +780,14 @@
       <option name="project" value="LOCAL" />
       <updated>1641853357212</updated>
     </task>
-    <option name="localTasksCounter" value="735" />
+    <task id="LOCAL-00735" summary="1-2">
+      <created>1643751743239</created>
+      <option name="number" value="00735" />
+      <option name="presentableId" value="LOCAL-00735" />
+      <option name="project" value="LOCAL" />
+      <updated>1643751743240</updated>
+    </task>
+    <option name="localTasksCounter" value="736" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -806,7 +807,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="sms" />
     <MESSAGE value="view" />
     <MESSAGE value="negotiation" />
     <MESSAGE value="transfers" />
@@ -831,6 +831,7 @@
     <MESSAGE value="events" />
     <MESSAGE value="bid time and total amount" />
     <MESSAGE value="١١-١" />
-    <option name="LAST_COMMIT_MESSAGE" value="١١-١" />
+    <MESSAGE value="1-2" />
+    <option name="LAST_COMMIT_MESSAGE" value="1-2" />
   </component>
 </project>
