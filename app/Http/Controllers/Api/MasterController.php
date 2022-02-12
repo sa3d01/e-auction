@@ -119,7 +119,7 @@ class MasterController extends Controller
                 $ar_msg='هذه المركبة قد انتهى وقت المزايدة عليها :(';
                 $en_msg='timout auction :(';
                 return $this->sendError($this->lang()=='ar'?$ar_msg:$en_msg);
-            }elseif ($auction_item->more_details['status'] == 'soon' && ($now->diffInSeconds(Carbon::createFromTimestamp($auction_item->auction->start_date))) < $bid_pause_period){
+            }elseif ($auction_item->more_details['status'] == 'soon' && ($now->diffInSeconds(Carbon::createFromTimestamp($auction_item->auction->start_date),false)) < $bid_pause_period){
                 $ar_msg='يرجى الانتظار لبداية المزاد المباشر';
                 $en_msg='please wait to start auction time';
                 return $this->sendError($this->lang()=='ar'?$ar_msg:$en_msg);
