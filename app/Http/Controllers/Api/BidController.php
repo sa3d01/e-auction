@@ -146,7 +146,7 @@ class BidController extends MasterController
             'auction_id' => $auction_item->auction_id,
             'charge_price' => $charge_price
         ]);
-        sleep(.5);
+        sleep(1);
         $auction_item->update([
             'price' => $auction_item->price + $charge_price,
             'latest_charge' => $charge_price
