@@ -19,10 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="validate price">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/BidController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/BidController.php" afterDir="false" />
-    </list>
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="sleep 1 seconds" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -445,21 +442,7 @@
       <workItem from="1643747048669" duration="2731000" />
       <workItem from="1644002388131" duration="598000" />
       <workItem from="1644437638477" duration="3874000" />
-      <workItem from="1644667099960" duration="751000" />
-    </task>
-    <task id="LOCAL-00689" summary="edit all items">
-      <created>1632789318354</created>
-      <option name="number" value="00689" />
-      <option name="presentableId" value="LOCAL-00689" />
-      <option name="project" value="LOCAL" />
-      <updated>1632789318354</updated>
-    </task>
-    <task id="LOCAL-00690" summary="edit float settings">
-      <created>1632790101134</created>
-      <option name="number" value="00690" />
-      <option name="presentableId" value="LOCAL-00690" />
-      <option name="project" value="LOCAL" />
-      <updated>1632790101134</updated>
+      <workItem from="1644667099960" duration="1587000" />
     </task>
     <task id="LOCAL-00691" summary="edit float settings">
       <created>1632790433470</created>
@@ -790,7 +773,21 @@
       <option name="project" value="LOCAL" />
       <updated>1644440914656</updated>
     </task>
-    <option name="localTasksCounter" value="738" />
+    <task id="LOCAL-00738" summary="sleep .5 seconds">
+      <created>1644668858630</created>
+      <option name="number" value="00738" />
+      <option name="presentableId" value="LOCAL-00738" />
+      <option name="project" value="LOCAL" />
+      <updated>1644668858630</updated>
+    </task>
+    <task id="LOCAL-00739" summary="sleep 1 seconds">
+      <created>1644669411775</created>
+      <option name="number" value="00739" />
+      <option name="presentableId" value="LOCAL-00739" />
+      <option name="project" value="LOCAL" />
+      <updated>1644669411775</updated>
+    </task>
+    <option name="localTasksCounter" value="740" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -810,8 +807,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="transfers" />
-    <MESSAGE value="edits" />
     <MESSAGE value="18-8" />
     <MESSAGE value="18-8/view link" />
     <MESSAGE value="18-8/wallet" />
@@ -835,6 +830,8 @@
     <MESSAGE value="1-2" />
     <MESSAGE value="add 2 hours" />
     <MESSAGE value="validate price" />
-    <option name="LAST_COMMIT_MESSAGE" value="validate price" />
+    <MESSAGE value="sleep .5 seconds" />
+    <MESSAGE value="sleep 1 seconds" />
+    <option name="LAST_COMMIT_MESSAGE" value="sleep 1 seconds" />
   </component>
 </project>
