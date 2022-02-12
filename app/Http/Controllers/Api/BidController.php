@@ -126,7 +126,7 @@ class BidController extends MasterController
         $user=$request->user();
         $auction_item = AuctionItem::where('item_id', $item_id)->latest()->first();
         //checkCanBid
-        sleep(1);
+        sleep(2);
         if ($this->canBid($user,$auction_item,$total_price,$bid_time) !== true){
             return $this->canBid($user,$auction_item,$total_price,$bid_time);
         }
