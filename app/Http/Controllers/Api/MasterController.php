@@ -113,7 +113,7 @@ class MasterController extends Controller
     {
         if ($auction_item->more_details != null) {
            // $now=Carbon::now();
-            $now=Carbon::createFromTimestamp($bid_time)->subHour();
+            $now=Carbon::createFromTimestamp($bid_time);
             return $this->sendError($now);
 
             $bid_pause_period=Setting::value('bid_pause_period');
