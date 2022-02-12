@@ -114,7 +114,10 @@ class MasterController extends Controller
         if ($auction_item->more_details != null) {
            // $now=Carbon::now();
             $now=Carbon::createFromTimestamp($bid_time);
-            return $this->sendError($now);
+            return $this->sendError(
+                $now->format('Y-m-d H:i').' ///'
+                .Carbon::createFromTimestamp($auction_item->auction->start_date)->format('Y-m-d H:i')
+            );
 
             $bid_pause_period=Setting::value('bid_pause_period');
             if ($auction_item->more_details['status'] == 'expired' || $auction_item->more_details['status'] == 'paid') {
