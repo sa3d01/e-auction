@@ -130,38 +130,15 @@ class BidController extends MasterController
             return $this->canBid($user,$auction_item,$total_price,$bid_time);
         }
         //store bid
-        $charge_price=$total_price-($auction_item->price);
-        if ($total_price <= $auction_item->price){
-            return $this->sendError('لا يمكن المزايدة بأقل من القيمة الحالية للمزاد');
-        }
-        AuctionUser::create([
-            'finish_papers' => $request->input('finish_papers', 0),
-            'user_id' => $user->id,
-            'item_id' => $auction_item->item_id,
-            'auction_id' => $auction_item->auction_id,
-            'charge_price' => $charge_price
-        ]);
-        $auction_item->update([
-            'price' => $auction_item->price + $charge_price,
-            'latest_charge' => $charge_price
-        ]);
-        $this->topicNotify();
-        //change time now to request bid time
-        $now=Carbon::createFromTimestamp($bid_time);
-        if (!(Carbon::createFromTimestamp($auction_item->auction->more_details['end_date']) >= $now) && ((Carbon::createFromTimestamp($auction_item->auction->start_date)) <= $now)) {
-            $this->charge_notify($auction_item, $user, $charge_price);
-        }
-        //$this->completedBidOperations($auction_item,$user,$request->input('finish_papers', 0),$total_price,$bid_time);
+        $this->completedBidOperations($auction_item,$user,$request->input('finish_papers', 0),$total_price,$bid_time);
         return $this->sendError($this->lang()=='ar'?'تمت المزايدة بنجاح!':'Your bid has been accepted !');
     }
     function completedBidOperations($auction_item,$user,$finish_papers,$total_price,$bid_time)
     {
-        $charge_price=$total_price-($auction_item->price);
-
         if ($total_price <= $auction_item->price){
             return $this->sendError('لا يمكن المزايدة بأقل من القيمة الحالية للمزاد');
         }
-
+        $charge_price=$total_price-($auction_item->price);
         AuctionUser::create([
             'finish_papers' => $finish_papers,
             'user_id' => $user->id,
@@ -169,6 +146,7 @@ class BidController extends MasterController
             'auction_id' => $auction_item->auction_id,
             'charge_price' => $charge_price
         ]);
+        sleep(.5);
         $auction_item->update([
             'price' => $auction_item->price + $charge_price,
             'latest_charge' => $charge_price
