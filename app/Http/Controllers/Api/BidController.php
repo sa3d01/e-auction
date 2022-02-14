@@ -123,6 +123,10 @@ class BidController extends MasterController
             return $this->sendError($this->lang()=='ar'?'لا يمكن المزايدة بتلك القيمة!':'You can\'t bid by 0 amount !');
         }
         $bid_time=$request['bid_time'];
+
+        $now=Carbon::createFromTimestamp($bid_time);
+        return $this->sendError($now->diffInDays(Carbon::now()));
+
         $user=$request->user();
         $auction_item = AuctionItem::where('item_id', $item_id)->latest()->first();
         //checkCanBid
