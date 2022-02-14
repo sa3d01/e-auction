@@ -112,11 +112,8 @@ class MasterController extends Controller
     function checkTimeForBid($auction_item,$bid_time)
     {
         if ($auction_item->more_details != null) {
-           // $now=Carbon::now();
-            $now=Carbon::createFromTimestamp($bid_time);
-
-
-
+            $now=date('Y-m-d H:i:s',$bid_time);
+            return $this->sendError($now);
             $bid_pause_period=Setting::value('bid_pause_period');
             if ($auction_item->more_details['status'] == 'expired' || $auction_item->more_details['status'] == 'paid') {
                 $ar_msg='هذه المركبة قد انتهى وقت المزايدة عليها :(';
