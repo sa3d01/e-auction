@@ -130,7 +130,7 @@ class BidController extends MasterController
             return $this->canBid($user,$auction_item,$total_price,$bid_time);
         }
         if (Session::get('bid_total_price')!=null && $total_price <= Session::get('bid_total_price')){
-            return $this->sendError('لا يمكن المزايدة بأقل من القيمة الحالية للمزاد');
+            return $this->sendError(' يا مصطفي لا يمكن المزايدة بأقل من القيمة الحالية للمزاد');
         }
         Session::put('bid_total_price', $total_price);
         //store bid
