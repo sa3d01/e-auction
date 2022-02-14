@@ -19,9 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="sleep 1 seconds">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="df3d6e23-f3eb-4699-b7d6-c5ab1b6c5f05" name="Default Changelist" comment="time" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -445,34 +443,7 @@
       <workItem from="1644002388131" duration="598000" />
       <workItem from="1644437638477" duration="3874000" />
       <workItem from="1644667099960" duration="6507000" />
-    </task>
-    <task id="LOCAL-00702" summary="edit float settings">
-      <created>1632796695326</created>
-      <option name="number" value="00702" />
-      <option name="presentableId" value="LOCAL-00702" />
-      <option name="project" value="LOCAL" />
-      <updated>1632796695326</updated>
-    </task>
-    <task id="LOCAL-00703" summary="edit float settings">
-      <created>1632800581150</created>
-      <option name="number" value="00703" />
-      <option name="presentableId" value="LOCAL-00703" />
-      <option name="project" value="LOCAL" />
-      <updated>1632800581150</updated>
-    </task>
-    <task id="LOCAL-00704" summary="online transfers">
-      <created>1632842441844</created>
-      <option name="number" value="00704" />
-      <option name="presentableId" value="LOCAL-00704" />
-      <option name="project" value="LOCAL" />
-      <updated>1632842441844</updated>
-    </task>
-    <task id="LOCAL-00705" summary="online transfers">
-      <created>1632842544508</created>
-      <option name="number" value="00705" />
-      <option name="presentableId" value="LOCAL-00705" />
-      <option name="project" value="LOCAL" />
-      <updated>1632842544508</updated>
+      <workItem from="1644872970125" duration="521000" />
     </task>
     <task id="LOCAL-00706" summary="online transfers">
       <created>1632843295031</created>
@@ -789,7 +760,35 @@
       <option name="project" value="LOCAL" />
       <updated>1644675011555</updated>
     </task>
-    <option name="localTasksCounter" value="751" />
+    <task id="LOCAL-00751" summary="time">
+      <created>1644873047940</created>
+      <option name="number" value="00751" />
+      <option name="presentableId" value="LOCAL-00751" />
+      <option name="project" value="LOCAL" />
+      <updated>1644873047940</updated>
+    </task>
+    <task id="LOCAL-00752" summary="time">
+      <created>1644873254324</created>
+      <option name="number" value="00752" />
+      <option name="presentableId" value="LOCAL-00752" />
+      <option name="project" value="LOCAL" />
+      <updated>1644873254324</updated>
+    </task>
+    <task id="LOCAL-00753" summary="time">
+      <created>1644873343541</created>
+      <option name="number" value="00753" />
+      <option name="presentableId" value="LOCAL-00753" />
+      <option name="project" value="LOCAL" />
+      <updated>1644873343541</updated>
+    </task>
+    <task id="LOCAL-00754" summary="time">
+      <created>1644873478190</created>
+      <option name="number" value="00754" />
+      <option name="presentableId" value="LOCAL-00754" />
+      <option name="project" value="LOCAL" />
+      <updated>1644873478190</updated>
+    </task>
+    <option name="localTasksCounter" value="755" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -809,7 +808,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="18-8" />
     <MESSAGE value="18-8/view link" />
     <MESSAGE value="18-8/wallet" />
     <MESSAGE value="live" />
@@ -834,6 +832,7 @@
     <MESSAGE value="validate price" />
     <MESSAGE value="sleep .5 seconds" />
     <MESSAGE value="sleep 1 seconds" />
-    <option name="LAST_COMMIT_MESSAGE" value="sleep 1 seconds" />
+    <MESSAGE value="time" />
+    <option name="LAST_COMMIT_MESSAGE" value="time" />
   </component>
 </project>
