@@ -124,7 +124,7 @@ class BidController extends MasterController
         }
         $bid_time=$request['bid_time'];
 
-        return $this->sendError($bid_time);
+        return $this->sendError(Carbon::createFromTimestamp($bid_time));
 
         $user=$request->user();
         $auction_item = AuctionItem::where('item_id', $item_id)->latest()->first();
