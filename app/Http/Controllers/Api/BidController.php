@@ -132,6 +132,9 @@ class BidController extends MasterController
         if (Session::get('bid_total_price')!=null && $total_price <= Session::get('bid_total_price')){
             return $this->sendError(' يا مصطفي لا يمكن المزايدة بأقل من القيمة الحالية للمزاد');
         }
+        if (Session::get('bid_total_price')!=null ){
+            return $this->sendError(' يا مصطفي ');
+        }
         Session::put('bid_total_price', $total_price);
         //store bid
         $this->completedBidOperations($auction_item,$user,$request->input('finish_papers', 0),$total_price,$bid_time);
