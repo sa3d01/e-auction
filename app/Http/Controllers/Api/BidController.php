@@ -118,10 +118,7 @@ class BidController extends MasterController
         return $this->sendResponse(new Object_());
     }
     public function bid($item_id,Request $request){
-        //total_price,bid_time
         $total_price=$request['total_price'];
-        return $this->sendError(gettype(Session::get('bid_total_price')));
-        Session::put('bid_total_price', $total_price);
         if($total_price==0 || $total_price==''){
             return $this->sendError($this->lang()=='ar'?'لا يمكن المزايدة بتلك القيمة!':'You can\'t bid by 0 amount !');
         }
@@ -132,16 +129,16 @@ class BidController extends MasterController
         if ($this->canBid($user,$auction_item,$total_price,$bid_time) !== true){
             return $this->canBid($user,$auction_item,$total_price,$bid_time);
         }
+        if (Session::get('bid_total_price')!=null && $total_price <= Session::get('bid_total_price')){
+            return $this->sendError('لا يمكن المزايدة بأقل من القيمة الحالية للمزاد');
+        }
+        Session::put('bid_total_price', $total_price);
         //store bid
         $this->completedBidOperations($auction_item,$user,$request->input('finish_papers', 0),$total_price,$bid_time);
         return $this->sendError($this->lang()=='ar'?'تمت المزايدة بنجاح!':'Your bid has been accepted !');
     }
     function completedBidOperations($auction_item,$user,$finish_papers,$total_price,$bid_time)
     {
-        sleep(1);
-        if ($total_price <= $auction_item->price){
-            return $this->sendError('لا يمكن المزايدة بأقل من القيمة الحالية للمزاد');
-        }
         $charge_price=$total_price-($auction_item->price);
         AuctionUser::create([
             'finish_papers' => $finish_papers,
@@ -150,7 +147,6 @@ class BidController extends MasterController
             'auction_id' => $auction_item->auction_id,
             'charge_price' => $charge_price
         ]);
-        sleep(1);
         $auction_item->update([
             'price' => $auction_item->price + $charge_price,
             'latest_charge' => $charge_price
