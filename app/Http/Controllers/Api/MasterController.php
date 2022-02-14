@@ -9,7 +9,6 @@ use App\Offer;
 use App\Setting;
 use App\Transfer;
 use Carbon\Carbon;
-use Faker\Provider\DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Exceptions\UserNotDefinedException;
@@ -113,14 +112,14 @@ class MasterController extends Controller
     function checkTimeForBid($auction_item,$bid_time)
     {
         if ($auction_item->more_details != null) {
-            $now=date('Y-m-d H:i:s',$bid_time);
-            return $this->sendError(time());
+           // $now=Carbon::now();
+            $now=Carbon::createFromTimestamp($bid_time);
             $bid_pause_period=Setting::value('bid_pause_period');
             if ($auction_item->more_details['status'] == 'expired' || $auction_item->more_details['status'] == 'paid') {
                 $ar_msg='هذه المركبة قد انتهى وقت المزايدة عليها :(';
                 $en_msg='timout auction :(';
                 return $this->sendError($this->lang()=='ar'?$ar_msg:$en_msg);
-            }elseif ($auction_item->more_details['status'] == 'soon' && ($now->diffInSeconds(Carbon::createFromTimestamp($auction_item->auction->start_date),false)) < $bid_pause_period){
+            }elseif ($auction_item->more_details['status'] == 'soon' && ($now->diffInSeconds(Carbon::createFromTimestamp($auction_item->auction->start_date))) < $bid_pause_period){
                 $ar_msg='يرجى الانتظار لبداية المزاد المباشر';
                 $en_msg='please wait to start auction time';
                 return $this->sendError($this->lang()=='ar'?$ar_msg:$en_msg);
