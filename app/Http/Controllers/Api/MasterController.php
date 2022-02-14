@@ -113,7 +113,8 @@ class MasterController extends Controller
     {
         if ($auction_item->more_details != null) {
             $now=date('Y-m-d H:i:s',$bid_time);
-            return $this->sendError($now);
+            $date = \DateTime::createFromFormat('U', $bid_time);
+            return $this->sendError($date);
             $bid_pause_period=Setting::value('bid_pause_period');
             if ($auction_item->more_details['status'] == 'expired' || $auction_item->more_details['status'] == 'paid') {
                 $ar_msg='هذه المركبة قد انتهى وقت المزايدة عليها :(';
