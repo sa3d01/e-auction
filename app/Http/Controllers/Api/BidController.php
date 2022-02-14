@@ -120,7 +120,7 @@ class BidController extends MasterController
     public function bid($item_id,Request $request){
         //total_price,bid_time
         $total_price=$request['total_price'];
-        return $this->sendError(Session::get('bid_total_price'));
+        return $this->sendError(gettype(Session::get('bid_total_price')));
         Session::put('bid_total_price', $total_price);
         if($total_price==0 || $total_price==''){
             return $this->sendError($this->lang()=='ar'?'لا يمكن المزايدة بتلك القيمة!':'You can\'t bid by 0 amount !');
