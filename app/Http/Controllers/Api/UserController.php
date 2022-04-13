@@ -21,7 +21,6 @@ use App\User;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserController extends MasterController
 {
@@ -38,7 +37,7 @@ class UserController extends MasterController
         if (!$request->has('email') && !$request->has('phone')) {
             return $this->sendError('يجب ادخال وسيلة ارسال واحدة على الأقل');
         }
-        $activation_code = 1111;//rand(1111, 9999);
+        $activation_code = rand(1111, 9999);
         if ($request->has('email') && $request->has('phone')) {
             $user = User::where(['email' => $request['email'], 'phone' => $request['phone']])->first();
 //            if (!$user)
@@ -58,7 +57,7 @@ class UserController extends MasterController
             if ($user->status == 0) {
                 return $this->sendError('تم حظرك من قبل إدارة التطبيق ..');
             }
-            if($user->email == 'admin@admin.com') {
+            if ($user->email == 'admin@admin.com') {
                 $activation_code = 1111;
                 $all['activation_code'] = $activation_code;
             }
@@ -111,19 +110,15 @@ class UserController extends MasterController
 
     function sendToPhone($phone, $activation_code)
     {
-        try {
-            $client = $this->buildHttpClient();
-            $response = $client->request('POST', 'instance304158/sendMessage?token=17u577kh4wcj4cjg', [
-                'query' => [
-                    'token' => '17u577kh4wcj4cjg',
-                    'phone' => substr($phone, 1),
-                    'body' => "E-Auction verification code is '" . $activation_code . "'",
-                ]
-            ]);
-            $array = json_decode($response->getBody(), true);
-        }catch (\Exception $e){
-
-        }
+        $client = $this->buildHttpClient();
+        $response = $client->request('POST', 'instance304158/sendMessage?token=17u577kh4wcj4cjg', [
+            'query' => [
+                'token' => '17u577kh4wcj4cjg',
+                'phone' => substr($phone, 1),
+                'body' => "E-Auction verification code is '" . $activation_code . "'",
+            ]
+        ]);
+        $array = json_decode($response->getBody(), true);
     }
 
     public function verifyUser(VerifyPhoneRequest $request)
@@ -163,7 +158,7 @@ class UserController extends MasterController
     {
         $request->validated();
         $user = auth()->user();
-        if ($user->licence_image==null && !$request->has('licence_image')){
+        if ($user->licence_image == null && !$request->has('licence_image')) {
             return $this->sendError('صورة الهوية الزامية');
         }
         $data = $request->except(['package_id', 'wallet', 'purchasing_power']);
@@ -174,8 +169,8 @@ class UserController extends MasterController
                 'account_number' => $request['account_number'],
             ]
         ];
-        if (!$request->has('email')){
-            $data['email']=null;
+        if (!$request->has('email')) {
+            $data['email'] = null;
         }
         $user->update($data);
         $user_model = new UserResource($user);
@@ -188,14 +183,14 @@ class UserController extends MasterController
         $user = auth()->user();
         $activation_code = 1111;//rand(1111, 9999);
         $user->update([
-            'activation_code'=>$activation_code,
-            'phone_details'=>[
-                'new_phone'=>$request['new_phone']
+            'activation_code' => $activation_code,
+            'phone_details' => [
+                'new_phone' => $request['new_phone']
             ]
         ]);
-        $this->sendToPhone($request['new_phone'],$activation_code);
+        $this->sendToPhone($request['new_phone'], $activation_code);
         return $this->sendResponse([
-            'new_phone'=>$request['new_phone'],
+            'new_phone' => $request['new_phone'],
             'activation_code' => $activation_code
         ]);
     }
@@ -208,7 +203,7 @@ class UserController extends MasterController
             $user->update([
                 'activation_code' => null,
                 'phone_details' => [
-                    'old_phone'=>$user->phone
+                    'old_phone' => $user->phone
                 ],
                 'phone' => $request['new_phone'],
                 'phone_verified_at' => Carbon::now()
